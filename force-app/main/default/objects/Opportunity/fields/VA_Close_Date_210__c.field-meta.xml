@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VA_Close_Date_210__c</fullName>
+    <formula>If(ISPICKVAL(Loan_Program__c, &quot;VA 15&quot;),   First_Payment__c   + 210, If(ISPICKVAL(Loan_Program__c,&quot;VA 30&quot;),First_Payment__c + 210, If(ISPICKVAL(Loan_Program__c,&quot;FHA 15&quot;), Closed_Date__c + 210, If(ISPICKVAL(Loan_Program__c,&quot;FHA 30&quot;),Closed_Date__c + 210, If(ISPICKVAL(Loan_Program__c, &quot;VA15&quot;), First_Payment__c + 210, If(ISPICKVAL(Loan_Program__c,&quot;VA30&quot;),First_Payment__c + 210, If(ISPICKVAL(Loan_Program__c,&quot;FHA15&quot;),Closed_Date__c + 210, If(ISPICKVAL(Loan_Program__c,&quot;FHA30&quot;),Closed_Date__c + 210, NULL))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>This represents 210 days from the Closed Date for the next FHA/VA refi.  6 Payment Rule may impact this date.  Add 1 extra for safety and 2 extra days for Rocket.  Loan Program must reflect FHA 15, FHA 30, VA 15, or VA 30.</inlineHelpText>
+    <label>Next FHA/VA Refi Close Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

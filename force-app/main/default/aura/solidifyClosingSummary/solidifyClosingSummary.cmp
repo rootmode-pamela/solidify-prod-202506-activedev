@@ -1,0 +1,112 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="Opportunity" type="Object" />
+    <aura:attribute name="recordError" type="String" />
+    
+    <force:recordData aura:id="loanRecord"
+                  recordId="{!v.recordId}"
+                  targetFields="{!v.Opportunity}"
+                  targetError="{!v.recordError}"
+                  fields="Id, Name, Purpose__c, Occupancy__c, Subject_Prop_Type__c, Subject_Prop_No_Units__c,
+					Loan_Type__c, Loan_Program__c, Impounds_Formula__c, LTV__c, CLTV__c, DTI_Top__c, DTI__c,
+					Borrower_FICO__c, Co_Borrower_Fico__c, Qual_FICO__c, Interest_Rate__c, Purchase_Price__c, 
+					Appraised_Value__c, Down_Payment__c, Down_Payment_Percent__c, Loan_Amount__c, 
+					COE__c, Lock_Expiration__c, Loan_Contingency__c, Appraisal_Contingency__c, 
+					Current_Schedule_Balance__c, CD_Out_By__c,
+					Lender_Paid_Comp__c, Closing_Costs__c, Lender_Credit__c, Seller_Credit__c, 
+					Loan_Originator_User__c, Loan_Processor_User__c, Lender__c, Lender_AE__c, Escrow_Contact__c, 
+                    Appraiser_Contact__c, Buyers_Agent__c, Sellers_Agent__c,
+					LeadSource, Referred_By__c, Ad_Description__c, Ad_Consented__c, 
+                    Buyers_Agent__r.Phone, Buyers_Agent__r.MobilePhone, Rating__c, Grade__c"
+                      />
+    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Opportunity">
+     <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-1">
+		<div class="slds-section slds-is-open">
+
+            <table class="slds-table slds-table_bordered slds-table-striped slds-table_cell-buffer">
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Label">Type</div>
+                                </th>
+        			                                <th scope="col">
+                                    <div class="slds-truncate slds-text-align--right" title="Proposed"></div>
+                                </th>
+
+                                  </tr>
+                </thead>
+                <tbody>
+                <tr>
+                                <th scope="row" data-label="Label">
+                                    <div class="slds-truncate" title="Refi-Total Debts">Refi-Total Debts</div>
+                                </th>
+                                <td data-label="Amount">
+                                    <div class="slds-truncate slds-text-align--right" title="Refi-Total Debts"> <lightning:outputField fieldName="Refi_Total_Debts__c" variant="label-hidden"/> </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" data-label="Label">
+                                    <div class="slds-truncate" title="Label Subj Prop">Prepaids</div>
+                                </th>
+                                <td data-label="Amount">
+                                    <div class="slds-truncate slds-text-align--right" title="Subj Prop Exp"> <lightning:outputField fieldName="Prepaids__c" variant="label-hidden"/> </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" data-label="Label">
+                                    <div class="slds-truncate" title="Label Other Prop">Closing Costs</div>
+                                </th>
+                                <td data-label="Amount">
+                                    <div class="slds-truncate slds-text-align--right" title="Other Prop Exp"> <lightning:outputField fieldName="Closing_Costs__c" variant="label-hidden"/> </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" data-label="Label">
+                                    <div class="slds-truncate" title="Label All Other">Discount Points</div>
+                                </th>
+                                <td data-label="Amount">
+                                    <div class="slds-truncate slds-text-align--right" title="All Other Exp"> <lightning:outputField fieldName="Discount_Points__c" variant="label-hidden"/> </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th scope="row" data-label="Label">
+                                    <div class="slds-truncate bold-total" title="Label Total Liabilities">MIP, FF</div>
+                                </th>
+                                <td data-label="Amount">
+                                    <div class="slds-truncate slds-text-align--right bold-total" title="Total Liabilities"> <lightning:outputField fieldName="MIP_FF__c" variant="label-hidden"/> </div>
+                                </td>
+                            </tr>
+                                                <tr>
+                                <th scope="row" data-label="Label">
+                                    <div class="slds-truncate bold-total" title="Label Total Liabilities">Lender Credit</div>
+                                </th>
+                                <td data-label="Amount">
+                                    <div class="slds-truncate slds-text-align--right bold-total" title="Total Liabilities"> <lightning:outputField fieldName="Lender_Credit__c" variant="label-hidden"/> </div>
+                                </td>
+                            </tr>
+                                                <tr>
+                                <th scope="row" data-label="Label">
+                                    <div class="slds-truncate bold-total" title="Label Total Liabilities">Seller Credit</div>
+                                </th>
+                                <td data-label="Amount">
+                                    <div class="slds-truncate slds-text-align--right bold-total" title="Total Liabilities"> <lightning:outputField fieldName="Seller_Credit__c" variant="label-hidden"/> </div>
+                                </td>
+                            </tr>
+                                                <tr>
+                                <th scope="row" data-label="Label">
+                                    <div class="slds-truncate bold-total" title="Label Total Liabilities">Cash From/(To) Borrower</div>
+                                </th>
+                                <td data-label="Amount">
+                                    <div class="slds-truncate slds-text-align--right bold-total" title="Total Liabilities"> <lightning:outputField fieldName="Cash_From_To_Borrower__c" variant="label-hidden"/> </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                
+            </table>   
+            </div>
+            </div>
+        
+    </div>
+        </lightning:recordViewForm>  
+</aura:component>

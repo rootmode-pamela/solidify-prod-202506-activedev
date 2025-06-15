@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MD_Phone__c</fullName>
+    <description>This field will be used for the Melissa Data (Listware) implementation to store a cleaned phone number.</description>
+    <label>MD Phone</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Phone</type>
+</CustomField>

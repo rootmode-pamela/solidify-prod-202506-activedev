@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AutofillFees__c</fullName>
+    <formula>If(AND(ISBLANK(DiscountCreditS2__c), ISBLANK(LenderFeeS2__c), ISBLANK(AppraisalFeeS2__c), ISBLANK(CreditReportFeeS2__c), ISBLANK(EscrowFeesS2__c), ISBLANK(TitleFeeS2__c), ISBLANK(RecordingFeeS2__c), ISBLANK(DiscountCreditS3__c), ISBLANK(LenderFeeS3__c), ISBLANK(AppraisalFeeS3__c), ISBLANK(CreditReportFeeS3__c), ISBLANK(EscrowFeesS3__c), ISBLANK(TitleFeeS3__c), ISBLANK(RecordingFeeS3__c)),TRUE,FALSE)</formula>
+    <label>Autofill Fees</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

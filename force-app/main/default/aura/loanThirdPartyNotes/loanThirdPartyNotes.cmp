@@ -1,0 +1,28 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
+
+    <aura:attribute name="recordId" type="String"/>
+
+    <lightning:recordEditForm
+            recordId="{!v.recordId}"
+            objectApiName="Opportunity"
+            onsuccess="{!c.handleSuccess}">
+
+        <lightning:messages/>
+        <lightning:layout>
+
+            <lightning:layoutItem class="slds-p-around">
+
+                <div class="slds-p-top_small">
+                    <c:fieldHistoryController aura:id="fieldHistoryComponent" fieldName="X3rd_Party_Notes__c"
+                                              fieldLabel="3rd Party Notes" recordId="{!v.recordId}" recordLimit="2"/>
+                </div>
+                <label for="ThirdPartyNotes">3rd Party Notes</label>
+                <lightning:inputField aura:id="ThirdPartyNotes" fieldName="X3rd_Party_Notes__c"
+                                      variant="label-hidden"/>
+
+                <lightning:button class="slds-m-top_small" type="submit" label="Save Updates"/>
+            </lightning:layoutItem>
+
+        </lightning:layout>
+    </lightning:recordEditForm>
+</aura:component>

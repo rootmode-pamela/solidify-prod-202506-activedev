@@ -1,0 +1,461 @@
+<apex:page showHeader="false"  sidebar="false" applyHtmlTag="false" renderAs="PDF" controller="ScenariosPDFPageController">
+    <html>
+        <head>
+            <apex:includeScript value="{!$Resource.ScenariosStylePage}"/>
+            <!-- STYLE START -->
+            <style type="text/css" media="print">
+                @page {
+                padding:0px;
+                size:A4 portrait;
+                }
+                .centered {
+                text-align: center;
+                }
+                .parentTable{
+                width:100%;
+                font-family: Arial, Helvetica, sans-serif;
+                }
+                .childTableLeft{
+                width:100%;
+                }
+                .childTableRight{
+                width:100%;
+                margin-left: 15px;
+                }
+                .header{
+                font-size: 18px;
+                font-weight: bold;
+                text-align: center;
+                }
+                .subHeader{
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+                }
+                td{
+                text-align: center;
+                font-size: 14px;
+                padding: 5px;
+                }
+            </style>
+            </head>
+        <body>
+            <div class="calculator-body calculator-structure mt-5">
+        <div class="container mx-auto row p-0 mb-5">
+            <!-- END STYLE START -->
+            <!--content START-->
+            <div class="content">
+                <div class="centered col-12 calc-image-section">
+                    <img class="d-none d-md-block mt-6 mx-auto" src="/resource/1616612675000/logoHeader"/>
+                </div>
+                <table class="parentTable">
+                    <tbody>
+                        <tr>
+                            <td style="vertical-align:top" class="{!leftTableWidth}">
+                                <apex:outputPanel rendered="{!isRefinance}">
+                                    <div class="calculator-result col-11 col-md-3 mx-auto mb-3 my-md-0 p-0">
+                    				<div class="container calculator-result-comparison px-0 px-md-3 pb-5">
+                                <table class="childTableLeft">
+                                    <tr>
+                                        <td>
+                                            <apex:outputText styleClass="header" value="Current Loan Information"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table class="childTableLeft" style="background-color:#F0F0F0">
+                                                <tr class="col-12 row calculator-result-comparison-loan m-0 p-0">
+                                                    <td>
+                                                        <apex:outputText styleClass="subHeader" value="Occupancy"/>
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{!leadRecord.Occupancy__c}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <apex:outputText styleClass="subHeader" value="Subject Property Type"/>
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{!leadRecord.Subject_Property_Type__c}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <apex:outputText styleClass="subHeader" value="Number of Units"/>
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{!leadRecord.Number_of_Units__c}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <apex:outputText styleClass="subHeader" value="Estimated Value"/>
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{0,number }">
+                                                            <apex:param value="{!leadRecord.Estimated_Value__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <apex:outputText styleClass="subHeader" value="Current Program"/>
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{!leadRecord.Current_Program__c}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <apex:outputText styleClass="subHeader" value="Current Balance"/>
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Current_Balance__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <apex:outputText styleClass="subHeader" value="Current Rate"/>
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{!leadRecord.Current_Rate__c}%"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <apex:outputText styleClass="subHeader" value="Current Payment"/>
+                                                    </td>
+                                                    <td>
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Current_Payment__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                        </div>
+                                    </div>
+                            </apex:outputPanel>
+                            </td>
+                        
+                            <td class="{!rightTableWidth}">
+                                <table class="childTableRight">
+                                    <tr>
+                                        <td class="header">
+                                            <apex:outputText value="Comparison Results"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="padding-top:20px">
+                                            </div>
+                                            <table style="width:100%;background-color:#F0F0F0;margin-bottom: 20px;">
+                                                
+                                                <tr style="width:100%;background-color:white">
+                                                    <td style="width:25%">
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Scenario 1"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Scenario 2"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Scenario 3"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Purpose"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Purpose_Scenario_1__c}"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Purpose_Scenario_2__c}"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Purpose_Scenario_3__c}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Loan Program"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Loan_Program_Scenario_1__c}"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Loan_Program_Scenario_2__c}"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Loan_Program_Scenario_3__c}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Term Due"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Term_Due__c}"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Term_Due_Scenario_2__c}"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Term_Due_Scenario_3__c}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Loan Amount"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.First_Loan_Amount_Scenario_1__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.First_Loan_Amount_Scenario_2__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.First_Loan_Amount_Scenario_3__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Rate"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Rate_Scenario_1__c}%"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Rate_Scenario_2__c}%"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Rate_Scenario_3__c}%"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <apex:outputText styleClass="subHeader" value="Analysis"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="padding-top:20px">
+                                            </div>
+                                            <table class="childTableRight" style="width:100%;background-color:#F0F0F0">
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="LTV"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.LTV_Scenario_1__c}%"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.LTV_Scenario_2__c}%"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.LTV_Scenario_3__c}%"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="CLTV"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.CLTV_Scenario_1__c}%"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.CLTV_Scenario_2__c}%"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.CLTV_Scenario_3__c}%"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Monthly Payment"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Monthly_Payment__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Monthly_Payment_Scenario_2__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Monthly_Payment_Scenario_3__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Total Interest"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Total_Interest_Scenario_1__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Total_Interest_Scenario_2__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Total_Interest_Scenario_3__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                                <apex:outputPanel rendered="{!isRefinance}">
+                                                <table class="childTableRight" style="width:100%;background-color:#F0F0F0">
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Monthly Payment Savings"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Monthly_Payment_Savings__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Monthly_Payment_Savings_Scenario_2__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Monthly_Payment_Savings_Scenario_3__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Daily Interest Savings"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Daily_Interest_Savings__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Daily_Interest_Savings_Scenario_2__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Daily_Interest_Savings_Scenario_3__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="On Pace Payment"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.On_Pace_Payment_Scenario_1__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.On_Pace_Payment_Scenario_2__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.On_Pace_Payment_Scenario_3__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="On Pace Savings"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.On_Pace_Savings_Scenario_1__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.On_Pace_Savings_Scenario_2__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.On_Pace_Savings_Scenario_3__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Maturity Reduction"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Maturity_Reduction_Scenario_1__c}"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Maturity_Reduction_Scenario_2__c}"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{!leadRecord.Maturity_Reduction_Scenario_3__c}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:25%">
+                                                        <apex:outputText styleClass="subHeader" value="Lifetime Savings"/>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Lifetime_Savings_Scenario_1__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Lifetime_Savings_Scenario_2__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        <apex:outputText value="{0,number, Currency }">
+                                                            <apex:param value="{!leadRecord.Lifetime_Savings_Scenario_3__c}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            </apex:outputPanel>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                </div>
+            </div>
+            <!--END content START-->
+        </body>
+    </html>
+</apex:page>

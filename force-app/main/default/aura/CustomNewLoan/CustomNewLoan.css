@@ -1,0 +1,12 @@
+.THIS .marginTopLightningInput{
+    margin-top: -17px !important;
+}
+.THIS .Button{
+    width:33%;
+    /*background-color:#FAA916;
+    background-color:White;
+    color: black;*/
+    border: 0px;
+    height: 40px;
+    font-size:16px;
+}

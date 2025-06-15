@@ -1,0 +1,191 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
+                  
+   <lightning:recordViewForm aura:id="form"
+                                  recordId="{!v.recordId}"
+                                  objectApiName="Proposal__c"     
+                                  class="slds-card__body_inner ">    
+    
+           <lightning:card>
+<div class="slds-brand-band slds-brand-band_small">     
+        
+        <div class="slds-grid slds-wrap">
+            <div class="slds-size_2-of-12"></div>
+            <div class="slds-grid_align-space">
+                <div>
+        <img class='slds-align_absolute-center' src="{!$Resource.logoHeaderNew}"/>
+        </div>
+                 <div style="font-size: 28px;font-weight: bold" class="slds-grid slds-align_absolute-center">Rate/Fee Analysis</div>
+        <br/>
+     <div class="slds-border_right slds-border_left slds-border_top slds-border_bottom">               
+	<lightning:card class="slds-p-horizontal_x-large ">
+     
+                    
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-3 slds-align_absolute-center ">
+                            <p style="font-size: 18px; font-weight: bold;text-decoration: underline;"><lightning:outputField fieldName="Borrower_Name_Text__c" variant="label-hidden"/></p>
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-3 slds-align_absolute-center">
+                            <lightning:outputField fieldName="Fixed_Term_Years__c" variant="label-hidden"/> &nbsp; Year Fixed
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-3 slds-m-right_medium slds-align_absolute-center">
+                            <p style="font-size: 18px; font-weight: bold;text-decoration: underline;"><lightning:outputField fieldName="Prepared_Date__c" variant="label-hidden"/></p>
+                        </div>
+                    </div>
+        <br/>
+        <div class="slds-grid">
+        	<div class="slds-col slds-p-around_small">
+            	<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                  <thead>
+                    <tr class="slds-line-height_reset">
+                      <th  scope="col">Rate %</th>
+                      <th scope="col">APR %</th>
+                      <th  scope="col">Base Loan Amount</th>
+                      <th  class="slds-align_absolute-center" scope="col">Fees</th>
+                    </tr>
+  				  </thead>
+  				  <tbody>
+    				<tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField fieldName="Rate_1__c" variant="label-hidden"/></th> 
+                        <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="APR1__c" variant="label-hidden"/></th> 
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="New_Loan_Amount__c" variant="label-hidden"/></td>
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Cost_1__c" variant="label-hidden"/></td>  
+    				</tr>
+                      <tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField fieldName="Rate_2__c" variant="label-hidden"/></th> 
+                          <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="APR2__c" variant="label-hidden"/></th> 
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="New_Loan_Amount__c" variant="label-hidden"/></td>
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Cost_2__c" variant="label-hidden"/></td>  
+    				</tr>
+                      <tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField fieldName="Rate_3__c" variant="label-hidden"/></th>
+                          <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="APR3__c" variant="label-hidden"/></th> 
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="New_Loan_Amount__c" variant="label-hidden"/></td>
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Cost_3__c" variant="label-hidden"/></td>  
+    				</tr>
+                      <tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField fieldName="Rate_4__c" variant="label-hidden"/></th> 
+                          <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="APR4__c" variant="label-hidden"/></th> 
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="New_Loan_Amount__c" variant="label-hidden"/></td>
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Cost_4__c" variant="label-hidden"/></td>  
+    				</tr>
+                      <tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField fieldName="Rate_5__c" variant="label-hidden"/></th>   
+                          <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="APR5__c" variant="label-hidden"/></th> 
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="New_Loan_Amount__c" variant="label-hidden"/></td>
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Cost_5__c" variant="label-hidden"/></td>  
+    				</tr>
+                      <tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField fieldName="Rate_6__c" variant="label-hidden"/></th>  
+                          <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="APR6__c" variant="label-hidden"/></th> 
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="New_Loan_Amount__c" variant="label-hidden"/></td>
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Cost_6__c" variant="label-hidden"/></td>  
+    				</tr>
+                      
+                                                                
+              </tbody>
+            </table>
+          </div>
+            
+            <div class="slds-col slds-p-around_small">
+            	<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                  <thead>
+                    <tr class="slds-line-height_reset">
+                      <th scope="col">Total Loan Amount</th>
+                      <th  scope="col">Monthly P&amp;I Payment</th>
+                    </tr>
+  				  </thead>
+  				  <tbody>
+    				<tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Loan_Amount1__c" variant="label-hidden"/></th>                        
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Monthly_PI_Pmt1__c" variant="label-hidden"/></td>
+    				</tr>
+                      
+                    <tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Loan_Amount2__c" variant="label-hidden"/></th>                        
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Monthly_PI_Pmt2__c" variant="label-hidden"/></td>	</tr>
+                      
+                    <tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Loan_Amount3__c" variant="label-hidden"/></th>                        
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Monthly_PI_Pmt3__c" variant="label-hidden"/></td>    				</tr>
+                      
+                    <tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Loan_Amount4__c" variant="label-hidden"/></th>                        
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Monthly_PI_Pmt4__c" variant="label-hidden"/></td></tr>
+                      
+                    <tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Loan_Amount5__c" variant="label-hidden"/></th>                        
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Monthly_PI_Pmt5__c" variant="label-hidden"/></td>				</tr>
+                      
+                    <tr class="slds-hint-parent">
+                        <th scope="row"><lightning:outputField class="slds-align_absolute-center" fieldName="Total_Loan_Amount6__c" variant="label-hidden"/></th>                        
+                        <td><lightning:outputField class="slds-align_absolute-center" fieldName="Monthly_PI_Pmt6__c" variant="label-hidden"/></td>    				</tr>
+                                                                                                            
+              </tbody>
+            </table>
+          </div>
+          
+            <div class="slds-col slds-p-around_small">
+            	<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                  <thead>
+                    <tr class="slds-line-height_reset">
+                      <th class="" scope="col">Years Until Breakeven (est)</th>
+                    </tr>
+  				  </thead>                   
+  				  <tbody>
+                     <tr class="slds-hint-parent">
+                         <th scope="row" class="slds-align_absolute-center"><lightning:outputField fieldName="Years_Until_Breakeven1__c" variant="label-hidden"/></th>                        
+    				</tr>                      
+                     <tr class="slds-hint-parent">
+                         <th class="slds-align_absolute-center" scope="row"><lightning:outputField fieldName="Years_Until_Breakeven2__c" variant="label-hidden"/></th>                        
+    				</tr>                       
+                   <tr class="slds-hint-parent">
+                         <th class="slds-align_absolute-center" scope="row"><lightning:outputField fieldName="Years_Until_Breakeven3__c" variant="label-hidden"/></th>                        
+    				</tr>                       
+                    <tr class="slds-hint-parent">
+                         <th class="slds-align_absolute-center" scope="row"><lightning:outputField fieldName="Years_Until_Breakeven4__c" variant="label-hidden"/></th>                        
+    				</tr>                      
+                    <tr class="slds-hint-parent">
+                         <th class="slds-align_absolute-center" scope="row"><lightning:outputField fieldName="Years_Until_Breakeven5__c" variant="label-hidden"/></th>                        
+    				</tr>                       
+                    <tr class="slds-hint-parent">
+                         <th class="slds-align_absolute-center" scope="row">0</th>                        
+    				</tr> 
+                    </tbody>
+                </table>
+        	</div>
+        </div>
+        
+         </lightning:card></div>
+                <br/>
+                <div class="slds-grid slds-size_1-of-1 slds-p-bottom_large">
+                    <div class="slds-grid slds-size_1-of-1">
+                    <div class="slds-col slds-size_1-of-2 ">
+               			<div class="slds-align_absolute-center" style="font-weight: bold;text-decoration: underline">
+                        Notes and Disclosures:
+                        </div>
+                      	<div class="slds-align_absolute-center slds-p-top_x-small">Rates subject to change and costs are estimated</div>
+                        <div class="slds-align_absolute-center slds-p-top_x-small">Closing costs include appraisal, title, escrow, lender fees</div> 
+                        <div class="slds-align_absolute-center slds-p-top_x-small">Not a formal Loan Estimate and does not constitute approval</div> 
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                     <div style="font-weight: bold;text-decoration: underline" class="slds-align_absolute-center">
+                			Assumptions:
+                    </div>
+                    <div class="slds-align_absolute-center slds-p-top_x-small">Estimated Value: &nbsp;<lightning:outputField fieldName="Estimate_Value__c" variant="label-hidden"/></div>
+                        <div class="slds-align_absolute-center slds-p-top_x-small">Est. Credit Score: &nbsp; <lightning:outputField fieldName="FICO_Score__c" variant="label-hidden"/></div>
+                        <div class="slds-align_absolute-center slds-p-top_x-small">Est. Days to Close: &nbsp; <lightning:outputField fieldName="Lock_Period_Days__c" variant="label-hidden"/></div>
+                   
+                        <br/>
+                                               
+                    </div>
+                    </div>
+                </div>
+                <p class="slds-align_absolute-center">NMLS #1283930</p>
+            </div>
+            </div></div>
+               </lightning:card> 
+    </lightning:recordViewForm>
+   
+</aura:component>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maturity_Reduction_Scenario_3__c</fullName>
+    <externalId>false</externalId>
+    <formula>ROUND(((Current_Loan_Payments_Remaining__c -  Payments_Remaining_Scenario_3__c)/12), 3)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Maturity Reduction</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

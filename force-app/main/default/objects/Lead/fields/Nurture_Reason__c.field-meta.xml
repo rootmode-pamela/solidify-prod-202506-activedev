@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nurture_Reason__c</fullName>
+    <label>Nurture Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Status</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Credit Limitation</fullName>
+                <default>false</default>
+                <label>Credit Limitation</label>
+            </value>
+            <value>
+                <fullName>Downpayment Limitation</fullName>
+                <default>false</default>
+                <label>Downpayment Limitation</label>
+            </value>
+            <value>
+                <fullName>Income/Employment Limitation</fullName>
+                <default>false</default>
+                <label>Income/Employment Limitation</label>
+            </value>
+            <value>
+                <fullName>Asset Limitation</fullName>
+                <default>false</default>
+                <label>Asset Limitation</label>
+            </value>
+            <value>
+                <fullName>Property Limitation</fullName>
+                <default>false</default>
+                <label>Property Limitation</label>
+            </value>
+            <value>
+                <fullName>Timing</fullName>
+                <default>false</default>
+                <label>Timing</label>
+            </value>
+            <value>
+                <fullName>Waiting for Rates</fullName>
+                <default>false</default>
+                <label>Waiting for Rates</label>
+            </value>
+            <value>
+                <fullName>Closed Elsewhere</fullName>
+                <default>false</default>
+                <label>Closed Elsewhere</label>
+            </value>
+            <value>
+                <fullName>Proximity</fullName>
+                <default>false</default>
+                <label>Proximity</label>
+            </value>
+            <value>
+                <fullName>None Specified / General</fullName>
+                <default>false</default>
+                <label>None Specified / General</label>
+            </value>
+            <value>
+                <fullName>Never Connected</fullName>
+                <default>false</default>
+                <label>Never Connected</label>
+            </value>
+            <value>
+                <fullName>Lost Contact</fullName>
+                <default>false</default>
+                <label>Lost Contact</label>
+            </value>
+            <value>
+                <fullName>Spanish LO</fullName>
+                <default>false</default>
+                <label>Spanish LO</label>
+            </value>
+            <value>
+                <fullName>Referred Out</fullName>
+                <default>false</default>
+                <label>Referred Out</label>
+            </value>
+            <value>
+                <fullName>Opted to Sell</fullName>
+                <default>false</default>
+                <label>Opted to Sell</label>
+            </value>
+            <value>
+                <fullName>Unlicensed State</fullName>
+                <default>false</default>
+                <label>Unlicensed State</label>
+            </value>
+            <value>
+                <fullName>SMS Opt Out</fullName>
+                <default>false</default>
+                <label>SMS Opt Out</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Credit Limitation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Downpayment Limitation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Income/Employment Limitation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Asset Limitation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Property Limitation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Timing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Waiting for Rates</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Closed Elsewhere</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Proximity</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>None Specified / General</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Never Connected</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Lost Contact</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Spanish LO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Referred Out</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Opted to Sell</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>Unlicensed State</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nurturing</controllingFieldValue>
+            <valueName>SMS Opt Out</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

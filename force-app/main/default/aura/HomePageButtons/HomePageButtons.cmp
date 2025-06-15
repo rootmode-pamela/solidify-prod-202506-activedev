@@ -1,0 +1,125 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="openPopup" type="Boolean" default="false"/>
+    <aura:attribute name="isSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="isDisplayPopupProp" type="Boolean" default="false"/>
+    <aura:attribute name="isDisplayPopupLead" type="Boolean" default="false"/>
+    <aura:attribute name="isDisplayPopupLoan" type="Boolean" default="false"/>
+    <aura:attribute name="isDisplayPopupWhyWait" type="Boolean" default="false"/>
+    <aura:attribute name="isDisplayPopupMortgageCalculator" type="Boolean" default="false"/>
+    <aura:attribute name="isDisplayPopupContact" type="Boolean" default="false"/>
+    <aura:attribute name="isNewContactFromNewLoan" type="Boolean" default="false"/>
+    <aura:attribute name="isDisplayPopupBlendedRate" type="Boolean" default="false"/>  
+    <aura:attribute name="isDisplayPopupQualifying" type="Boolean" default="false"/>
+    <aura:attribute name="isDisplayPopupScenario" type="Boolean" default="false"/>
+    <aura:attribute name="contactRecord" type="Object" default=""/>
+    <lightning:quickActionAPI aura:id="quickActionAPI" />
+    
+    <div  style="padding:2% !important;">
+        <div class="slds-grid slds-gutters">
+            <!--<button class="slds-align_absolute-center slds-button slds-button_brand" style="width:100% !important; background-color:#FAA916; color: black; border: 0px; height: 50px; font-size:18px;" onclick="{!c.openNewProposalButton}">
+                New Proposal
+            </button>-->
+            
+            <button class="slds-align_absolute-center slds-button slds-button_brand" style="width:100% !important; background-color:#FAA916; color: black; border: 0px; height: 50px; font-size:18px;" onclick="{!c.openNewLoanButton}">
+                New Scenario
+            </button>
+            
+            <button class="slds-align_absolute-center slds-button slds-button_brand" style="width:100% !important; background-color:#FAA916; color: black; border: 0px; height: 50px; font-size:18px;" onclick="{!c.openNewLeadButton}">
+                <!--<svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#lead"></use>
+                </svg>-->
+                New Lead
+            </button>
+            
+            <button class="slds-align_absolute-center slds-button slds-button_brand" style="width:100% !important; background-color:#FAA916; color: black; border: 0px; height: 50px; font-size:18px;" onclick="{!c.openNewContactButton}">
+                New Contact
+            </button>
+        </div>
+        
+        <div class="slds-grid slds-gutters slds-p-top_small">
+            <button class="slds-align_absolute-center slds-button slds-button_brand worksheet" style="width:100% !important; background-color:#3e9797; color: white; border: 0px; height: 50px; font-size:18px;" onclick="{!c.openWhyWaitButton}">
+                Why Wait?
+            </button>
+            
+            <button class="slds-align_absolute-center slds-button slds-button_brand worksheet" style="width:100% !important; background-color:#3e9797; color: white; border: 0px; height: 50px; font-size:18px;" 
+                    onclick="{!c.openMortgageCalculatorButton}">Mortgage Calculator
+            </button>
+        </div>
+        <div class="slds-grid slds-gutters slds-p-top_small">
+            <button class="slds-align_absolute-center slds-button slds-button_brand worksheet" style="width:100% !important; background-color:#3e9797; color: white; border: 0px; height: 50px; font-size:18px;" onclick="{!c.openBlendedRateButton}">
+                Blended Rate
+            </button>
+            
+            <button class="slds-align_absolute-center slds-button slds-button_brand worksheet" style="width:100% !important; background-color:#3e9797; color: white; border: 0px; height: 50px; font-size:18px;" onclick="{!c.openQualifying}">
+        		Pre-Qual Worksheet
+    	    </button>
+
+            <button class="slds-align_absolute-center slds-button slds-button_brand worksheet" style="width:100% !important; background-color:#3e9797; color: white; border: 0px; height: 50px; font-size:18px;" onclick="{!c.openScenario}">
+        		Scenario
+    	    </button>
+
+        </div>
+    </div>
+    
+    <aura:if isTrue="{!v.isDisplayPopupProp}"> 
+        <c:proposalTypeNavigation />
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isDisplayPopupLead}"> 
+        <c:solidifyNewLeadOverride />
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isDisplayPopupLoan}">
+        <div class="{!v.isNewContactFromNewLoan ? 'slds-hide' : ''}">
+            <c:CustomNewLoan onNewContact="{!c.newContactFromNewLoan}" contactRecord="{!v.contactRecord}"/>
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isDisplayPopupWhyWait}"> 
+        <c:crudeCalculator onclosemodal="{!c.closeCrudeCalculatorModal}"/>
+    </aura:if>
+
+    <aura:if isTrue="{!v.isDisplayPopupScenario}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" 
+                 aria-describedby="modal-content-id-1" 
+                 class="slds-modal slds-fade-in-open slds-modal_full"
+                 style="margin-top:50px">
+            <div class="slds-modal__container slds-scrollable"> 
+                <div class="modal-header slds-modal__header slds-size_1-of-1">
+                    <H1>Scenario</H1>
+                </div>
+        <c:scenario onclosemodal="{!c.closePopupScenario}"/>
+        <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+            <lightning:button variant="Neutral" class="slds-button" label="Close" onclick="{!c.closePopupScenario}"/>
+        </div>
+    </div>
+</section>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isDisplayPopupContact}"> 
+        <c:CustomNewContact onContactCreated="{!c.onContactCreated}" isNewContactFromNewLoan="{!v.isNewContactFromNewLoan}" aura:id="newCon:c"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isDisplayPopupMortgageCalculator}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" 
+                 aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small" style="margin-top: 10% !important;">
+            <div class="slds-modal__container"  style="height: 74%; !important;"> 
+                <lightning:flow aura:id="mortgageCalculatorFlow"/>
+                <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+                    <lightning:button variant="Neutral" class="slds-button" label="Close" onclick="{!c.handleMortagageCalculatorClose}"/>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </aura:if>    
+    
+    <aura:if isTrue="{!v.isDisplayPopupBlendedRate}">
+        <c:quickBlendedRate onclosemodal="{!c.closeCrudeCalculatoeModal}"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isDisplayPopupQualifying}">
+            <c:qualifyingModal onclosemodal="{!c.closeQualifyingModal}"
+                typeOfRecord="Scenario"></c:qualifyingModal>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,39 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-26-2022
+  @last modified by  : Ashton Kuehne
+-->
+<template>
+    <lightning-card>
+        <h1 slot="title">{title}</h1>
+        <div class="slds-card__body slds-card__body_inner">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-var-m-bottom_large"> 
+                <!--<thead>
+                    <tr class="slds-text-title_caps">
+                        <template for:each={columns} for:item="column">
+                            <th key={column.apiName}><div class="slds-truncate">{column.label}</div></th>
+                        </template>
+                    </tr>
+                </thead>-->
+                <tbody>
+                    <template for:each={rows} for:item="row" for:index="index">
+                        <tr class="inputRows" key={row.uuid}>
+                            <template for:each={columns} for:item="column">
+                                <td key={column.apiName}>
+                                  <c-input-pick-list-cell class="fields" field-type={column.fieldType} record={row} field={column.apiName} object-name={column.objectName}></c-input-pick-list-cell>
+                                  <c-input-table-cell class="fields" field-type={column.fieldType} record={row} field={column.apiName} ></c-input-table-cell> 
+                                </td>
+                            </template>
+                            <td>
+                                <lightning-button-icon icon-name="action:delete" value={index} variant="border-filled" onclick={removeRow}></lightning-button-icon>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        <lightning-button variant="Neutral" label="Add Row" onclick={addRow}></lightning-button>
+    </lightning-card>
+  </template>

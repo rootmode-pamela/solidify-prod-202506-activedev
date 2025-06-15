@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Appraisal__c</fullName>
+    <label>Appraisal</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Reimbursed to LO</fullName>
+                <default>false</default>
+                <label>Reimbursed to LO</label>
+            </value>
+            <value>
+                <fullName>Reimbursed to Broker</fullName>
+                <default>false</default>
+                <label>Reimbursed to Broker</label>
+            </value>
+            <value>
+                <fullName>Paid by Client</fullName>
+                <default>false</default>
+                <label>Paid by Client</label>
+            </value>
+            <value>
+                <fullName>Expecting PIW</fullName>
+                <default>false</default>
+                <label>Expecting PIW</label>
+            </value>
+            <value>
+                <fullName>PIW</fullName>
+                <default>false</default>
+                <label>PIW</label>
+            </value>
+            <value>
+                <fullName>Streamline / IRRRL</fullName>
+                <default>false</default>
+                <label>Streamline / IRRRL</label>
+            </value>
+            <value>
+                <fullName>Transfer</fullName>
+                <default>false</default>
+                <label>Transfer</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

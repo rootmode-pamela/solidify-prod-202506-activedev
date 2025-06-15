@@ -1,0 +1,671 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="Opportunity" type="Object" />
+    <aura:attribute name="recordError" type="String" />
+    <aura:attribute name="openTransact" type="boolean" default="false"/>
+    <aura:attribute name="openLoanDetails" type="boolean" default="false"/>
+    <aura:attribute name="openClosingCosts" type="boolean" default="false"/>
+    <aura:attribute name="openPayments" type="boolean" default="false"/>
+    <aura:attribute name="openRatios" type="boolean" default="false"/>
+    <aura:attribute name="openSubmissionNotes" type="boolean" default="false"/>    
+    <aura:attribute name="openProperty" type="boolean" default="false"/>
+    
+    <force:recordData aura:id="loanRecord"
+                          recordId="{!v.recordId}"
+                          targetFields="{!v.Opportunity}"
+                          targetError="{!v.recordError}"
+                          fields="Loan_Type__c, Loan_Program__c, Down_Payment__c, LTV__c, CLTV__c, DTI_Top__c, DTI__c,
+                                    Qualifying_Fico__c, Borrower_FICO__c, Co_Borrower_Fico__c, Interest_Rate__c, Interest_Rate_SF__c,
+                                    Purchase_Price__c, Loan_Amount__c,Property_Value__c,Lender_Credit__c,Seller_Credit__c,
+                                    Purpose__c,Occupancy__c,Amount,Lender_Admin_Fee__c,
+                                    Subject_Property_Name__r.Property_County__c, Escrows_Collected__c,
+                                    Escrows_Indicator__c,
+                                    Subject_Property_Name__r.Property_Street__c,Subject_Property_Name__r.Property_City__c,
+                                    Subject_Property_Name__r.Property_Zip__c,Subject_Property_Name__r.Property_State__c,
+                                    Subject_Property_Name__r.Number_of_Units__c,Subject_Property_Name__r.Property_Type__c,
+                                    Exp_Subject_Prop_Net_Neg__c, Exp_All_Oth_Prop__c,
+                                    Exp_All_Other_Payments__c, Total_Liabilities__c,Exp_1Mtg_Present__c,
+                                    Exp_1Mtg_Proposed__c, Exp_OthFin_Present__c, Exp_OthFin_Proposed__c,
+                                    Exp_HazIns_Present__c, Exp_HazIns_Proposed__c,Estimated_Flood_Insurance_Payment__c, Exp_Taxes_Proposed__c,
+                                    Exp_MtgIns_Proposed__c, Exp_HOA_Proposed__c,Exp_Total_Proposed__c,Refi_Total_Debts__c,
+                                    Prepaids__c,Discount_Points__c,MIP_FF__c,Cash_From_To_Borrower__c,
+                                    Subject_Property_Name__c,Qual_FICO__c,Appraised_Value__c,Lender_Paid_Comp__c,
+                                    Scenario_Bottom_DTI__c,LTV_Old__c, Scenario_CLTV__c, Scenario_Top_DTI__c,
+                                    Scenario_HCLTV__c, Encompass_Total_Fees__c" />
+
+    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Opportunity">
+
+    <div class="slds-clearfix slds-grid slds-grid_align-spread slds-wrap">
+        <!--column 1-->
+        <div class="slds-col slds-float_left slds-size_4-of-12 slds-p-around--x-small">
+            <!--Transaction Details--> 
+            <div class="slds-p-horizontal_x-small slds-p-bottom_x-small slds-size_12-of-12 ">               
+                <div style="border-color:#003366;border-width:1px; background-color:#E8E8E8" class="slds-grid slds-wrap slds-box_border blueIcon">
+                    <div style="border-color:#003366; border-width:1px" class="blueIcon slds-border--bottom slds-p-top_x-small slds-p-bottom_xx-small slds-p-left_xx-small slds-size_12-of-12">
+                        <lightning:icon iconName="utility:news" alternativeText=""/>
+                        <span style="font-weight: bold;color:#003366;font-size: 16px" class="slds-text-heading_small slds-p-left_x-small slds-p-top_medium">Transaction</span>
+                        <div class="slds-float_right slds-p-right_small slds-p-bottom_xx-small">
+                            <lightning:button variant="neutral" label="Edit" onclick="{!c.openTransact}"/>    
+                        </div>
+                    </div>
+                                
+                    <p style="color:#003366" class="slds-p-horizontal_small slds-list__item">
+                        <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Purpose</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">
+                                {!v.Opportunity.Purpose__c}
+                            </div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small arive-label slds-size_6-of-12">
+                                Occupancy:
+                            </div>
+                            <div style="border-color:#003366" class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small arive-info slds-size_6-of-12">
+                                {!v.Opportunity.Occupancy__c}
+                            
+                            </div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Property Type:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Subject_Property_Name__r.Property_Type__c}</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Purchase Price:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Purchase_Price__c}"></lightning:formattedNumber></div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Down Payment:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Down_Payment__c}"></lightning:formattedNumber></div>
+                            <!--<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Estimated Value:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Property_Value__c}"></lightning:formattedNumber></div>-->
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Appraised Value:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Appraised_Value__c}"></lightning:formattedNumber></div>
+                            <div class="slds-text-body_small slds-size_12-of-12"></div>
+                        </div>
+                    </p>
+                </div>
+            </div>
+                            
+            <!--LOAN DETAILS START-->     
+            <div style="border-color:#003366;" class="slds-grid slds-grid_align-spread slds-wrap slds-size-12-of-12 ">
+                <div style="border-color:#003366;" class="slds-p-around--x-small slds-size_12-of-12">
+                    <div style="border-color:#003366; border-width:1px; background-color:#E8E8E8" class="slds-grid slds-wrap slds-box_border">
+                        <div style="border-color:#003366;background-color:#E8E8E8; border-width:1px" class="slds-border--bottom slds-p-top_x-small slds-p-bottom_xx-small slds-p-left_xx-small slds-size_12-of-12">
+                            <lightning:icon class="blue" iconName="utility:metrics" alternativeText=""/>
+                            <span style="color:#003366;font-weight: bold;font-size: 16px" class="slds-text-heading_small slds-p-top_medium slds-p-left_x-small ">Loan Details</span>
+                            <span class="slds-float_right slds-p-right_small slds-p-bottom_xx-small">
+                                <lightning:button variant="neutral" label="Edit" onclick="{!c.openLoanDetails}"/>
+                            </span>
+                        </div> 
+                                        
+                        <p class="slds-p-horizontal_small slds-list__item">
+                            <div style="color:#003366;" class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Loan Type:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Loan_Type__c}</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Program:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Loan_Program__c}</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Loan Amount:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Amount}"></lightning:formattedNumber></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">MIP:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.MIP_FF__c}"></lightning:formattedNumber></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Total Loan:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Loan_Amount__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Interest Rate:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="decimal" value="{!v.Opportunity.Interest_Rate_SF__c}"></lightning:formattedNumber>%</div>
+                            </div>
+                        </p>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <!--column 2-->            	
+        <div class="slds-col slds-float_left slds-size_4-of-12 slds-p-top_x-small">
+            <!--SUBJECT PROPERTY START--> 
+            <div class="slds-p-horizontal_x-small slds-p-bottom_x-small slds-size_12-of-12 ">               
+                <div style="border-color:#003366; border-width:1px; background-color:#E8E8E8;" class="slds-grid slds-wrap slds-box_border blueIcon">
+                    <div style="border-color:#003366; border-width:1px" class="blueIcon slds-border--bottom slds-p-top_x-small slds-p-bottom_xx-small slds-p-left_xx-small slds-size_12-of-12">
+                        <lightning:icon iconName="utility:company" alternativeText=""/>
+                        <span style="font-weight: bold;color:#003366;font-size: 16px" class="slds-text-heading_small slds-p-left_x-small slds-p-top_medium">Subject Property</span>
+                        <div class="slds-float_right slds-p-right_small slds-p-bottom_xx-small">
+                            <lightning:button variant="neutral" label="View" onclick="{!c.openProperty}"/>
+                        </div>
+                    </div>
+                                
+                    <p style="color:#003366" class="slds-p-horizontal_small slds-list__item">
+                        <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Street</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                                {!v.Opportunity.Subject_Property_Name__r.Property_Street__c}
+                            </div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small arive-label slds-size_4-of-12">
+                                City:
+                            </div>
+                            <div style="border-color:#003366" class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small arive-info slds-size_8-of-12">
+                                {!v.Opportunity.Subject_Property_Name__r.Property_City__c}
+                            </div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">State:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">{!v.Opportunity.Subject_Property_Name__r.Property_State__c}</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Zip Code:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">{!v.Opportunity.Subject_Property_Name__r.Property_Zip__c}</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">County:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">{!v.Opportunity.Subject_Property_Name__r.Property_County__c}</div>
+                       
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12"># Units:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">{!v.Opportunity.Subject_Property_Name__r.Number_of_Units__c}</div>
+                            <div class="slds-text-body_small slds-size_12-of-12"></div>
+                        </div>
+                    </p>
+                </div>
+            </div>
+
+            <!--LOAN SPECS START-->     
+            <div style="border-color:#003366" class="slds-grid slds-grid_align-spread slds-wrap slds-size-12-of-12 ">
+                <div style="border-color:#003366 " class="slds-p-around--x-small slds-size_12-of-12">
+                    <div style="border-color:#003366; border-width:1px; background-color:#E8E8E8" class="slds-grid slds-wrap slds-box_border">
+                        <div style="border-color:#003366;background-color:#E8E8E8; border-width:1px" class="slds-border--bottom slds-p-top_x-small slds-p-bottom_xx-small slds-p-left_xx-small slds-size_12-of-12">
+                            <lightning:icon class="blue" iconName="utility:metrics" alternativeText=""/>
+                            <span style="color:#003366;font-weight: bold;font-size: 16px" class="slds-text-heading_small slds-p-top_medium slds-p-left_x-small ">Closing</span>
+                            <span class="slds-float_right slds-p-right_small slds-p-bottom_xx-small">
+                                <lightning:button variant="neutral" label="Edit" onclick="{!c.openClosingCosts}"/>
+                            </span>
+                        </div> 
+                                        
+                        <p class="slds-p-horizontal_small slds-list__item">
+                            <div style="color:#003366;" class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Prepaids:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Prepaids__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Escrows:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Escrows_Collected__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Fees:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Encompass_Total_Fees__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Lender Credit:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Lender_Credit__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Seller Credit:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Seller_Credit__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Cash To/From:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Cash_From_To_Borrower__c}"/></div>
+                                <!--<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Discount Points:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Discount_Points__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Lender Admin Fee:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Lender_Admin_Fee__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Total Lender Fees:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Grid_Lender_Fees__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Lender Paid Comp:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Lender_Paid_Comp__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Lender Credit %:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Lender_Credit_Percentage__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Appraisal Fee:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Appraisal_Fee__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Credit Report Fee:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Encompass_Credit_Report_Fee__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Voe Fee:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Grid_Appraisal_Credit_VOE__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Title/Esc/Rec:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Grid_Title_Escrow_Rec__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Trfr Tax &amp; Stamps:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Encompass_Total_Trfr_Tax_Stamps}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Seller Credit:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Seller_Credit__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Cash Deposit:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Cash_Deposit_Amount__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Refi - Total Debts:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Refi_Total_Debts__c}"/></div>-->
+                            </div>
+                        </p>
+                    </div>
+                </div>  
+            </div>
+
+        </div>
+        <!--columnn 3-->     
+        
+        <div class="slds-col slds-float_left slds-size_3-of-12 slds-p-top_x-small">
+
+            <!--RATIOS START-->     
+                <div style="border-color:#003366;" class="slds-p-bottom--x-small slds-p-horizontal--x-small slds-size_12-of-12">
+                    <div style="border-color:#003366; border-width:1px; background-color:#E8E8E8" class="slds-grid slds-wrap slds-box_border">
+                        <div style="border-color:#003366;background-color:#E8E8E8; border-width:1px" class="slds-border--bottom slds-p-top_x-small slds-p-bottom_xx-small slds-p-left_xx-small slds-size_12-of-12">
+                            <lightning:icon class="blue" iconName="utility:capacity_plan" alternativeText=""/>
+                            <span style="color:#003366;font-weight: bold;font-size: 16px" class="slds-text-heading_small slds-p-top_medium slds-p-left_x-small ">Ratios</span>
+                            <span class="slds-float_right slds-p-right_small slds-p-bottom_xx-small">
+                                <lightning:button variant="neutral" label="View" onclick="{!c.openRatios}"/>
+                            </span>
+                        </div> 
+                                        
+                        <p class="slds-p-horizontal_small slds-list__item">
+                            <div style="color:#003366;" class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">LTV:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber  maximumFractionDigits="2" style="percent-fixed" value="{!v.Opportunity.LTV__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">CLTV:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber  maximumFractionDigits="2" style="percent-fixed" value="{!v.Opportunity.CLTV__c}"/></div>
+                                <!--<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">TLTV:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.TLTV__c}</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">HCLTV:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.HCLTV__c}</div>-->
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Top DTI:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber  minimumFractionDigits="3" maximumFractionDigits="3" value="{!v.Opportunity.DTI_Top__c}"/></div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Bottom DTI:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber  minimumFractionDigits="3" maximumFractionDigits="3" value="{!v.Opportunity.DTI__c}"/></div>
+                                <!--<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Borr Fico:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Borrower_FICO__c}</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">CoB Fico:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Co_Borrower_Fico__c}</div>-->
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Qual FICO:</div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber  maximumFractionDigits="0" value="{!v.Opportunity.Qualifying_Fico__c}"/></div>
+                            </div>
+                        </p>
+                    </div>
+                
+            </div>
+
+            <!--PAYMENT START-->    
+            <div class="slds-p-around_x-small slds-size_12-of-12 ">               
+                <div style="border-color:#003366;border-width:1px; background-color:#E8E8E8" class="slds-grid slds-wrap slds-box_border blueIcon">
+                    <div style="border-color:#003366; border-width:1px" class="blueIcon slds-border--bottom slds-p-top_x-small slds-p-bottom_xx-small slds-p-left_xx-small slds-size_12-of-12">
+                        <lightning:icon class="blue" iconName="utility:money" alternativeText=""/>
+                        <span style="color:#003366;font-weight: bold;font-size: 16px" class="slds-text-heading_small slds-p-top_medium slds-p-left_x-small ">Payment</span>
+                        <span class="slds-float_right slds-p-right_small slds-p-bottom_xx-small">
+                        <lightning:button variant="neutral" label="Edit" onclick="{!c.openPayments}"/>                                </span>
+                    </div> 
+                                            
+                    <p class="slds-p-horizontal_small slds-list__item">
+                        <div style="color:#003366;" class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">1st:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Exp_1Mtg_Proposed__c}"/></div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">2nd:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Exp_OtheFin_Proposed__c}"/></div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Ins:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Exp_HazIns_Proposed__c}"/></div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Tax:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Exp_Taxes_Proposed__c}"/></div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">MtgIns:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Exp_MtgIns_Proposed__c}"/></div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">HOA:</div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Exp_HOA_Proposed__c}"/></div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><b>Total:</b></div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Exp_Total_Proposed__c}"/></div>
+                        </div>
+                    </p>
+                </div>
+            </div>  
+
+        </div>
+
+        <!--column 4-->
+        <!-- <div class="slds-col slds-float_left slds-size_1-of-12 slds-p-around&#45;&#45;x-small">
+ 			<div class="slds-p-vertical_x-small">
+            	<lightning:button variant="neutral" label="Submit Notes" onclick="{!c.openSubmissionNotes}"/> 
+            </div>
+   			<div class="slds-p-vertical_x-small">
+                <lightning:button variant="neutral" label="Value Search" onclick="{!c.handleValueSearch}"/>  
+            </div>
+        </div> -->
+    </div>
+            </lightning:recordViewForm>  
+
+    		<!--Edit Transaction Modal -->
+              <aura:if isTrue="{!v.openTransact}">
+                <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Opportunity" 
+                                          onsuccess="{!c.onsuccess}" density="compact">
+
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text'heading_medium slds-hyphenate"> Transaction</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        
+                            <tbody>
+                                    <tr class="slds-hint-parent">
+                                        <lightning:inputField fieldName="Purpose__c" />
+                                        <lightning:inputField fieldName="Occupancy__c" />
+                                        <lightning:inputField fieldName="Subject_Property_Name__r.Property_Type__c"/>
+                                        <lightning:inputField fieldName="Purchase_Price__c"/>
+                                        <lightning:inputField fieldName="Down_Payment__c"/>
+                                        <lightning:inputField fieldName="Property_Value__c"/>
+                                        <lightning:inputField fieldName="Appraised_Value__c"/>
+                                    </tr>                                                       
+                                    </tbody>
+                                 </table>
+                               </div>
+                
+                           <footer class="slds-modal__footer">
+                                   <lightning:button variant="neutral"
+                                                              label="Cancel"
+                                                              title="Cancel"
+                                                              onclick="{!c.closeModals}"/>
+                                    <lightning:button variant="brand"
+                                                              label="Save"
+                                                              title="Save"
+                                                              type="submit"
+                                                              /> 
+                           </footer>
+                     </div>
+                </section> 
+    <div class="slds-backdrop slds-backdrop_open"></div>
+                </lightning:recordEditForm>
+    </aura:if> 
+
+        					<!--Edit Loan Details Modal -->
+                  <aura:if isTrue="{!v.openLoanDetails}">
+                    <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Opportunity" 
+                                              onsuccess="{!c.onsuccess}" density="compact">
+    
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container" style=" max-width: 80rem; width:40%; height: 107%  !important;">
+                    <!--<div class="myComponent"> -->
+                        <header class="slds-modal__header">
+                            <h2 id="modal-heading-01" class="slds-text-heading_small slds-hyphenate"> Loan Details</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-horizontal_xx-large slds-scrollable_y" id="modal-content-id-1" style="height:75% !important;">
+                            <table class="slds-table slds-table_cell-buffer">
+                                <tbody>
+                                <tr class="slds-hint-parent">
+                                    <h4 class="labels slds-align_absolute-center slds-text-heading_small slds-hyphenate slds-p-around_xx-small"
+                                        style="text-align: center;">First Mortgage</h4>
+                                        
+                                    <lightning:inputField class="no-padding" fieldName="Loan_Type__c"/>
+                                    <lightning:inputField class="no-padding" fieldName="Loan_Program__c"/>
+                                    <lightning:inputField class="no-padding" fieldName="Buydown__c"/>
+                                    <lightning:inputField class="no-padding" fieldName="Due_In_Months__c"/>
+                                    <lightning:inputField class="no-padding" fieldName="encompass_By_EM__Interest_Only_Term_Months__c"/>
+                                    <lightning:inputField class="no-padding" fieldName="Amount"/>
+                                    <lightning:inputField class="no-padding" fieldName="MIP_FF__c"/>
+                                    <lightning:inputField class="no-padding" fieldName="Loan_Amount__c"/>
+                              <!--  <lightning:inputField class="no-padding" fieldName="encompass_By_EM__Interest_Rate__c"/> -->
+                                    <lightning:inputField class="no-padding" fieldName="Interest_Rate_SF__c"/>
+                                    <lightning:inputField class="no-padding" fieldName="Escrows_Indicator__c"/>
+                                   
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                <tbody>
+                                <tr class="slds-hint-parent">
+                                    <h4 class="labels slds-align_absolute-center slds-text-heading_small slds-hyphenate slds-p-around_xx-small"
+                                        style="text-align: center;">Second Mortgage</h4>
+                                    <lightning:inputField class="no-padding" fieldName="Closed_End_2nd_Total__c"/>
+                                    <lightning:inputField class="no-padding" fieldName="Heloc_Balance_Drawn__c"/>
+                                    <lightning:inputField class="no-padding" fieldName="Heloc_Max_Credit_Limit__c"/>
+                                    <lightning:inputField class="no-padding" fieldName="Second_Interest_Rate__c"/>
+                                </tr>
+                                </tbody>
+                            </table>
+                                   </div>
+                    
+                               <footer class="slds-modal__footer">
+                                       <lightning:button variant="neutral"
+                                                                  label="Cancel"
+                                                                  title="Cancel"
+                                                                  onclick="{!c.closeModals}"/>
+                                        <lightning:button variant="brand"
+                                                                  label="Save"
+                                                                  title="Save"
+                                                                  type="submit"
+                                                                  /> 
+                               </footer>
+                         </div>
+                          <!-- </div> -->
+                    </section> 
+        <div class="slds-backdrop slds-backdrop_open"></div>
+                    </lightning:recordEditForm>
+        </aura:if> 
+
+                					<!--Edit Ratios Modal -->
+                          <aura:if isTrue="{!v.openRatios}">
+                            <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Opportunity" 
+                                                      onsuccess="{!c.onsuccess}" density="compact">
+            
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                <header class="slds-modal__header">
+                                    <h2 id="modal-heading-01" class="slds-text'heading_medium slds-hyphenate">Ratios</h2>
+                                </header>
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                    
+                                        <tbody>
+                                                <tr class="slds-hint-parent">
+                                                    <lightning:outputField fieldName="LTV__c" />
+                                                    <lightning:outputField fieldName="CLTV__c" />
+                                                    <lightning:outputField fieldName="TLTV__c" />
+                                                    <lightning:outputField fieldName="HCLTV__c"/>
+                                                    <lightning:outputField fieldName="DTI_Top__c"/>
+                                                    <lightning:outputField fieldName="DTI__c"/>
+                                                    <lightning:outputField fieldName="Borrower_FICO__c"/>
+                                                    <lightning:outputField fieldName="Co_Borrower_Fico__c"/>
+                                                    <lightning:outputField fieldName="Qualifying_Fico__c"/>
+                                                </tr>
+                                                </tbody>
+                                             </table>
+                                           </div>
+                            
+                                       <footer class="slds-modal__footer">
+                                           <lightning:button variant="neutral"
+                                                             label="Cancel"
+                                                             title="Cancel"
+                                                             onclick="{!c.closeModals}"/>
+
+                                             <!--   <lightning:button variant="brand"
+                                                                          label="Save"
+                                                                          title="Save"
+                                                                          type="submit"
+                                                                          />   -->
+                                       </footer>
+                                 </div>
+                            </section> 
+                <div class="slds-backdrop slds-backdrop_open"></div>
+                            </lightning:recordEditForm>
+                </aura:if> 
+        
+
+    					<!--Edit Payments Modal -->
+              <aura:if isTrue="{!v.openPayments}">
+                <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Opportunity" 
+                                          onsuccess="{!c.onsuccess}" density="compact">
+
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text'heading_medium slds-hyphenate">Proposed Monthly Mortgage Payment</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        
+                            <tbody>
+                                    <tr class="slds-hint-parent">
+                                        <div class="slds-form-element slds-form-element_horizontal">
+                                            <label class="slds-form-element__label slds-no-flex" for="firstMortgage">First Mortgage</label>
+                                            <lightning:inputField aura:id="firstMortgage" variant="label-hidden" disabled="true" fieldName="Exp_1Mtg_Proposed__c" />
+                                        </div>
+                                        <div class="slds-form-element slds-form-element_horizontal">
+                                            <label class="slds-form-element__label slds-no-flex" for="subordinateLiens">Subordinate Liens</label>
+                                            <lightning:inputField aura:id="subordinateLiens" variant="label-hidden" fieldName="Exp_OthFin_Proposed__c" />
+                                        </div>
+                                        <div class="slds-form-element slds-form-element_horizontal">
+                                            <label class="slds-form-element__label slds-no-flex" for="hazardInsurance">Hazard Insurance</label>
+                                            <lightning:inputField aura:id="hazardInsurance" variant="label-hidden" fieldName="Exp_HazIns_Proposed__c"/>
+                                        </div>
+                                        <div class="slds-form-element slds-form-element_horizontal">
+                                            <label class="slds-form-element__label slds-no-flex" for="FloodInsurance">Flood Insurance</label>
+                                            <lightning:inputField aura:id="FloodInsurance" variant="label-hidden" fieldName="Estimated_Flood_Insurance_Payment__c"/>
+                                        </div>
+                                        <div class="slds-form-element slds-form-element_horizontal">
+                                            <label class="slds-form-element__label slds-no-flex" for="reTaxes">RE Taxes</label>
+                                            <lightning:inputField aura:id="reTaxes" variant="label-hidden" fieldName="Exp_Taxes_Proposed__c"/>
+                                        </div>
+                                        <div class="slds-form-element slds-form-element_horizontal">
+                                            <label class="slds-form-element__label slds-no-flex" for="mortgageInsurance">Mortgage Insurance</label>
+                                            <lightning:inputField aura:id="mortgageInsurance" variant="label-hidden" fieldName="Exp_MtgIns_Proposed__c"/>
+                                        </div>
+                                        <div class="slds-form-element slds-form-element_horizontal">
+                                            <label class="slds-form-element__label slds-no-flex" for="hoa">HOA</label>
+                                            <lightning:inputField aura:id="hoa" variant="label-hidden" fieldName="Exp_HOA_Proposed__c"/>
+                                        </div>
+                                        <div class="slds-form-element slds-form-element_horizontal">
+                                            <label class="slds-form-element__label slds-no-flex" for="other">Other</label>
+                                            <lightning:inputField aura:id="other" variant="label-hidden" fieldName="Exp_Other_Proposed__c"/>
+                                        </div>
+
+                                        <lightning:inputField disabled="true" fieldName="Exp_Total_Proposed__c"/>
+                                    </tr>                                                       
+                                    </tbody>
+                                 </table>
+                               </div>
+                
+                           <footer class="slds-modal__footer">
+                                   <lightning:button variant="neutral"
+                                                              label="Cancel"
+                                                              title="Cancel"
+                                                              onclick="{!c.closeModals}"/>
+       <lightning:button variant="brand"
+                                                              label="Save"
+                                                              title="Save"
+                                                              type="submit"
+                                                              /> 
+                           </footer>
+                     </div>
+                </section> 
+    <div class="slds-backdrop slds-backdrop_open"></div>
+                </lightning:recordEditForm>
+    </aura:if> 
+
+                					<!--View Properties Modal -->
+                                    <aura:if isTrue="{!v.openProperty}">
+                                        <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Opportunity" 
+                                                                  onsuccess="{!c.onsuccess}" density="compact">
+                        
+                                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                        <div class="slds-modal__container">
+                                            <header class="slds-modal__header">
+                                                <h2 id="modal-heading-01" class="slds-text'heading_medium slds-hyphenate"> Property Details</h2>
+                                            </header>
+                                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                                
+                                                    <tbody>
+                                                            <tr class="slds-hint-parent">
+                                                                <lightning:outputField fieldName="Subject_Prop_Type__c" />
+                                                                <lightning:inputField fieldName="Property_Value__c"/> 
+                                                                
+                                                            </tr>                                                       
+                                                            </tbody>
+                                                         </table>
+                                                       </div>
+                                        
+                                                   <footer class="slds-modal__footer">
+                                                           <lightning:button variant="neutral"
+                                                                                      label="Cancel"
+                                                                                      title="Cancel"
+                                                                                      onclick="{!c.closeModals}"/>
+                                                            <lightning:button variant="brand"
+                                                                                      label="Save"
+                                                                                      title="Save"
+                                                                                      type="submit"
+                                                                                      /> 
+                                                            <lightning:button variant="neutral"
+                                                                                      label="Go To Property"
+                                                                                      title="Go To Property"
+                                                                                      onclick="{!c.goToProp}"
+                                                                                      /> 
+                                                   </footer>
+                                             </div>
+                                        </section> 
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                                        </lightning:recordEditForm>
+                            </aura:if> 
+                    
+
+
+
+    					<!--Edit Closing Costs Modal -->
+              <aura:if isTrue="{!v.openClosingCosts}">
+                <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Opportunity" 
+                                          onsuccess="{!c.onsuccess}" density="compact">
+
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text'heading_medium slds-hyphenate"> Closing Costs</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        
+                            <tbody>
+                                    <tr class="slds-hint-parent">
+                                        <lightning:inputField fieldName="Discount_Points__c" />
+                                        <lightning:inputField fieldName="Lender_Admin_Fee__c" />
+                                        <lightning:outputField fieldName="Grid_Lender_Fees__c" />
+                                        <lightning:outputField fieldName="Lender_Paid_Comp__c" />
+                                        <lightning:inputField fieldName="Lender_Credit_Percentage__c" />
+                                        <lightning:outputField fieldName="Appraisal_Fee__c" />
+                                        <lightning:outputField fieldName="Encompass_Credit_Report_Fee__c" />
+                                        <lightning:outputField fieldName="Grid_Appraisal_Credit_VOE__c" />
+                                        <lightning:outputField fieldName="Grid_Title_Escrow_Rec__c" />
+                                        <lightning:outputField fieldName="Encompass_Total_Trfr_Tax_Stamps__c" />
+                                        <lightning:inputField fieldName="Seller_Credit__c"/>
+                                        <lightning:inputField fieldName="Cash_Deposit_Amount__c" />
+                                        <lightning:outputField fieldName="Refi_Total_Debts__c" />
+                                    </tr>                                                       
+                                    </tbody>
+                                 </table>
+                               </div>
+                
+                           <footer class="slds-modal__footer">
+                                   <lightning:button variant="neutral"
+                                                              label="Cancel"
+                                                              title="Cancel"
+                                                              onclick="{!c.closeModals}"/>
+       <lightning:button variant="brand"
+                                                              label="Save"
+                                                              title="Save"
+                                                              type="submit"
+                                                              /> 
+                           </footer>
+                     </div>
+                </section> 
+    <div class="slds-backdrop slds-backdrop_open"></div>
+                </lightning:recordEditForm>
+    </aura:if> 
+
+
+    					<!--Edit SubmissionNotes Modal -->
+              <aura:if isTrue="{!v.openSubmissionNotes}">
+                <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Opportunity" 
+                                          onsuccess="{!c.onsuccess}" density="compact">
+
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text'heading_medium slds-hyphenate"> Closing Costs</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        
+                            <tbody>
+                                    <tr class="slds-hint-parent">
+                                        <lightning:inputField fieldName="AUS__c" />
+                                        <lightning:inputField fieldName="Lender__c" />
+                                        <lightning:inputField fieldName="Non_QM__c"/> 
+                                        <lightning:inputField fieldName="Submission_Summary__c"/>
+                                        <lightning:inputField fieldName="Credit_Submission_Notes__c"/>
+                                        <lightning:inputField fieldName="Income_Submission_Notes__c" />         
+                                        <lightning:inputField fieldName="Asset_Submission_Notes__c" />
+                                        <lightning:inputField fieldName="Property_Submission_Notes__c" />                                        
+                                    </tr>                                                       
+                                    </tbody>
+                                 </table>
+                               </div>
+                
+                           <footer class="slds-modal__footer">
+                                   <lightning:button variant="neutral"
+                                                              label="Cancel"
+                                                              title="Cancel"
+                                                              onclick="{!c.closeModals}"/>
+       <lightning:button variant="brand"
+                                                              label="Save"
+                                                              title="Save"
+                                                              type="submit"
+                                                              /> 
+                           </footer>
+                     </div>
+                </section> 
+    <div class="slds-backdrop slds-backdrop_open"></div>
+                </lightning:recordEditForm>
+    </aura:if> 
+
+
+ 	</aura:component>

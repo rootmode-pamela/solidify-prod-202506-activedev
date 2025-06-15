@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Refi</fullName>
+    <active>true</active>
+    <label>Refi Analysis</label>
+    <picklistValues>
+        <picklist>Add_Fees_to_Loan_Balance__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CoBorrower_Veteran__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>First_Time_Homebuyer__c</picklist>
+        <values>
+            <fullName>Borrower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Both</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Co-Borrower</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loan_Program_Scenario_1__c</picklist>
+        <values>
+            <fullName>2nd %2F HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FX 2ND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HELOAN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interest Only - ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interest Only - Fixed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JF15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JF30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-QM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-QM Fixed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loan_Program_Scenario_2__c</picklist>
+        <values>
+            <fullName>2nd %2F HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FX 2ND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HELOAN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interest Only - ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interest Only - Fixed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JF15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JF30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-QM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-QM Fixed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loan_Program_Scenario_3__c</picklist>
+        <values>
+            <fullName>2nd %2F HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FX 2ND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interest Only - ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interest Only - Fixed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JF15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JF30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-QM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Number_of_Units__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Occupancy__c</picklist>
+        <values>
+            <fullName>Investment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Primary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Secondary</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Property_State__c</picklist>
+        <values>
+            <fullName>AZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CA</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>CO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TX</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Purpose_Scenario_1__c</picklist>
+        <values>
+            <fullName>Home Improvements</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pay Down Loan Faster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pay Off Other Debts</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reduce Rate or Payment</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Purpose_Scenario_2__c</picklist>
+        <values>
+            <fullName>Home Improvements</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pay Down Loan Faster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pay Off Other Debts</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reduce Rate or Payment</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Purpose_Scenario_3__c</picklist>
+        <values>
+            <fullName>Home Improvements</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pay Down Loan Faster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pay Off Other Debts</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reduce Rate or Payment</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Purpose__c</picklist>
+        <values>
+            <fullName>Purchase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refinance - Cash Out</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refinance - No Cash Out</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Draft</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sent to Client</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subject_Property_Type__c</picklist>
+        <values>
+            <fullName>Attached</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Condominium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cooperative</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Detached</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Detached Condominium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Rise Condominium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manufactured Home</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Modular%2FPre-Fab</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Multi-family</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PUD</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Transaction_Type__c</picklist>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Veteran__c</picklist>
+        <values>
+            <fullName>Borrower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Both</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Co-Borrower</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

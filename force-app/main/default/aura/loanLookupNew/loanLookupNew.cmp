@@ -1,0 +1,58 @@
+<aura:component controller="customLookUpControllerNew" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+
+    <aura:attribute name="selectedLoan" type="sObject" default="{}" />
+    <aura:attribute name="listOfLoanRecords" type="List" />
+    <aura:attribute name="loanSearchKeyWord" type="string"/>
+    <aura:attribute name="label" type="string" default=""/>
+    <aura:attribute name="Message" type="String" default=""/>   
+    <aura:attribute name="showLoanInput" type="Boolean" />
+    <aura:attribute name="showDetails" type="Boolean"/>
+    <aura:attribute name="contactId" type="String"/>
+    <aura:attribute name="loanId" type="String"/>
+    <aura:attribute name="transactionType" type="String"/>
+    <aura:attribute name="propState" type="String"/>
+    <aura:attribute name="loanAmount" type="String"/>
+    <aura:attribute name="qualFico" type="String"/>    
+    <aura:attribute name="loanProgram" type="String"/>
+    <aura:attribute name="loanType" type="String"/>
+    <aura:attribute name="purchasePrice" type="String"/>
+    <aura:attribute name="appraisedVal" type="String"/>
+    <aura:attribute name="loanSelected" type="Boolean" default="false"/>
+    <aura:attribute name="propId" type="String"/>
+    
+  
+    <aura:handler name="loanRecordEvent" event="c:selectedLoanRecordEvent" action="{!c.handleComponentEvent}"/>
+    <aura:handler event="c:selectedLoanEventApp" action="{!c.handleComponentEvent}" />
+
+    <div onmouseleave="{!c.onblur}" aura:id="searchRes" class="slds-form-element slds-p-left_small slds-lookup slds-is-close" data-select="single">
+        <label class="slds-form-element__label" for="lookup-348">Search Loan</label>
+
+        <div class="slds-form-element__control">            
+            <div class="slds-input-has-icon slds-input-has-icon--right">
+
+                <div aura:id="lookup-pill" class="slds-pill-container slds-hide">
+                     <lightning:pill class="pillSize" label="{!v.selectedLoan.Name}" name="{!v.selectedLoan.Name}" onremove="{! c.clear }">
+                      </lightning:pill>
+                </div>
+                <div aura:id="lookupField" class="slds-show">
+                    <lightning:icon class="slds-input__icon slds-show" size="x-small" alternativeText="search"/>
+                    <span class="slds-icon_container  slds-combobox__input-entity-icon" title="record">
+                        <lightning:icon class="slds-icon slds-icon slds-icon_small slds-icon-text-default" size="x-small" alternativeText="icon"/>
+                        <span class="slds-assistive-text"></span>
+                    </span>
+                    <ui:inputText click="{!c.onfocus}" updateOn="keyup" keyup="{!c.keyPressController}" 
+                                  class="slds-lookup__search-input slds-input leftPaddingClass" value="{!v.loanSearchKeyWord}" 
+                                  placeholder="Search for Loan"/>
+                 
+            </div>
+        </div>
+        </div>
+        <ul style="min-height:40px;margin-top:0px !important" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds" role="listbox">
+            <lightning:spinner class="slds-hide" variant="brand" size="small" aura:id="mySpinner"/>
+            <center> {!v.Message}</center>
+            <aura:iteration items="{!v.listOfLoanRecords}" var="singleRec">
+                <c:lookupSearchLoanNew loanRecord="{!singleRec}" />
+            </aura:iteration>
+        </ul>
+    </div>
+</aura:component>

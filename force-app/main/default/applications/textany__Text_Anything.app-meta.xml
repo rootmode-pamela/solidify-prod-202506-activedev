@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>textany__Home_Page_Default</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+    </actionOverrides>
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Text Anything related configuration and settings</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Text Anything</label>
+    <navType>Standard</navType>
+    <tabs>textany__Administration</tabs>
+    <tabs>textany__Text_Anything_Purchased_Number__c</tabs>
+    <tabs>textany__To_Number_Configuration</tabs>
+    <tabs>textany__Billing_Support</tabs>
+    <tabs>textany__A2P_Campaigns</tabs>
+    <tabs>textany__Uninstall_Instructions</tabs>
+    <tabs>textany__Templates</tabs>
+    <tabs>textany__Text_Anything_Interaction__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>textany__Text_Anything_UtilityBar</utilityBar>
+</CustomApplication>

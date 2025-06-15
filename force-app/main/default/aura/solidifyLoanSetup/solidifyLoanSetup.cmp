@@ -1,0 +1,102 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="Opportunity" type="Object" />
+    <aura:attribute name="recordError" type="String" />
+    <force:recordData aura:id="loanRecord"
+                      mode="EDIT"
+                      recordId="{!v.recordId}"
+                      targetFields="{!v.Opportunity}"
+                      targetError="{!v.recordError}"
+                      fields="Id,Lock_Expiration__c,Appraisal_Ordered__c,Loan_Contingency__c,COE__c,Appraisal_Contingency__c,
+                              CD_Out_By__c,Loan_Originator__c,Loan_Processor__c,Lender__c,Sellers_Agent__c,Escrow_Contact__c,Buyers_Agent__c,
+                              Lender_AE__c,Appraiser_Contact__c,LeadSource,Primary_Referral_Source__c,Referred_By__c,Rating__c,Ad_Description__c,
+                              Full_VOE__c,Other_Liens__c,Vesting__c,Closing_Funds__c,Rush_Requested__c"
+                      recordUpdated="{!c.recordUpdate}"
+                      />
+    
+    
+    
+    <lightning:recordEditForm aura:id="loanDetailForm" recordId="{!v.recordId}" objectApiName="Opportunity" recordtypeid="012f4000000HmNxAAK">
+        <lightning:messages />
+        <aura:if isTrue="{!not(empty(v.recordError))}">
+            <div class="recordError">
+                {!v.recordError}</div>
+        </aura:if>
+        
+        
+        
+        <div class="slds-grid slds-gutters">
+            
+            <div class="slds-col slds-size_4-of-12">
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Dates"><b>Timeline</b></span>
+                    </h3>
+                    <div class="slds-p-left_small">
+                        <lightning:outputField fieldName="COE__c" />
+                        <lightning:inputField fieldName="Initial_Docs_In_By__c" onchange="{!c.handleSaveRecord}"/>
+                        <lightning:inputField fieldName="LE_Acknowledged_By__c" onchange="{!c.handleSaveRecord}"/>
+                        <!--<lightning:inputField fieldName="Appraisal_Ordered__c" onchange="{!c.handleSaveRecord}" />-->
+                        <lightning:inputField fieldName="Loan_Status_Update__c" onchange="{!c.handleSaveRecord}" />
+                        <lightning:inputField fieldName="Appraisal_Contingency__c" onchange="{!c.handleSaveRecord}" />
+                        <lightning:inputField fieldName="Loan_Contingency__c" onchange="{!c.handleSaveRecord}" />
+                        <lightning:inputField fieldName="Approval_Expected__c" onchange="{!c.handleSaveRecord}" />
+                        <lightning:inputField fieldName="Final_Conditions_In_By__c" onchange="{!c.handleSaveRecord}" />
+                        <lightning:inputField fieldName="CD_Out_By__c" onchange="{!c.handleSaveRecord}" />
+                         <lightning:inputField fieldName="Sign_Final_Docs_By__c" onchange="{!c.handleSaveRecord}"/>
+                    </div>
+                </div>  
+            </div>
+            
+             <div class="slds-col slds-size_4-of-12">
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Internal"><b>Contacts</b></span>
+                    </h3>
+                    
+                    <div aria-hidden="false" class="slds-section__content slds-p-left_small" id="expando-unique-id">
+                      
+                                
+                                <lightning:inputField fieldName="Loan_Originator__c" onchange="{!c.handleSaveRecord}"/>
+                                <lightning:inputField fieldName="Loan_Processor__c" onchange="{!c.handleSaveRecord}"/>
+                                <lightning:inputField fieldName="LeadSource"  onchange="{!c.handleSaveRecord}" />
+                                <lightning:inputField fieldName="Referred_By__c" onchange="{!c.handleSaveRecord}"/>
+                                <lightning:inputField fieldName="Lender__c"  onchange="{!c.handleSaveRecord}"/>
+                        		<lightning:inputField fieldName="Lender_AE__c" onchange="{!c.handleSaveRecord}" />
+                                <lightning:inputField fieldName="Escrow_Contact__c" onchange="{!c.handleSaveRecord}"/>
+                                <lightning:inputField fieldName="Buyers_Agent__c" onchange="{!c.handleSaveRecord}"/>
+                                <lightning:inputField fieldName="Sellers_Agent__c" onchange="{!c.handleSaveRecord}"/> 
+                        
+                        
+                    </div>  
+                </div>  	
+            </div>           
+            
+             <div class="slds-col slds-size_4-of-12">
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Internal"><b>Key Info</b></span>
+                    </h3>
+                    
+                     
+                    <lightning:inputField fieldName="Primary_Goal__c" onchange="{!c.handleSaveRecord}"/> 
+					<lightning:inputField fieldName="Appraisal__c" onchange="{!c.handleSaveRecord}"/>
+                    <lightning:inputField fieldName="Escrows__c" onchange="{!c.handleSaveRecord}"/> 
+                    <lightning:inputField fieldName="Admin_Fee__c" onchange="{!c.handleSaveRecord}"/>
+                    <lightning:inputField fieldName="Other_Liens__c" onblur="{!c.handleSaveRecord}"/>
+                    <lightning:inputField fieldName="Full_VOE__c" onblur="{!c.handleSaveRecord}"/>
+                    <lightning:inputField fieldName="Vesting__c" onblur="{!c.handleSaveRecord}"/>
+                    <lightning:inputField fieldName="Closing_Funds__c" onblur="{!c.handleSaveRecord}"/>
+                    <lightning:inputField fieldName="Rush_Requested__c" onchange="{!c.handleSaveRecord}"/>
+                    
+                 </div>
+                 
+            </div>
+            
+            
+            
+        </div>
+
+        
+    </lightning:recordEditForm>
+    
+</aura:component>

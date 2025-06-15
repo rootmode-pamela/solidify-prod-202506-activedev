@@ -1,0 +1,80 @@
+.input-rows {
+    padding-top: 0;
+    padding-bottom: 0
+}
+.modal-window {
+    width: 40%;
+    max-width: 50%;
+    min-width: 500px;
+}
+
+.modal-window {
+    width: 40%;
+    max-width: 50%;
+    min-width: 500px;
+}
+
+.margintop{
+    margin-top: 25px;
+}
+
+.top-border {
+    border-top: 1px solid #d5d5d5;
+}
+
+.bottom-border {
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.income-column {
+    margin-left: 20px;
+    width: 30%;
+}
+
+.margin-bottom-unset {
+    margin-bottom: unset
+}
+
+.margin-top-ratio {
+    margin-top: 15px
+}
+
+.main-column-width {
+    min-width: 430px;
+}
+
+.input-padding-x {
+    padding: 0 var(--lwc-spacingLarge,1.5rem);
+}.input-rows {
+     padding-top: 0;
+     padding-bottom: 0
+ }
+
+.top-border {
+    border-top: 1px solid #d5d5d5;
+}
+
+.bottom-border {
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.income-column {
+    margin-left: 20px;
+    width: 30%;
+}
+
+.margin-bottom-unset {
+    margin-bottom: unset
+}
+
+.margin-top-ratio {
+    margin-top: 15px
+}
+
+.main-column-width {
+    min-width: 430px;
+}
+
+.input-padding-x {
+    padding: 0 var(--lwc-spacingLarge,1.5rem);
+}

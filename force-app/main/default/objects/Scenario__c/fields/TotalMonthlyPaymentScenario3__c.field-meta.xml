@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalMonthlyPaymentScenario3__c</fullName>
+    <formula>Monthly_Payment_Scenario_3__c + EstimatedTaxesScenario3__c + EstimatedInsuranceScenario3__c + EstimatedMortgageInsuranceScenario3__c + EstimatedHOAScenario3__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>TotalMonthlyPaymentScenario3</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

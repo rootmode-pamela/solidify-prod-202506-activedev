@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opportunity_Identifier__c</fullName>
+    <description>This is the field that Point uses as Key ID. Duplicate fields are added to ensure that if entered from SF, that the name is entered consistently (Validation rule requires this to be the same as the Point File Name).</description>
+    <externalId>true</externalId>
+    <inlineHelpText>This field must match EXACTLY the Point File Name for proper sync.</inlineHelpText>
+    <label>Re-enter the Point Filename</label>
+    <length>255</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Loans_This_Year_Company</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>Subject_Prop_St__c</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>OPPORTUNITY.LEAD_SOURCE</columns>
+    <columns>Referred_By__c</columns>
+    <columns>Purpose__c</columns>
+    <columns>Occupancy__c</columns>
+    <columns>Loan_Program__c</columns>
+    <columns>Loan_Amount__c</columns>
+    <columns>Interest_Rate__c</columns>
+    <columns>encompass_By_EM__Interest_Rate__c</columns>
+    <columns>Lender__c</columns>
+    <columns>Days_Closed__c</columns>
+    <columns>Loan_Originator__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.Closed</value>
+    </filters>
+    <filters>
+        <field>Closed_Date__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>1/1/2022</value>
+    </filters>
+    <label>Closed Loans This Year - Company</label>
+    <sharedTo>
+        <group>Team_Broderick</group>
+    </sharedTo>
+</ListView>

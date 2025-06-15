@@ -1,0 +1,19 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="recordError" type="String"/>
+    <force:recordData aura:id="recordEditor"
+                      recordId="{!v.recordId}"
+                      targetError="{!v.recordError}"
+                      targetRecord="{!v.record}"
+                      mode="EDIT"
+                      fields="Lock_Expiration__c,COE__c,Appraisal_Ordered__c,Appraisal_Contingency__c,Loan_Contingency__c,CD_Out_By__c,
+                              Loan_Originator__c,Loan_Processor__c,Sellers_Agent__c,Lender_AE__c,Escrow_Contact__c,Appraiser_Contact__c,
+                              Primary_Referral_Source__c,Referred_By__c,Rating__c,Grade__c,Ad_Description__c,Ad_Consented__c"/>
+   
+    <lightning:card iconName="action:edit" title="Setup Information">
+    	<div class="slds-p-horizontal--small">
+            <lightning:input label="Lock Expiration" value="{!v.record.Lock_Expiration__c}"/>
+        </div>
+    </lightning:card>
+
+</aura:component>

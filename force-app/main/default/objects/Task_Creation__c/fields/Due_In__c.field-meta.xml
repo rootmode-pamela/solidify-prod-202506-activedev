@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Due_In__c</fullName>
+    <description>This field will hold what day the task should be due in. 0 = same day.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Day this task is due. 0 = due the same day it is created.</inlineHelpText>
+    <label>Due In</label>
+    <precision>18</precision>
+    <required>true</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalFeesS1__c</fullName>
+    <formula>IF((DiscountCreditS1__c+LenderFeeS1__c+AppraisalFeeS1__c+CreditReportFeeS1__c+EscrowFeesS1__c+TitleFeeS1__c+RecordingFeeS1__c)&gt;0,DiscountCreditS1__c+LenderFeeS1__c+AppraisalFeeS1__c+CreditReportFeeS1__c+EscrowFeesS1__c+TitleFeeS1__c+RecordingFeeS1__c,0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Fees</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

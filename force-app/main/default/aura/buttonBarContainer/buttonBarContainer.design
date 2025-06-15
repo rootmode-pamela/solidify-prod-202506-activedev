@@ -1,0 +1,4 @@
+<design:component>
+    <design:attribute name="RecordType" label="Record Type" datasource="Scenario,Mortgage" default="Scenario" />
+    <design:attribute name="FromObject" label="From Object" datasource="Lead,Loan" default="" />
+</design:component>

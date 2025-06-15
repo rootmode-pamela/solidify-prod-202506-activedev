@@ -1,0 +1,10 @@
+.collapsed {
+    font-size: 14px;
+}
+/*.THIS lightning-icon.some-indicator > lightning-primitive-icon > svg > use{
+    fill: #d1d1d1 !Important;
+}*/
+.pencil-icon {
+    --sds-c-icon-color-foreground-default: #dfdfdf;
+    --sds-c-icon-color-foreground: #dfdfdf;
+ }

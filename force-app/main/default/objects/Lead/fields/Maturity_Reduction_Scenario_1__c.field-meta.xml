@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maturity_Reduction_Scenario_1__c</fullName>
+    <externalId>false</externalId>
+    <formula>ROUND((Current_Loan_Payments_Remaining__c -  Payments_Remaining_Scenario_1__c)/12, 1)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>How many years they will shave off by making their current payment on the new loan</inlineHelpText>
+    <label>Maturity Reduction</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

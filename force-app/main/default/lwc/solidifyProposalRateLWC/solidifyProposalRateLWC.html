@@ -1,0 +1,1504 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-05-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   04-08-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+    <div class="container">
+        <div class="inner-container">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <template if:false={hideTable}>
+                    <div class="Contact-image-section">
+                        <img class="" src="/resource/1619120802000/NewSolidifyLogo">
+                    </div>
+                    <!--<div class="slds-col slds-size_1-of-1 Widget">
+                        <h1>Choose Your Rate</h1>
+                        <h4 class="centerText">Loan Options at your fingertips</h4>
+                    </div>-->
+                    <div class="slds-col slds-size_1-of-1 Widget">
+                        <article class="slds-card">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <h1>Choose Your Rates to Compare</h1>
+
+                                <div class="table-wrapper">
+                                <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_striped">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th class="slds-text-align_right" scope="col" style="width:39px">
+                                                <div class="slds-truncate" title="Blank"></div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Rate">Rate %</div></th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="APR">APR %</div></th> 
+                                            <th class="" scope="col">
+                                                        <div class="slds-truncate" title="Base Loan Amount">Loan Amount</div></th>
+                                            <template if:true={expandFees}>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Non-recurring Fees">Non-recurring <br/>Fees</div></th>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Points/Credit">Points/Credit</div></th>
+                                            </template>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Fees">Fees
+                                                <lightning-button-icon icon-name={toggleFeesIconName} class="slds-var-m-left_xx-small"
+                                                onclick={handleToggleFeesClick} variant="bare" alternative-text="Expand Fees" title="Expand Fees"></lightning-button-icon></div>
+                                            </th>
+                                            <template if:true={addFeesToBalance}>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Total Loan Amount">Total Loan <br/> Amount</div></th>
+                                            </template>
+                                            <template if:true={FFMIP}>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="FFMIP">FFMIP</div>
+                                                </th>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="TotalWithFFMIP">Total With FFMIP</div>
+                                                </th>
+                                            </template>
+
+                                        
+                                            <template if:true={expandPayments}>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="EstTaxes">Est. Taxes</div></th>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="EstInsurance">Est. Insurance</div></th>
+                                                <template if:true={mortgageInsurance}>
+                                                    <th class="" scope="col">
+                                                    <div class="slds-truncate" title="MI">Mortgage Ins. </div></th>
+                                                </template>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Monthly PI Payment">Monthly P&I <br/>Payment</div>  </th>
+                                            </template>
+
+                                            <template if:true={hideEscrows}>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Monthly P&I Payment">Monthly P&I <br/>Payment 
+                                                   </div>
+                                                </th>
+                                            </template>
+                                            
+                                            <template if:true={showEscrows}>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Total Payment">Total Payment
+                                                        <lightning-button-icon icon-name={togglePaymentsIconName} class="slds-var-m-left_xx-small"
+                                                    onclick={handleTogglePaymentsClick}  variant="bare" alternative-text="Expand Payment" title="Expand Payment"></lightning-button-icon>
+                                              
+                                                    </div>  
+                                                </th>
+                                            </template>
+                                            <template if:true={expandEscrows}>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title="Downpayment">Down Payment</div></th>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title="InterestDue">Interest Due</div></th>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title="Escrows">Escrows <br/> <span style="font-size:xx-small;">(Tax & Ins)</span> </div> </th>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="InterestDue">Other <lightning-helptext content="Deposit, seller credit, tax stamps, etc"></lightning-helptext></div></th>
+                                            </template>
+                                            <template if:true={showFundsToClose}>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="TotalFundsToClose">Total Funds<br/> To Close
+                                                <lightning-button-icon icon-name={toggleEscrowsIconName} class="slds-var-m-left_xx-small"
+                                                  onclick={handleToggleEscrowsClick}  variant="bare" alternative-text="Expand Escrows" title="Expand Escrows"></lightning-button-icon></div>
+                                            </th>
+                                            </template>
+                                            <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Years Til Breakeven">Years Til<br/> Breakeven
+                                                    <lightning-helptext content="This column shows how long it will take to recoup the fees paid vs the lowest cost rate option shown (bottom rate)."></lightning-helptext>
+                                                </div></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <template if:false={Exclude1}>
+                                        <tr class="slds-hint-parent">
+                                            <td data-label="Blank" style="width:39px; Padding:8px">
+                                                <lightning-checkbox-group name="Exclude1" label=""
+                                                options={options1} value={value1} onchange={handleChangeE1} 
+                                                type="radio">
+                                                </lightning-checkbox-group>
+                                            </td>
+                                            <th data-label="Rate" scope="row">
+                                                <lightning-formatted-number
+                                                    format-style="percent-fixed" class="rate-cell row-cell"
+                                                    maximum-fraction-digits="3" value={Rate_1}>
+                                                </lightning-formatted-number>
+                                            </th>
+                                            <td data-label="APR">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="percent"
+                                                    maximum-fraction-digits="3" value={APRF1}>
+                                                </lightning-formatted-number>
+                                            </td> 
+                                            <td data-label="Base Loan Amount">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={New_Loan_Amount}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={expandFees}>
+                                                <td data-label="Non-recurring Fees" class="expanded-column" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={StandardFees}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Points/Credit" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell expanded-column" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={RateCost1}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <td data-label="Fees">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFees1}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={addFeesToBalance}>
+                                                <td data-label="Total Loan Amount">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={Total_Loan_Amount1}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+                                            <template if:true={FFMIP}>
+                                                <td data-label="FFMIP1">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={FFMIP1}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="TotalWithFFMIP1">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={TotalLoanWithFFMIP1}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            
+                                            <template if:true={expandPayments}>
+                                                <td data-label="Est Taxes" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" 
+                                                        currency-code="USD" value={EstTaxes}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Est Insurance" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" 
+                                                        currency-code="USD" value={EstInsurance}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <template if:true={mortgageInsurance}>
+                                                <td data-label="Mortgage Insurance" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" 
+                                                        currency-code="USD" value={MortgageIns1}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                </template>
+                                                <td data-label="Monthly PI Payment" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={Monthly_PI_Pmt1}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+                                            <template if:true={hideEscrows}>
+                                                <td data-label="Monthly PI Payment">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={Monthly_PI_Pmt1}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                </template>
+                                                <template if:true={showEscrows}>
+                                                    <td data-label="Total Monthly Payment" >
+                                                        <lightning-formatted-number
+                                                            class="row-cell" format-style="currency"
+                                                            currency-code="USD" value={TotalPayment1}>
+                                                        </lightning-formatted-number>
+                                                    </td>
+                                                </template>
+
+                                            <template if:true={expandEscrows} for:each={expandedEscrows1} for:item="item">
+                                                <td key={item.name} data-label={item.name} style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                            class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                            currency-code="USD" value={item.value}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={showFundsToClose}>
+                                            <td data-label="TotalFundsToClose1">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFundsToClose1}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+                                            <template if:false={nullBreakevenYears1}>
+                                                <td data-label="Years Til  Breakeven">
+                                                    <lightning-formatted-number 
+                                                        class="row-cell" format-style="decimal"
+                                                        maximum-fraction-digits="2" value={Years_Until_Breakeven1}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={nullBreakevenYears1}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <h4 class="row-cell slds-text-align_center">N/A</h4>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                    <template if:false={Exclude2}>
+                                        <tr class="slds-hint-parent">
+                                            <td data-label="Blank" style="width:39px; Padding:8px">
+                                                <lightning-checkbox-group name="Exclude2" label=""
+                                                options={options2} value={value2} onchange={handleChangeE2} 
+                                                type="radio">
+                                                </lightning-checkbox-group>
+                                            </td>
+                                            <td data-label="Rate" scope="row">
+                                                <lightning-formatted-number
+                                                    format-style="percent-fixed" class="rate-cell row-cell"
+                                                    maximum-fraction-digits="3" value={Rate_2}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td data-label="APR">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="percent"
+                                                    maximum-fraction-digits="3" value={APRF2}>
+                                                </lightning-formatted-number>
+                                            </td> 
+                                            <td data-label="Base Loan Amount">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={New_Loan_Amount}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={expandFees}>
+                                                <td data-label="Non-recurring Fees" class="expanded-column" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={StandardFees}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Points/Credit" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell expanded-column" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={RateCost2}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <td data-label="Fees">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFees2}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={addFeesToBalance}>
+                                                <td data-label="Total Loan Amount">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={Total_Loan_Amount2}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+                                            <template if:true={FFMIP}>
+                                                <td data-label="FFMIP12">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={FFMIP2}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="TotalWithFFMIP2">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={TotalLoanWithFFMIP2}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+                                            <template if:true={expandPayments}>
+                                                <td data-label="Est Taxes"  style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={EstTaxes}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Est Insurance"  style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={EstInsurance}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <template if:true={mortgageInsurance}>
+                                                <td data-label="Mortgage Insurance"  style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={MortgageIns2}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                </template>
+                                                
+                                                <td data-label="Monthly PI Payment" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={Monthly_PI_Pmt2}>
+                                                    </lightning-formatted-number>
+                                                </td>
+
+                                            </template>
+
+                                            <template if:true={hideEscrows}>
+                                            <td data-label="Monthly PI Payment" >
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency"
+                                                    currency-code="USD" value={Monthly_PI_Pmt2}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+                                            
+                                            <template if:true={showEscrows}>
+                                            <td data-label="Total Monthly Payment">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency"
+                                                    currency-code="USD" value={TotalPayment2}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </template>
+
+                                            <template if:true={expandEscrows} for:each={expandedEscrows2} for:item="item">
+                                                <td key={item.name} data-label={item.name} style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                            class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                            currency-code="USD" value={item.value}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={showFundsToClose}>
+                                            <td data-label="TotalFundsToClose2">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFundsToClose2}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+                                            <template if:false={nullBreakevenYears2}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <lightning-formatted-number 
+                                                        class="row-cell" format-style="decimal"
+                                                        maximum-fraction-digits="2" value={Years_Until_Breakeven2}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={nullBreakevenYears2}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <h4 class="row-cell slds-text-align_center">N/A</h4>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                    <template if:false={Exclude3}>
+                                        <tr class="slds-hint-parent">
+                                            <td data-label="Blank" style="width:39px; Padding:8px">
+                                                <lightning-checkbox-group name="Exclude3" label=""
+                                                options={options3} value={value3} onchange={handleChangeE3} 
+                                                type="radio">
+                                                </lightning-checkbox-group>
+                                            </td>
+                                            <td data-label="Rate" scope="row">
+                                                <lightning-formatted-number
+                                                    format-style="percent-fixed" class="rate-cell row-cell"
+                                                    maximum-fraction-digits="3" value={Rate_3}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td data-label="APR">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="percent"
+                                                    maximum-fraction-digits="3" value={APRF3}>
+                                                </lightning-formatted-number>
+                                            </td>  
+                                            <td data-label="Base Loan Amount">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={New_Loan_Amount}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={expandFees}>
+                                                <td data-label="Non-recurring Fees" class="expanded-column" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={StandardFees}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Points/Credit" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell expanded-column" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={RateCost3}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <td data-label="Fees">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFees3}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={addFeesToBalance}>
+                                                <td data-label="Total Loan Amount">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={Total_Loan_Amount3}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+
+                                            <template if:true={FFMIP}>
+                                                <td data-label="FFMIP3">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={FFMIP3}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="TotalWithFFMIP1">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={TotalLoanWithFFMIP3}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+                                            <template if:true={expandPayments}>
+                                                <td data-label="Est Taxes" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={EstTaxes}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Est Insurance" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={EstInsurance}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <template if:true={mortgageInsurance}>
+                                                <td data-label="Mortgage Insurance" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={MortgageIns3}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                </template>
+
+                                                <td data-label="Monthly PI Payment" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={Monthly_PI_Pmt3}>
+                                                    </lightning-formatted-number>
+                                                </td>
+
+
+                                            </template>
+
+                                            <template if:true={hideEscrows}>
+                                            <td data-label="Monthly PI Payment">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency"
+                                                    currency-code="USD" value={Monthly_PI_Pmt3}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+
+
+                                            <template if:true={showEscrows}>
+                                            <td data-label="Total Monthly Payment" >
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency"
+                                                    currency-code="USD" value={TotalPayment3}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+
+                                            <template if:true={expandEscrows} for:each={expandedEscrows3} for:item="item">
+                                                <td key={item.name} data-label={item.name} style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                            class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                            currency-code="USD" value={item.value}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={showFundsToClose}>
+                                            <td data-label="TotalFundsToClose3">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFundsToClose3}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+                                            <template if:false={nullBreakevenYears3}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <lightning-formatted-number 
+                                                        class="row-cell" format-style="decimal"
+                                                        maximum-fraction-digits="2" value={Years_Until_Breakeven3}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={nullBreakevenYears3}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <h4 class="row-cell slds-text-align_center">N/A</h4>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                    <template if:false={Exclude4}>
+                                        <tr class="slds-hint-parent">
+                                            <td data-label="Blank" style="width:39px; Padding:8px">
+                                                <lightning-checkbox-group name="Exclude4" label=""
+                                                options={options4} value={value4} onchange={handleChangeE4} 
+                                                type="radio">
+                                                </lightning-checkbox-group>
+                                            </td>
+                                            <td data-label="Rate" scope="row">
+                                                <lightning-formatted-number
+                                                    format-style="percent-fixed" class="rate-cell row-cell"
+                                                    maximum-fraction-digits="3" value={Rate_4}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td data-label="APR">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="percent"
+                                                    maximum-fraction-digits="3" value={APRF4}>
+                                                </lightning-formatted-number>
+                                            </td> 
+                                            <td data-label="Base Loan Amount">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={New_Loan_Amount}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={expandFees}>
+                                                <td data-label="Non-recurring Fees" class="expanded-column" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={StandardFees}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Points/Credit" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell expanded-column" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={RateCost4}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <td data-label="Fees">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFees4}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={addFeesToBalance}>
+                                                <td data-label="Total Loan Amount">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={Total_Loan_Amount4}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+
+                                            <template if:true={FFMIP}>
+                                                <td data-label="FFMIP4">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={FFMIP4}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="TotalWithFFMIP1">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={TotalLoanWithFFMIP4}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+
+                                            <template if:true={expandPayments}>
+                                                <td data-label="Est Taxes" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={EstTaxes}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Est Insurance" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={EstInsurance}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <template if:true={mortgageInsurance}>
+                                                <td data-label="Mortgage Insurance" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={MortgageIns4}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                </template>
+
+                                                <td data-label="Monthly PI Payment" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={Monthly_PI_Pmt4}>
+                                                    </lightning-formatted-number>
+                                                </td>
+
+                                            </template>
+                                            <template if:true={hideEscrows}>
+                                            <td data-label="Monthly PI Payment">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency"
+                                                    currency-code="USD" value={Monthly_PI_Pmt4}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+                                            <template if:true={showEscrows}>
+                                            <td data-label="Total Monthly Payment">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency"
+                                                    currency-code="USD" value={TotalPayment4}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+
+                                            <template if:true={expandEscrows} for:each={expandedEscrows4} for:item="item">
+                                                <td key={item.name} data-label={item.name} style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                            class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                            currency-code="USD" value={item.value}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={showFundsToClose}>
+                                            <td data-label="TotalFundsToClose4" >
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFundsToClose4}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+                                            <template if:false={nullBreakevenYears4}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <lightning-formatted-number 
+                                                        class="row-cell" format-style="decimal"
+                                                        maximum-fraction-digits="2" value={Years_Until_Breakeven4}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={nullBreakevenYears4}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <h4 class="row-cell slds-text-align_center">N/A</h4>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                    <template if:false={Exclude5}>
+                                        <tr class="slds-hint-parent">
+                                            <td data-label="Blank" style="width:39px; Padding:8px">
+                                                <lightning-checkbox-group name="Exclude5" label=""
+                                                options={options5} value={value5} onchange={handleChangeE5}
+                                                type="radio">
+                                                </lightning-checkbox-group>
+                                            </td>
+                                            <td data-label="Rate" scope="row">
+                                                <lightning-formatted-number
+                                                    format-style="percent-fixed" class="rate-cell row-cell"
+                                                    maximum-fraction-digits="3" value={Rate_5}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td data-label="APR">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="percent"
+                                                    maximum-fraction-digits="3" value={APRF5}>
+                                                </lightning-formatted-number>
+                                            </td> 
+                                            <td data-label="Base Loan Amount">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={New_Loan_Amount}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={expandFees}>
+                                                <td data-label="Non-recurring Fees" class="expanded-column" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={StandardFees}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Points/Credit" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell expanded-column" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={RateCost5}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <td data-label="Fees">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFees5}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={addFeesToBalance}>
+                                                <td data-label="Total Loan Amount">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={Total_Loan_Amount5}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+
+                                            <template if:true={FFMIP}>
+                                                <td data-label="FFMIP5">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={FFMIP5}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="TotalWithFFMIP5">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={TotalLoanWithFFMIP5}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+                                            <template if:true={expandPayments}>
+                                                <td data-label="Est Taxes" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={EstTaxes}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Est Insurance" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={EstInsurance}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <template if:true={mortgageInsurance}>
+                                                <td data-label="Mortgage Insurance" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={MortgageIns5}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                </template>
+                                                <td data-label="Monthly PI Payment" style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={Monthly_PI_Pmt5}>
+                                                    </lightning-formatted-number>
+                                                </td>
+
+                                            </template>
+                                            <template if:true={hideEscrows}>
+                                            <td data-label="Monthly PI Payment">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency"
+                                                    currency-code="USD" value={Monthly_PI_Pmt5}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+                                            <template if:true={showEscrows}>
+                                            <td data-label="Total Monthly Payment">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency"
+                                                    currency-code="USD" value={TotalPayment5}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+
+                                            <template if:true={expandEscrows} for:each={expandedEscrows5} for:item="item">
+                                                <td key={item.name} data-label={item.name} style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                            class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                            currency-code="USD" value={item.value}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={showFundsToClose}>
+                                            <td data-label="TotalFundsToClose5">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFundsToClose5}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+                                            <template if:false={nullBreakevenYears5}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <lightning-formatted-number 
+                                                        class="row-cell" format-style="decimal"
+                                                        maximum-fraction-digits="2" value={Years_Until_Breakeven5}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={nullBreakevenYears5}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <h4 class="row-cell slds-text-align_center">N/A</h4>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                    <template if:false={Exclude6}>
+                                        <tr class="slds-hint-parent">
+                                            <td data-label="Blank" style="width:39px; Padding:8px">
+                                                <lightning-checkbox-group name="Exclude6" label=""
+                                                options={options6} value={value6} onchange={handleChangeE6} 
+                                                type="radio">
+                                                </lightning-checkbox-group>
+                                            </td>
+                                            <td data-label="Rate" scope="row">
+                                                <lightning-formatted-number
+                                                    format-style="percent-fixed" class="rate-cell row-cell"
+                                                    maximum-fraction-digits="3" value={Rate_6}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <td data-label="APR">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="percent"
+                                                    maximum-fraction-digits="3" value={APRF6}>
+                                                </lightning-formatted-number>
+                                            </td> 
+                                            <td data-label="Base Loan Amount">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={New_Loan_Amount}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={expandFees}>
+                                                <td data-label="Non-recurring Fees" class="expanded-column" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={StandardFees}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Points/Credit" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell expanded-column" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={RateCost6}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <td data-label="Fees">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFees6}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            <template if:true={addFeesToBalance}>
+                                                <td data-label="Total Loan Amount">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={Total_Loan_Amount6}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+
+                                            <template if:true={FFMIP}>
+                                                <td data-label="FFMIP6">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={FFMIP6}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="TotalWithFFMIP1">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                        currency-code="USD" value={TotalLoanWithFFMIP6}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+
+                                            <template if:true={expandPayments}>
+                                                <td data-label="Est Taxes" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={EstTaxes}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <td data-label="Est Insurance" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={EstInsurance}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                <template if:true={mortgageInsurance}>
+                                                <td data-label="Mortgage Insurance" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={MortgageIns6}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                                </template>
+                                                <td data-label="Monthly PI Payment" style="background-color: rgb(133,133,133,.25)">
+                                                    <lightning-formatted-number
+                                                        class="row-cell" format-style="currency"
+                                                        currency-code="USD" value={Monthly_PI_Pmt6}>
+                                                    </lightning-formatted-number>
+                                                </td>
+
+                                            </template>
+                                            <template if:true={hideEscrows}>
+                                            <td data-label="Monthly PI Payment">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency"
+                                                    currency-code="USD" value={Monthly_PI_Pmt6}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+                                            <template if:true={showEscrows}>
+                                            <td data-label="Total Monthly Payment" >
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency"
+                                                    currency-code="USD" value={TotalPayment6}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                        </template>
+                                            <template if:true={expandEscrows} for:each={expandedEscrows6} for:item="item">
+                                                <td key={item.name} data-label={item.name} style="background-color: rgb(163,163,163,.25)">
+                                                    <lightning-formatted-number
+                                                            class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                            currency-code="USD" value={item.value}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={showFundsToClose}>
+                                            <td data-label="TotalFundsToClose6">
+                                                <lightning-formatted-number
+                                                    class="row-cell" format-style="currency" maximum-fraction-digits="0" minimum-fraction-digits="0"
+                                                    currency-code="USD" value={TotalFundsToClose6}>
+                                                </lightning-formatted-number>
+                                            </td>
+                                            </template>
+
+
+                                            <template if:false={nullBreakevenYears6}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <lightning-formatted-number 
+                                                        class="row-cell" format-style="decimal"
+                                                        maximum-fraction-digits="2" value={Years_Until_Breakeven6}>
+                                                    </lightning-formatted-number>
+                                                </td>
+                                            </template>
+                                            <template if:true={nullBreakevenYears6}>
+                                                <td data-label="Years Til Breakeven">
+                                                    <h4 class="row-cell slds-text-align_center">N/A</h4>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                                </table>
+                            </div>
+                                <br>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 Widget">
+                        <article class="slds-card greyback">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="mainTable slds-wrap slds-grid slds-gutters">
+                                    <template if:false={excludeCard1}>
+                                        <div class="CompareCards slds-col">
+                                            <div class="table slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <h3 class="CardName"> Rate &nbsp;
+                                                        <lightning-formatted-number
+                                                            format-style="percent-fixed" class="RateTitle"
+                                                            maximum-fraction-digits="3" value={Rate_1}>
+                                                        </lightning-formatted-number>
+                                                    </h3>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <div class="slds-grid slds-wrap">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">APR %:</h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                            format-style="percent" maximum-fraction-digits="3"
+                                                                value={APRF1}>
+                                                            </lightning-formatted-number> 
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Fees:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={TotalFees1}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Total_Loan_Amount1}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">P&I Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Monthly_PI_Pmt1}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Breakeven:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="decimal"
+                                                                maximum-fraction-digits="2" value={Years_Until_Breakeven1}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template if:false={excludeCard2}>
+                                        <div class="CompareCards slds-col ">
+                                            <div class="table slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <h3 class="CardName"> Rate &nbsp;
+                                                        <lightning-formatted-number
+                                                            format-style="percent-fixed" class="RateTitle"
+                                                            maximum-fraction-digits="3" value={Rate_2}>
+                                                        </lightning-formatted-number>
+                                                    </h3>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <div class="slds-grid slds-wrap">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">APR %:</h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                            format-style="percent" maximum-fraction-digits="3"
+                                                                value={APRF2}>
+                                                            </lightning-formatted-number>
+                                                        </div> 
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Fee's:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={TotalFees2}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Total_Loan_Amount2}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">P&I Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Monthly_PI_Pmt2}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Breakeven:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="decimal"
+                                                                maximum-fraction-digits="2" value={Years_Until_Breakeven2}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template if:false={excludeCard3}>
+                                        <div class="CompareCards slds-col ">
+                                            <div class="table slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <h3 class="CardName"> Rate &nbsp;
+                                                        <lightning-formatted-number
+                                                            format-style="percent-fixed" class="RateTitle"
+                                                            maximum-fraction-digits="3" value={Rate_3}>
+                                                        </lightning-formatted-number>
+                                                    </h3>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <div class="slds-grid slds-wrap">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">APR %:</h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                            format-style="percent" maximum-fraction-digits="3"
+                                                                value={APRF3}> 
+                                                            </lightning-formatted-number>
+                                                        </div>  
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Fee's:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={TotalFees3}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Total_Loan_Amount3}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">P&I Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Monthly_PI_Pmt3}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Breakeven:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="decimal"
+                                                                maximum-fraction-digits="2" value={Years_Until_Breakeven3}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template if:false={excludeCard4}>
+                                        <div class="CompareCards slds-col ">
+                                            <div class="table slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <h3 class="CardName"> Rate &nbsp;
+                                                        <lightning-formatted-number
+                                                            format-style="percent-fixed" class="RateTitle"
+                                                            maximum-fraction-digits="3" value={Rate_4}>
+                                                        </lightning-formatted-number>
+                                                    </h3>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <div class="slds-grid slds-wrap">
+                                                       <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">APR %:</h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                            format-style="percent" maximum-fraction-digits="3"
+                                                                value={APRF4}>
+                                                            </lightning-formatted-number>
+                                                        </div> 
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Fee's:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={TotalFees4}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Total_Loan_Amount4}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">P&I Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Monthly_PI_Pmt4}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Breakeven:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="decimal"
+                                                                maximum-fraction-digits="2" value={Years_Until_Breakeven4}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template if:false={excludeCard5}>
+                                        <div class="CompareCards slds-col ">
+                                            <div class="table slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <h3 class="CardName"> Rate &nbsp;
+                                                        <lightning-formatted-number
+                                                            format-style="percent-fixed" class="RateTitle"
+                                                            maximum-fraction-digits="3" value={Rate_5}>
+                                                        </lightning-formatted-number>
+                                                    </h3>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <div class="slds-grid slds-wrap">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">APR %:</h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                            format-style="percent" maximum-fraction-digits="3"
+                                                                value={APRF5}>
+                                                            </lightning-formatted-number>
+                                                        </div>  
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Fee's:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={TotalFees5}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Total_Loan_Amount5}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">P&I Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Monthly_PI_Pmt5}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Breakeven:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="decimal"
+                                                                maximum-fraction-digits="2" value={Years_Until_Breakeven5}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template if:false={excludeCard6}>
+                                        <div class="CompareCards slds-col ">
+                                            <div class="table slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <h3 class="CardName"> Rate &nbsp;
+                                                        <lightning-formatted-number
+                                                            format-style="percent-fixed" class="RateTitle"
+                                                            maximum-fraction-digits="3" value={Rate_6}>
+                                                        </lightning-formatted-number>
+                                                    </h3>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <div class="slds-grid slds-wrap">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">APR %:</h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                            format-style="percent" maximum-fraction-digits="3"
+                                                                value={APRF6}>
+                                                            </lightning-formatted-number>
+                                                        </div>  
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Fee's:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={TotalFees6}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Total_Loan_Amount6}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">P&I Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Monthly_PI_Pmt6}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Breakeven:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="decimal"
+                                                                maximum-fraction-digits="2" value={Years_Until_Breakeven6}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 Widget">
+                        <article class="slds-card">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="slds-grid slds-wrap slds-gutters slds-grid_vertical-align-center">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="profilediv">
+                                                <img class="Profile-image-section slds-align_absolute-center" src={SolidifyContactFullPhotoUrl}
+                                                    alt="Profile photo">
+                                        </div>
+                                        <div class="contactInfoDiv">
+                                            <br>
+                                            <lightning-formatted-text class="slds-text-heading_small"
+                                                value={SolidifyContactName}>
+                                            </lightning-formatted-text>
+                                            <br>
+                                            <lightning-formatted-email class="slds-text-body_regular"
+                                                value={SolidifyContactEmail}>
+                                            </lightning-formatted-email>
+                                            <br>
+                                            <lightning-formatted-phone class="slds-text-body_regular"
+                                                value={SolidifyContactMobilePhone}>
+                                            </lightning-formatted-phone>
+                                            <br>
+                                            <div class="slds-text-body_regular">NMLS #: &nbsp;
+                                            <lightning-formatted-text class="slds-text-body_regular"
+                                                value={SolidifyContactMLS}>
+                                            </lightning-formatted-text></div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="slds-grid slds-wrap slds-gutters slds-grid_vertical-align-center">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <template if:true={addressEmpty}>
+                                                    <div class="slds-text-heading_small"><b>Address:</b> <br>
+                                                    <lightning-formatted-text class="slds-text-heading_small"
+                                                    value={Subject_Property_Street}>
+                                                    </lightning-formatted-text></div>
+                                                </template>
+                                                <div class="slds-text-heading_small"><b>Borrower Name:</b> <br>
+                                                <lightning-formatted-text class="slds-text-heading_small"
+                                                value={Borrower_Name_Text}>
+                                                </lightning-formatted-text></div>
+                                                <div class="slds-text-heading_small"> <b>Loan Type: </b> <br>
+                                                    <lightning-formatted-number
+                                                        class="slds-text-heading_small" value={Fixed_Term_Years}>
+                                                    </lightning-formatted-number>&nbsp;
+                                                    <lightning-formatted-text
+                                                        class="slds-text-heading_small" value={Loan_Type}>
+                                                    </lightning-formatted-text>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2">
+
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2">
+
+                                            </div>
+                                            <!--<div class="floatRight slds-col slds-size_1-of-2">
+                                                <div class="Contact-image-section">
+                                                    <img class="" src="/resource/1619120802000/NewSolidifyLogo">
+                                                </div>
+                                                <lightning-formatted-text
+                                                    class="slds-align_absolute-center slds-text-heading_small"
+                                                    value="NMLS #1283930">
+                                                </lightning-formatted-text>
+                                            </div>
+                                            <div class="floatRight slds-col slds-size_1-of-2">
+                                                <br>
+                                                <div class="EHO-image-section">
+                                                    <img class="" src="/resource/1621273869000/EqualOppHousingImage">
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </template>
+                <div class="slds-col slds-size_1-of-1 Widget">
+                    <p class="pad10">
+                        <b>Disclaimer:</b> This is not a Loan Estimate. This is not an extension of credit or a promise
+                        to lend.
+                        Not everyone will qualify for this quote.
+                        This quote is not locked in and can change at any time. Please contact your loan officer for
+                        more
+                        details.
+                        <br>Your actual rate, payment, and costs could be higher. Get an official Loan Estimate before
+                        choosing
+                        the loan.
+                        <br><br> ©2024 Solidify Mortgage Advisors dba of BowHattan Holdings, Inc. All Rights Reserved.
+                        NMLS
+                        1283930, Equal Housing Lender.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

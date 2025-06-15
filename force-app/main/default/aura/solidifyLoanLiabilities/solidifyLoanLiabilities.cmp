@@ -1,0 +1,220 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+	<aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="Opportunity" type="Opportunity"
+               default="{ 'sobjectType': 'Opportunity' }"/>
+    <force:recordData aura:id="loanRecord"
+                  recordId="{!v.recordId}"
+				  fields="Id, Exp_Primary_Housing_Total__c, Exp_Subject_Prop_Net_Neg__c, Exp_All_Oth_Prop__c, Exp_All_Other_Payments__c, Total_Liabilities__c,
+                            Exp_Rent__c, Exp_1Mtg_Present__c, Exp_1Mtg_Proposed__c, Exp_OthFin_Present__c, Exp_OthFin_Proposed__c,
+                            Exp_HazIns_Present__c, Exp_HazIns_Proposed__c, Exp_Taxes_Present__c, Exp_Taxes_Proposed__c, Exp_MtgIns_Present__c,
+                            Exp_MtgIns_Proposed__c, Exp_HOA_Present__c, Exp_HOA_Proposed__c, Exp_Other_Present__c, Exp_Other_Present__c, 
+                            Exp_Total_Present__c, Exp_Total_Proposed__c"
+                  targetFields="{!v.Opportunity}"
+                  recordUpdated="{!c.recordUpdate}"
+                      />
+  <lightning:recordViewForm recordId="{!v.recordId}" objectAPIname="Opportunity">  
+<div class="slds-grid slds-gutters">
+  <div class="slds-col slds-size_1-of-2">  
+      <div class="slds-section slds-is-open">
+          <h4 class="slds-section__title slds-theme_shade">
+    		<span class="slds-truncate slds-p-horizontal_small" title="Liabilities">Liabilities</span>
+  		</h4>
+        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+
+    	<table class="slds-table slds-table_bordered slds-table-striped slds-table_cell-buffer">
+    	<thead>             
+			<tr class="slds-text-title_caps">
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Label Liabilities">Liabilities</div>
+      			</th>
+                <th scope="row" data-label="Amount">
+        			<div class="slds-truncate slds-text-align--right" title="Label Amount">Amount</div>
+      			</th>
+             </tr>
+        </thead>
+			<tbody>
+             <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Label Base Income">Primary Housing Expense</div>
+      			</th>
+      			<td data-label="Amount">
+        			<div class="slds-truncate slds-text-align--right" title="Base Income"> <lightning:outputField fieldName="Exp_Primary_Housing_Total__c" variant="label-hidden"/> </div>
+      			</td>
+             </tr>
+			 <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Label Base Income">Subject Property Negative Net Cash Flow</div>
+      			</th>
+      			<td data-label="Amount">
+        			<div class="slds-truncate slds-text-align--right" title="Base Income"> <lightning:outputField fieldName="Exp_Subject_Prop_Net_Neg__c" variant="label-hidden"/> </div>
+      			</td>
+             </tr>
+                          <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Label Base Income">All Other Properties</div>
+      			</th>
+      			<td data-label="Amount">
+        			<div class="slds-truncate slds-text-align--right" title="Base Income"> <lightning:outputField fieldName="Exp_All_Oth_Prop__c" variant="label-hidden"/> </div>
+      			</td>
+             </tr>
+			<tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Label Base Income">All Other Payments</div>
+      			</th>
+      			<td data-label="Amount">
+        			<div class="slds-truncate slds-text-align--right" title="Base Income"> <lightning:outputField fieldName="Exp_All_Other_Payments__c" variant="label-hidden"/> </div>
+      			</td>
+             </tr>
+             
+                          <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Label Base Income">Total Monthly Liabilities</div>
+      			</th>
+      			<td data-label="Amount">
+        			<div class="slds-truncate slds-text-align--right" title="Base Income"> <lightning:outputField fieldName="Total_Liabilities__c" variant="label-hidden"/> </div>
+      			</td>
+             </tr>
+            </tbody>
+            </table>
+                      
+        </div>
+     </div>
+    </div>
+    
+    
+  <div class="slds-col slds-size_1-of-2">  
+     <div class="slds-section slds-is-open">
+  		<h4 class="slds-section__title slds-theme_shade">
+    		<span class="slds-truncate slds-p-horizontal_small" title="Payments">Monthly Housing Payments</span>
+  		</h4>
+        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+
+    <table class="slds-table slds-table_bordered slds-table-striped slds-table_cell-buffer">
+  		<thead>
+    		<tr class="slds-text-title_caps">
+      			<th scope="col">
+                    <div class="slds-truncate" title="Label"/>
+      			</th>
+                <th scope="col">
+        			<div class="slds-truncate slds-text-align--right" title="Present">Present</div>
+      			</th>
+                <th scope="col">
+        			<div class="slds-truncate slds-text-align--right" title="Proposed">Proposed</div>
+      			</th>
+            </tr>
+         </thead> 
+         <tbody>
+    		<tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Label Rent">Rent</div>
+      			</th> 
+      			<td data-label="Present">
+        			<div class="slds-truncate slds-text-align--right" title="Present Rent"> <lightning:outputField fieldName="Exp_Rent__c" variant="label-hidden"/> </div>
+      			</td>
+      			<td data-label="Proposed">
+                    <div class="slds-truncate slds-text-align--right" title="Proposed Rent">N/A</div>
+      			</td>
+             </tr>
+             <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Label 1st">1st Mortgage</div>
+      			</th>
+      			<td data-label="Present">
+        			<div class="slds-truncate slds-text-align--right" title="Present 1st"> <lightning:outputField fieldName="Exp_1Mtg_Present__c" variant="label-hidden"/> </div>
+      			</td>
+      			<td data-label="Proposed">
+                    <div class="slds-truncate slds-text-align--right" title="Proposed 1st"> <lightning:outputField fieldName="Exp_1Mtg_Proposed__c" variant="label-hidden" /></div>
+      			</td>
+             </tr>
+             <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="OthFin Label">Other Fin</div>
+      			</th>
+      			<td data-label="Present">
+        			<div class="slds-truncate slds-text-align--right" title="Present OthFin"> <lightning:outputField fieldName="Exp_OthFin_Present__c" variant="label-hidden"/> </div>
+      			</td>
+      			<td data-label="Proposed">
+                    <div class="slds-truncate slds-text-align--right" title="Proposed OthFin"> <lightning:outputField fieldName="Exp_OthFin_Proposed__c" variant="label-hidden"/></div>
+      			</td>
+             </tr>
+             <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="HazIns Label">Haz Ins</div>
+      			</th>
+      			<td data-label="Present">
+        			<div class="slds-truncate slds-text-align--right" title="Present HazIns"> <lightning:outputField fieldName="Exp_HazIns_Present__c" variant="label-hidden"/> </div>
+      			</td>
+      			<td data-label="Proposed">
+                    <div class="slds-truncate slds-text-align--right" title="Proposed HazIns"> <lightning:outputField fieldName="Exp_HazIns_Proposed__c" variant="label-hidden"/></div>
+      			</td>
+             </tr>
+             <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Taxes Label">Taxes</div>
+      			</th>
+      			<td data-label="Present">
+        			<div class="slds-truncate slds-text-align--right" title="Present Taxes"> <lightning:outputField fieldName="Exp_Taxes_Present__c" variant="label-hidden" /> </div>
+      			</td>
+      			<td data-label="Proposed">
+                    <div class="slds-truncate slds-text-align--right" title="Proposed Taxes"> <lightning:outputField fieldName="Exp_Taxes_Proposed__c" variant="label-hidden"/></div>
+      			</td>
+             </tr>
+             <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="MtgIns Label">Mtg Ins</div>
+      			</th>
+      			<td data-label="Present">
+        			<div class="slds-truncate slds-text-align--right" title="Present MtgIns"> <lightning:outputField fieldName="Exp_MtgIns_Present__c" variant="label-hidden"/> </div>
+      			</td>
+      			<td data-label="Proposed">
+                    <div class="slds-truncate slds-text-align--right" title="Proposed MTgIns"> <lightning:outputField fieldName="Exp_MtgIns_Proposed__c" variant="label-hidden"/></div>
+      			</td>
+             </tr>
+             
+             <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Label HOA">HOA Dues</div>
+      			</th>
+      			<td data-label="Present">
+        			<div class="slds-truncate slds-text-align--right" title="Present HOA"> <lightning:outputField fieldName="Exp_HOA_Present__c" variant="label-hidden"/> </div>
+      			</td>
+      			<td data-label="Proposed">
+                    <div class="slds-truncate slds-text-align--right" title="Proposed HOA"> <lightning:outputField fieldName="Exp_HOA_Proposed__c" variant="label-hidden"/></div>
+      			</td>
+             </tr>
+             
+             <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Other Label">Other Expenses</div>
+      			</th>
+      			<td data-label="Present">
+        			<div class="slds-truncate slds-text-align--right" title="Present Other"> <lightning:outputField fieldName="Exp_Other_Present__c" variant="label-hidden"/> </div>
+      			</td>
+      			<td data-label="Proposed">
+                    <div class="slds-truncate slds-text-align--right" title="Proposed Other"> <lightning:outputField fieldName="Exp_Other_Proposed__c" variant="label-hidden"/></div>
+      			</td>
+             </tr>             
+             
+             <tr>
+      			<th scope="row" data-label="Label">
+        			<div class="slds-truncate" title="Total Label">Total</div>
+      			</th>
+      			<td data-label="Present">
+        			<div class="slds-truncate slds-text-align--right" title="Present Total"> <lightning:outputField fieldName="Exp_Total_Present__c" variant="label-hidden"/> </div>
+      			</td>
+      			<td data-label="Proposed">
+                    <div class="slds-truncate slds-text-align--right" title="Proposed Total"> <lightning:outputField fieldName="Exp_Total_Proposed__c" variant="label-hidden"/></div>
+      			</td>
+             </tr> 
+             
+            </tbody>
+      
+    </table>
+     </div>
+    </div>
+    </div>
+      </div>
+
+    </lightning:recordViewForm>
+    
+</aura:component>

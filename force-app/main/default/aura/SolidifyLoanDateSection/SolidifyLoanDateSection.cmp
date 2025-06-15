@@ -1,0 +1,102 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="SolidifyLoanDateSectionController">
+<!--    controller=""-->
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+    <aura:attribute name="RecordType" type="String" />
+
+    <aura:attribute name="isOldVariant" type="Boolean" default="false"/>
+    <aura:attribute name="showForm" type="Boolean" default="false"/>
+    <aura:attribute name="showFlowButton" type="Boolean" default="false"/>
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="propertiesRecordId" type="String" />
+    <aura:attribute name="objectApiName" type="String" default="Opportunity"/>
+
+    <aura:attribute name="fields" type="List" default="[]"/>
+    <aura:attribute name="stageColumns" type="List"
+                    default="[ { label: 'Stage', fieldName: 'LinkName', type: 'url', typeAttributes: {label: { fieldName: 'StageName'},target: '_top', tooltip:{ fieldName: 'StageName'} } }, { label: 'Amount', fieldName: 'Amount', type: 'currency', initialWidth:80,  typeAttributes: {currencyCode: 'USD'} }, { label: 'Probability', fieldName: 'Probability', type: 'percent', typeAttributes: {maximumFractionDigits: '2', minimumSignificantDigits:'2', style:'percent'} }, { label: 'Last Modified By', fieldName: 'CreatedById', type: 'url', typeAttributes: {label: { fieldName: 'CreatedByName'},target: '_top', tooltip:{ fieldName: 'CreatedByName'} } }, { label: 'Last Modified Date', fieldName: 'CreatedDate', type: 'date', typeAttributes: { year:'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12:'false'} } ]"/>
+    <aura:attribute name="caseColumns" type="List"
+                    default="[{ label: 'Subject', fieldName: 'LinkName', type: 'url', typeAttributes: { label: { fieldName: 'Subject' }, target: '_top', tooltip:{ fieldName: 'Subject'} } },{ label: 'Status', fieldName: 'Status', type: 'text' },{ label: 'Last Modified Date', fieldName: 'LastModifiedDate', type: 'date', typeAttributes: { year:'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12:'false'} } ]"/>
+    <aura:attribute name="teamMemberColumns" type="List"
+                    default="[{ label: 'User', fieldName: 'LinkName', type: 'url', typeAttributes: { label: { fieldName: 'UserName' }, target: '_top', tooltip:{ fieldName: 'UserName'} } },{ label: 'Member Role', fieldName: 'TeamMemberRole', type: 'text' } ]"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:if isTrue="{!v.isModalOpen}">
+
+        <!-- Modal/Popup Box starts here-->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box Header Starts here-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Research Modal</h2>
+                </header>
+                <!--Modal/Popup Box Body Starts here-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+<!--                    <fc_zillow:Zillow />-->
+                    <c:solidifyLoanResearchLinks recordId="{!v.recordId}"/>
+                    <c:SolidifyRelatedRecordOpportunity recordId="{!v.propertiesRecordId}" objectApiName="Properties__c" />
+<!--                    <datalara:datalaraRecordView recordId="{!v.recordId}" />-->
+                    <c:relatedList
+                            sobjectApiName="OpportunityHistory"
+                            relatedFieldApiName="OpportunityId"
+                            sortedBy="Opportunity.LastModifiedDate"
+                            fields="StageName, Probability, Amount, CloseDate, CreatedBy.Name, CreatedById, CreatedDate"
+                            columns="{!v.stageColumns}"
+                            recordId="{!v.recordId}"
+                            iconName="custom:custom19"
+                    />
+                    <c:relatedList
+                            sobjectApiName="Case"
+                            relatedFieldApiName="Loan__c"
+                            sortedBy="Subject"
+                            fields="Subject, Status, LastModifiedDate"
+                            columns="{!v.caseColumns}"
+                            recordId="{!v.recordId}"
+                            allowEdit="true"
+                            allowDelete="true"
+                    />
+                    <c:relatedList
+                            sobjectApiName="OpportunityTeamMember"
+                            relatedFieldApiName="OpportunityId"
+                            sortedBy="TeamMemberRole"
+                            fields="UserId, User.Name, TeamMemberRole"
+                            columns="{!v.teamMemberColumns}"
+                            recordId="{!v.recordId}"
+                            allowDelete="true"
+                            allowEdit="true"
+                            iconName="standard:team_member"
+                    />
+                </div>
+                <!--Modal/Popup Box Footer Starts here-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral"
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closeModel }"/>
+                    <lightning:button variant="brand"
+                                      label="OK"
+                                      title="OK"
+                                      onclick="{!c.closeModel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <lightning:messages />
+
+    <aura:if isTrue="{!v.RecordType == 'Scenario'}" >
+        <c:loanDateSectionScenario recordId="{!v.recordId}" objectApiName="{!v.objectApiName}" variant="With Flow Button" onshowresearchmodal="{!c.openModel}"/>
+    </aura:if>
+
+    <aura:if isTrue="{!v.RecordType == 'Mortgage'}" >
+        <c:loanDateSection recordId="{!v.recordId}" objectApiName="{!v.objectApiName}" variant="With Flow Button" onshowresearchmodal="{!c.openModel}"/>
+    </aura:if>
+
+</aura:component>

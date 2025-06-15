@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Follow_Up_Date_Not_Null</name>
+        <label>Follow-Up Date Not Null</label>
+        <locationX>886</locationX>
+        <locationY>276</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_Follow_Up_Date_Not_Null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Followup_Date__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_oFlow_Reset_Follow_Up_IN</targetReference>
+            </connector>
+            <label>True, Follow-Up Date Not Null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Follow_Up_Period_Changed_Not_Null</name>
+        <label>Follow-Up Period Changed &amp; Not Null</label>
+        <locationX>314</locationX>
+        <locationY>576</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_Follow_Up_Period_Changed_Not_Null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Next_Followup__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Next_Followup__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_oFlow_Add_Follow_Up_Date</targetReference>
+            </connector>
+            <label>True, Follow-Up Period Changed &amp; Not Null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>oFlow_Status_Updates</name>
+        <label>oFlow Status Updates</label>
+        <locationX>314</locationX>
+        <locationY>276</locationY>
+        <defaultConnector>
+            <targetReference>Follow_Up_Period_Changed_Not_Null</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>oFlow_Proposal</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Proposal</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Lead_Proposal</targetReference>
+            </connector>
+            <label>oFlow = Proposal</label>
+        </rules>
+        <rules>
+            <name>oFlow_Qualifying</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Qualifying</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Lead_Qualifying</targetReference>
+            </connector>
+            <label>oFlow = Qualifying</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>Formula_Update_Follow_Up_Date</name>
+        <dataType>Date</dataType>
+        <expression>CASE(
+    TEXT({!$Record.Next_Followup__c}),
+    &quot;1 Day&quot;, TODAY() + 1,
+    &quot;3 Days&quot;, TODAY() + 3,
+    &quot;1 Week&quot;, TODAY() + 7,
+    &quot;2 Weeks&quot;, TODAY() + 14,
+    &quot;3 Weeks&quot;, TODAY() + 21,
+    &quot;1 Month&quot;, TODAY() + 28,
+    TODAY()
+)</expression>
+    </formulas>
+    <interviewLabel>oFlow - All Processes + Workflows {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>oFlow - All Processes + Workflows</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Lead_Proposal</name>
+        <label>Update Lead = Proposal</label>
+        <locationX>50</locationX>
+        <locationY>384</locationY>
+        <connector>
+            <targetReference>Follow_Up_Period_Changed_Not_Null</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Proposal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Lead__r</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Lead_Qualifying</name>
+        <label>Update Lead = Qualifying</label>
+        <locationX>314</locationX>
+        <locationY>384</locationY>
+        <connector>
+            <targetReference>Follow_Up_Period_Changed_Not_Null</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Qualifying</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Lead__r</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_oFlow_Add_Follow_Up_Date</name>
+        <label>Update oFlow - Add Follow-Up Date</label>
+        <locationX>182</locationX>
+        <locationY>684</locationY>
+        <inputAssignments>
+            <field>Followup_Date__c</field>
+            <value>
+                <elementReference>Formula_Update_Follow_Up_Date</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_oFlow_Reset_Follow_Up_IN</name>
+        <label>Update oFlow - Reset Follow-Up IN</label>
+        <locationX>754</locationX>
+        <locationY>384</locationY>
+        <inputAssignments>
+            <field>Next_Followup__c</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>474</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>oFlow_Status_Updates</targetReference>
+        </connector>
+        <object>Case</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>One_Hour_Before_Follow_Up_Date</name>
+            <connector>
+                <targetReference>Follow_Up_Date_Not_Null</targetReference>
+            </connector>
+            <label>One Hour Before Follow Up Date</label>
+            <offsetNumber>-1</offsetNumber>
+            <offsetUnit>Hours</offsetUnit>
+            <recordField>Followup_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TBD_s_M_D</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>COE__c</columns>
+    <columns>Lock_Expiration__c</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>Next_Deadline__c</columns>
+    <columns>Rating__c</columns>
+    <columns>Grade__c</columns>
+    <columns>Priority_Sort__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>equals</operation>
+        <value>Prospect / Preapproval,Prospect,Requested,Setup,Reviewed,Application,Sent to Processing,Submitted,Approved,Clear to Close</value>
+    </filters>
+    <filters>
+        <field>Loan_Originator__c</field>
+        <operation>contains</operation>
+        <value>Dusty Broderick,Missy Broderick</value>
+    </filters>
+    <filters>
+        <field>Subject_Prop_Street__c</field>
+        <operation>contains</operation>
+        <value>tbd</value>
+    </filters>
+    <label>TBD&apos;s - M&amp;D</label>
+    <sharedTo>
+        <group>Team_Broderick</group>
+    </sharedTo>
+</ListView>

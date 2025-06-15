@@ -1,0 +1,49 @@
+.bottom-border {
+    border-bottom: 1px solid #d5d5d5;
+}
+
+
+.input-rows {
+    padding-top: 0;
+    padding-bottom: 0
+}
+
+.input-padding-x {
+    padding: 0 var(--lwc-spacingLarge,1.5rem);
+}
+
+.main-column-width {
+    min-width: 30px;
+}
+
+.margin-bottom-unset {
+    margin-bottom: unset
+}
+
+.margin-top-ratio {
+    margin-top: 15px
+}
+
+.modal-window {
+    width: 92%;
+    max-width: 100%;
+    min-width: 930px;
+}
+
+.top-border {
+    border-top: 1px solid #d5d5d5;
+}
+
+
+.background{
+    background-color:white !important;
+    border: 1px solid rgba(0,0,0,.16) !important; 
+    border-radius: .25rem !important; 
+    box-sizing: border-box !important; 
+    padding: .5rem !important;
+    width: 331px !important;
+ }
+
+.testCls lightning-input-field .slds-form-element__label {
+    display : none !important;
+}

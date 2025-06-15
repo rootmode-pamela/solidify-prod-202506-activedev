@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Interest_Scenario_3__c</fullName>
+    <description>This a simple way of re-creating the “CUMIPMT” formula of Excel, it will just consider the entire term instead of a specific time period within it (ie months 60-120).</description>
+    <formula>(Monthly_Payment_Scenario_3__c  *   Term_Due_Scenario_3__c * 12) -    First_Loan_Amount_Scenario_3__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Interest Scenario 3</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

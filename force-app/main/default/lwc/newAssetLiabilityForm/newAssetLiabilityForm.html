@@ -1,0 +1,21 @@
+<template>
+    <lightning-modal-header label="New Liability"></lightning-modal-header>
+    <lightning-modal-body> 
+        <lightning-card title="Create New Liability Record" icon-name="standard:record">
+            <div class="slds-var-m-around_medium">
+                <div if:true={errors} class="slds-notify slds-notify_alert slds-alert_error">
+                    {errors}
+                  </div>
+                  <lightning-record-form
+                    object-api-name="Asset__c"
+                    fields={assetFields}
+                    columns="2"
+                    onsuccess={closePopupSuccess}
+                    oncancel={closePopup}>
+                  </lightning-record-form>
+
+            </div>
+        </lightning-card>
+
+    </lightning-modal-body>
+</template>

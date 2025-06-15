@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X4_TBD_s_Team_Broderick</fullName>
+    <booleanFilter>(1 OR 2 OR 3) AND 4 AND 5 AND 6 AND 7</booleanFilter>
+    <columns>Household_Name__c</columns>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>Subject_Prop_Street__c</columns>
+    <columns>Subject_Prop_St__c</columns>
+    <columns>Loan_Originator__c</columns>
+    <columns>Loan_Processor__c</columns>
+    <columns>Purpose__c</columns>
+    <columns>Referred_By__c</columns>
+    <columns>Loan_Program__c</columns>
+    <columns>Lender__c</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY.CREATED_DATE</columns>
+    <columns>Next_Deadline__c</columns>
+    <columns>Processor_Note__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>equals</operation>
+        <value>Requested,Reviewed,Pre-approved,Application,Sent to Processing,Submitted,Approved,Clear to Close</value>
+    </filters>
+    <filters>
+        <field>COE__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Lock_Expiration__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>notEqual</operation>
+        <value>Closed Won,Archive Closed,Closed Elsewhere,Cancelled,Denied</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.Prospecting</value>
+    </filters>
+    <filters>
+        <field>Loan_Originator__c</field>
+        <operation>contains</operation>
+        <value>Dusty Broderick,Missy Broderick</value>
+    </filters>
+    <filters>
+        <field>Subject_Prop_Street__c</field>
+        <operation>contains</operation>
+        <value>tbd</value>
+    </filters>
+    <label>4. TBD&apos;s - Team Broderick</label>
+    <sharedTo>
+        <group>Team_Broderick</group>
+    </sharedTo>
+</ListView>

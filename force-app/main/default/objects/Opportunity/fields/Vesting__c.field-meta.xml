@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vesting__c</fullName>
+    <label>Vesting</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>See Prelim</fullName>
+                <default>false</default>
+                <label>See Prelim</label>
+            </value>
+            <value>
+                <fullName>Trust</fullName>
+                <default>false</default>
+                <label>Trust</label>
+            </value>
+            <value>
+                <fullName>Non-Borrower on Title</fullName>
+                <default>false</default>
+                <label>Non-Borrower on Title</label>
+            </value>
+            <value>
+                <fullName>Borrower(s) Being Added</fullName>
+                <default>false</default>
+                <label>Adding Borrower(s)</label>
+            </value>
+            <value>
+                <fullName>Borrower(s) Being Removed</fullName>
+                <default>false</default>
+                <label>Removing Borrower(s)</label>
+            </value>
+            <value>
+                <fullName>Power of Attorney</fullName>
+                <default>false</default>
+                <label>Power of Attorney</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

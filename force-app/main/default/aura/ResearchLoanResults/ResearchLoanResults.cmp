@@ -1,0 +1,68 @@
+<aura:component controller="ResearchSearchController" implements="flexipage:availableForAllPageTypes">
+	<aura:attribute name="loans" type="Properties__c[]" />
+    <aura:attribute name="columns" type="String[]"/>
+    <aura:attribute name="selectedPropId" type="String"/>
+    <aura:attribute name="actions" type="String[]"/>
+
+    <aura:attribute name="sortedBy" type="String" default="Household__r.Name"/>
+    <aura:attribute name="sortedDirection" type="String" default="asc" />
+    
+    <aura:attribute name="argumentObj" type="Object"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="onPropSelect" event="c:propSelect" action="{!c.onPropSelect}" />
+    <aura:method name="search" action="{!c.doSearch}" access="global" >
+    <aura:attribute name="formData" type="Object" />     
+    <aura:attribute name="initialRows" type="Integer" default="5"/>
+    <aura:attribute name="rowsToLoad" type="Integer" default="50"/>
+
+    
+    
+    </aura:method>
+    
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+  <!--create a component attributs -->
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="ListOfContact" type="contact[]" />
+    
+
+    <lightning:navigation aura:id="navService" /> 
+    <aura:attribute name="pageReference" type="Object"/>
+    
+      <!--loading spinner start... style=Brand Medium (blue dots)-->
+ 	<aura:if isTrue="{!v.Spinner}">
+    	<div aura:id="spinnerId" class="slds-spinner_container">
+       		<div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+         		<span class="slds-assistive-text">Loading</span>
+         		<div class="slds-spinner__dot-a"></div>
+         		<div class="slds-spinner__dot-b"></div>
+       		</div>
+    	</div>
+ 	</aura:if>
+    
+    
+    <lightning:layout multipleRows="true">
+            <div style="height: 450px">
+        <lightning:datatable
+                keyField="id"
+                data="{!v.loans}"
+                columns="{!v.columns}"
+                hideCheckboxColumn="true"
+                sortedBy="{!v.sortedBy}"
+                sortedDirection="{!v.sortedDirection}"
+                onsort="{!c.updateColumnSorting}"
+                onrowaction="{! c.handleRowAction }"
+                enableInfiniteLoading="false"
+                />
+                <!-- onloadmore="{! c.loadMoreData }" -->
+    </div>
+        
+        <aura:if isTrue="{!v.loans.length==0}">
+            <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" padding="around-small" class="slds-align_absolute-center">
+                <lightning:formattedText value="No loans found" />
+            </lightning:layoutItem>
+        </aura:if>
+        
+    </lightning:layout>
+</aura:component>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Contact_Type</name>
+        <label>Contact Type</label>
+        <locationX>314</locationX>
+        <locationY>468</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Preferred_Partner</name>
+            <conditionLogic>1 AND 4 AND (2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contact_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Preferred Partner</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Open_Partner_Check_In_Tasks.ActivityDate</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Formula_Today_Minus_20</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Open_Partner_Check_In_Tasks.ActivityDate</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Open_Partner_Check_In_Tasks.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_21_Day_Follow_Up</targetReference>
+            </connector>
+            <label>Preferred Partner</label>
+        </rules>
+        <rules>
+            <name>Non_Preferred_Partner</name>
+            <conditionLogic>1 AND 4 AND (2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contact_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Active</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Open_Partner_Check_In_Tasks.CreatedDate</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>Formula_Today_Minus_44</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Open_Partner_Check_In_Tasks.ActivityDate</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Open_Partner_Check_In_Tasks.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_45_Day_Follow_Up</targetReference>
+            </connector>
+            <label>Non-Preferred Partner</label>
+        </rules>
+    </decisions>
+    <description>Scheduled Flow that creates tasks based on the Contact Type (Realtor, Insurance Agent, Financial Advisor, Referral Partner - Other) and Contact Status (Preferred Partner OR Non-Preferred Partner).</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>Formula_Task_Subject_Line</name>
+        <dataType>String</dataType>
+        <expression>&quot;Partner Check In:&quot; + &quot; &quot; + {!Get_Contact.Name}</expression>
+    </formulas>
+    <formulas>
+        <name>Formula_Today_Minus_20</name>
+        <dataType>Date</dataType>
+        <expression>Today() - 20</expression>
+    </formulas>
+    <formulas>
+        <name>Formula_Today_Minus_44</name>
+        <dataType>Date</dataType>
+        <expression>Today() - 44</expression>
+    </formulas>
+    <formulas>
+        <name>Formula_Today_Plus_1</name>
+        <dataType>Date</dataType>
+        <expression>Today() + 1</expression>
+    </formulas>
+    <formulas>
+        <name>Formula_Today_Plus_One_Business_Day</name>
+        <dataType>Date</dataType>
+        <expression>CASE(
+    MOD(TODAY() - DATE(1900,1,7), 7), 
+    5, TODAY() + 3, 
+    6, TODAY() + 2,
+    TODAY() + 1 
+)</expression>
+    </formulas>
+    <interviewLabel>Contact - Key Referral Partners - Follow Up {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Contact - Key Referral Partners - Follow Up</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_21_Day_Follow_Up</name>
+        <label>Create 21 Day Follow Up</label>
+        <locationX>50</locationX>
+        <locationY>576</locationY>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>Formula_Task_Subject_Line</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_45_Day_Follow_Up</name>
+        <label>Create 45 Day Follow Up</label>
+        <locationX>314</locationX>
+        <locationY>576</locationY>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>Formula_Task_Subject_Line</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Contact</name>
+        <label>Get Contact</label>
+        <locationX>314</locationX>
+        <locationY>252</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Open_Partner_Check_In_Tasks</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Contact</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Open_Partner_Check_In_Tasks</name>
+        <label>Get Open Partner Check In Tasks</label>
+        <locationX>314</locationX>
+        <locationY>360</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Contact_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Subject</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>Partner Check In</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>WhoId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Contact.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Task</object>
+        <sortField>ActivityDate</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Contact</targetReference>
+        </connector>
+        <filterLogic>(1 OR 2 OR 3 OR 4) AND (5 OR 6)</filterLogic>
+        <filters>
+            <field>Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Realtor</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Insurance Agent</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Financial Advisor</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Referral Partner - Other</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Contact_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Active</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Contact_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Preferred Partner</stringValue>
+            </value>
+        </filters>
+        <object>Contact</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2025-03-03</startDate>
+            <startTime>19:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

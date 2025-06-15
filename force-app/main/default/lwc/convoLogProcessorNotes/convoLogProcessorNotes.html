@@ -1,0 +1,27 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" 
+        class="slds-modal slds-fade-in-open slds-modal_small">
+        <div class="slds-modal__container modal-window">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+            <header class="slds-modal__header">
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Convo Log/Loan Processor Notes</h2>
+            </header>
+            <div class="slds-modal__content" id="modal-content-id-2">
+                <div class="slds-p-around_medium">
+                    <div class="slds-box">
+                        <lightning-input label="Processor Note" value={processorNote} onblur={handleProcessorNoteChange}></lightning-input>
+                        <lightning-textarea style="--slds-c-textarea-sizing-min-height: 200px;" label="Convo Log" value={ConvoLog} disabled></lightning-textarea>
+                        <lightning-input label="Notify Processor" value={notifyProcessor} type="checkbox" onchange={handleNotifyProcessorChange}></lightning-input>
+                    </div>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">                
+                <lightning-button label="Close" variant="brand" onclick={closeModal}></lightning-button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <lightning-button label="Save" variant="brand" onclick={handlesave}></lightning-button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

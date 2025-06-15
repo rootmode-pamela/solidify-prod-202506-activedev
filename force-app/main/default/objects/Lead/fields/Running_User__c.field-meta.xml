@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Running_User__c</fullName>
+    <formula>IF(    
+or(
+text(Loan_Originator__c) =  $User.FirstName &amp;&quot; &quot;&amp; $User.LastName ,text(Loan_Originator__c) =  Owner:User.FirstName &amp;&quot; &quot;&amp; Owner:User.LastName),True,False)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Running User</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

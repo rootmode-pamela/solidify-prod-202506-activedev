@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="loanDateSectionScenario">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Loan Date Section Scenario</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="variant" type="String" datasource="Default, With Flow Button, Only Form" default="Default" label="Variant"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

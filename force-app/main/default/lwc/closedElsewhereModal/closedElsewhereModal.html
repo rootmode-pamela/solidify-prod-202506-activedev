@@ -1,0 +1,33 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner class="spinner" alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+    <lightning-record-edit-form
+            object-api-name={opportunityObject}
+            onsuccess={handleSuccess}
+            onerror={handleError}
+            onsubmit={handleSubmit}
+            record-type-id={recordTypeId}>
+
+        <header class="slds-modal__header">
+            <h2 class="slds-modal__title">New Loan Closed Elsewhere</h2>
+        </header>
+        <lightning-quick-action-panel>
+
+            <div class="slds-p-horizontal_small slds-p-bottom_small">
+                <lightning-input-field if:false={isPropertyPage} field-name="Subject_Property_Name__c"> </lightning-input-field>
+                <lightning-input-field field-name="Name"> </lightning-input-field>
+                <lightning-input-field field-name="CloseDate"> </lightning-input-field>
+                <lightning-input-field if:false={isPropertyPage} field-name="Lender__c"> </lightning-input-field>
+                <lightning-input-field field-name="Amount"> </lightning-input-field>
+                <lightning-input-field if:false={isPropertyPage} field-name="Interest_Rate__c"> </lightning-input-field>
+                <lightning-input-field if:false={isPropertyPage} field-name="Due_In_Months__c"> </lightning-input-field>
+            </div>
+
+            <div slot="footer">
+                <lightning-button variant="neutral" label="Cancel" onclick={closeAction}></lightning-button>
+                <lightning-button class="slds-m-left_x-small" type="submit" variant="brand" label="Save"></lightning-button>
+            </div>
+        </lightning-quick-action-panel>
+    </lightning-record-edit-form>
+</template>

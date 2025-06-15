@@ -1,0 +1,1018 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-30-2022
+  @last modified by  : Ashton Kuehne
+-->
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <lightning-record-edit-form record-id={recordId} object-api-name={objectApiName} onsubmit={handleSubmit}
+        onsuccess={handleSuccess}>
+        <lightning-messages> </lightning-messages>
+        <div class="slds-grid slds-wrap" style="background:var(--lwc-colorBackground,rgb(243, 242, 242))">
+            <!--Top Bar Section-->
+            <div class="slds-col slds-size_1-of-1 slds-p-around_x-small">
+                <div
+                    style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                    <div class="slds-grid slds-wrap slds-p-around_x-small">
+                        <div class="slds-col slds-size_1-of-5 slds-small-size_1-of-6">
+                            <lightning-checkbox-group name="Co-Borrower" label="" options={options1} value={value1}
+                                onchange={BorrowerChange} type="radio">
+                            </lightning-checkbox-group>
+                        </div>
+                        <template if:true={isRefinance}>
+                            <div class="slds-col slds-size_1-of-5 slds-small-size_1-of-6">
+                                <lightning-checkbox-group name="Second Loan" label="" options={options2} value={value2}
+                                    onchange={LoanChange} type="radio">
+                                </lightning-checkbox-group>
+                            </div>
+                        </template>
+                        <div class="slds-col slds-col_bump-left slds-size_1-of-5 slds-small-size_1-of-6">
+                            <lightning-button class="slds-m-around_small" variant="brand" name="Value Search" label="Value Search"
+                                    onclick={handleValueSearch}></lightning-button>
+                        </div>
+                        <div class="slds-col slds-col_bump-left slds-size_1-of-5 slds-small-size_1-of-6">
+                            <c-new-proposal-button recordid={recordId} objectapiname={objectApiName} ></c-new-proposal-button>
+                        </div>
+                        <template if:true={editable}>
+                            <div class="slds-docked-form-footer">
+                                <lightning-button class="slds-m-around_small" variant="neutral" name="Cancel" label="Cancel"
+                                    onclick={handleCancelClick}></lightning-button>
+                                <lightning-button class="slds-m-around_small" variant="brand" type="submit" name="Save"
+                                    label="Save"></lightning-button>
+                            </div>
+                            <!--<div class="slds-col slds-size_1-of-5 slds-small-size_2-of-6">
+                                <lightning-button class="slds-m-around_small" variant="neutral" name="Cancel" label="Cancel"
+                                    onclick={handleCancelClick}></lightning-button>
+                                <lightning-button class="slds-m-around_small" variant="brand" type="submit" name="Save"
+                                    label="Save"></lightning-button>
+                            </div>-->
+                        </template>
+                        <template if:false={editable}>
+                            <div class="slds-col slds-size_1-of-5 slds-small-size_2-of-6">
+                                <lightning-button class="slds-m-around_small" variant="brand" name="Edit"
+                                    onclick={handleEditClick} label="Edit"></lightning-button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <!--Borrower Section-->
+            <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+                <div
+                    style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                    <h3 class="slds-section__title">
+                        <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                            <strong>Borrower</strong>
+                        </div>
+                    </h3>
+                    <div class="slds-grid slds-wrap slds-p-around_x-small">
+                        <template for:each={borrowerFields} for:item='borrowerField'>
+                            <div key={borrowerField.fieldname} class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>{borrowerField.label}</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name={borrowerField.fieldname} variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name={borrowerField.fieldname} variant="label-hidden">
+                                                </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                        </template>
+                        <div class="slds-col slds-size_1-of-1">
+                            <lightning-accordion allow-multiple-sections-open="true"
+                                onsectiontoggle={handleToggleSection}>
+                                <lightning-accordion-section name="More" label="More">
+                                    <div class="slds-grid slds-wrap">
+                                        <template for:each={borrowerExpandedFields} for:item='borrowerExpandedField'>
+                                            <div key={borrowerExpandedField.fieldname} class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                                    <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                                        <div class="slds-text-title_bold labelSize">
+                                                            <span>{borrowerExpandedField.label}</span>
+                                                        </div>
+                                                        <div class="slds-form-element__control">
+                                                            <template if:false={editable}>
+                                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                                    <lightning-output-field field-name={borrowerExpandedField.fieldname} variant="label-hidden">
+                                                                    </lightning-output-field>
+                                                                </span>
+                                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                                    <lightning-icon icon-name="utility:edit"
+                                                                      alternative-text="edit"
+                                                                      variant="base"
+                                                                      size="xx-small"
+                                                                      class="pencil-icon" ></lightning-icon>
+                                                                   <span class="slds-assistive-text">Edit</span>
+                                                               </button>
+                                                            </template>
+                                                            <template if:true={editable}>
+                                                                <lightning-input-field field-name={borrowerExpandedField.fieldname} variant="label-hidden">
+                                                                </lightning-input-field>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </lightning-accordion-section>
+                            </lightning-accordion>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Co-Borrower Section-->
+            <template if:true={CoBorrowerActive}>
+                <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+                    <div
+                        style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                        <h3 class="slds-section__title">
+                            <div class="slds-button slds-section__title-action"
+                                aria-controls="upcoming-activities-section">
+                                <strong>Co-Borrower</strong>
+                            </div>
+                        </h3>
+                        <div class="slds-grid slds-wrap slds-p-around_x-small">
+                            <template for:each={coBorrowerFields} for:item='coBorrowerField'>
+                                <div key={coBorrowerField.fieldname} class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                        <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                            <div class="slds-text-title_bold labelSize">
+                                                <span>{coBorrowerField.label}</span>
+                                            </div>
+                                            <div class="slds-form-element__control">
+                                                <template if:false={editable}>
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <lightning-output-field field-name={coBorrowerField.fieldname} variant="label-hidden">
+                                                        </lightning-output-field>
+                                                    </span>
+                                                    <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                        <lightning-icon icon-name="utility:edit"
+                                                          alternative-text="edit"
+                                                          variant="base"
+                                                          size="xx-small"
+                                                          class="pencil-icon" ></lightning-icon>
+                                                       <span class="slds-assistive-text">Edit</span>
+                                                   </button>
+                                                </template>
+                                                <template if:true={editable}>
+                                                    <lightning-input-field field-name={coBorrowerField.fieldname} variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </template>
+                                            </div>
+                                        </div>
+                                </div>
+                            </template>
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning-accordion allow-multiple-sections-open="true"
+                                    onsectiontoggle={handleToggleSection}>
+                                    <lightning-accordion-section name="MoreCo" label="More">
+                                        <div class="slds-grid slds-wrap">
+                                            <template for:each={coBorrowerExpandedFields} for:item='coBorrowerExpandedField'>
+                                                <div key={coBorrowerExpandedField.fieldname} class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                                        <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                                            <div class="slds-text-title_bold labelSize">
+                                                                <span>{coBorrowerExpandedField.label}</span>
+                                                            </div>
+                                                            <div class="slds-form-element__control">
+                                                                <template if:false={editable}>
+                                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                                        <lightning-output-field field-name={coBorrowerExpandedField.fieldname} variant="label-hidden">
+                                                                        </lightning-output-field>
+                                                                    </span>
+                                                                    <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                                        <lightning-icon icon-name="utility:edit"
+                                                                          alternative-text="edit"
+                                                                          variant="base"
+                                                                          size="xx-small"
+                                                                          class="pencil-icon" ></lightning-icon>
+                                                                       <span class="slds-assistive-text">Edit</span>
+                                                                   </button>
+                                                                </template>
+                                                                <template if:true={editable}>
+                                                                    <lightning-input-field field-name={coBorrowerExpandedField.fieldname} variant="label-hidden">
+                                                                    </lightning-input-field>
+                                                                </template>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </lightning-accordion-section>
+                                </lightning-accordion>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <!--Loan Details Section-->
+            <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+                <div
+                    style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                    <h3 class="slds-section__title">
+                        <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                            <strong>Loan Details</strong>
+                        </div>
+                    </h3>
+                    <div class="slds-grid slds-wrap slds-p-around_x-small">
+                        <template if:true={isRefinance}>
+                            <div class="slds-col slds-size_1-of-1">
+                                    <div
+                                        class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Primary Goal</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name="PrimaryGoal__c"
+                                                        variant="label-hidden"> </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name="PrimaryGoal__c"
+                                                    variant="label-hidden"> </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                        </template>
+                        <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                    <div class="slds-text-title_bold labelSize">
+                                        <span>Purpose</span>
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <template if:false={editable}>
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <lightning-output-field field-name="Purpose__c" variant="label-hidden">
+                                                </lightning-output-field>
+                                            </span>
+                                            <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                <lightning-icon icon-name="utility:edit"
+                                                  alternative-text="edit"
+                                                  variant="base"
+                                                  size="xx-small"
+                                                  class="pencil-icon" ></lightning-icon>
+                                               <span class="slds-assistive-text">Edit</span>
+                                           </button>
+                                        </template>
+                                        <template if:true={editable}>
+                                            <lightning-input-field field-name="Purpose__c" variant="label-hidden">
+                                            </lightning-input-field>
+                                        </template>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                    <div class="slds-text-title_bold labelSize">
+                                        <span>Occupancy</span>
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <template if:false={editable}>
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <lightning-output-field field-name="Occupancy__c"
+                                                    variant="label-hidden"> </lightning-output-field>
+                                            </span>
+                                            <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                <lightning-icon icon-name="utility:edit"
+                                                  alternative-text="edit"
+                                                  variant="base"
+                                                  size="xx-small"
+                                                  class="pencil-icon" ></lightning-icon>
+                                               <span class="slds-assistive-text">Edit</span>
+                                           </button>
+                                        </template>
+                                        <template if:true={editable}>
+                                            <lightning-input-field field-name="Occupancy__c" variant="label-hidden">
+                                            </lightning-input-field>
+                                        </template>
+                                    </div>
+                                </div>
+                        </div>
+                        <template if:false={isRefinance}>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div
+                                        class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Purchase Price</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name="Purchase_Price__c"
+                                                        variant="label-hidden"> </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name="Purchase_Price__c"
+                                                    variant="label-hidden"> </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div
+                                        class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Down Payment</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name="Down_Payment__c"
+                                                        variant="label-hidden"> </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name="Down_Payment__c"
+                                                    variant="label-hidden"> </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div
+                                        class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>First Loan Amount</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name="Loan_Amount__c"
+                                                        variant="label-hidden"> </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name="Loan_Amount__c"
+                                                    variant="label-hidden"> </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div
+                                        class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Second Loan Amount</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name="SecondLoanAmount__c"
+                                                        variant="label-hidden"> </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name="SecondLoanAmount__c"
+                                                    variant="label-hidden"> </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                        </template>
+                        <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                    <div class="slds-text-title_bold labelSize">
+                                        <span>Qualifying Fico</span>
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <template if:false={editable}>
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <lightning-output-field field-name="Qualifying_Fico__c"
+                                                    variant="label-hidden"> </lightning-output-field>
+                                            </span>
+                                            <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                <lightning-icon icon-name="utility:edit"
+                                                  alternative-text="edit"
+                                                  variant="base"
+                                                  size="xx-small"
+                                                  class="pencil-icon" ></lightning-icon>
+                                               <span class="slds-assistive-text">Edit</span>
+                                           </button>
+                                        </template>
+                                        <template if:true={editable}>
+                                            <lightning-input-field field-name="Qualifying_Fico__c"
+                                                variant="label-hidden"> </lightning-input-field>
+                                        </template>
+                                    </div>
+                                </div>
+                        </div>
+                        <template if:true={isRefinance}>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div
+                                        class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Current Program</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name="Current_Program__c"
+                                                        variant="label-hidden"> </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name="Current_Program__c"
+                                                    variant="label-hidden"> </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div
+                                        class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Current Balance</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name="Current_Balance__c"
+                                                        variant="label-hidden"> </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name="Current_Balance__c"
+                                                    variant="label-hidden"> </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div
+                                        class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Current Rate</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name="Current_Rate__c"
+                                                        variant="label-hidden"> </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name="Current_Rate__c"
+                                                    variant="label-hidden"> </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div
+                                        class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Cashout</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name="Cashout__c"
+                                                        variant="label-hidden"> </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name="Cashout__c" variant="label-hidden">
+                                                </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div
+                                        class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Current Payment</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name="Current_Payment__c"
+                                                        variant="label-hidden"> </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name="Current_Payment__c"
+                                                    variant="label-hidden"> </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                            <template if:true={Active2ndLoan}>
+                                <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                        <div
+                                            class="slds-form-element_edit slds-grow override--slds-form-element">
+                                            <div class="slds-text-title_bold labelSize">
+                                                <span>Second Current Program</span>
+                                            </div>
+                                            <div class="slds-form-element__control">
+                                                <template if:false={editable}>
+                                                    <span
+                                                        class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <lightning-output-field field-name="X2ndLoanProgram__c"
+                                                            variant="label-hidden"> </lightning-output-field>
+                                                    </span>
+                                                    <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                        <lightning-icon icon-name="utility:edit"
+                                                          alternative-text="edit"
+                                                          variant="base"
+                                                          size="xx-small"
+                                                          class="pencil-icon" ></lightning-icon>
+                                                       <span class="slds-assistive-text">Edit</span>
+                                                   </button>
+                                                </template>
+                                                <template if:true={editable}>
+                                                    <lightning-input-field field-name="X2ndLoanProgram__c"
+                                                        variant="label-hidden"> </lightning-input-field>
+                                                </template>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                        <div
+                                            class="slds-form-element_edit slds-grow override--slds-form-element">
+                                            <div class="slds-text-title_bold labelSize">
+                                                <span>Second Current Balance</span>
+                                            </div>
+                                            <div class="slds-form-element__control">
+                                                <template if:false={editable}>
+                                                    <span
+                                                        class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <lightning-output-field field-name="SecondLoanAmount__c"
+                                                            variant="label-hidden"> </lightning-output-field>
+                                                    </span>
+                                                    <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                        <lightning-icon icon-name="utility:edit"
+                                                          alternative-text="edit"
+                                                          variant="base"
+                                                          size="xx-small"
+                                                          class="pencil-icon" ></lightning-icon>
+                                                       <span class="slds-assistive-text">Edit</span>
+                                                   </button>
+                                                </template>
+                                                <template if:true={editable}>
+                                                    <lightning-input-field field-name="SecondLoanAmount__c"
+                                                        variant="label-hidden"> </lightning-input-field>
+                                                </template>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                        <div
+                                            class="slds-form-element_edit slds-grow override--slds-form-element">
+                                            <div class="slds-text-title_bold labelSize">
+                                                <span>Second Current Rate</span>
+                                            </div>
+                                            <div class="slds-form-element__control">
+                                                <template if:false={editable}>
+                                                    <span
+                                                        class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <lightning-output-field field-name="SecondLoanRate__c"
+                                                            variant="label-hidden"> </lightning-output-field>
+                                                    </span>
+                                                    <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                        <lightning-icon icon-name="utility:edit"
+                                                          alternative-text="edit"
+                                                          variant="base"
+                                                          size="xx-small"
+                                                          class="pencil-icon" ></lightning-icon>
+                                                       <span class="slds-assistive-text">Edit</span>
+                                                   </button>
+                                                </template>
+                                                <template if:true={editable}>
+                                                    <lightning-input-field field-name="SecondLoanRate__c"
+                                                        variant="label-hidden"> </lightning-input-field>
+                                                </template>
+                                            </div>
+                                        </div>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <!--Subject Property Section-->
+            <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+                <div
+                    style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                    <h3 class="slds-section__title">
+                        <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                            <strong>Subject Property</strong>
+                        </div>
+                    </h3>
+                    <div class="slds-grid slds-wrap slds-p-around_x-small">
+                        <div class="slds-col slds-size_1-of-1">
+                                <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                    <div class="slds-text-title_bold labelSize">
+                                        <span>Address</span>
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <template if:false={editable}>
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <lightning-output-field field-name="Address" variant="label-hidden">
+                                                </lightning-output-field>
+                                            </span>
+                                            <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                <lightning-icon icon-name="utility:edit"
+                                                  alternative-text="edit"
+                                                  variant="base"
+                                                  size="xx-small"
+                                                  class="pencil-icon" ></lightning-icon>
+                                               <span class="slds-assistive-text">Edit</span>
+                                           </button>
+                                        </template>
+                                        <template if:true={editable}>
+                                            <lightning-input-address address-label="Address" street-label="Street"
+                                                city-label="City" country-label="Country"
+                                                province-label="State" city={SPCity} postal-code-label="Zip" street={SPStreet}
+                                                province={SPState}
+                                                postal-code={SPZip}
+                                                onchange={addressInputChange} show-address-lookup>
+                                            </lightning-input-address>
+                                        </template>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                    <div class="slds-text-title_bold labelSize">
+                                        <span>Property Type</span>
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <template if:false={editable}>
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <lightning-output-field field-name="Subject_Property_Type__c"
+                                                    variant="label-hidden"> </lightning-output-field>
+                                            </span>
+                                            <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                <lightning-icon icon-name="utility:edit"
+                                                  alternative-text="edit"
+                                                  variant="base"
+                                                  size="xx-small"
+                                                  class="pencil-icon" ></lightning-icon>
+                                               <span class="slds-assistive-text">Edit</span>
+                                           </button>
+                                        </template>
+                                        <template if:true={editable}>
+                                            <lightning-input-field field-name="Subject_Property_Type__c"
+                                                variant="label-hidden"> </lightning-input-field>
+                                        </template>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                    <div class="slds-text-title_bold labelSize">
+                                        <span>Number of Units</span>
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <template if:false={editable}>
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <lightning-output-field field-name="Number_of_Units__c"
+                                                    variant="label-hidden"> </lightning-output-field>
+                                            </span>
+                                            <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                <lightning-icon icon-name="utility:edit"
+                                                  alternative-text="edit"
+                                                  variant="base"
+                                                  size="xx-small"
+                                                  class="pencil-icon" ></lightning-icon>
+                                               <span class="slds-assistive-text">Edit</span>
+                                           </button>
+                                        </template>
+                                        <template if:true={editable}>
+                                            <lightning-input-field field-name="Number_of_Units__c"
+                                                variant="label-hidden"> </lightning-input-field>
+                                        </template>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                    <div class="slds-text-title_bold labelSize">
+                                        <span>Estimated Value</span>
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <template if:false={editable}>
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <lightning-output-field field-name="Estimated_Value__c"
+                                                    variant="label-hidden"> </lightning-output-field>
+                                            </span>
+                                            <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                <lightning-icon icon-name="utility:edit"
+                                                  alternative-text="edit"
+                                                  variant="base"
+                                                  size="xx-small"
+                                                  class="pencil-icon" ></lightning-icon>
+                                               <span class="slds-assistive-text">Edit</span>
+                                           </button>
+                                        </template>
+                                        <template if:true={editable}>
+                                            <lightning-input-field field-name="Estimated_Value__c"
+                                                variant="label-hidden"> </lightning-input-field>
+                                        </template>
+                                    </div>
+                                </div>
+                        </div>
+                        <template if:true={isRefinance}>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                                        <div
+                                            class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div
+                                                class="slds-form-element_edit slds-grow override--slds-form-element">
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Purchased Year</span>
+                                                </div>
+                                                <div class="slds-form-element__control">
+                                                    <template if:false={editable}>
+                                                        <span
+                                                            class="test-id__field-value slds-form-element__static slds-grow ">
+                                                            <lightning-output-field field-name="PurchasedYearText__c"
+                                                                variant="label-hidden"> </lightning-output-field>
+                                                        </span>
+                                                        <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                            <lightning-icon icon-name="utility:edit"
+                                                              alternative-text="edit"
+                                                              variant="base"
+                                                              size="xx-small"
+                                                              class="pencil-icon" ></lightning-icon>
+                                                           <span class="slds-assistive-text">Edit</span>
+                                                       </button>
+                                                    </template>
+                                                    <template if:true={editable}>
+                                                        <lightning-input-field field-name="PurchasedYearText__c"
+                                                            variant="label-hidden"> </lightning-input-field>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </template>
+                        <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                    <div class="slds-text-title_bold labelSize">
+                                        <span>TBD</span>
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <template if:false={editable}>
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <lightning-output-field field-name="TBD__c" variant="label-hidden">
+                                                </lightning-output-field>
+                                            </span>
+                                            <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                <lightning-icon icon-name="utility:edit"
+                                                  alternative-text="edit"
+                                                  variant="base"
+                                                  size="xx-small"
+                                                  class="pencil-icon" ></lightning-icon>
+                                               <span class="slds-assistive-text">Edit</span>
+                                           </button>
+                                        </template>
+                                        <template if:true={editable}>
+                                            <lightning-input-field field-name="TBD__c" variant="label-hidden">
+                                            </lightning-input-field>
+                                        </template>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-id="wrappercollapsed" class="slds-col slds-size_1-of-4 slds-grid slds-wrap">
+            <!--Declarations Section-->
+            <div data-id="collapsed1" class="slds-col slds-size_1-of-1 slds-p-around_x-small">
+                <div
+                    style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                    <h3 class="slds-section__title">
+                        <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                            <strong>Declarations</strong>
+                        </div>
+                    </h3>
+                    <div class="slds-grid slds-wrap slds-p-around_x-small">
+                        <template for:each={declarationsFields} for:item='declarationsField'>
+                            <div key={declarationsField.fieldname} class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>{declarationsField.label}</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name={declarationsField.fieldname} variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name={declarationsField.fieldname} variant="label-hidden">
+                                                </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <!--Source-->
+            <div data-id="collapsed3" class="slds-col slds-size_1-of-1 slds-p-around_x-small">
+                <div
+                    style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                    <h3 class="slds-section__title">
+                        <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                            <strong>Source</strong>
+                        </div>
+                    </h3>
+                    <div class="slds-grid slds-wrap slds-p-around_x-small">
+                        <template for:each={sourceFields} for:item='sourceField'>
+                            <div key={sourceField.fieldname} class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>{sourceField.label}</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name={sourceField.fieldname} variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name={sourceField.fieldname} variant="label-hidden">
+                                                </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <!--Misc Section-->
+            <div data-id="collapsed2" class="slds-col slds-size_1-of-1 slds-p-around_x-small">
+                <div
+                    style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                    <h3 class="slds-section__title">
+                        <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                            <strong>Misc</strong>
+                        </div>
+                    </h3>
+
+                    <div class="slds-grid slds-wrap slds-p-around_x-small">
+                        <template for:each={miscFields} for:item='miscField'>
+                            <div key={miscField.fieldname} class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <div class="slds-form-element_edit slds-grow override--slds-form-element">
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>{miscField.label}</span>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <template if:false={editable}>
+                                                <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                    <lightning-output-field field-name={miscField.fieldname} variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </span>
+                                                <button class="slds-button slds-button_icon" title="Edit" onclick={handleEditClick}>
+                                                    <lightning-icon icon-name="utility:edit"
+                                                      alternative-text="edit"
+                                                      variant="base"
+                                                      size="xx-small"
+                                                      class="pencil-icon" ></lightning-icon>
+                                                   <span class="slds-assistive-text">Edit</span>
+                                               </button>
+                                            </template>
+                                            <template if:true={editable}>
+                                                <lightning-input-field field-name={miscField.fieldname} variant="label-hidden">
+                                                </lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </lightning-record-edit-form>
+</template>

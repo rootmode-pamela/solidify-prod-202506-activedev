@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Zillow_Value</fullName>
+    <availability>online</availability>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Zillow Value</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <url>https://www.zillow.com/homes/1_ah/{!Lead.Street},-{!Lead.City},-{!Lead.State}-{!Lead.PostalCode}_rb/?fromHomePage=true&amp;shouldFireSellPageImplicitClaimGA=false&amp;fromHomePageTab=zestimate&amp;view=owner</url>
+</WebLink>

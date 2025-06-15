@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prospective_LOs</fullName>
+    <columns>FULL_NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CONTACT.TITLE</columns>
+    <columns>CONTACT.EMAIL</columns>
+    <columns>Email_2__c</columns>
+    <columns>CONTACT.PHONE3</columns>
+    <columns>Home_Phone__c</columns>
+    <columns>Days_Since_Last_Activity__c</columns>
+    <columns>CORE.USERS.FIRST_NAME</columns>
+    <columns>Type__c</columns>
+    <columns>CONTACT.CREATED_DATE</columns>
+    <columns>Prospective_LO_Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Type__c</field>
+        <operation>includes</operation>
+        <value>Prospective LO</value>
+    </filters>
+    <label>Prospective LOs</label>
+    <sharedTo>
+        <group>Team_Broderick</group>
+    </sharedTo>
+</ListView>

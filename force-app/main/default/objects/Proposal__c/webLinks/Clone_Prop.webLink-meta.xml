@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Clone_Prop</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Clone Prop</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var evt = $A.get(&quot;e.force:navigateToURL&quot;);
+        evt.setParams({
+            &quot;url&quot; : &quot;/lightning/n/Rate_Analysis_Clone&quot;
+        });
+        
+        evt.fire();</url>
+</WebLink>

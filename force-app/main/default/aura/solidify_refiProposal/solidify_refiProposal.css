@@ -1,0 +1,20 @@
+.THIS form {
+    max-width: 800px;
+    font-size: .9rem;
+}
+
+.THIS .slds-form-element__label{
+    font-size: .9rem !important;
+}
+
+.THIS .slds-form-element__static{
+    font-size: .9rem !important;
+}
+
+.THIS p.slds-align_absolute-center{	
+    font-size: .9rem !important;
+}
+
+.THIS h1{
+    font-size: 1rem !important;
+}

@@ -1,0 +1,17 @@
+<aura:component access="global" Implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="openPopup" type="Boolean" default="false"/>
+    <aura:attribute name="isSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="isDisplayPopup" type="Boolean" default="false"/>
+
+    <lightning:quickActionAPI aura:id="quickActionAPI" />
+    
+    <button class="slds-align_absolute-center slds-button slds-button_brand" style="width:100% !important;" onclick="{!c.openNewLeadButton}">
+        New Lead
+    </button>
+
+    <aura:if isTrue="{!v.isDisplayPopup}"> 
+        <c:solidifyNewLeadOverride />
+    </aura:if>
+
+</aura:component>

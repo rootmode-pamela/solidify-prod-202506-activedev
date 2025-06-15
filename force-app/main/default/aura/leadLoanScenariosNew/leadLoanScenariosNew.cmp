@@ -1,0 +1,124 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="Lead" type="Object" />
+    <aura:attribute name="recordError" type="String" />
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+     
+    <lightning:recordEditForm aura:id="leadLoanScenarioForm" recordId="{!v.recordId}" objectApiName="Lead" density="compact"
+                               onload="{!c.handleLoad}"
+                              onsuccess="{!c.handleSuccess}"
+                             >
+        <lightning:messages />
+		<aura:if isTrue="{!not(empty(v.recordError))}">
+        	<div class="recordError">
+            	{!v.recordError}</div>
+    	</aura:if>
+        
+    <lightning:card>
+    	<div class="slds-grid slds-size_1-of-1">
+        	<div class="slds-col slds-box slds-m-right_xx-small slds-size_1-of-4">
+            	<h1 class="title" >CURRENT LOAN</h1>
+                	<div class="slds-grid slds-size_1-of-1">
+                        <div class="slds-col slds-size_1-of-1">
+                  			<lightning:inputField class="slds-size_1-of-1" fieldName="Occupancy__c" onchange="{!c.handleSaveRecord}" variant="label-stacked" />
+                            <lightning:inputField class="slds-size_1-of-1" fieldName="Subject_Property_Type__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                            <lightning:inputField class="slds-size_1-of-1" fieldName="Number_of_Units__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                            <lightning:inputField class="slds-size_1-of-1" fieldName="Estimated_Value__c" onchange="{!c.handleSaveRecord}" variant="label-stacked" />
+                            <lightning:inputField class="slds-size_1-of-1" fieldName="Current_Program__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                            <lightning:inputField class="slds-size_1-of-1" fieldName="Current_Balance__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                            <lightning:inputField class="slds-size_1-of-1" fieldName="Current_Rate__c" onchange="{!c.handleSaveRecord}" variant="label-stacked" />
+                            <lightning:inputField class="slds-size_1-of-1" fieldName="Current_Payment__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                            <lightning:inputField class="slds-size_1-of-1" fieldName="Years_Remaining_on_Current_Loan__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-box slds-size_1-of-4 slds-m-right_xx-small">
+                    <div>
+                             <h1 class="title">SCENARIO 1</h1> 
+                    </div>
+                        <div class="slds-grid slds-size_1-of-1">
+                            <div class="slds-col slds-size_5-of-12 slds-p-right_xx-small">
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Purpose__c" variant="label-stacked" />
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Loan_Program__c" variant="label-stacked"/>
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Term_Due__c" variant="label-stacked"/>
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="First_Loan_Amount_Scenario_1__c" variant="label-stacked"/>
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Rate_Scenario_1__c" variant="label-stacked"/>
+								<lightning:inputField class="slds-size_1-of-1"  readonly="true" variant="label-stacked" fieldName="LTV_Scenario_1__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="CLTV_Scenario_1__c" />                                 
+                            </div>
+                            <div class="slds-col slds-size_7-of-12 slds-p-bottom_small slds-float_right">
+                            <br></br>
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked"   fieldName="Monthly_Payment__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="Monthly_Payment_Savings__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="Daily_Interest_Savings__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="On_Pace_Payment_Scenario_1__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="On_Pace_Savings_Scenario_1__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked"  fieldName="Maturity_Reduction_Scenario_1__c"/>
+                                <lightning:inputField class="slds-size_1-of-1"  readonly="true" variant="label-stacked" fieldName="Lifetime_Savings_Scenario_1__c" />
+
+                            </div>
+                    </div>
+                </div>
+                
+             <div class="slds-col slds-box slds-size_1-of-4 slds-m-right_xx-small">
+                    <div>
+                             <h1 class="title">SCENARIO 2</h1> 
+                    </div>
+                        <div class="slds-grid slds-size_1-of-1">
+                            <div class="slds-col slds-size_5-of-12 slds-p-right_xx-small">
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Purpose_Scenario_2__c" variant="label-stacked" />
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Loan_Program_Scenario_2__c" variant="label-stacked"/>
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Term_Due_Scenario_2__c" variant="label-stacked"/>
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="First_Loan_Amount_Scenario_2__c" variant="label-stacked"/>
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Rate_Scenario_2__c" variant="label-stacked"/>
+								<lightning:inputField class="slds-size_1-of-1"  readonly="true" variant="label-stacked" fieldName="LTV_Scenario_2__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="CLTV_Scenario_2__c" />            
+                            </div>
+                            <div class="slds-col slds-size_7-of-12 slds-p-bottom_small slds-float_right">
+                            <br></br>
+                                <lightning:inputField class="slds-size_1-of-1 " readonly="true" variant="label-stacked"   fieldName="Monthly_Payment_Scenario_2__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="Monthly_Payment_Savings_Scenario_2__c" />
+                                <lightning:inputField class="slds-size_1-of-1 " readonly="true" variant="label-stacked" fieldName="Daily_Interest_Savings_Scenario_2__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="On_Pace_Payment_Scenario_2__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="On_Pace_Savings_Scenario_2__c" />
+                                <lightning:inputField class="slds-size_1-of-1 " readonly="true" variant="label-stacked"  fieldName="Maturity_Reduction_Scenario_2__c"/>
+                                <lightning:inputField class="slds-size_1-of-1"  readonly="true" variant="label-stacked" fieldName="Lifetime_Savings_Scenario_2__c" />
+
+                            </div>
+                    </div>
+                </div>
+            
+             <div class="slds-col slds-box slds-size_1-of-4 slds-m-right_xx-small">
+                    <div>
+                             <h1 class="title">SCENARIO 3</h1> 
+                    </div>
+                        <div class="slds-grid slds-size_1-of-1">
+                            <div class="slds-col slds-size_5-of-12 slds-p-right_xx-small">
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Purpose_Scenario_3__c" variant="label-stacked" />
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Loan_Program_Scenario_3__c" variant="label-stacked"/>
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Term_Due_Scenario_3__c" variant="label-stacked"/>
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="First_Loan_Amount_Scenario_3__c" variant="label-stacked"/>
+                                <lightning:inputField class="slds-size_1-of-1" onchange="{!c.handleSaveRecord}" fieldName="Rate_Scenario_3__c" variant="label-stacked"/>
+								<lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="LTV_Scenario_3__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="CLTV_Scenario_3__c" />                                 
+                            </div>
+                            <div class="slds-col slds-size_7-of-12 slds-p-bottom_small slds-float_right">
+                            <br></br>
+
+                                <lightning:inputField class="slds-size_1-of-1 " readonly="true" variant="label-stacked"   fieldName="Monthly_Payment_Scenario_3__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="Monthly_Payment_Savings_Scenario_3__c" />
+                                <lightning:inputField class="slds-size_1-of-1 " readonly="true" variant="label-stacked" fieldName="Daily_Interest_Savings_Scenario_3__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="On_Pace_Payment_Scenario_3__c" />
+                                <lightning:inputField class="slds-size_1-of-1" readonly="true" variant="label-stacked" fieldName="On_Pace_Savings_Scenario_3__c" />
+                                <lightning:inputField class="slds-size_1-of-1 " readonly="true" variant="label-stacked"  fieldName="Maturity_Reduction_Scenario_3__c"/>
+                                <lightning:inputField class="slds-size_1-of-1"  readonly="true" variant="label-stacked" fieldName="Lifetime_Savings_Scenario_3__c" />
+
+                            </div>
+                    </div>
+                </div>               
+            </div>
+        </lightning:card>
+    </lightning:recordEditForm>
+</aura:component>

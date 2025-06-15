@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Self_Reported_Credit__c</fullName>
+    <label>Credit Self Rating</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Excellent  (720+)</fullName>
+                <default>false</default>
+                <label>Excellent  (720+)</label>
+            </value>
+            <value>
+                <fullName>Good  (680-719)</fullName>
+                <default>false</default>
+                <label>Good  (680-719)</label>
+            </value>
+            <value>
+                <fullName>Average (640-679)</fullName>
+                <default>false</default>
+                <label>Average (640-679)</label>
+            </value>
+            <value>
+                <fullName>Fair (580-639)</fullName>
+                <default>false</default>
+                <label>Fair (580-639)</label>
+            </value>
+            <value>
+                <fullName>Poor (579 and below)</fullName>
+                <default>false</default>
+                <label>Poor (579 and below)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

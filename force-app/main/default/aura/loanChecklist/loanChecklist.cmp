@@ -1,0 +1,152 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="Opportunity" type="Object" />
+    <aura:attribute name="recordError" type="String" />
+    <aura:attribute name="condo" type="Boolean" default="false"/>
+    <force:recordData aura:id="loanRecord"
+                      mode="EDIT"
+                      recordId="{!v.recordId}"
+                      targetFields="{!v.Opportunity}"
+                      targetError="{!v.recordError}"
+                      fields="Id,Appraisal_Ordered__c,Appraisal_Received__c,Appraisal_Required__c,Title_Report_Ordered__c,Title_Report_Received__c,Title_Required__c,
+                              Payoff_Ordered__c,Payoff_Received__c,Payoff_Required__c,X2nd_Payoff_Ordered__c,X2nd_Payoff_Received__c,X2nd_Payoff_Required__c,
+                              Credit_Supplement_Ordered__c,Credit_Supplement_Received__c,Credit_Supplement_Required__c,Evidence_of_Insurance_Ordered__c,
+                              Evidence_of_Insurance_Received__c,Evidence_of_Insurance_Required__c,Subordination_Ordered__c,Subordination_Received__c,Subordination_Required__c,
+                              VOE_Ordered__c,VOE_Received__c,VOE_Required__c,Loan_Estimate_Ordered_Date__c,Closing_Disclosure_Ordered_Date__c,
+                              Condo__c,HOA_Docs_Required__c,HOA_Docs_Ordered__c,HOA_Docs_Received__c"
+                      recordUpdated="{!c.recordUpdate}"
+                      />
+    
+    
+    
+    <lightning:recordEditForm aura:id="loanDetailForm" recordId="{!v.recordId}" objectApiName="Opportunity" recordtypeid="012f4000000HmNxAAK" onload="{!c.handleOnLoad}">
+        <lightning:messages />
+        <aura:if isTrue="{!not(empty(v.recordError))}">
+            <div class="recordError">
+                {!v.recordError}</div>
+        </aura:if>
+        <lightning:inputField fieldName = "Condo__c" disabled="true" aura:id="condo" class="slds-hide"/>
+        <div class="slds-grid slds-size_1-of-1">
+            <div class="slds-col slds-size_3-of-5 slds-p-around_small">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                        <tr >
+                            <th align="center" scope="col">Document Name</th>
+                            <th align="center" class="slds-p-left_small" scope="col">Required?</th>
+                            <th align="center" scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered Date</th>
+                            <th align="center" scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Received Date</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">Appraisal</th>
+                            <td><lightning:inputField class="slds-align_absolute-center" fieldName="Appraisal_Required__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                            <th scope="row"><lightning:inputField fieldName="Appraisal_Ordered__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th> 
+                            <td><lightning:inputField fieldName="Appraisal_Received__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                            
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th align="center"  scope="row">Title/Escrow</th>
+                            <td><lightning:inputField class="slds-align_absolute-center" fieldName="Title_Required__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>  
+                            <th scope="row"><lightning:inputField fieldName="Title_Report_Ordered__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th> 
+                            <td><lightning:inputField fieldName="Title_Report_Received__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">Payoff</th>
+                            <td><lightning:inputField class="slds-align_absolute-center" fieldName="Payoff_Required__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>  
+                            <th scope="row"><lightning:inputField fieldName="Payoff_Ordered__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th> 
+                            <td><lightning:inputField fieldName="Payoff_Received__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">2nd Payoff</th> 
+                            <td><lightning:inputField class="slds-align_absolute-center" fieldName="X2nd_Payoff_Required__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>  
+                            <th scope="row"><lightning:inputField fieldName="X2nd_Payoff_Ordered__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th> 
+                            <td><lightning:inputField fieldName="X2nd_Payoff_Received__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">Credit Supplement</th> 
+                            <td><lightning:inputField class="slds-align_absolute-center" fieldName="Credit_Supplement_Required__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>  
+                            <th scope="row"><lightning:inputField fieldName="Credit_Supplement_Ordered__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th> 
+                            <td><lightning:inputField fieldName="Credit_Supplement_Received__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">Evidence of Insurance</th>  
+                            <td><lightning:inputField class="slds-align_absolute-center" fieldName="Evidence_of_Insurance_Required__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>  
+                            <th scope="row"><lightning:inputField fieldName="Evidence_of_Insurance_Ordered__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th> 
+                            <td><lightning:inputField fieldName="Evidence_of_Insurance_Received__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                        </tr>
+                        <aura:if isTrue="{!v.condo}">
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">HOA Docs</th>  
+                            <td><lightning:inputField class="slds-align_absolute-center" fieldName="HOA_Docs_Required__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>  
+                            <th scope="row"><lightning:inputField fieldName="HOA_Docs_Ordered__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th> 
+                            <td><lightning:inputField fieldName="HOA_Docs_Received__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                        </tr>
+                            </aura:if>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">Subordination</th>  
+                            <td><lightning:inputField class="slds-align_absolute-center" fieldName="Subordination_Required__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>  
+                            <th scope="row"><lightning:inputField fieldName="Subordination_Ordered__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th> 
+                            <td><lightning:inputField fieldName="Subordination_Received__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">VOE</th>  
+                            <td><lightning:inputField class="slds-align_absolute-center" fieldName="VOE_Required__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>  
+                            <th scope="row"><lightning:inputField fieldName="VOE_Ordered__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th> 
+                            <td><lightning:inputField fieldName="VOE_Received__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                        </tr>
+                    </tbody>
+                </table>                                                                              
+            </div>
+            <div class="slds-col slds-size_2-of-5 slds-p-around_small">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="col">Document Name</th>
+                            <th align="center" scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Ordered Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">Loan Estimate</th>
+                            <th scope="row"><lightning:inputField fieldName="Loan_Estimate_Ordered_Date__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">Closing Disclosure</th>
+                            <th scope="row"><lightning:inputField  fieldName="Closing_Disclosure_Ordered_Date__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+                
+                <!-- start -->
+                <br/>
+                
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                        <tr >
+                            <th align="center" scope="col">Item</th>
+                            <th align="center" class="slds-p-left_small" scope="col">Required?</th>
+                            <th align="center" scope="col">&nbsp;&nbsp;&nbsp;Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="slds-hint-parent">
+                            <th align="center" scope="row">Send Gift</th>
+                            <td><lightning:inputField class="slds-align_absolute-center" fieldName="Send_Gift_Required__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></td>
+                            <th scope="row"><lightning:inputField class="slds-align_absolute-center" fieldName="Send_Gift__c" variant="label-hidden" onchange="{!c.handleSaveRecord}"/></th> 
+                        </tr>
+                        
+                    </tbody>
+                </table>           
+                
+                <!-- end -->
+                
+            </div>
+            
+            
+            
+        </div>
+    </lightning:recordEditForm>
+</aura:component>

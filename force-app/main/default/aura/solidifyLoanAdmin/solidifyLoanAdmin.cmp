@@ -1,0 +1,171 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+	<aura:attribute name="editMode" type="Boolean" default="false" />
+    <aura:attribute name="sourceRecord" type="Object" />
+    <aura:attribute name="sourceRecordFields" type="Object" />
+    <aura:attribute name="error" type="String" />
+    <force:recordData aura:id="loanRecord"
+                  recordId="{!v.recordId}"
+                  targetFields="{!v.Opportunity}"
+                  fields="Id, OwnerId, Current_Schedule_Balance__c, CreatedById, CreatedDate, Probability, Last_Completed_Activity__c, Future_Activities__c, 
+                          LastModifiedById, LastModifiedDate, Last_Point_Update__c,Days_Closed__c, Years_Closed__c,
+                          Origination_Points__c, Lender_Paid_Comp__c, Brokerage_Charges__c, Total_Commission_Paid__c,
+                          Fee1__c, Fee1_Amount__c, Fee2__c, Fee2_Amount__c, Fee3__c, Fee3_Amount__c, Fee4__c, Fee4_Amount__c,
+                          Fee5__c, Fee5_Amount__c, Net_Profit__c, Point_Filename__c, Point_Folder__c, Grade__c, Rating__c,
+                          Encompass_Action_Taken__c, Action_Taken_Date__c"
+                  recordUpdated="{!c.recordUpdate}"
+                      />
+    
+    
+    
+    <lightning:recordEditForm aura:id="adminEditForm" recordId="{!v.recordId}" objectApiName="Opportunity" recordtypeid="012f4000000HmNxAAK" onsuccess="{!c.handleSuccess}">
+        <lightning:messages />
+        
+        
+        
+        
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col  slds-size_1-of-2">
+                
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Profit-Loss"><b>Profit/Loss Detail</b></span>
+                    </h3>
+                    <div class="slds-p-left_small">
+                        <lightning:outputField fieldName="Borrower_Paid_Comp__c" />
+                        <lightning:outputField fieldName="Lender_Paid_Comp__c" />
+                        <lightning:outputField fieldName="Total_Broker_Comp__c" />
+                        <lightning:outputField fieldName="Brokerage_Charges__c" />
+                        <lightning:outputField fieldName="Total_Commission_Paid__c" />
+                        
+                        <table class="slds-table slds-table_bordered slds-table-striped slds-table_cell-buffer">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Fee"><b>Fee</b></div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate slds-text-align--right" title="Amount"><b>Amount</b></div>
+                                    </th>              
+                                </tr>
+                            </thead> 
+                            <tbody>
+                                <tr>
+                                    <th scope="row" data-label="Fee">
+                                        <div class="slds-truncate" title="Fee1"><lightning:outputField fieldName="Fee1__c" variant="label-hidden"/> </div>
+                                    </th> 
+                                    <td data-label="Amount">
+                                        <div class="slds-truncate slds-text0align--right" title="Fee1 Amount"> <lightning:outputField fieldName="Fee1_Amount__c" variant="label-hidden"/> </div>
+                                    </td>            
+                                </tr>
+                                <tr>
+                                    <th scope="row" data-label="Fee">
+                                        <div class="slds-truncate" title="Fee2"><lightning:outputField fieldName="Fee2__c" variant="label-hidden"/> </div>
+                                    </th> 
+                                    <td data-label="Amount">
+                                        <div class="slds-truncate slds-text0align--right" title="Fee2 Amount"> <lightning:outputField fieldName="Fee2_Amount__c" variant="label-hidden"/> </div>
+                                    </td>            
+                                </tr>
+                                <tr>
+                                    <th scope="row" data-label="Fee">
+                                        <div class="slds-truncate" title="Fee3"><lightning:outputField fieldName="Fee3__c" variant="label-hidden"/> </div>
+                                    </th> 
+                                    <td data-label="Amount">
+                                        <div class="slds-truncate slds-text0align--right" title="Fee3 Amount"> <lightning:outputField fieldName="Fee3_Amount__c" variant="label-hidden"/> </div>
+                                    </td>            
+                                </tr>
+                                <tr>
+                                    <th scope="row" data-label="Fee">
+                                        <div class="slds-truncate" title="Fee4"><lightning:outputField fieldName="Fee4__c" variant="label-hidden"/> </div>
+                                    </th> 
+                                    <td data-label="Amount">
+                                        <div class="slds-truncate slds-text0align--right" title="Fee4 Amount"> <lightning:outputField fieldName="Fee4_Amount__c" variant="label-hidden"/> </div>
+                                    </td>            
+                                </tr>
+                                <tr>
+                                    <th scope="row" data-label="Fee">
+                                        <div class="slds-truncate" title="Fee5"><lightning:outputField fieldName="Fee5__c" variant="label-hidden"/> </div>
+                                    </th> 
+                                    <td data-label="Amount">
+                                        <div class="slds-truncate slds-text0align--right" title="Fee5 Amount"> <lightning:outputField fieldName="Fee5_Amount__c" variant="label-hidden"/> </div>
+                                    </td>            
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <lightning:outputField fieldName="Net_Profit__c" />
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            <br></br>
+            
+            <div class="slds-col slds-size_1-of-2">
+                 <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:inputField fieldName="Override_Stage_Change__c"/></div>
+                <div class="slds-col slds-size_1-of-2">
+                <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update" />
+                </div>
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Misc"><b>Closed Loan Data</b></span>
+                    </h3>
+                    <div class="slds-p-left_small">                
+                        <lightning:outputField fieldName="Closed_Date__c"/>
+                        <lightning:outputField fieldName="Days_Closed__c" />                        
+                        <lightning:outputField fieldName="EPO_Expiration_Date__c" />                        
+                        <lightning:outputField fieldName="First_Payment__c"/>
+                        <lightning:outputField fieldName="Lender__c" />
+                        <lightning:outputField fieldName="Loan_Program__c" />  
+                        <lightning:outputField fieldName="Loan_Amount__c" /> 
+                        <lightning:outputField fieldName="Interest_Rate__c" />
+                        <lightning:outputField fieldName="Payment_Amount__c" />
+                        <lightning:outputField fieldName="Current_Schedule_Balance__c" />
+                        <lightning:outputField fieldName="Day_181__c" />                        
+                        <lightning:outputField fieldName="VA_Close_Date_210__c" />                        
+                        <lightning:outputField fieldName="HMDA_Action__c"/>
+                        <lightning:outputField fieldName="HMDA_Action_Date__c"/>                        
+                        
+                          
+                    </div>   	
+                </div>
+            </div>          
+        </div>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col  slds-size_2-of-2">
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade">
+                        <span class="slds-truncate slds-p-horizontal_small" title="System"><b>System Information</b></span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col  slds-size_1-of-3">
+                <lightning:outputField fieldName="OwnerId" />
+                <lightning:outputField fieldName="Point_Filename__c"/>
+                <lightning:outputField fieldName="Point_Folder__c"/>
+                <lightning:outputField fieldName="Last_Point_Update__c" />
+                
+            </div>
+            <div class="slds-col  slds-size_1-of-3">
+                <lightning:outputField fieldName="Probability" /> 
+                <lightning:outputField fieldName="LastActivityDate" /> 
+                <lightning:outputField fieldName="Future_Activities__c" /> 
+                <lightning:outputField fieldName="Next_Deadline__c"/>
+            </div>
+            <div class="slds-col  slds-size_1-of-3">
+                <lightning:outputField fieldName="CreatedById" />
+                <lightning:outputField fieldName="CreatedDate" />
+                <lightning:outputField fieldName="LastModifiedById" />
+                <lightning:outputField fieldName="LastModifiedDate" />
+            </div>
+            
+            
+        </div>
+        
+    </lightning:recordEditForm>
+</aura:component>

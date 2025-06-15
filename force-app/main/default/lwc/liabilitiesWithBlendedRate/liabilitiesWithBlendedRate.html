@@ -1,0 +1,117 @@
+<template>
+    <div if:true={isLoading} style="height: 200px; position:relative">
+        <lightning-spinner variant="base" size="medium"></lightning-spinner>
+      </div>
+    <lightning-card
+        title="Liabilities with Blended Rate"
+        icon-name="custom:custom62"
+    >
+        <div class="slds-var-m-around_medium">
+            <template lwc:if={liabilities}>
+                <c-custom-datatable
+                    key-field="Id"
+                    data={liabilities}
+                    columns={columns}
+                    onsave={handleSave}
+                    draft-values={draftValues}
+                    hide-checkbox-column=true
+                    onrowaction={handleRowAction}
+                >
+            </c-custom-datatable>
+            
+            <div class="slds-var-m-around_medium">
+                <lightning-layout class="slds-var-m-vertical_x-small">
+                    <lightning-layout-item class="slds-size_1-of-3">
+                        <div  class="slds-text-heading_small">
+                        Blended Rate:     {blendedRate} %
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-size_1-of-3">
+                        <div  class="slds-text-heading_small">
+                        Payment Total:     ${totalPayment}
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-size_1-of-3">
+                        <lightning-button label="New Liability" onclick={handleShowPopup}></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+
+            </template>
+        <!--    <template lwc:elseif={liabilities.error}>
+                <c-error-panel errors={liabilities.error}></c-error-panel>
+            </template>  -->
+        </div>
+    </lightning-card>
+
+    <template if:true={showPopup}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open"> 
+        <div class="slds-modal__container">
+        <header class="slds-modal__header">New Liability</header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <lightning-card title="Create New Liability Record" icon-name="standard:record">
+                <div class="slds-var-m-around_medium">
+                    <div if:true={errors} class="slds-notify slds-notify_alert slds-alert_error">
+                        {errors}
+                      </div>
+                      <lightning-record-edit-form
+                        object-api-name="Asset__c"
+                        columns="2"
+                        onsuccess={closePopupSuccess}>
+                        
+                            <lightning-input-field field-name="Name" required></lightning-input-field>
+                            <lightning-input-field field-name="Amount__c" required></lightning-input-field>
+                            <lightning-input-field field-name="Type__c"></lightning-input-field>
+                            <lightning-layout>
+                                <lightning-layout-item size="6">
+                                    <lightning-input-field field-name="Payment__c"></lightning-input-field>
+                                </lightning-layout-item>
+
+                            <lightning-layout-item size="6">                                                            
+                                <lightning-input-field field-name="Planned_Payment__c"></lightning-input-field>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <lightning-input-field field-name="Interest_Rate__c"></lightning-input-field>
+                            <lightning-layout>
+                                <lightning-layout-item size="6">
+                        <lightning-input-field field-name="Loan__c" value={recordId} disabled="true" hidden></lightning-input-field>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6">
+                        <lightning-input-field hidden field-name="AssetOrLiability__c" value="Liability" disabled="true"></lightning-input-field>
+                    </lightning-layout-item>    
+                    </lightning-layout>
+                    <lightning-layout>
+                        
+               
+                <lightning-layout-item size = 4>
+                <lightning-button
+                class="slds-m-top_small"
+                type="submit"
+                onclick={handleCancel}
+                label="Cancel"
+            ></lightning-button></lightning-layout-item>
+            <lightning-layout-item size = 4 ></lightning-layout-item>
+
+                        <lightning-layout-item size = 4 style="text-align: right;">
+                            <div class="">
+                        <lightning-button
+                        class="slds-m-top_small"
+                        type="submit"
+                        onclick={handleSubmit}
+                        label="Create new"
+                    ></lightning-button></div>
+                </lightning-layout-item>
+            </lightning-layout>
+                    </lightning-record-edit-form>
+                    
+                </div>
+            </lightning-card>
+        </div> 
+        </div>
+        </section>
+    </template>
+
+
+
+
+</template>

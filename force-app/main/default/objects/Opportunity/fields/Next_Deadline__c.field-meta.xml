@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Next_Deadline__c</fullName>
+    <formula>IF(
+    AND(
+        ISBLANK( COE__c ),
+        ISBLANK( Lock_Expiration__c ),
+        ISBLANK( LE_Acknowledged_By__c ),
+        ISBLANK( Approval_Expected__c ),
+        ISBLANK( Final_Conditions_In_By__c ),
+        ISBLANK( CD_Out_By__c ),
+        ISBLANK( Appraisal_Contingency__c ),
+        ISBLANK( Loan_Contingency__c ),
+        ISBLANK( Sign_Final_Docs_By__c ),
+        ISBLANK( Rush_Requested__c ),
+        ISBLANK( Hold_Until__c )
+    ),
+    DATE(2199, 01, 01),
+    DATE(2199, 01, 01) +
+    MIN(
+        IF(
+            ISBLANK(COE__c) || COE__c &lt; TODAY(),
+            DATE(2199, 01, 01),
+            COE__c
+        ) - DATE(2199, 01, 01),
+        IF(
+            ISBLANK(Lock_Expiration__c) || Lock_Expiration__c &lt; TODAY(),
+            DATE(2199, 01, 01),
+            Lock_Expiration__c
+        ) - DATE(2199, 01, 01),
+        IF(
+            ISBLANK(LE_Acknowledged_By__c) || LE_Acknowledged_By__c &lt; TODAY(),
+            DATE(2199, 01, 01),
+            LE_Acknowledged_By__c
+        ) - DATE(2199, 01, 01),       
+         IF(
+            ISBLANK(Approval_Expected__c) || Approval_Expected__c &lt; TODAY(),
+            DATE(2199, 01, 01),
+            Approval_Expected__c
+        ) - DATE(2199, 01, 01),       
+        IF(
+            ISBLANK(Final_Conditions_In_By__c) || Final_Conditions_In_By__c &lt; TODAY(),
+            DATE(2199, 01, 01),
+            Final_Conditions_In_By__c
+        ) - DATE(2199, 01, 01),
+        IF(
+            ISBLANK(CD_Out_By__c) || CD_Out_By__c &lt; TODAY(),
+            DATE(2199, 01, 01),
+            CD_Out_By__c
+        ) - DATE(2199, 01, 01),
+        IF(
+            ISBLANK(Appraisal_Contingency__c) || Appraisal_Contingency__c &lt; TODAY(),
+            DATE(2199, 01, 01),
+            Appraisal_Contingency__c
+        ) - DATE(2199, 01, 01),
+        IF(
+            ISBLANK(Loan_Contingency__c) || Loan_Contingency__c &lt; TODAY(),
+            DATE(2199, 01, 01),
+            Loan_Contingency__c
+        ) - DATE(2199, 01, 01),
+        IF(
+            ISBLANK(Sign_Final_Docs_By__c) || Sign_Final_Docs_By__c &lt; TODAY(),
+            DATE(2199, 01, 01),
+            Sign_Final_Docs_By__c
+        ) - DATE(2199, 01, 01),
+        IF(
+            ISBLANK(Rush_Requested__c) || Rush_Requested__c &lt; TODAY(),
+            DATE(2199, 01, 01),
+            Rush_Requested__c
+        ) - DATE(2199, 01, 01)
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Next Deadline</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

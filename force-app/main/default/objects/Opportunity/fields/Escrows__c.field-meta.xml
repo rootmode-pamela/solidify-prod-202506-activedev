@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Escrows__c</fullName>
+    <label>Escrows</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>None Waived</fullName>
+                <default>false</default>
+                <label>None Waived</label>
+            </value>
+            <value>
+                <fullName>None Waived - Same Servicer</fullName>
+                <default>false</default>
+                <label>None Waived - Same Servicer</label>
+            </value>
+            <value>
+                <fullName>All Waived</fullName>
+                <default>false</default>
+                <label>All Waived</label>
+            </value>
+            <value>
+                <fullName>See Mortgage Statement</fullName>
+                <default>false</default>
+                <label>See Mortgage Statement</label>
+            </value>
+            <value>
+                <fullName>Insurance Only</fullName>
+                <default>false</default>
+                <label>Insurance Only</label>
+            </value>
+            <value>
+                <fullName>Taxes Only</fullName>
+                <default>false</default>
+                <label>Taxes Only</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

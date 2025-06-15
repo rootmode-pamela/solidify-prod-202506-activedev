@@ -1,0 +1,55 @@
+<aura:component implements="lightning:homeTemplate" description="10|2 - Left Side Tray- Closed">
+    <!-- Page Sections -->
+    <aura:attribute name="header" type="Aura.Component[]" description="Full-width header." />
+    <aura:attribute name="left" type="Aura.Component[]" description="Left Section (Tray)" />
+    <aura:attribute name="middle" type="Aura.Component[]" description="Main Section" />
+    <!-- Foldable Section Controls -->
+    <aura:attribute name="isLeftOpen" type="Boolean" default="false" description="Open state of left section." />
+    <aura:attribute name="objName" type="String" description="Current Object Name." />
+    <!-- Component initialisation -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"
+        description="Template Initialisation (e.g. sections default fold states)." />
+    <!-- Utility Components -->
+    <c:PEG_Context_CMP aura:id="contextMgr" />
+    <lightning:workspaceAPI aura:id="workspaceAPI" />
+    <!-- Component Display -->
+    <div class="{! 'slds-container sub-container slds-size_12-of-12'}">
+        <!--            <ui:scrollerWrapper class="slds-scrollable_y">
+            -->
+        <div class="slds-p-right_xx-small slds-m-bottom_medium content-container">
+            {!v.header}
+        </div>
+        <!--            </ui:scrollerWrapper>
+    -->
+    </div>
+    <div class="slds-grid main-container scrollerSize">
+        <div class="{! 'slds-container sub-container slds-size_10-of-12 '
+                   + (v.isLeftOpen ? '': 'hiddenDiv')}">
+            <ui:scrollerWrapper class="slds-scrollable_y">
+                <div class="slds-p-right_xx-small slds-m-bottom_xx-small content-container">
+                    {!v.left}
+                </div>
+            </ui:scrollerWrapper>
+        </div>
+
+        <div class="{! 'slds-container sub-container slds-p-horizontal_medium '
+                     + (v.isLeftOpen ? 'slds-size_2-of-12' : 'slds-size_12-of-12')}">
+            <div class="slds-is-relative">
+                <div style="z-index: 10; position: absolute; top: 0em; left: -1.1em;"
+                    class="slds-theme_shade slds-border-right">
+                    <lightning:buttonStateful class="buttonSize slds-border_left slds-border_right" variant="text"
+                        state="{! v.isLeftOpen }" iconNameWhenOff="utility:chevronright"
+                        iconNameWhenOn="utility:chevronleft" onclick="{! c.handleOpenClose }" aura:id="isLeftOpen" />
+                </div>
+
+            </div>
+            <ui:scrollerWrapper class="slds-scrollable_y">
+                <div class="slds-p-horizontal_xx-small slds-m-bottom_xx-small content-container">
+                    {!v.middle}
+                </div>
+            </ui:scrollerWrapper>
+        </div>
+
+    </div>
+
+</aura:component>

@@ -1,0 +1,28 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
+
+    <aura:attribute name="recordId" type="String"/>
+
+    <lightning:recordEditForm
+            recordId="{!v.recordId}"
+            objectApiName="Opportunity"
+            onsuccess="{!c.handleSuccess}">
+
+        <lightning:messages/>
+        <lightning:layout>
+
+            <lightning:layoutItem class="slds-p-around">
+
+                <div class="slds-p-top_small">
+                    <c:fieldHistoryController aura:id="fieldHistoryComponent" fieldName="Processor_Note__c"
+                                              fieldLabel="Processor Updates" recordId="{!v.recordId}"/>
+                </div>
+                <label for="ProcessorNotes">Processor Updates</label>
+                <lightning:inputField aura:id="ProcessorNotes" fieldName="Processor_Note__c" variant="label-hidden"/>
+
+
+                <lightning:button class="slds-m-top_small" type="submit" label="Save Updates"/>
+            </lightning:layoutItem>
+
+        </lightning:layout>
+    </lightning:recordEditForm>
+</aura:component>

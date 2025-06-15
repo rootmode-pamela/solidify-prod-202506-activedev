@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PointsCredit5__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <formula>IF( !Override_Comp__c,
+((Adj_Price_5__c/100) * New_Loan_Amount__c) + Orig__c,
+If(Override_Min__c &gt; ((Adj_Price_5__c/100) * New_Loan_Amount__c) + Orig__c,
+Override_Min__c,
+If (Override_Max__c &lt; ((Adj_Price_5__c/100) * New_Loan_Amount__c) + Orig__c,
+Override_Max__c,
+((Adj_Price_5__c/100) * New_Loan_Amount__c) + Orig__c
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>RateAnalysis Points/Credits with Override</inlineHelpText>
+    <label>Points/Credit</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

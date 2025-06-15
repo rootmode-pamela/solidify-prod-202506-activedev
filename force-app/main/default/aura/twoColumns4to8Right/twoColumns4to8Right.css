@@ -1,0 +1,42 @@
+.THIS {
+    background-color: #ffffff;
+    text-size-adjust:small;
+}
+
+.THIS.scrollerSize {
+    height: calc(100vh - 405px);
+    /*height: calc(100vh - 145px);*/
+    /* 12rem  173px  185px*/
+    overflow:hidden;
+    z-index: 2;
+}
+.THIS .hiddenDiv {
+    display:none;
+}
+.THIS svg.slds-button__icon--stateful {
+    margin-right:0rem !important;
+    color: #ffffff;
+}
+.THIS svg.slds-button__icon_left {
+    margin-right:0rem !important;
+    color: #ffffff;
+}
+.THIS .buttonSize {
+    height: 100% !important;
+    background-color: #0A253E   ;
+    border-collapse: collapse;
+    border-color: #ffffff;
+    color: #ffffff;
+    padding-top:    calc(50vh - 6.5rem);
+    padding-bottom: calc(50vh - 6.5rem);
+    display:block;
+}
+
+.THIS .sub-container {
+    height: calc(100vh - 405px);
+    /*height: calc(100vh - 145px);*/
+    /*height: calc(100vh - 255px);*/
+}
+.THIS .content-container {
+    padding-bottom: 5px;
+}

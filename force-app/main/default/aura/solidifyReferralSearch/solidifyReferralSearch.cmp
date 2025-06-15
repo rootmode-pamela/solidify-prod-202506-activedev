@@ -1,0 +1,122 @@
+<aura:component implements="flexipage:availableForRecordHome,force:appHostable,forceCommunity:searchInterface" controller="solidifyReferralSearchController">
+    <aura:attribute name="Opportunity" type="Object" />
+    <aura:attribute name="searchContacts" type="Contact"/>
+    <aura:attribute name="recordError" type="String" />
+    <aura:attribute name="referrerName" type="String" />
+    <aura:attribute name="partnerType" type="String" default="Referred_By"/>
+    <aura:attribute name="searchText" type="String" default=""/>
+    <aura:attribute name="selectedLookUpRecord" type="sObject" default="{}"/>
+    <aura:attribute name="objContact" type="contact" default="{'sobjectType':'contact'}"/>
+    <aura:attribute name="queryString" type="String"/>
+  	<aura:attribute name="accountIds" type="String"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="allTime" type="Boolean" default="false"/>
+    
+ <!--   <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>  -->
+
+    <aura:attribute name="partnerTypeOptions" type="list" 
+                    default="[
+                    		{'label':'Referred By','value':'Opportunity.Account.Referred_By__c'},
+                            {'label':'Seller Agent','value':'Sellers_Agent__c'},
+                            {'label':'Buyer Agent','value':'Buyers_Agent__c'},
+                            {'label':'Any Real Estate Agent','value':'Real_Estate'},
+                            {'label':'Escrow Officer','value':'Escrow_Contact__c'},
+                            {'label':'Appraiser','value':'Appraiser_Contact__c'},
+                            {'label':'Lender AE','value':'Lender_AE__c'},
+                            {'label':'Any Role','value':'Any_Role'},
+                            ]"/>
+    <aura:attribute name="fromDate" type="Date"  />
+    <aura:attribute name="toDate" type="Date" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="cardTitle" type="String" default="Referral History"/>
+    
+     
+        <aura:if isTrue="{!v.showSpinner}">
+             <lightning:spinner alternativeText="Searching Records..." size="medium" />
+         </aura:if>
+         
+    <lightning:card>
+        <aura:set attribute="title">
+            <lightning:icon iconName="custom:custom68" size="medium"/>
+           <span class="slds-p-left__small">{! v.cardTitle }</span> 
+        </aura:set>
+        <aura:set attribute="actions">
+            <lightning:button label="Search" onclick="{!c.handleClick}"/>
+        </aura:set>
+
+        <div class="slds-grid">  
+            <div class="slds-col slds-size_3-of-12">
+                <div class=" slds-p-left_small">
+                <c:solidifyLookup objectAPIName="contact" IconName="standard:contact" label="Contact Name" selectedRecord="{!v.selectedLookUpRecord}"/>
+      
+
+                </div>
+            </div>
+           <div class="slds-col  slds-size_3-of-12">
+                <div class=" slds-p-left_small">
+                        <lightning:combobox  name="partnerType" label="Referring As" value="{!v.partnerType}" options="{!v.partnerTypeOptions}" />
+                </div>
+            </div>  
+            
+            <div class="slds-col  slds-size_2-of-12">
+                <div class=" slds-p-left_small">
+                    <lightning:input type="checkbox" name="allTime" label="Show All Loans" checked="{!v.allTime}" /> </div>
+            </div>
+            
+            <div class="slds-col  slds-size_2-of-12">
+                <div class=" slds-p-left_small">
+                    <lightning:input type="date" name="from" label="Loan Close Date From" value="{!v.fromDate}" disabled="{!v.allTime}" /> </div>
+            </div>
+            
+            
+            <div class="slds-col  slds-size_2-of-12">
+                     <div class=" slds-p-left_small"> 
+                    
+                    <lightning:input type="date" name="toDate" label="To" value="{!v.toDate}" disabled="{!v.allTime}"/>  
+            </div>
+            </div>
+        </div>
+
+        
+    </lightning:card>
+
+
+
+    <lightning:card  title="Pipeline">
+            <aura:set attribute="footer">
+            
+        </aura:set>
+    
+
+        
+       
+	       <c:solidifyDataTableGrid aura:id = "pipelineLoans"/>  
+ 
+    </lightning:card>
+    
+
+<!--       <aura:if isTrue="{!v.partnerType=='Referred_By__c'}">  -->
+           <lightning:card  title="Leads">
+            <aura:set attribute="footer">
+            
+        	</aura:set>
+
+	       <c:solidifyDataTableGrid aura:id = "openLeads"/>  
+       
+    </lightning:card>
+<!-- </aura:if>    -->   
+    
+
+
+       <lightning:card  title='Closed Loans'>
+            
+        
+	       <c:solidifyDataTableGrid aura:id='closedLoans' />  
+     
+ 
+    </lightning:card>    
+  
+    
+</aura:component>

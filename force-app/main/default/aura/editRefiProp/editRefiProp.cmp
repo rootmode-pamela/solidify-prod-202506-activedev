@@ -1,0 +1,66 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="propRecord" type="Object"/>
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      targetFields="{!v.propRecord}"
+                      layoutType="FULL"
+                      mode="EDIT"
+                      targetError="{!v.recordError}"/>
+    
+    <div class="slds-p-around_small">
+        
+        <lightning:button variant="brand"
+                          label="Edit Proposal"
+                          title="Edit Proposal"
+                          onclick="{!c.openModal}" />
+  
+        <aura:if isTrue="{!v.isOpen}">
+ 
+
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{!c.closeModal}"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit Proposal</h2>
+                    </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">                                     
+                                        <lightning:input label="Current Loan Amount" aura:id="currAmt" class="slds-p-left_small slds-p-right_small" type="number" formatter="currency" value="{!v.propRecord.Current_Loan_Amount__c}"/>
+                                        <lightning:input label="Current Interest Rate" aura:id="currInt" class="slds-p-left_small slds-p-right_small" type="number" step="0.001" value="{!v.propRecord.Current_Interest_Rate__c}"/>
+                                        <lightning:input label="Current Loan Term" aura:id="currTerm" class="slds-p-left_small slds-p-right_small" type="number" value="{!v.propRecord.Current_Loan_Term__c}"/>
+                                        <lightning:input label="Current Loan First Payment" aura:id="currFP" class="slds-p-left_small slds-p-right_small" type="date" value="{!v.propRecord.Current_Loan_First_Payment__c}"/>
+                                        <lightning:input label="Current Loan Last Payment" aura:id="currLP" class="slds-p-left_small slds-p-right_small" type="date" value="{!v.propRecord.Current_Loan_Last_Payment_Made__c}"/>
+                                        <lightning:input label="Current Loan Balance Remaining" aura:id="currBalRem" class="slds-p-left_small slds-p-right_small" type="number" formatter="currency" step="0.01" value="{!v.propRecord.Current_Loan_Balance_Remaining__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:input label="New Loan Amount" aura:id="newAmt" class="slds-p-left_small slds-p-right_small" type="number" formatter="currency" value="{!v.propRecord.New_Loan_Amount__c}"/>
+                                        <lightning:input label="New Loan Interest Rate" aura:id="newInt" class="slds-p-left_small slds-p-right_small" type="number" step="0.001" value="{!v.propRecord.New_Loan_Interest_Rate__c}"/>
+                                        <lightning:input label="New Loan Term" aura:id="newTerm" class="slds-p-left_small slds-p-right_small" type="number" value="{!v.propRecord.New_Loan_Term__c}"/>
+                                        <lightning:input label="Treasury Rate" aura:id="treasury" class="slds-p-left_small slds-p-right_small" type="number" step="0.01" value="{!v.propRecord.X10_Yr_Treasury_Yield__c}"/>
+                                    </div>
+                                </div>
+
+                         </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{!c.closeModal}"/>
+                        <lightning:button variant="brand" 
+                                          label="Save"
+                                          onclick="{!c.saveRecord}"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>            
+        </aura:if>
+    </div>
+</aura:component>

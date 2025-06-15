@@ -1,0 +1,1381 @@
+<aura:component controller="ContactDetailsComponentController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:availableForFlowScreens" access="global">
+
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="isSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="isReadOnly" type="Boolean" default="true"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:attribute name="contactRecord" type="Contact"/>
+
+    <aura:attribute access="private" type="List" name="selectionContact" default="[]"/>
+    <aura:attribute access="private" type="List" name="errors" default="[]"/>
+    <aura:attribute access="private" type="Boolean" name="isMultiEntry" default="false"/>
+    
+    <aura:attribute name="typeValue" type="String" default=""/>
+    
+
+    <aura:attribute name="options" type="List" default="[ {'label': 'Client', 'value': 'Client'}, {'label': 'Realtor', 'value': 'Realtor'}, {'label': 'Escrow Officer', 'value': 'Escrow Officer'}, 
+    {'label': 'Lender AE', 'value': 'Lender AE'}, {'label': 'Insurance Agent', 'value': 'Insurance Agent'}, {'label': 'Lender - Ops', 'value': 'Lender_Ops'}, {'label': 'Financial Advisor / Planner', 'value': 'Financial Advisor'}, 
+    {'label': 'Referral Partner - Other', 'value': 'Referral Partner - Other'}, {'label': 'Appraiser', 'value': 'Appraiser'}, {'label': 'Loan Originator / Broker', 'value': 'Loan Originator / Broker'}, {'label': 'Vendor', 'value': 'Vendor'},
+    {'label': 'Prospective LO', 'value': 'Prospective LO'}, {'label': 'Prospective TM', 'value': 'Prospective TM'} ]"/>
+    <aura:attribute name="selectedType" type="List"/>
+
+    <aura:attribute name="incomeSourcePicklist" type="Object[]"/>
+
+    <div class="slds-grid slds-wrap" style="background:var(--lwc-colorBackground,rgb(243, 242, 242))">
+
+        <aura:if isTrue="{!v.isSpinner}">
+            <lightning:spinner variant="brand" size="large" />
+        </aura:if>
+
+        <!--Details Section-->
+        <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+            <div style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                <h3 class="slds-section__title">
+                    <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                        <strong>Details</strong>
+                    </div>
+                </h3>
+
+                <div class="slds-grid slds-wrap slds-p-around_x-small">
+
+                    <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>First Name</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.FirstName}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputText value="{!v.contactRecord.FirstName}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>LastName</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.LastName}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputText value="{!v.contactRecord.LastName}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Nickname</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.Nickname__c}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputText value="{!v.contactRecord.Nickname__c}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Greeting Name</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.Greeting_Name__c}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:outputText value="{!v.contactRecord.Greeting_Name__c}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Birthdate</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputDate value="{!v.contactRecord.Birthdate}" format="MM/dd/yyyy"/>
+                                                    <aura:set attribute="else">
+                                                        <ui:inputDate value="{!v.contactRecord.Birthdate}" format="MM/dd/yyyy" displayDatePicker="true"/>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Age</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputNumber value="{!v.contactRecord.Age__c}"/>
+                                                    <aura:set attribute="else">
+                                                        <ui:outputNumber value="{!v.contactRecord.Age__c}"/>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Gender</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.Gender__c}"/>
+                                                    <aura:set attribute="else">
+                                                        <ui:inputSelect aura:id="genderId" change="{!c.genderChange}"> 
+                                                            <ui:inputSelectOption label="--None--" text=""/>
+                                                            <ui:inputSelectOption text="Female"/>
+                                                            <ui:inputSelectOption text="Male"/>
+                                                        </ui:inputSelect>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Ethnicity</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.Ethnicity__c}"/>
+                                                    <aura:set attribute="else">
+                                                        <ui:inputSelect aura:id="ethnicityId" change="{!c.ethnicityChange}"> 
+                                                            <ui:inputSelectOption label="--None--" text=""/>
+                                                            <ui:inputSelectOption text="Hispanic or Latino"/>
+                                                            <ui:inputSelectOption text="Not Hispanic or Latino"/>
+                                                            <ui:inputSelectOption text="Do not wish to furnish"/>
+                                                        </ui:inputSelect>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Race</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.Race__c}"/>
+                                                    <aura:set attribute="else">
+                                                        <ui:inputSelect aura:id="raceId" change="{!c.raceChange}"> 
+                                                            <ui:inputSelectOption label="--None--" text=""/>
+                                                            <ui:inputSelectOption text="American Indian or Alaskan Native"/>
+                                                            <ui:inputSelectOption text="Asian"/>
+                                                            <ui:inputSelectOption text="Black or African American"/>
+                                                            <ui:inputSelectOption text="Native Hawaiian or Other Pacific Islander Or None Selected"/>
+                                                            <ui:inputSelectOption text="White"/>
+                                                            <ui:inputSelectOption text="Do not wish to furnish"/>
+                                                        </ui:inputSelect>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Veteran</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.Veteran__c}"/>
+                                                    <aura:set attribute="else">
+                                                        <ui:inputSelect aura:id="veteranId" change="{!c.veteranChange}"> 
+                                                            <ui:inputSelectOption label="--None--" text=""/>
+                                                            <ui:inputSelectOption text="Yes"/>
+                                                            <ui:inputSelectOption text="No"/>
+                                                        </ui:inputSelect>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>FICO</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputNumber value="{!v.contactRecord.FICO__c}"/>
+                                                    <aura:set attribute="else">
+                                                        <ui:inputNumber value="{!v.contactRecord.FICO__c}"/>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+            </div>
+        </div>
+
+        <!--Contact Info Section-->
+        <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+            <div style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                <h3 class="slds-section__title">
+                    <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                        <strong>Contact Info</strong>
+                    </div>
+                </h3>
+
+                <div class="slds-grid slds-wrap slds-p-around_x-small">
+
+                    <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Type</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.Type__c}" />
+                                                    <aura:set attribute="else">
+                                                        <!--
+                                                        test
+                                                        -->
+                                                        <lightning:checkboxGroup options="{! v.options }" value="{!v.contactRecord.Type__c}" onchange="{! c.handleChange }"/>
+                                                        
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Contact Status</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.Contact_Status__c}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputSelect aura:id="contactStatusId" change="{!c.contactStatusChange}"> 
+                                                            <ui:inputSelectOption label="--None--" text=""/>
+                                                            <ui:inputSelectOption text="Active"/>
+                                                            <ui:inputSelectOption text="Inactive"/>
+                                                            <ui:inputSelectOption text="Preferred Partner"/>
+                                                            <ui:inputSelectOption text="Fired"/>
+                                                            <ui:inputSelectOption text="Deceased"/>
+                                                        </ui:inputSelect>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Email</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.Email}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputText value="{!v.contactRecord.Email}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Email 2</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputText value="{!v.contactRecord.Email_2__c}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputText value="{!v.contactRecord.Email_2__c}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Home Phone</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputPhone value="{!v.contactRecord.Home_Phone__c}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputPhone value="{!v.contactRecord.Home_Phone__c}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Business Phone</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputPhone value="{!v.contactRecord.Business_Phone__c}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputPhone value="{!v.contactRecord.Business_Phone__c}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Mobile Phone</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputPhone value="{!v.contactRecord.MobilePhone}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputPhone value="{!v.contactRecord.MobilePhone}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>Email Opt Out</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputCheckbox value="{!v.contactRecord.HasOptedOutOfEmail}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputCheckbox value="{!v.contactRecord.HasOptedOutOfEmail}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                        <div class="slds-form form-horizontal ">
+                            <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+            
+                                <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                    <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                        
+                                        <div class="slds-text-title_bold labelSize">
+                                            <span>SMS Opt Out</span>
+                                        </div>
+                                        <div class="slds-form-element__control slds-grid itemBody">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                <aura:if isTrue="{!v.isReadOnly}" >
+                                                    <ui:outputCheckbox value="{!v.contactRecord.smagicinteract__SMSOptOut__c}" />
+                                                    <aura:set attribute="else">
+                                                        <ui:inputCheckbox value="{!v.contactRecord.smagicinteract__SMSOptOut__c}" />
+                                                    </aura:set>
+                                                </aura:if>
+                                            </span>
+                                            
+                                            <aura:if isTrue="{!v.isReadOnly}">
+                                                <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                            </aura:if>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!--Employment Info - Source Section-->
+        <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+            
+            <div class="slds-grid slds-wrap">
+                <!--Employment Info-->
+                <div class="slds-col slds-size_1-of-1">
+                    <div style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+
+                        <h3 class="slds-section__title">
+                            <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                                <strong>Employment Info</strong>
+                            </div>
+                        </h3>
+
+                        <div class="slds-grid slds-wrap slds-p-around_x-small">
+
+                            <div class="slds-col slds-size_1-of-1">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Income Sources</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.Income_Sources__c}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputSelect aura:id="incomeSourcesId" change="{!c.incomeSourcesChange}"> 
+                                                                    <ui:inputSelectOption label="--None--" text=""/>
+                                                                    <aura:iteration items="{!v.incomeSourcePicklist}" var="item">
+                                                                        <ui:inputSelectOption label="{!item.label}" text="{!item.text}"/>
+                                                                    </aura:iteration>
+                                                                </ui:inputSelect>
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Employer Name</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.Employer_Name__c}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputText value="{!v.contactRecord.Employer_Name__c}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Title</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.Title}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputText value="{!v.contactRecord.Title}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Years on Job</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputNumber value="{!v.contactRecord.Years_on_Job__c}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputNumber value="{!v.contactRecord.Years_on_Job__c}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Income</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputCurrency value="{!v.contactRecord.Income__c}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputCurrency value="{!v.contactRecord.Income__c}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
+                    </div>
+                </div>
+
+                <!--Source Section-->
+                <div class="slds-col slds-size_1-of-1 slds-p-top_medium">
+                    <div style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+
+                        <h3 class="slds-section__title">
+                            <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                                <strong>Source</strong>
+                            </div>
+                        </h3>
+
+                        <div class="slds-grid slds-wrap slds-p-around_x-small">
+
+                            <div class="slds-col slds-size_1-of-1">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Lead Source</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.LeadSource}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputSelect aura:id="leadSourceId" change="{!c.leadSourceChange}"> 
+                                                                    <ui:inputSelectOption label="--None--" text=""/>
+                                                                    <ui:inputSelectOption text="Repeat Client"/>
+                                                                    <ui:inputSelectOption text="Referral - Client"/>
+                                                                    <ui:inputSelectOption text="Referral - Realtor"/>
+                                                                    <ui:inputSelectOption text="Referral - Partner"/>
+                                                                    <ui:inputSelectOption text="Self Generated"/>
+                                                                    <ui:inputSelectOption text="Interneal Referral"/>
+                                                                    <ui:inputSelectOption text="Nextdoor"/>
+                                                                    <ui:inputSelectOption text="Quicken Broker Finder"/>
+                                                                    <ui:inputSelectOption text="Website"/>
+                                                                    <ui:inputSelectOption text="Website - Buy a Home form"/>
+                                                                    <ui:inputSelectOption text="Website - Refinance form"/>
+                                                                    <ui:inputSelectOption text="Television"/>
+                                                                    <ui:inputSelectOption text="Radio"/>
+                                                                    <ui:inputSelectOption text="Google Ads"/>
+                                                                    <ui:inputSelectOption text="Facebook"/>                                                                    
+                                                                    <ui:inputSelectOption text="Zillow Lead"/>
+                                                                    <ui:inputSelectOption text="UWM Broker Finder"/>
+                                                                    <ui:inputSelectOption text="LMB"/>
+                                                                    <ui:inputSelectOption text="Lower My Bills"/>
+                                                                    <ui:inputSelectOption text="Refily"/>
+                                                                    <ui:inputSelectOption text="Its Home"/>
+
+                                                                </ui:inputSelect>
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Referred By</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputURL value="{!'/' + v.contactRecord.Referred_by__c}" label="{!v.contactRecord.Referred_by__r.FirstName + ' ' + v.contactRecord.Referred_by__r.LastName}" target="_new"/>
+                                                            <aura:set attribute="else">
+                                                                <c:Lookup selection="{!v.selectionContact}" onSearch="{!c.lookupSearchContact}" onSelection="{!c.clearErrorsOnChange}" errors="{!v.errors}" placeholder="Search Referred By" isMultiEntry="{!v.isMultiEntry}"/>
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Loan Originator</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.Loan_Originator__c}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputSelect aura:id="loanOriginatorId" change="{!c.loanOriginatorChange}"> 
+                                                                    <ui:inputSelectOption label="--None--" text=""/>
+                                                                    <ui:inputSelectOption text="Dusty Broderick"/>
+                                                                    <ui:inputSelectOption text="Missy Broderick"/>
+                                                                    <ui:inputSelectOption text="Brandon Kyle"/>
+                                                                    <ui:inputSelectOption text="Cole Annati"/>
+                                                                    <ui:inputSelectOption text="Joe Rivera"/>
+                                                                    <ui:inputSelectOption text="Andy Hess"/>
+                                                                    <ui:inputSelectOption text="Steve McKnight"/>
+                                                                    <ui:inputSelectOption text="Tiffany Attwood"/>
+                                                                    <ui:inputSelectOption text="Robert Salas"/>
+                                                                    <ui:inputSelectOption text="Louis Bing"/>
+                                                                </ui:inputSelect>
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Mailing Address - Present Address Section-->
+        <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+            <div class="slds-grid slds-wrap">
+                <!--Mailing Address-->
+                <div class="slds-col slds-size_1-of-1">
+                    <div style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+
+                        <h3 class="slds-section__title">
+                            <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                                <strong>Mailing Address</strong>
+                            </div>
+                        </h3>
+                        
+                        <div class="slds-grid slds-wrap slds-p-around_x-small">
+
+                            <div class="slds-col slds-size_1-of-1">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Street</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.MailingStreet}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputText value="{!v.contactRecord.MailingStreet}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>City</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.MailingCity}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputText value="{!v.contactRecord.MailingCity}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>State</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.MailingState}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputText value="{!v.contactRecord.MailingState}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Postal Code</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.MailingPostalCode}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputText value="{!v.contactRecord.MailingPostalCode}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!--Present Address-->
+                <div class="slds-col slds-size_1-of-1 slds-p-top_medium">
+                    <div style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+
+                        <h3 class="slds-section__title">
+                            <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                                <strong>Present Address</strong>
+                            </div>
+                        </h3>
+
+                        <div class="slds-grid slds-wrap slds-p-around_x-small">
+
+                            <div class="slds-col slds-size_1-of-1">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Street</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.Present_Address__c}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputText value="{!v.contactRecord.Present_Address__c}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>City</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.Present_Address_City__c}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputText value="{!v.contactRecord.Present_Address_City__c}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>State</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.Present_Address_State__c}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputText value="{!v.contactRecord.Present_Address_State__c}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                <div class="slds-form form-horizontal ">
+                                    <div class="slds-grid slds-gutters_small full cols-1 forcePageBlockSectionRow">
+                    
+                                        <div class="slds-grid slds-has-flexi-truncate  full forcePageBlockItem forcePageBlockItemView">
+                                            <div class="slds-form-element slds-form-element_edit slds-grow slds-hint-parent override--slds-form-element">
+                                                
+                                                <div class="slds-text-title_bold labelSize">
+                                                    <span>Postal Code</span>
+                                                </div>
+                                                <div class="slds-form-element__control slds-grid itemBody">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow ">
+                                                        <aura:if isTrue="{!v.isReadOnly}" >
+                                                            <ui:outputText value="{!v.contactRecord.Present_Address_Zip__c}" />
+                                                            <aura:set attribute="else">
+                                                                <ui:inputText value="{!v.contactRecord.Present_Address_Zip__c}" />
+                                                            </aura:set>
+                                                        </aura:if>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!v.isReadOnly}">
+                                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" size="medium" onclick="{!c.editMethod }" alternativeText="Edit" title="Edit"/>
+                                                    </aura:if>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <aura:if isTrue="{!v.isReadOnly == false}">
+            <div class="slds-col slds-size_1-of-1 slds-p-around_x-small">
+                <div class="slds-docked-form-footer">
+                    <button type="button" class="slds-button slds-button_neutral" onclick="{!c.cancelButton}">Cancel</button>
+                    <button type="button" class="slds-button slds-button_brand" onclick="{!c.saveButton}">Save</button>
+                  </div>
+            </div>
+        </aura:if>  
+    </div>
+</aura:component>

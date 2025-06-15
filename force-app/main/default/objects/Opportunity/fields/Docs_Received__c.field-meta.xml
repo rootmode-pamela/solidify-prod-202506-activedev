@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Docs_Received__c</fullName>
+    <description>Date Initial Borrower Docs Were Received for Review</description>
+    <inlineHelpText>Date Initial Borrower Docs Were Received for Review</inlineHelpText>
+    <label>Docs Received</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

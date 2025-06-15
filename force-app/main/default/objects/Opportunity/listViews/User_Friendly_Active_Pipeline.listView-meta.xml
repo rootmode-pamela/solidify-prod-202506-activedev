@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Friendly_Active_Pipeline</fullName>
+    <booleanFilter>1 AND 2 AND (3 OR 4 OR 5 OR 6 OR 7 OR 8) AND (9 or 10)</booleanFilter>
+    <columns>Household_Name__c</columns>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>Subject_Prop_Street__c</columns>
+    <columns>Subject_Prop_St__c</columns>
+    <columns>Purchase_Price__c</columns>
+    <columns>Down_Payment__c</columns>
+    <columns>COE__c</columns>
+    <columns>Lock_Expiration__c</columns>
+    <columns>Loan_Processor__c</columns>
+    <columns>Loan_Program__c</columns>
+    <columns>Lender__c</columns>
+    <columns>Processor_Note__c</columns>
+    <columns>Next_Deadline__c</columns>
+    <columns>OPPORTUNITY.CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>equals</operation>
+        <value>Qualifying,Proposal,Nurturing,Prospect,Requested,Reviewed,File Started,Docs Requested,Docs Received,Qualified,Pre-approved,Application,Sent to Processing,Submitted,Approved,Clear to Close,Cleared to Close,Docs Out,Funded</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.Mortgage,Opportunity.Prospecting,Opportunity.Scenario</value>
+    </filters>
+    <filters>
+        <field>Referred_By__c</field>
+        <operation>contains</operation>
+        <value>Migliore</value>
+    </filters>
+    <filters>
+        <field>Referred_By__c</field>
+        <operation>contains</operation>
+        <value>samuel roberts</value>
+    </filters>
+    <filters>
+        <field>Referred_By__c</field>
+        <operation>contains</operation>
+        <value>Chris lane</value>
+    </filters>
+    <filters>
+        <field>Referred_By__c</field>
+        <operation>contains</operation>
+        <value>patricia wilson</value>
+    </filters>
+    <filters>
+        <field>Referred_By__c</field>
+        <operation>contains</operation>
+        <value>Tracy Aldridge</value>
+    </filters>
+    <filters>
+        <field>Referred_By__c</field>
+        <operation>contains</operation>
+        <value>diema</value>
+    </filters>
+    <filters>
+        <field>Hold_Until__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>Hold_Until__c</field>
+        <operation>lessOrEqual</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>User Friendly Active Pipeline</label>
+    <sharedTo>
+        <group>Team_Broderick</group>
+    </sharedTo>
+</ListView>

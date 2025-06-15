@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loan_Amount_f__c</fullName>
+    <formula>IF (NOT(ISBLANK(Loan__c)),  Loan__r.Loan_Amount__c , IF(NOT(ISBLANK( Lead__c )),  Lead__r.First_Loan_Amount_Scenario_1__c , 0))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Loan Amount formula</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

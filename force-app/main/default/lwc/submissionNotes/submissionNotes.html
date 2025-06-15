@@ -1,0 +1,298 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+        <div class="slds-modal__container modal-window">
+            <div class="spinner">
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                    </lightning-spinner>
+                </template>
+            </div>
+            <lightning-record-edit-form record-id={recordId} object-api-name="Opportunity"
+                        onsubmit={handleSubmit} onsuccess={handleSuccess}>
+                        <lightning-messages> </lightning-messages>
+            <header class="slds-modal__header">
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Submission Notes</h2>
+            </header>
+            <div class="slds-modal__content slds-p-bottom_x-small" id="modal-content-id-2" >
+                <!-- <div class="slds-var-m-around_medium">
+                    <div if:true={errors} class="slds-notify slds-notify_alert slds-alert_error">
+                        {errors}
+                      </div>
+                      <lightning-record-edit-form
+                        object-api-name="Opportunity"
+                        record-id={recordId}
+                        onsuccess={closeModal}>
+                    
+                        <lightning-input-field field-name="AUS__c"></lightning-input-field>
+                        <lightning-input-field field-name="Lender__c"></lightning-input-field>
+                        <lightning-input-field field-name="Non_QM__c"></lightning-input-field>
+                        <lightning-input-field field-name="Submission_Summary__c"></lightning-input-field>
+                        <lightning-input-field field-name="Credit_Submission_Notes__c"></lightning-input-field>
+                        <lightning-input-field field-name="Income_Submission_Notes__c"></lightning-input-field>
+                        <lightning-input-field field-name="Asset_Submission_Notes__c" ></lightning-input-field>
+                        <lightning-input-field field-name="Property_Submission_Notes__c"></lightning-input-field>
+                        <lightning-input-field field-name="Send_Processor_Notes__c"></lightning-input-field>
+
+                        <lightning-button
+                        class="slds-m-top_small"
+                        type="submit"
+                        label="Submit Notes"
+                    ></lightning-button>
+                    </lightning-record-edit-form>      
+                </div> -->
+                <div class="slds-p-around_medium">  
+                        <div class="slds-grid">
+                            <!-- Left Section -->
+                            <div class="slds-col slds-size_5-of-12 slds-box slds-wrap" style="margin-right: 1% !important;">
+                                <!-- Submission Notes START -->
+                                <div
+                                    style="background-color: #f3f3f3; padding: 1%; color: black; font-weight: bolder !important;">
+                                    <span>Submission Notes</span>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-1 testCls" style="padding: 1% !important;">
+                                        <lightning-input-field field-name="Submission_Notes__c" value={notes}
+                                            variant="label-hidden" onchange={handleSubmissionNotesChange}>
+                                        </lightning-input-field>
+                                    </div>
+                                </div>
+                                    
+                                <!-- Submission Notes END -->
+                                <!-- Credit START -->
+                                <div
+                                    style="background-color: #f3f3f3; padding: 1%; color: black; font-weight: bolder !important;">
+                                    <span>Credit</span>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-1" style="padding: 1% !important;">
+                                        <lightning-input-field field-name="Credit_Submission_Notes__c"
+                                            variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+                                </div>
+                                <!-- Credit END -->
+                                <!-- Income START -->
+                                <div
+                                    style="background-color: #f3f3f3; padding: 1%; color: black; font-weight: bolder !important;">
+                                    <span>Income</span>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-1" style="padding: 1% !important;">
+                                        <lightning-input-field field-name="Income_Submission_Notes__c"
+                                            variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+                                </div>
+                                <!-- Income END -->
+                                <!-- Assets START -->
+                                <div
+                                    style="background-color: #f3f3f3; padding: 1%; color: black; font-weight: bolder !important;">
+                                    <span>Assets</span>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-1" style="padding: 1% !important;">
+                                        <lightning-input-field field-name="Asset_Submission_Notes__c"
+                                            variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+                                </div>
+                                <!-- Assets END -->
+                                <!-- Property & Title START -->
+                                <div
+                                    style="background-color: #f3f3f3; padding: 1%; color: black; font-weight: bolder !important;">
+                                    <span>Property & Title</span>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-1" style="padding: 1%; !important;">
+                                        <lightning-input-field field-name="Property_Submission_Notes__c"
+                                            variant="label-hidden">
+                                        </lightning-input-field>
+                                        
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-1 slds-wrap slds-p-top_medium">
+                                        <div class="slds-grid" style="margin-top: 1% !important;">
+                                            <lightning-input-field field-name="Update_Loan_File_Team__c" variant="label-hidden">
+                                            </lightning-input-field>
+                                            <span>Check to Notify Loan Team</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Property & Title END -->
+                            </div>
+                            <div class="slds-col slds-size_2-of-12 slds-box slds-wrap" style="margin-right: 1% !important;">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-1 slds-wrap">
+
+                                        <h3 class="slds-section__title">
+                                            <div class="slds-button slds-section__title-action">
+                                                <strong>Team Info</strong>
+                                            </div>
+                                        </h3>
+                                        <span
+                                            style="padding: 1%; color: black; font-weight: bolder !important;">LPC/BPC</span>
+                                        <lightning-input-field field-name="Borrower_Paid__c" label="" variant="label-hidden">
+                                        </lightning-input-field>
+                                        <span
+                                            style="padding: 1%; color: black; font-weight: bolder !important;">Escrows</span>
+                                        <lightning-input-field field-name="Escrows__c" label="" variant="label-hidden">
+                                        </lightning-input-field>
+                                        <span style="padding: 1%; color: black; font-weight: bolder !important;">Admin
+                                            Fee</span>
+                                        <lightning-input-field field-name="Admin_Fee__c" label=""
+                                            variant="label-hidden">
+                                        </lightning-input-field>
+                                        <span
+                                            style="padding: 1%; color: black; font-weight: bolder !important;">AUS</span>
+                                        <lightning-input-field field-name="AUS__c" label="" variant="label-hidden">
+                                        </lightning-input-field>
+
+                                        <span style="padding: 1%; color: black; font-weight: bolder !important;">Credit Source
+                                            </span>
+                                        <lightning-input-field field-name="Credit_Source__c" label=""
+                                            variant="label-hidden">
+                                        </lightning-input-field>
+
+                                        <span style="padding: 1%; color: black; font-weight: bolder !important;">Other
+                                            Liens</span>
+                                        <lightning-input-field field-name="Other_Liens__c" label=""
+                                            variant="label-hidden">
+                                        </lightning-input-field>
+                                    
+                                        <span
+                                        style="padding: 1%; color: black; font-weight: bolder !important;">Appraisal</span>
+                                        <lightning-input-field field-name="Appraisal__c" label=""
+                                            variant="label-hidden">
+                                        </lightning-input-field>
+                                        <span
+                                        style="padding: 1%; color: black; font-weight: bolder !important;">Solar</span>
+                                        <lightning-input-field field-name="Solar__c" label="" variant="label-hidden">
+                                        </lightning-input-field>
+                                        <span
+                                        style="padding: 1%; color: black; font-weight: bolder !important;">Vesting</span>
+                                        <lightning-input-field field-name="Vesting__c" label="" variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Section -->
+                            <div class="slds-col slds-size_2-of-12">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small background"
+                                        style="margin-right: 1% !important;">
+                                        <div>
+                                            <h3 class="slds-section__title">
+                                                <div class="slds-button slds-section__title-action"
+                                                    aria-controls="upcoming-activities-section">
+                                                    <strong>Contacts</strong>
+                                                </div>
+                                            </h3>
+                                            <div class="slds-grid slds-wrap slds-p-around_x-small">
+                                                <template for:each={contactFields} for:item='contactField'>
+                                                    <div key={contactField.fieldname}
+                                                        class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                                        <div
+                                                            class="slds-form-element_edit override--slds-form-element">
+                                                            <div class="slds-text-title_bold labelSize">
+                                                                <span>{contactField.label}</span>
+                                                            </div>
+                                                            <div class="slds-form-element__control">
+                                                                <template if:false={editable}>
+                                                                    <span
+                                                                        class="test-id__field-value slds-form-element__static  ">
+                                                                        <lightning-output-field
+                                                                            field-name={contactField.fieldname}
+                                                                            variant="label-hidden">
+                                                                        </lightning-output-field>
+                                                                    </span>
+                                                                    <button class="slds-button slds-button_icon"
+                                                                        title="Edit" onclick={handleEditClick}>
+                                                                        <lightning-icon icon-name="utility:edit"
+                                                                            alternative-text="edit" variant="base"
+                                                                            size="xx-small"
+                                                                            class="pencil-icon"></lightning-icon>
+                                                                        <span class="slds-assistive-text">Edit</span>
+                                                                    </button>
+                                                                </template>
+                                                                <template if:true={editable}>
+                                                                    <lightning-input-field
+                                                                        field-name={contactField.fieldname}
+                                                                        variant="label-hidden">
+                                                                    </lightning-input-field>
+                                                                </template>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small background">
+                                        <div>
+                                            <h3 class="slds-section__title">
+                                                <div class="slds-button slds-section__title-action"
+                                                    aria-controls="upcoming-activities-section">
+                                                    <strong>TimeLine</strong>
+                                                </div>
+                                            </h3>
+                                            <div class="slds-grid slds-wrap slds-p-around_x-small">
+                                                <template for:each={timeLineFields} for:item='timeLineField'>
+                                                    <div key={timeLineField.fieldname}
+                                                        class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                                        <div
+                                                            class="slds-form-element_edit override--slds-form-element">
+                                                            <div class="slds-text-title_bold labelSize">
+                                                                <span>{timeLineField.label}</span>
+                                                            </div>
+                                                            <div class="slds-form-element__control">
+                                                                <template if:false={editable}>
+                                                                    <span
+                                                                        class="test-id__field-value slds-form-element__static ">
+                                                                        <lightning-output-field
+                                                                            field-name={timeLineField.fieldname}
+                                                                            variant="label-hidden">
+                                                                        </lightning-output-field>
+                                                                    </span>
+                                                                    <button class="slds-button slds-button_icon"
+                                                                        title="Edit" onclick={handleEditClick}>
+                                                                        <lightning-icon icon-name="utility:edit"
+                                                                            alternative-text="edit" variant="base"
+                                                                            size="xx-small"
+                                                                            class="pencil-icon"></lightning-icon>
+                                                                        <span class="slds-assistive-text">Edit</span>
+                                                                    </button>
+                                                                </template>
+                                                                <template if:true={editable}>
+                                                                    <lightning-input-field
+                                                                        field-name={timeLineField.fieldname}
+                                                                        variant="label-hidden">
+                                                                    </lightning-input-field>
+                                                                </template>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                </div>
+            </div>
+             <footer class="slds-modal__footer">
+                 <lightning-button class="slds-m-around_small" variant="brand" label="Cancel" title="Close" onclick={closeModal}></lightning-button>
+                <lightning-button class="slds-m-around_small" variant="brand" type="submit" name="Save" label="Save"></lightning-button>
+            </footer>
+        </lightning-record-edit-form>
+
+           
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+
+</template>

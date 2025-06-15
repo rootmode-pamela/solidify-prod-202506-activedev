@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>On_Pace_Payment_Scenario_2__c</fullName>
+    <formula>First_Loan_Amount_Scenario_2__c *( Rate_Scenario_2__c /12)*((1+( Rate_Scenario_2__c /12))^Current_Loan_Payments_Remaining__c) /(((1+( Rate_Scenario_2__c /12))^Current_Loan_Payments_Remaining__c) -1)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>This payment will keep the borrower on pace with their current maturity date.</inlineHelpText>
+    <label>On Pace Payment</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

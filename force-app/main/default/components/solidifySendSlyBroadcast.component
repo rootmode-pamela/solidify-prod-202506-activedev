@@ -1,0 +1,10 @@
+<apex:component controller="solidifySendSlybroadcast" >
+    <apex:outputText rendered="{!init}" />
+    <apex:attribute name="Phones" assignTo="{!inputPhones}" description="List of phone numbers to send vm to" type="String" />
+    <apex:attribute name="CallerId" assignTo="{!inputCallerId}" description="Phone number to show as caller id" type="String" />
+    <apex:attribute name="AudioFile" assignTo="{!inputAudioFile}" description="Name of audio file recorded in Sly" type="String"/> 
+          
+		    <apex:commandButton value="Send" action="{!buttonSendSlyMessage}" id="butsav"/>
+ 
+        
+</apex:component>

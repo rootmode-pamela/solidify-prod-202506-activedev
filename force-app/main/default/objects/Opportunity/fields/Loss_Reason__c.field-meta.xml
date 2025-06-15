@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loss_Reason__c</fullName>
+    <label>Loss Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Credit</fullName>
+                <default>false</default>
+                <label>Credit</label>
+            </value>
+            <value>
+                <fullName>Down Payment</fullName>
+                <default>false</default>
+                <label>Down Payment</label>
+            </value>
+            <value>
+                <fullName>Assets</fullName>
+                <default>false</default>
+                <label>Assets</label>
+            </value>
+            <value>
+                <fullName>DTI</fullName>
+                <default>false</default>
+                <label>DTI</label>
+            </value>
+            <value>
+                <fullName>LTV</fullName>
+                <default>false</default>
+                <label>LTV</label>
+            </value>
+            <value>
+                <fullName>Employment</fullName>
+                <default>false</default>
+                <label>Employment</label>
+            </value>
+            <value>
+                <fullName>Property</fullName>
+                <default>false</default>
+                <label>Property</label>
+            </value>
+            <value>
+                <fullName>Timing</fullName>
+                <default>false</default>
+                <label>Timing</label>
+            </value>
+            <value>
+                <fullName>Rates</fullName>
+                <default>false</default>
+                <label>Rates</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Closed Elsewhere</fullName>
+                <default>false</default>
+                <label>Closed Elsewhere</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

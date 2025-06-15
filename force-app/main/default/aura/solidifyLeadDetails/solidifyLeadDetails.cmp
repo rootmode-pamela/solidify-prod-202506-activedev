@@ -1,0 +1,215 @@
+<aura:component controller = "solidifyGoogleMaps" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="LeadSimpleRecord" type="Object" />
+    <aura:attribute name="LeadRecord" type="Object" />
+    <aura:attribute name="recordError" type="String" />
+    <aura:attribute name="location" type="string" default=""/>
+	<aura:attribute name="predictions" type="List" default="[]"/>
+    <aura:attribute name="location2" type="string" default=""/>
+	<aura:attribute name="predictions2" type="List" default="[]"/>
+    <aura:attribute name="dirtyFields" type="List"/>
+
+    <force:recordData aura:id="leadRecord"
+                  mode="EDIT"
+                  recordId="{!v.recordId}"
+                  targetRecord="{!v.LeadRecord}"
+                  targetFields="{!v.LeadSimpleRecord}"
+                  targetError="{!v.recordError}"
+                  fields="Id,Name,FirstName,LastName,Nickname__c,Type__c,Role__c,Rating,Branch__c,LeadSource,
+                          Referred_By__c,Ad_Description__c,Ad_Consented__c,Loan_Originator_User__c, OwnerId, 
+                          Archived_Reason__c,Home_Phone__c,Business_Phone__c,MobilePhone,Business_Phone__c,Email,Email_2__c,
+                          Company,Title,Income_Sources__c,Estimated_Income__c,Impounds__c,Fico__c,Self_Reported_Credit__c,
+                          Purpose__c,Occupancy__c,Subject_Property_Type__c,Number_of_Units__c,
+                          Rate_Quoted__c,Address,Street,City,State,PostalCode,CoBorrower_FirstName__c,CoBorrower_LastName__c,
+                          CoBorrower_Veteran__c,CoBorrower_Income_Sources__c,CoBorrower_Est_Income__c,
+                          CoBorrower_Nickname__c,CoBorrower_Mobile__c,Checking_Assets__c,Savings_Assets__c,Retirement_Assets__c,Other_Monthly_Payments__c,
+                          CoBorrower_Home_Phone__c,CoBorrower_Business_Phone__c,Subject_Property_State__c,Subject_Property_City__c,
+                          Subject_Property_Street__c,Subject_Property_Zip__c,Subject_Property_County__c"
+                  recordUpdated="{!c.recordUpdate}"
+                     />
+
+     
+    <lightning:recordEditForm aura:id="leadDetailForm" onsuccess="{!c.handleSuccess}" recordId="{!v.recordId}" objectApiName="Lead" density='compact'>
+        <lightning:messages />
+		<aura:if isTrue="{!not(empty(v.recordError))}">
+        	<div class="recordError">
+            	{!v.recordError}</div>
+    	</aura:if>
+            
+       
+       
+           
+         <div class="slds-grid slds-gutters">
+            <div class="slds-col  slds-size_1-of-4">
+                
+                <div class="slds-p-left_small">
+                    <h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small" title="Contact"><b>Borrower</b></span>
+  				</h3>
+                    <lightning:inputField aura:id="fname" fieldName = "FirstName"  onchange="{!c.highlightChangedField}" />
+                    <lightning:inputField aura:id="lname" fieldName = "LastName"  onchange="{!c.highlightChangedField}"  />
+                    <lightning:inputField aura:id="nname" fieldName = "Nickname__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/> 
+                    <lightning:inputField aura:id="homephone" fieldName = "Home_Phone__c"  onchange="{!c.highlightChangedField}" variant="label-inline" />
+                    <lightning:inputField aura:id="businessphone" fieldName = "Business_Phone__c"  onchange="{!c.highlightChangedField}" variant="label-inline" />
+                    <lightning:inputField aura:id="mobilephone" fieldName = "MobilePhone"  onchange="{!c.highlightChangedField}" variant="label-inline" />
+                    <lightning:inputField aura:id="email" fieldName = "Email"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="bpmoc" fieldName = "Borrower_PMOC__c"  onchange="{!c.highlightChangedField}" variant="label-inline" />
+                     <lightning:inputField aura:id="employer" fieldName = "Employer__c"  onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                     <lightning:inputField aura:id="incsources" fieldName = "Income_Sources__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="estinc" fieldName = "Estimated_Income__c"  onchange="{!c.highlightChangedField}" variant="label-inline" />
+
+                </div>
+             
+              <!--      <div class="slds-p-top_small slds-p-left_small">
+                <h3 class="slds-section__title slds-theme_default">
+                <span class="slds-truncate slds-p-horizontal_small" title="Borrower Details"><b>Borrower Details</b></span>
+                </h3>
+                       
+                <div >   
+                    <lightning:inputField fieldName = "Income_Sources__c"  onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                    <lightning:inputField fieldName = "Estimated_Income__c"  onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                    <lightning:inputField fieldName = "Veteran__c"  onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                </div>
+                
+            </div> -->
+             </div>
+            
+   		    <div class="slds-col  slds-size_1-of-4">
+            
+               <div class="slds-p-left_small ">
+                    <h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small" title="Contact"><b>Co-Borrower</b></span>
+  				</h3>
+                   
+                   <lightning:inputField aura:id="CBFirst"  fieldName = "CoBorrower_FirstName__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+				   <lightning:inputField aura:id="CBLast"  fieldName = "CoBorrower_LastName__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                   <lightning:inputfield aura:id="CBnick" fieldName="CoBorrower_Nickname__c" variant="label-inline"/>
+                   <lightning:inputField aura:id="CBHome" fieldName="CoBorrower_Home_Phone__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                   <lightning:inputField aura:id="CBBusiness" fieldName="CoBorrower_Business_Phone__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                   <lightning:inputField aura:id="CBMobile" fieldName="CoBorrower_Mobile__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                   <lightning:inputField aura:id="email2" fieldName = "Email_2__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                   <lightning:inputField aura:id="CBPMOC" fieldName = "CoBorrower_PMOC__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                   <lightning:inputField aura:id="CBEmployer" fieldName = "CoBorrower_Employer__c"  onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                    <lightning:inputField aura:id="CBIncSource"  fieldName = "CoBorrower_Income_Sources__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="CBInc"  fieldName = "CoBorrower_Est_Income__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    
+                </div>
+                
+               <!-- <div class="slds-p-top_small slds-p-left_small">
+                	<h3 class="slds-section__title slds-theme_alt-inverse">
+                	<span class="slds-truncate slds-p-horizontal_small" title="Borrower Details" variant="label-stacked"><b>Co-Borrower Details</b></span>
+                </h3>
+                 	<lightning:inputField aura:id="CBEmployer" fieldName = "CoBorrower_Employer__c"  onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                    <lightning:inputField aura:id="CBIncSource"  fieldName = "CoBorrower_Income_Sources__c"  onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                    <lightning:inputField aura:id="CBInc"  fieldName = "CoBorrower_Est_Income__c"  onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                   
+                </div>  -->
+                       
+                
+            </div>
+            
+           <div class="slds-col  slds-size_1-of-4">
+               
+               <h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small" title="Misc"><b>Loan Details</b></span>
+  				</h3>
+                <div class="slds-p-left_small">
+                    <lightning:inputField aura:id="Purpose" fieldName="Purpose__c" onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                    <lightning:inputField aura:id="Occupancy" fieldName="Occupancy__c" onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                    <lightning:inputField aura:id="Current Program" fieldName="Current_Program__c" onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="Current Balance" fieldName="Current_Balance__c" onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="Current Rate" fieldName="Current_Rate__c" onchange="{!c.highlightChangedField}" variant="label-inline"/> 
+                    <lightning:inputField aura:id="Current Payment" fieldName="Current_Payment__c" onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="QualFico" fieldName="Qualifying_Fico__c" onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="FirstTimeHomebuyer" fieldName="First_Time_Homebuyer__c" onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="Veteran2" fieldName="Veteran__c" onchange="{!c.highlightChangedField}" variant="label-inline"/>
+     				
+                 </div>
+
+                 <div class="slds-grid slds-gutters slds-p-bottom_x-large slds-align_absolute-center" >
+        		<div>
+            		<lightning:button disabled="true" aura:id="submitButton" class="slds-m-top_small" type="submit" label="Submit" />
+        		</div>
+        </div>
+               
+               
+             </div>               
+             
+              <div class="slds-col  slds-size_1-of-4">
+ 
+            <h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small" title="Address"><b>Subject Property</b></span>
+  				</h3>
+                  
+                  <div class="slds-p-left_small">
+                    
+                   <lightning:input label="Address Search" 
+                        name="location2"
+                        aura:id="location2" 
+                        value="{!v.location2}"
+                        onchange="{!c.getAddress2}" />
+                   
+                   <aura:if isTrue="{!v.predictions2.length > 0}">		 
+ 						<ul class="city_predictions">
+						<aura:iteration items="{!v.predictions2}" var="prediction2">
+							<li class="slds-listbox__item">
+								<a onclick="{!c.getAddressDetails2}" data-placeid="{!prediction2.place_id}">{!prediction2.description}</a>
+							</li>
+						</aura:iteration>
+						</ul> 	 
+					</aura:if>
+                 
+                      <label for="SP_Street" class="slds-form-element__label slds-p-top_small">Street</label> 
+                      <lightning:inputField aura:id="SP_Street" variant="label-hidden" fieldName="Subject_Property_Street__c"  onchange="{!c.highlightChangedField}"/>
+                      <div class="slds-grid slds-gutters_direct-xxx-small slds-p-top_x-small">
+                          <div class="slds-col  slds-size_5-of-12 ">
+                              <label for="SP_City" class="slds-form-element__label">City</label>
+                              <lightning:inputField aura:id="SP_City"  variant="label-hidden" fieldName="Subject_Property_City__c"  onchange="{!c.highlightChangedField}"/>
+                          </div>
+                          <div class="slds-col  slds-size_3-of-12">
+                              <label for="SP_State" class="slds-form-element__label">State</label>
+                              <lightning:inputField aura:id="SP_State" variant="label-hidden" fieldName="Subject_Property_State__c"  onchange="{!c.highlightChangedField}"/> </div>
+                          <div class="slds-col  slds-size_4-of-12">
+                              <label for="SP_Zip" class="slds-form-element__label">Zip</label>
+                              <lightning:inputField aura:id="SP_Zip"  variant="label-hidden" fieldName="Subject_Property_Zip__c"  onchange="{!c.highlightChangedField}"/> </div>
+                      </div>
+                 
+                      
+                  </div>
+               
+                  <div class="slds-section slds-is-open slds-p-bottom_xxx-small">
+  				
+						<div class="slds-p-left_small">
+                <lightning:inputField aura:id="SPType" fieldName="Subject_Property_Type__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                <lightning:inputField aura:id="SPUnits" fieldName="Number_of_Units__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+
+    			<lightning:inputField aura:id="SPEstVal" fieldName="Estimated_Value__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    </div>
+            	</div>               
+               
+  				
+                  
+                                                  <div class="slds-p-top_small">
+                            <h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small" title="Rating"><b>Source</b></span>
+  				</h3>
+            
+               <div >
+                    <lightning:inputField aura:id="LeadSource" fieldName="LeadSource"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="ReferredBy" fieldName="Referred_By__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                   
+                
+            </div>             </div>
+                  
+                  
+             </div>
+             
+             
+             
+
+             
+        </div>
+
+        
+    </lightning:recordEditForm>
+
+</aura:component>

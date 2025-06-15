@@ -1,0 +1,16 @@
+.THIS .slds-form-element__static{
+     background-color: rgb(252, 253, 253);
+
+    cursor: not-allowed;
+    user-select: none;
+        border-radius: .25rem;
+    width: 100%;
+	padding: .25rem 1rem 0 .75rem;
+    border: 1px solid rgb(221, 219, 218);
+        font-size:13px
+   
+}
+.THIS .solidify-bold .slds-form-element__static{
+    font-weight: bold;
+    background-color: rgb(247,251,251)
+}

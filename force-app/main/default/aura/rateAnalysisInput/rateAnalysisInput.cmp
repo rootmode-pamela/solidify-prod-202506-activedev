@@ -1,0 +1,302 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-11-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<aura:component controller="customLookUpController" implements="lightning:actionOverride,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:isUrlAddressable" access="global" >
+    <aura:attribute name="newProposal" type = "Proposal__c"/>
+    <aura:attribute name="newProposalError" type = "String"/>
+    <aura:attribute name="showLoanInput" type="Boolean" default="false"/>
+    <aura:attribute name="showDetails" type="Boolean" default="false"/>
+    <aura:attribute name="selectedBorrower" type="sObject" default="{}"/>
+    <aura:attribute name="selectedLoan" type="sObject" default="{}"/>
+    <aura:attribute name="contactId" type="String" default=""/>
+    <aura:attribute name="borrowerName" type="String"/>
+    <aura:attribute name="leadId" type="String"/>
+    <aura:attribute name="loanId" type="String"/>
+    <aura:attribute name="noLoans" type="Boolean"/>
+    <aura:attribute name="transactionType" type="String"/>
+    <aura:attribute name="loanAmount" type="String"/>
+    <aura:attribute name="qualFico" type="String"/>    
+    <aura:attribute name="loanProgram" type="String"/>
+    <aura:attribute name="loanType" type="String"/>
+    <aura:attribute name="purchasePrice" type="String"/>
+    <aura:attribute name="appraisedVal" type="String"/>
+    <aura:attribute name="loanSelected" type="Boolean" default="false"/>
+    <aura:attribute name="recordError" type="String"/>
+    <aura:attribute name="proposalRecord" type="Object"/>
+    <aura:attribute name="overrideComp" type="Boolean" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+      
+    <lightning:navigation aura:id="navService" />
+    
+	<force:recordData aura:id="propRecordCreator"
+                recordId="{!v.recordId}"
+                targetFields="{!v.newProposal}"
+                layoutType="FULL"
+                mode="EDIT" />
+
+    <lightning:card>
+        
+        <c:borrowerLookup selectedBorrower="{!v.selectedBorrower}" showLoanInput="{!v.showLoanInput}" showDetails="{!v.showDetails}"
+                          contactId="{!v.contactId}" noLoans="{!v.noLoans}" leadId="{!v.leadId}" borrowerName="{!v.borrowerName}"/>
+            
+               <aura:if isTrue="{!v.showLoanInput}">           
+        			<c:loanLookup showDetails="{!v.showDetails}" selectedLoan="{!v.selectedLoan}"  loanId="{!v.loanId}" contactId="{!v.contactId}"
+                                  loanAmount="{!v.loanAmount}" transactionType="{!v.transactionType}"
+                                  qualFico="{!v.qualFico}" loanProgram="{!v.loanProgram}" loanType="{!v.loanType}" purchasePrice="{!v.purchasePrice}"
+                                  appraisedVal="{!v.appraisedVal}" loanSelected="{!v.loanSelected}"/>     
+     			    
+     			</aura:if>
+        
+        <aura:if isTrue="{!v.noLoans}">
+            <div class="slds-p-left_small slds-p-top_small">There are no open Loans associated to this Contact.</div>
+        </aura:if>
+    </lightning:card>
+    
+    
+    
+    
+    <!-- TRANSACTION DETAILS SECTION -->
+     
+    <aura:if isTrue="{!v.showDetails}"> 
+		<lightning:card> 
+          <div class="slds-grid">
+			<div class="slds-col slds-size_1-of-4 slds-p-right_xx-small">         
+           		<h1 style="font-size: 15px;font-weight: bold;" class="slds-p-left_small slds-p-bottom_small slds-p-right_small header">Transaction Details</h1>
+                <lightning:input class="slds-p-left_small slds-p-right_small" aura:id="borrowerName" label="Borrower Name" value="{!v.borrowerName}"
+                                 readonly="true"/>
+  				<aura:if isTrue="{!v.loanSelected}">
+                	<lightning:input class="slds-p-left_small slds-p-right_small" aura:id="transactionType" name="transactionType" label="Transaction Type" 
+                                     value="{!v.transactionType}" readonly="true"/>
+                <aura:set attribute="else"> 
+                    <lightning:select class="slds-p-left_small slds-p-right_small" aura:id="transactionType" name="select" label="Transaction Type" >
+                        <option value=""></option>
+                        <option value="Purchase">Purchase</option>
+                        <option value="No Cash">No Cash Out Refinance</option>
+                        <option value="Cash">Cash Out Refinance</option>
+                    </lightning:select>
+      			</aura:set>
+             	</aura:if>
+    			
+              
+                
+                 <lightning:input class="slds-p-left_small slds-p-right_small" type="search" aura:id="SolidContact" label="Solidify Contact"/>
+                 <lightning:input class="slds-p-left_small slds-p-right_small" type="date" aura:id="prepDate" label="Prepared Date" />
+                <lightning:input class="slds-p-left_small slds-p-right_small" type="number" aura:id="lockPer" label="Lock Period"/>
+                
+                     
+                <br/>
+                <h1 style="font-size: 15px;font-weight: bold;" class="slds-p-left_small slds-p-right_small header">Fees Analysis</h1>
+                
+                
+                <lightning:input class="slds-p-left_small slds-p-right_small" aura:id="estTitle" type="number" formatter="currency" 
+                                 oncommit="{!c.handleUpdate}" step=".01" label="Est. Fees - Title/Escrow/Recording" />
+                <lightning:input oncommit="{!c.handleUpdate}" class="slds-p-left_small slds-p-right_small" aura:id="estLender" type="number" 
+                                 formatter="currency" step=".01" label="Est. Fees - Lender" />
+                <lightning:input oncommit="{!c.handleUpdate}" class="slds-p-left_small slds-p-right_small" aura:id="estCredit" type="number" 
+                                 formatter="currency" step=".01" label="Est. Fees - Appraisal and Credit"/>
+                <lightning:select onchange="{!c.handleUpdate}" class="slds-p-left_small slds-p-right_small" aura:id="addFees" label="Add Fees to Loan Balance?">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+    			</lightning:select>
+                
+                 
+             </div>
+             
+              
+              
+            <!-- LOAN DETAILS SECTION -->  
+              
+            <div class="slds-col slds-size_1-of-4">
+                <h1 style="font-size: 15px;font-weight: bold;" class="slds-p-left_small slds-p-bottom_small slds-p-right_large header">Loan Details</h1>
+                
+                <aura:if isTrue="{!v.loanSelected}">
+                    <lightning:input  aura:id="loanAmount" oncommit="{!c.handleUpdate}" class="slds-p-left_small slds-p-right_small"  name="loanAmount" 
+                                     type="number" formatter="currency" step="1" label="Loan Amount" value="{!v.loanAmount}" />
+				<aura:set attribute="else">
+                    <lightning:input aura:id="loanAmount" oncommit="{!c.handleUpdate}" class="slds-p-left_small slds-p-right_small"  name="loanAmount" 
+                                     type="number" formatter="currency" step="1" label="Loan Amount" />
+                    </aura:set>
+                </aura:if>
+                
+                     
+                     <lightning:input aura:id="estVal" class="slds-p-left_small slds-p-right_small"  type="number" formatter="currency" step="1" 
+                                      label="Estimated Value/Purchase Price"  />
+                
+                <aura:if isTrue="{!v.loanSelected}">           	
+                	<lightning:input aura:id="ficoScore" class="slds-p-left_small slds-p-right_small"  label="FICO Score" value="{!v.qualFico}" readonly="true" />
+                <aura:set attribute="else">
+                    <lightning:input aura:id="ficoScore" class="slds-p-left_small slds-p-right_small"  label="FICO Score" />
+                </aura:set>
+                </aura:if>
+                
+                <aura:if isTrue="{!v.loanSelected}">
+ 					 <lightning:input aura:id="loanProgram" class="slds-p-left_small slds-p-right_small"  label="Loan Program" value="{!v.loanProgram}"/>
+                <aura:set attribute="else">
+  					 <lightning:select aura:id="loanProgram" class="slds-p-left_small slds-p-right_small"  label="Loan Program">
+                		<option value="Conforming">Conforming</option>
+                        <option value="Jumbo">Jumbo</option>
+                        <option value="FHA">FHA</option>
+                        <option value="VA">VA</option>
+                	</lightning:select>
+    			</aura:set>
+                </aura:if>
+   
+                <lightning:input aura:id="fixedTermYears" value="30" oncommit="{!c.handleUpdate}"  class="slds-p-left_small slds-p-right_small"  type="number"  
+                                 label="Fixed Term Years"/>
+                
+                <aura:if isTrue="{!v.loanSelected}">
+                    <lightning:input aura:id="loanType" class="slds-p-left_small slds-p-right_small"  label="Loan Type" value="{!v.loanType}" readonly="true"/>
+   				<aura:set attribute="else">
+                    <lightning:select aura:id="loanType" class="slds-p-left_small slds-p-right_small"  label="Loan Type">
+                             <option value="Year Fixed">Year-Fixed</option>
+                             <option value="Year ARM">Year ARM</option>
+                    </lightning:select>                    
+                </aura:set>
+                </aura:if>
+                     
+                <lightning:input aura:id="treasuryYield" class="slds-p-left_small slds-p-right_small"  label="10 Year Treasury Yield" type="number"
+                                      formatter="percent-fixed" step="0.001"/>
+             
+                <aura:if isTrue="{!v.loanSelected}">  
+                    <lightning:input aura:id="purchasePrice" readonly="true" class="slds-p-left_small slds-p-right_small"  type="number" formatter="currency" step="1" 
+                                     label="Purchase Price" value="{!v.purchasePrice}"/>                  
+                    <lightning:input aura:id="appraisedVal" readonly="true" class="slds-p-left_small slds-p-right_small" type="number" formatter="currency" step="1" 
+                                     label="Appraised Value" value="{!v.purchasePrice}"/>
+                </aura:if>
+                
+                
+                
+                
+                <!--COMPENSATION SECTION-->
+                
+                <h1 style="font-size: 15px;font-weight: bold;" class="slds-p-left_small slds-p-top_medium slds-p-bottom_x-small slds-p-right_small header">
+                    Compensation</h1>
+                
+                 <lightning:input aura:id="origFee" oncommit="{!c.handleUpdate}"  class="slds-p-left_small slds-p-right_small" type="number" name="input6" 
+                                  label="Compensation (LPC/BPC)" step="0.01" value="1.50" />
+                <lightning:input aura:id="override" class="slds-p-left_small slds-p-top_small"  type="toggle" label="Override Comp?" 
+                                 name="override" checked="false" onchange="{!c.updateOverride}"/>
+                
+                <aura:if isTrue="{!v.overrideComp}">
+                    <lightning:input aura:id="overrideMin" class="slds-p-left_small" type="number"  step="1" name="overrideMin" label="Override Min" 
+                                     value="2500" oncommit="{!c.handleUpdate}"/>
+                    <lightning:input aura:id="overrideMax" class="slds-p-left_small" type="number"  step="1" name="overrideMax" label="Override Max" 
+                                     value="9500" oncommit="{!c.handleUpdate}"/>
+                </aura:if>
+                      	
+                <br/>
+                <br/>            
+            </div>
+
+              
+              
+              
+              <!-- RATE/PRICE TABLE SECTION --> 
+                        
+        <div class="slds-col slds-size_1-of-2 slds-p-top_medium slds-p-right_small slds-p-left slds-p-bottom_medium">
+     		<lightning:card > 
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:input aura:id="gpa" value="0.000" oncommit="{!c.handleUpdate}" label="Global Pricing Adjuster" class="slds-p-around_small" 
+                                         name="adjuster" type="number"  step="0.001" 
+                                         /> </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-right_medium slds-p-top_x-large">
+                        
+                    <lightning:button class="slds-float_right slds-m-left_small " variant="brand" label="Submit" title="Update" onclick="{!c.saveRecord}"/> 
+                    </div>
+                </div>
+                   
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                      <thead>
+                      	<tr class="slds-line-height_reset">
+                        	<th scope="col" style="width:6rem">Rate</th>
+                            <th scope="col" style="width:6rem">Price</th>
+                            <th scope="col" style="width:6rem">Adj. Price</th>
+                            <th scope="col" style="width:6rem">Orig</th>
+                            <th scope="col" style="width:6rem">Total Costs</th>
+                        </tr>
+                      </thead>
+                            
+                     <tbody>
+                        <tr class="slds-hint-parent">
+                          <th scope="row" >
+                              <lightning:input aura:id="rate1" oncommit="{!c.handleUpdate}"  class="slds-p-right_small slds-p-bottom_small" type="number" name="rate1" step="0.001"/>
+                          </th>
+                          <td><lightning:input aura:id="price1" oncommit="{!c.handleUpdate}"  class="slds-p-bottom_small slds-p-right_small slds-p-left_small" type="number" step="0.001"/></td>
+                          <td><lightning:formattedNumber aura:id="adjPrice1" /></td>
+                          <td><lightning:formattedNumber aura:id="origPrice1" minimumFractionDigits="2" maximumFractionDigits="2"/></td>
+                          <td><lightning:formattedNumber aura:id="totalCost1"  maximumFractionDigits="0"/></td>    
+                       </tr>  
+                          
+                       <tr class="slds-hint-parent">
+                          <th scope="row"  >
+                              <lightning:input aura:id="rate2" oncommit="{!c.handleUpdate}"  class="slds-p-right_small slds-p-bottom_small" type="number" step="0.001"
+                                               /></th>
+                          <td><lightning:input aura:id="price2" oncommit="{!c.handleUpdate}" class="slds-p-bottom_small slds-p-right_small slds-p-left_small" type="number" 
+                                               name="input6" step="0.001" /></td>
+                          <td><lightning:formattedNumber aura:id="adjPrice2" /></td>
+                          <td><lightning:formattedNumber aura:id="origPrice2"  minimumFractionDigits="2" maximumFractionDigits="2"/></td>
+                          <td><lightning:formattedNumber aura:id="totalCost2"  maximumFractionDigits="0"/></td>
+                        </tr>
+                          
+                       <tr class="slds-hint-parent">
+                          <th scope="row" >
+                            <lightning:input aura:id="rate3" oncommit="{!c.handleUpdate}" class="slds-p-right_small slds-p-bottom_small" type="number" step="0.001" />
+                           </th>
+                          <td><lightning:input aura:id="price3" oncommit="{!c.handleUpdate}" class="slds-p-bottom_small slds-p-right_small slds-p-left_small"
+                                               type="number" name="price3" step="0.001" /></td>
+                          <td><lightning:formattedNumber aura:id="adjPrice3" /></td>
+                          <td><lightning:formattedNumber aura:id="origPrice3"  minimumFractionDigits="2" maximumFractionDigits="2"/></td>
+                          <td><lightning:formattedNumber aura:id="totalCost3"  maximumFractionDigits="0"/></td>
+                       </tr>
+                          
+                       <tr class="slds-hint-parent">
+                          <th scope="row" >                           
+                              <lightning:input aura:id="rate4" oncommit="{!c.handleUpdate}" class="slds-p-right_small slds-p-bottom_small" type="number" step="0.001"/>
+                           </th>
+                          <td>
+                              <lightning:input aura:id="price4" oncommit="{!c.handleUpdate}" class="slds-p-bottom_small slds-p-right_small slds-p-left_small" type="number" 
+                                               step="0.001" />
+                           </td>
+                          <td><lightning:formattedNumber aura:id="adjPrice4" /></td>
+                          <td><lightning:formattedNumber aura:id="origPrice4"  minimumFractionDigits="2" maximumFractionDigits="2"/></td>
+                          <td><lightning:formattedNumber aura:id="totalCost4" maximumFractionDigits="0"/></td>
+                       </tr>
+                          
+                       <tr class="slds-hint-parent">
+                          <th scope="row" >
+                              <lightning:input aura:id="rate5" oncommit="{!c.handleUpdate}" class="slds-p-right_small slds-p-bottom_small" type="number" step="0.001" />
+                          </th>
+                          <td><lightning:input aura:id="price5" oncommit="{!c.handleUpdate}" class="slds-p-bottom_small slds-p-right_small slds-p-left_small" type="number" 
+                                               step="0.001" /></td>
+                          <td><lightning:formattedNumber aura:id="adjPrice5" /></td>
+                          <td><lightning:formattedNumber aura:id="origPrice5"   minimumFractionDigits="2" maximumFractionDigits="2"/></td>
+                          <td><lightning:formattedNumber aura:id="totalCost5"  maximumFractionDigits="0"/></td>
+                       </tr>
+                          
+                       <tr class="slds-hint-parent">
+                          <th scope="row">
+                              <lightning:input aura:id="rate6" oncommit="{!c.handleUpdate}" class="slds-p-right_small slds-p-bottom_small" type="number" name="input6" step="0.001" 
+                                               /></th>
+                          <td><lightning:input aura:id="price6" oncommit="{!c.handleUpdate}" class="slds-p-bottom_small slds-p-right_small slds-p-left_small" type="number" name="input6" 
+                                               step="0.001" /></td>
+                          <td><lightning:formattedNumber aura:id="adjPrice6" /></td>
+                          <td><lightning:formattedNumber aura:id="origPrice6"  minimumFractionDigits="2" maximumFractionDigits="2"/></td>
+                          <td><lightning:formattedNumber aura:id="totalCost6"  maximumFractionDigits="0"/></td>
+                       </tr>
+                         
+                     </tbody>
+                   </table>
+                
+				</lightning:card>
+    		</div>
+         </div>                    
+    </lightning:card>
+    </aura:if>
+</aura:component>

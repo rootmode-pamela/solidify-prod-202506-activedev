@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Encompass_User_Email__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Email listed in encompass for salesforce user matching</inlineHelpText>
+    <label>Encompass User Email</label>
+    <length>255</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

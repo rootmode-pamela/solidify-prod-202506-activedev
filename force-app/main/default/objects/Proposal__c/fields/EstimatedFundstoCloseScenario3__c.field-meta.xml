@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EstimatedFundstoCloseScenario3__c</fullName>
+    <formula>DownPaymentScenario3__c +(Escrow_Taxes_Months__c* EstimatedTaxesScenario3__c)+(Escrow_Ins_Months__c* EstimatedInsuranceScenario3__c )+( First_Loan_Amount_Scenario_3__c * Rate_Scenario_3__c /365*15) + TotalFeesS3__c + OtherDueAtCloseS3__c + CashDeposit3__c + SellerCredit3__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Estimated Funds to Close</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

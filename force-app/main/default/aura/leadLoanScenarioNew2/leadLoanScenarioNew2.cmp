@@ -1,0 +1,332 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="Lead" type="Object" />
+    <aura:attribute name="recordError" type="String" />
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:attribute name="dirtyFields" type="List"/>
+    
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+    
+    <lightning:recordEditForm aura:id="leadLoanScenarioForm" recordId="{!v.recordId}" objectApiName="Lead" density="compact"
+                              onload="{!c.handleLoad}"
+                              onsuccess="{!c.handleSuccess}"
+                              
+                              >
+        <lightning:messages />
+        <aura:if isTrue="{!not(empty(v.recordError))}">
+            <div class="recordError">
+                {!v.recordError}</div>
+        </aura:if>
+        
+        <lightning:card>
+            <div class="slds-grid slds-size_1-of-1">
+                <div class="slds-col slds-box slds-m-right_xx-small slds-size_1-of-5">
+                    <h1 class="title" >CURRENT LOAN</h1>
+                    <div class="slds-grid slds-size_1-of-1">
+                        <div class="slds-col slds-size_1-of-1">
+                            <lightning:inputField class="slds-size_1-of-1" aura:id="occupancy" fieldName="Occupancy__c" onchange="{!c.highlightChangedField}" variant="label-stacked" />
+                            <lightning:inputField class="slds-size_1-of-1" aura:id="propery" fieldName="Subject_Property_Type__c" onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                            <lightning:inputField class="slds-size_1-of-1" aura:id="units" fieldName="Number_of_Units__c" onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                            <lightning:inputField class="slds-size_1-of-1" aura:id="value" fieldName="Estimated_Value__c" onchange="{!c.highlightChangedField}" variant="label-stacked" />
+                            <lightning:inputField class="slds-size_1-of-1" aura:id="program" fieldName="Current_Program__c"  onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                            <lightning:inputField class="slds-size_1-of-1" aura:id="balance" fieldName="Current_Balance__c" onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                            <lightning:inputField class="slds-size_1-of-1" aura:id="rate" fieldName="Current_Rate__c" onchange="{!c.highlightChangedField}" variant="label-stacked" />
+                            <lightning:inputField class="slds-size_1-of-1" aura:id="payment" fieldName="Current_Payment__c"  onchange="{!c.highlightChangedField}" variant="label-stacked"/>
+                            <div>
+                                <lightning:button disabled="true" aura:id="submitButton" class="slds-m-top_small" type="submit" label="Submit" />
+                            </div>
+                            <lightning:outputField class="slds-size_1-of-1" fieldName="Years_Remaining_on_Current_Loan__c" variant="label-stacked"/>
+                            <lightning:outputField class="slds-size_1-of-1" fieldName="Total_Interest_Remaining_on_Current_Loan__c" variant="label-stacked"/>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                
+                
+                <div class="slds-col slds-box slds-size_4-of-5 slds-m-right_xx-small">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Labels">&nbsp;</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Scenario1">Scenario 1</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Scenario2">Scenario 2</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Scenario3">Scenario 3</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th data-label="Purpose" scope="row">
+                                    Purpose:
+                                </th>
+                                <td data-label="S1-Purpose">
+                                    <div title="S1-Purpose">
+                                        <lightning:inputField fieldName="Purpose__c" aura:id="purpose1" onchange="{!c.highlightChangedField}" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-Purpose">
+                                    <div title="S2-Purpose">
+                                        <lightning:inputField fieldName="Purpose_Scenario_2__c" aura:id="purpose2" onchange="{!c.highlightChangedField}" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-Purpose">
+                                    <div title="S3-Purpose">
+                                        <lightning:inputField fieldName="Purpose_Scenario_3__c" aura:id="purpose3" onchange="{!c.highlightChangedField}" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="Loan Program" scope="row">
+                                    Loan Program:
+                                </th>
+                                <td data-label="S1-Program">
+                                    <div title="S1-Program">
+                                        <lightning:inputField fieldName="Loan_Program__c" aura:id="program1" onchange="{!c.highlightChangedField}" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-Program">
+                                    <div title="S2-Program">
+                                        <lightning:inputField fieldName="Loan_Program_Scenario_2__c" aura:id="program2" onchange="{!c.highlightChangedField}" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-Program">
+                                    <div title="S3-Program">
+                                        <lightning:inputField fieldName="Loan_Program_Scenario_3__c" aura:id="program3" onchange="{!c.highlightChangedField}" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="Term Due" scope="row">
+                                    Term Due:
+                                </th>
+                                <td data-label="S1-TermDue">
+                                    <div class="slds-truncate" title="S1-TermDue">
+                                        <lightning:inputField fieldName="Term_Due__c" aura:id="term1" onchange="{!c.highlightChangedField}" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-TermDue">
+                                    <div class="slds-truncate" title="S2-TermDue">
+                                        <lightning:inputField fieldName="Term_Due_Scenario_2__c" aura:id="term2" onchange="{!c.highlightChangedField}" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-TermDue">
+                                    <div class="slds-truncate" title="S3-TermDue">
+                                        <lightning:inputField fieldName="Term_Due_Scenario_3__c" aura:id="term3" onchange="{!c.highlightChangedField}" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="LoanAmt" scope="row">
+                                    Loan Amt:
+                                </th>
+                                <td data-label="S1-LoanAmt">
+                                    <div class="slds-truncate" title="S1-LoanAmt">
+                                        <lightning:inputField fieldName="First_Loan_Amount_Scenario_1__c" aura:id="amt1" onchange="{!c.highlightChangedField}" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-LoanAmt">
+                                    <div class="slds-truncate" title="S2-LoanAmt">
+                                        <lightning:inputField fieldName="First_Loan_Amount_Scenario_2__c" aura:id="amt2"  onchange="{!c.highlightChangedField}" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-LoanAmt">
+                                    <div class="slds-truncate" title="S3-LoanAmt">
+                                        <lightning:inputField fieldName="First_Loan_Amount_Scenario_3__c" aura:id="amt3"  onchange="{!c.highlightChangedField}" variant="label-hidden" /></div>
+                                </td>
+                            </tr>  
+                            
+                            <tr>
+                                <th data-label="Rate" scope="row">
+                                    Rate:
+                                </th>
+                                <td data-label="S1-Rate">
+                                    <div class="slds-truncate" title="S1-Rate">
+                                        <lightning:inputField fieldName="Rate_Scenario_1__c" aura:id="rate1"  onchange="{!c.highlightChangedField}" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-Rate">
+                                    <div class="slds-truncate" title="S2-Rate">
+                                        <lightning:inputField fieldName="Rate_Scenario_2__c" aura:id="rate2" onchange="{!c.highlightChangedField}" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-Rate">
+                                    <div class="slds-truncate" title="S3-Rate">
+                                        <lightning:inputField fieldName="Rate_Scenario_3__c" aura:id="rate3" onchange="{!c.highlightChangedField}" variant="label-hidden" /></div>
+                                </td>
+                            </tr>  
+                            <tr>
+                                <th data-label="LTV" scope="row">
+                                    LTV:
+                                </th>
+                                <td data-label="S1-LTV">
+                                    <div class="slds-truncate" title="S1-LTV">
+                                        <lightning:outputField fieldName="LTV_Scenario_1__c" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-LTV">
+                                    <div class="slds-truncate" title="S2-LTV">
+                                        <lightning:outputField fieldName="LTV_Scenario_2__c" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-LTV">
+                                    <div class="slds-truncate" title="S3-LTV">
+                                        <lightning:outputField fieldName="LTV_Scenario_3__c" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="CLTV" scope="row">
+                                    CLTV:
+                                </th>
+                                <td data-label="S1-CLTV">
+                                    <div class="slds-truncate" title="S1-CLTV">
+                                        <lightning:outputField fieldName="CLTV_Scenario_1__c" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-CLTV">
+                                    <div class="slds-truncate" title="S2-CLTV">
+                                        <lightning:outputField fieldName="CLTV_Scenario_2__c" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-CLTV">
+                                    <div class="slds-truncate" title="S3-CLTV">
+                                        <lightning:outputField fieldName="CLTV_Scenario_3__c" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="CLTV" scope="row">
+                                    Monthly Payment:
+                                </th>
+                                <td data-label="S1-Payment">
+                                    <div class="slds-truncate" title="S1-Payment">
+                                        <lightning:outputField fieldName="Monthly_Payment__c" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-Payment">
+                                    <div class="slds-truncate" title="S2-Payment">
+                                        <lightning:outputField fieldName="Monthly_Payment_Scenario_2__c" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-Payment">
+                                    <div class="slds-truncate" title="S3-Payment">
+                                        <lightning:outputField fieldName="Monthly_Payment_Scenario_3__c" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="CLTV" scope="row">
+                                    Total Interest:
+                                </th>
+                                <td data-label="S1-TotalInterest">
+                                    <div class="slds-truncate" title="S1-TotalInterest">
+                                        <lightning:outputField fieldName="Total_Interest_Scenario_1__c" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-TotalInterest">
+                                    <div class="slds-truncate" title="S2-TotalInterest">
+                                        <lightning:outputField fieldName="Total_Interest_Scenario_2__c" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-TotalInterest">
+                                    <div class="slds-truncate" title="S3-TotalInterest">
+                                        <lightning:outputField fieldName="Total_Interest_Scenario_3__c" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="PaymentSavings" scope="row">
+                                    Monthly Payment Savings:
+                                </th>
+                                <td data-label="S1-PaymentSavings">
+                                    <div class="slds-truncate" title="S1-PaymentSavings">
+                                        <lightning:outputField fieldName="Monthly_Payment_Savings__c" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-PaymentSavings">
+                                    <div class="slds-truncate" title="S2-PaymentSavings">
+                                        <lightning:outputField fieldName="Monthly_Payment_Savings_Scenario_2__c" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-PaymentSavings">
+                                    <div class="slds-truncate" title="S3-PaymentSavings">
+                                        <lightning:outputField fieldName="Monthly_Payment_Savings_Scenario_3__c" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="InterestSavings" scope="row">
+                                    Daily Interest Savings:
+                                </th>
+                                <td data-label="S1-InterestSavings">
+                                    <div class="slds-truncate" title="S1-InterestSavings">
+                                        <lightning:outputField fieldName="Daily_Interest_Savings__c" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-InterestSavings">
+                                    <div class="slds-truncate" title="S2-InterestSavings">
+                                        <lightning:outputField fieldName="Daily_Interest_Savings_Scenario_2__c" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-InterestSavings">
+                                    <div class="slds-truncate" title="S3-InterestSavings">
+                                        <lightning:outputField fieldName="Daily_Interest_Savings_Scenario_3__c" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="OnPacePayment" scope="row">
+                                    On Pace Payment:
+                                </th>
+                                <td data-label="S1-OnPacePayment">
+                                    <div class="slds-truncate" title="S1-OnPacePayment">
+                                        <lightning:outputField fieldName="On_Pace_Payment_Scenario_1__c" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-OnPacePayment">
+                                    <div class="slds-truncate" title="S2-OnPacePayment">
+                                        <lightning:outputField fieldName="On_Pace_Payment_Scenario_2__c" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-OnPacePayment">
+                                    <div class="slds-truncate" title="S3-OnPacePayment">
+                                        <lightning:outputField fieldName="On_Pace_Payment_Scenario_3__c" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="OnPaceSavings" scope="row">
+                                    On Pace Savings:
+                                </th>
+                                <td data-label="S1-OnPaceSavings">
+                                    <div class="slds-truncate" title="S1-OnPaceSavings">
+                                        <lightning:outputField fieldName="On_Pace_Savings_Scenario_1__c" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-OnPaceSavings">
+                                    <div class="slds-truncate" title="S2-OnPaceSavings">
+                                        <lightning:outputField fieldName="On_Pace_Savings_Scenario_2__c" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-OnPaceSavings">
+                                    <div class="slds-truncate" title="S3-OnPaceSavings">
+                                        <lightning:outputField fieldName="On_Pace_Savings_Scenario_3__c" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="MaturityReduction" scope="row">
+                                    Maturity Reduction:
+                                </th>
+                                <td data-label="S1-MaturityReduction">
+                                    <div class="slds-truncate" title="S1-MaturityReduction">
+                                        <lightning:outputField fieldName="Maturity_Reduction_Scenario_1__c" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-MaturityReduction">
+                                    <div class="slds-truncate" title="S2-MaturityReduction">
+                                        <lightning:outputField fieldName="Maturity_Reduction_Scenario_2__c" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-MaturityReduction">
+                                    <div class="slds-truncate" title="S3-MaturityReduction">
+                                        <lightning:outputField fieldName="Maturity_Reduction_Scenario_3__c" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th data-label="LifetimeSavings" scope="row">
+                                    Lifetime Savings:
+                                </th>
+                                <td data-label="S1-LifetimeSavings">
+                                    <div class="slds-truncate" title="S1-Lifetime Savings">
+                                        <lightning:outputField fieldName="Lifetime_Savings_Scenario_1__c" variant="label-hidden"/></div>
+                                </td>
+                                <td data-label="S2-LifetimeSavings">
+                                    <div class="slds-truncate" title="S2-MaturityReduction">
+                                        <lightning:outputField fieldName="Lifetime_Savings_Scenario_2__c" variant="label-hidden" /></div>
+                                </td>
+                                <td data-label="S3-LifetimeSavings">
+                                    <div class="slds-truncate" title="S3-LifetimeSavings">
+                                        <lightning:outputField fieldName="Lifetime_Savings_Scenario_3__c" variant="label-hidden" /></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                    
+                </div>
+            </div>
+        </lightning:card>
+        
+    </lightning:recordEditForm>
+</aura:component>

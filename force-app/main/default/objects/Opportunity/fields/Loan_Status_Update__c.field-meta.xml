@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loan_Status_Update__c</fullName>
+    <description>(LSU) AZ only</description>
+    <inlineHelpText>(LSU) AZ only</inlineHelpText>
+    <label>Loan Status Update</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

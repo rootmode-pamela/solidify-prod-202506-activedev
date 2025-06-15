@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Borrower_Paid__c</fullName>
+    <description>To establish whether the loan is lender paid or borrower paid</description>
+    <label>LPC / BPC</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Lender Paid</fullName>
+                <default>true</default>
+                <label>Lender Paid</label>
+            </value>
+            <value>
+                <fullName>Borrower Paid</fullName>
+                <default>false</default>
+                <label>Borrower Paid</label>
+            </value>
+            <value>
+                <fullName>Exempt</fullName>
+                <default>false</default>
+                <label>Exempt</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

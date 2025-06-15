@@ -1,0 +1,111 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="Lead" type="Object" />
+    <aura:attribute name="recordError" type="String" />
+    <force:recordData aura:id="leadRecord"
+                  mode="EDIT"
+                  recordId="{!v.recordId}"
+                  targetFields="{!v.Lead}"
+                  targetError="{!v.recordError}"
+                  fields="Id,Name,FirstName,LastName,Nickname__c,Type__c,Role__c,Rating,Branch__c,LeadSource,
+                          Referred_By__c,Ad_Description__c,Ad_Consented__c,Loan_Originator_User__c,OwnerId,
+                          Home_Phone__c,Business_Phone__c,MobilePhone,Business_Phone__c,Email,Email_2__c,
+                          Company,Title,Income_Sources__c,Estimated_Income__c,Impounds__c,Fico__c,Self_Reported_Credit__c,
+                          Purpose__c,Occupancy__c,Subject_Property_Type__c,Number_of_Units__c,
+                          Rate_Quoted__c"
+                  recordUpdated="{!c.recordUpdate}"
+                      />
+    
+    
+     
+    <lightning:recordEditForm aura:id="leadLoanDetailForm" recordId="{!v.recordId}" objectApiName="Lead" density="compact" >
+        <lightning:messages />
+		<aura:if isTrue="{!not(empty(v.recordError))}">
+        	<div class="recordError">
+            	{!v.recordError}</div>
+    	</aura:if>
+            
+             
+       
+         <div class="slds-grid slds-gutters">
+            <div class="slds-col  slds-size_1-of-4">
+                <div class="slds-section slds-is-open">
+  				<h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small" title="Form Data"><b>Form Data</b></span>
+  				</h3>
+                <div class="slds-p-left_small">
+                <lightning:inputField fieldName="Type_of_Property__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+        		<lightning:inputField fieldName="Type_of_Home__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>  
+                <lightning:inputField fieldName="Price_Value_Range__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                <lightning:inputField fieldName="Down_Payment_Range__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                <lightning:inputField fieldName="Loan_Amt_Range_Refi__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+    			<lightning:inputField fieldName="Household_Income_Range__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                <lightning:inputField fieldName="Income_Sources__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                <lightning:inputField fieldName="First_Time_Homebuyer__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                <lightning:inputField fieldName="Realtor_Established__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                    
+            </div>
+
+                </div>
+             </div>
+            <div class="slds-col slds-size_1-of-4">
+                <div class="slds-section slds-is-open">
+  				<h3 class="slds-section__title slds-theme_shade">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Data"><b>Obtained Data</b></span>
+  				</h3>
+<div class="slds-p-left_small">
+                <lightning:inputField fieldName="Purpose__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+   			    <lightning:inputField fieldName="Occupancy__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                <lightning:inputField fieldName="Subject_Property_Type__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>	      
+  			    <lightning:inputField fieldName="Loan_Type__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                <lightning:inputField fieldName="Loan_Program__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>	
+                <lightning:inputField fieldName="Self_Reported_Credit__c" variant="label-stacked" />
+        		<lightning:inputField fieldName="BK_Foreclosure_Past_7yrs__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+    			<lightning:inputField fieldName="Veteran__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                <lightning:inputField fieldName="Timeline__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+
+                    </div>
+            	</div>
+            </div>
+            <div class="slds-col slds-size_1-of-4"> 
+                <div class="slds-section slds-is-open">
+  				<h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small" title="Specifics"><b>Proposed Scenario</b></span>
+  				</h3>
+<div class="slds-p-left_small">
+				<lightning:inputField fieldName="Rate_Quoted__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+				<lightning:inputField fieldName="Price_Est_Value__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                <lightning:inputField fieldName="Down_Payment__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                <lightning:inputField fieldName="Loan_Amount__c" onchange="{!c.handleSaveRecord}"  variant="label-stacked"/>
+    			<lightning:inputField fieldName="LTV__c" onchange="{!c.handleSaveRecord}" variant="label-stacked" />
+    			<lightning:inputField fieldName="CLTV__c" onchange="{!c.handleSaveRecord}" variant="label-stacked" />
+    			<lightning:inputField fieldName="Fico__c" onchange="{!c.handleSaveRecord}"  variant="label-stacked"/>
+    			<lightning:inputField fieldName="Impounds__c" onchange="{!c.handleSaveRecord}"  variant="label-stacked"/>
+    			
+                    </div>
+            </div>
+             </div>
+            <div class="slds-col slds-size_1-of-4">
+                <div class="slds-section slds-is-open">
+  				<h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small" title="Misc"><b>Misc</b></span>
+  				</h3>
+                <div class="slds-p-left_small">
+                    <lightning:inputField fieldName="LeadSource"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                    <lightning:inputField fieldName="Referred_By__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                    <lightning:inputField fieldName="Ad_Description__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                    <lightning:inputField fieldName="Ad_Area__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                    <lightning:inputField fieldName="COE__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                    <lightning:inputField fieldName="Loan_Originator__c"  onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                    <lightning:inputField fieldName="Loan_Originator_User__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                    <lightning:inputField fieldName="OwnerId" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+                    <lightning:inputField fieldName="Branch__c" onchange="{!c.handleSaveRecord}" variant="label-stacked"/>
+     				
+                 </div>
+            </div>  
+             </div>
+        </div>
+       
+        
+    </lightning:recordEditForm>
+
+</aura:component>

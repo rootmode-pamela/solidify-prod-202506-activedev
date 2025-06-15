@@ -1,0 +1,1654 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 09-29-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   04-08-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+
+    <div class="container">
+        <div class="inner-container slds-align_absolute-center">
+            <div class="slds-grid slds-wrap slds-gutters">
+<!-- Header -->
+                <template if:false={hideTable}>
+                    <div class="Contact-image-section">
+                        <img class="" src="/resource/1619120802000/NewSolidifyLogo">
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 Widget">
+                        <h1>Your Loan, Your Choice</h1>
+                        <h4 class="centerText">Loan Options at your fingertips</h4>
+                    </div>
+<!-- Main Rate Comparison Card -->
+                    <div class="slds-col slds-size_1-of-1 Widget">
+                        <article class="slds-card">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="mainTable slds-wrap slds-grid slds-gutters">
+<!--Scenario 1 Column -->
+                                    <div
+                                        class="CompareCards slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3">
+                                        <div class="table slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <h3 class="CardName"> 
+                                                    <lightning-formatted-text class="RateTitle"
+                                                            value={ProgramNameS1F}>
+                                                    </lightning-formatted-text>
+                                                    &nbsp;
+                                                    <lightning-formatted-number
+                                                        format-style="percent-fixed" class="RateTitle"
+                                                        maximum-fraction-digits="3" value={Rate_Scenario_1}>
+                                                    </lightning-formatted-number>
+                                                </h3>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <template if:true={TIIH1}>
+                                                    <lightning-checkbox-group name="TaxesAndInsurance1" label=""
+                                                    options={options1} value={value1} onchange={handleChangePITI1}
+                                                    type="radio">
+                                                    </lightning-checkbox-group>
+                                                </template>
+                                                <template if:false={TIIH1}>
+                                                    <h4>&nbsp;</h4>
+                                                </template>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <div class="slds-grid slds-wrap">
+                                                    <template if:true={isRefinance}>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:
+                                                            </h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                                        format-style="currency" currency-code="USD"
+                                                                                        value={First_Loan_Amount_Scenario_1}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </template>
+
+                                                    <template if:false={isRefinance}>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Purchase Price:</h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="currency"
+                                                                                        currency-code="USD" value={Purchase_Price_S1}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Down Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="currency"
+                                                                currency-code="USD" value={DownPaymentScenario1}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:
+                                                            </h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                                        format-style="currency" currency-code="USD"
+                                                                                        value={First_Loan_Amount_Scenario_1}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+
+                                                    </template>
+                                                    <template if:false={isPITI}>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">P&I Payment:
+                                                            </h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Monthly_Payment_Scenario_1}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </template>
+                                                    <template if:true={isPITI}>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">PITI Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={TotalMonthlyPaymentScenario1}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </template>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Fees:
+                                                            <lightning-helptext content="Fees exclude recurring costs such as interest, taxes, and insurance. See formal Loan Estimate for details."></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="currency" currency-code="USD"
+                                                            value={TotalFeesS1}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">APR:
+                                                            <lightning-helptext content="APR is estimated, see Loan Estimate for most accurate figure."></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells" format-style="percent-fixed"
+                                                         maximum-fraction-digits="3"
+                                                            value={APR1}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Total Interest:
+                                                            <lightning-helptext content="Excludes mortgage insurance"></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="currency" currency-code="USD"
+                                                            value={Total_Interest_Scenario_1}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <template if:false={hideFundsToClose}>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Est. Funds to Close:
+                                                            <lightning-helptext content="Includes all fees, credits, and interest, taxes, and insurance"></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="currency" currency-code="USD"
+                                                            value={EstimatedFundstoCloseScenario1}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    </template>
+                                                    
+
+
+                                                </div>
+                                            </div>
+                                            <div class="buttonDiv slds-col slds-size_1-of-1">
+                                                <button title="Toggle content action"
+                                                    class="slds-button__icon_large slds-button slds-button_neutral detailsButton" onclick={handleToggleClick}>
+                                                View Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+<!-- Scenario 2 Column -->
+                                    <div
+                                        class="CompareCards slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3">
+                                        <div class="table slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <h3 class="CardName"> <!--Rate &nbsp;-->
+                                                    <lightning-formatted-text class="RateTitle"
+                                                            value={ProgramNameS2F}>
+                                                    </lightning-formatted-text>
+                                                    &nbsp;
+                                                    <lightning-formatted-number
+                                                        format-style="percent-fixed" class="RateTitle"
+                                                        maximum-fraction-digits="3" value={Rate_Scenario_2}>
+                                                    </lightning-formatted-number>
+                                                </h3>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <template if:true={TIIH2}>
+                                                <lightning-checkbox-group name="TaxesAndInsurance2" label=""
+                                                    options={options2} value={value2} onchange={handleChangePITI2}
+                                                    type="radio">
+                                                </lightning-checkbox-group>
+                                                </template>
+                                                <template if:false={TIIH2}>
+                                                    <br>
+                                                </template>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <div class="slds-grid slds-wrap">
+                                                    <template if:true={isRefinance}>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:
+                                                            </h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                                        format-style="currency" currency-code="USD"
+                                                                                        value={First_Loan_Amount_Scenario_2}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </template>
+
+                                                    <template if:false={isRefinance}>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Purchase Price:</h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="currency"
+                                                                                        currency-code="USD" value={Purchase_Price_S2}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Down Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="currency"
+                                                                currency-code="USD" value={DownPaymentScenario2}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:
+                                                            </h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                                        format-style="currency" currency-code="USD"
+                                                                                        value={First_Loan_Amount_Scenario_2}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+
+                                                    </template>
+                                                    <template if:false={isPITI2}>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">P&I Payment:
+                                                            </h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Monthly_Payment_Scenario_2}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </template>
+                                                    <template if:true={isPITI2}>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">PITI Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={TotalMonthlyPaymentScenario2}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </template>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Fees:
+                                                            <lightning-helptext content="Fees exclude recurring costs such as interest, taxes, and insurance. See formal Loan Estimate for details."></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="currency" currency-code="USD"
+                                                            value={TotalFeesS2}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">APR:
+                                                            <lightning-helptext content="APR is estimated, see Loan Estimate for most accurate figure."></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                        format-style="percent-fixed" maximum-fraction-digits="3"
+                                                            value={APR2}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Total Interest:
+                                                            <lightning-helptext content="Excludes mortgage insurance"></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="currency" currency-code="USD"
+                                                            value={Total_Interest_Scenario_2}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <template if:false={hideFundsToClose}>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Est. Funds to Close:
+                                                            <lightning-helptext content="Includes all fees, credits, and interest, taxes, and insurance"></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="currency" currency-code="USD"
+                                                            value={EstimatedFundstoCloseScenario2}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                            <div class="buttonDiv slds-col slds-size_1-of-1">
+                                                <button title="Toggle content action"
+                                                    class="slds-button__icon_large slds-button slds-button_neutral detailsButton" onclick={handleToggleClick2}>
+                                                View Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+<!-- Scenario 3 Column-->
+                                    <div
+                                        class="CompareCards slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3">
+                                        <div class="table slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <h3 class="CardName"> <!--Rate &nbsp;-->
+                                                    <lightning-formatted-text class="RateTitle"
+                                                            value={ProgramNameS3F}>
+                                                    </lightning-formatted-text>
+                                                    &nbsp;
+                                                    <lightning-formatted-number
+                                                        format-style="percent-fixed" class="RateTitle"
+                                                        maximum-fraction-digits="3" value={Rate_Scenario_3}>
+                                                    </lightning-formatted-number>
+                                                </h3>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <template if:true={TIIH3}>
+                                                <lightning-checkbox-group name="TaxesAndInsurance3" label=""
+                                                    options={options3} value={value3} onchange={handleChangePITI3}
+                                                    type="radio">
+                                                </lightning-checkbox-group>
+                                                </template>
+                                                <template if:false={TIIH3}>
+                                                    <br>
+                                                </template>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <div class="slds-grid slds-wrap">
+                                                    <template if:true={isRefinance}>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:
+                                                            </h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                                        format-style="currency" currency-code="USD"
+                                                                                        value={First_Loan_Amount_Scenario_3}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </template>
+
+                                                    <template if:false={isRefinance}>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Purchase Price:</h4>
+                                                        </div>
+                                                        <div class="row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="currency"
+                                                                                        currency-code="USD" value={Purchase_Price_S3}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Down Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells" format-style="currency"
+                                                                currency-code="USD" value={DownPaymentScenario3}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">Loan Amount:
+                                                            </h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                                        format-style="currency" currency-code="USD"
+                                                                                        value={First_Loan_Amount_Scenario_3}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+
+                                                    </template>
+                                                    <template if:false={isPITI3}>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">P&I Payment:
+                                                            </h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={Monthly_Payment_Scenario_3}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </template>
+                                                    <template if:true={isPITI3}>
+                                                        <div class="row slds-col slds-size_1-of-2">
+                                                            <h4 class="row-headers">PITI Payment:</h4>
+                                                        </div>
+                                                        <div class="row row-cells slds-col slds-size_1-of-2">
+                                                            <lightning-formatted-number class="row-cells"
+                                                                format-style="currency" currency-code="USD"
+                                                                value={TotalMonthlyPaymentScenario3}>
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </template>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Fees:
+                                                            <lightning-helptext content="Fees exclude recurring costs such as interest, taxes, and insurance. See formal Loan Estimate for details."></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="currency" currency-code="USD"
+                                                            value={TotalFeesS3}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">APR:
+                                                            <lightning-helptext content="APR is estimated, see Loan Estimate for most accurate figure."></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="percent-fixed" maximum-fraction-digits="3"
+                                                            value={APR3}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Total Interest:
+                                                            <lightning-helptext content="Excludes mortgage insurance"></lightning-helptext>
+                                                            </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="currency" currency-code="USD"
+                                                            value={Total_Interest_Scenario_3}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <template if:false={hideFundsToClose}>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Est. Funds to Close:
+                                                            <lightning-helptext content="Includes all fees, credits, and interest, taxes, and insurance"></lightning-helptext>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="currency" currency-code="USD"
+                                                            value={EstimatedFundstoCloseScenario3}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    </template>
+
+                                                </div>
+                                            </div>
+                                            <div class="buttonDiv slds-col slds-size_1-of-1">
+                                                <button title="Toggle content action"
+                                                    class="slds-button__icon_large slds-button slds-button_neutral detailsButton" onclick={handleToggleClick3}>
+                                                View Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+<!-- Solidify Contact Card -->
+                    <div class="slds-col slds-size_1-of-1 Widget">
+                        <article class="slds-card">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="slds-grid slds-wrap slds-gutters">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="profilediv">
+                                                <img class="Profile-image-section slds-align_absolute-center" src={SolidifyContactFullPhotoUrl}
+                                                    alt="Profile photo">
+                                        </div>
+                                        <div class="contactInfoDiv">
+                                            <br>
+                                            <lightning-formatted-text class="slds-text-heading_small"
+                                                value={SolidifyContactName}>
+                                            </lightning-formatted-text>
+                                            <br>
+                                            <lightning-formatted-email class="slds-text-body_regular"
+                                                value={SolidifyContactEmail}>
+                                            </lightning-formatted-email>
+                                            <br>
+                                            <lightning-formatted-phone class="slds-text-body_regular"
+                                                value={SolidifyContactMobilePhone}>
+                                            </lightning-formatted-phone>
+                                            <br>
+                                            <div class="slds-text-body_regular">NMLS #: &nbsp;
+                                            <lightning-formatted-text class="slds-text-body_regular"
+                                                value={SolidifyContactMLS}>
+                                            </lightning-formatted-text></div>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="slds-grid slds-wrap slds-gutters">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <template if:false={addressEmpty}>
+                                                <h4><b>Address:</b></h4>
+                                                <lightning-formatted-text class="slds-text-heading_small"
+                                                value={Subject_Property_Street}>
+                                                </lightning-formatted-text>
+                                                <br>
+                                                </template>
+                                                <h4><b>Borrower Name:</b></h4>
+                                                <lightning-formatted-text class="slds-text-heading_small"
+                                                value={BorrowerName}>
+                                                </lightning-formatted-text>
+                                                <template if:true={coBorrowerActive}>
+                                                    <br>
+                                                    <h5>And</h5>
+                                                    <lightning-formatted-text class="slds-text-heading_small"
+                                                    value={CoBorrowerName}>
+                                                    </lightning-formatted-text>
+                                                </template>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2">
+
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2">
+
+                                            </div>
+                                            <!--<div class="floatRight slds-col slds-size_1-of-2">
+                                                <div class="Contact-image-section">
+                                                    <img class="" src="/resource/1619120802000/NewSolidifyLogo">
+                                                </div>
+                                                <lightning-formatted-text
+                                                    class="slds-align_absolute-center slds-text-heading_small"
+                                                    value="NMLS #1283930">
+                                                </lightning-formatted-text>
+                                            </div>
+                                            <div class="floatRight slds-col slds-size_1-of-2">
+                                                <br>
+                                                <div class="EHO-image-section">
+                                                    <img class="" src="/resource/1621273869000/EqualOppHousingImage">
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                <div class="slds-col slds-size_1-of-1 Widget">
+                    <p class="pad10">
+                        <b>Disclaimer:</b> This is not a Loan Estimate. This is not an extension of credit or a promise
+                        to lend.
+                        Not everyone will qualify for this quote.
+                        This quote is not locked in and can change at any time. Please contact your loan officer for
+                        more
+                        details.
+                        <br>Your actual rate, payment, and costs could be higher. Get an official Loan Estimate before
+                        choosing
+                        the loan.
+                        <br><br> ©2024 Solidify Mortgage Advisors dba of BowHattan Holdings, Inc. All Rights Reserved.
+                        NMLS
+                        1283930, Equal Housing Lender.
+                    </p>
+                </div>
+            </template>
+<!--Details 1 Section -->
+                <template if:true={isDetails1}>
+                    <div class="slds-col slds-size_1-of-1 Widget bottombuffer">
+                        <article class="slds-card">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="mainTable slds-wrap slds-grid slds-gutters">
+                                    <div class="slds-col slds-size_3-of-4">
+                                        <h2 class="detailsTitle"> 
+                                            <lightning-formatted-text
+                                                    value={ProgramNameS1F}>
+                                            </lightning-formatted-text>
+                                            &nbsp;
+                                            <lightning-formatted-number
+                                                format-style="percent-fixed"
+                                                maximum-fraction-digits="3" value={Rate_Scenario_1}>
+                                            </lightning-formatted-number>
+                                        </h2>
+                                    </div>
+                                    <!--<div class="slds-col rightText slds-size_1-of-4">
+                                        <button class="slds-button rightText slds-button_icon" title="Close"
+                                            onclick={closeModal}>
+                                            <lightning-icon icon-name="utility:close" alternative-text="close"
+                                                size="small">
+                                            </lightning-icon>
+                                        </button>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning-formatted-text class="CardName" value={Scenario1Name}>
+                                        </lightning-formatted-text>
+                                    </div>-->
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning-checkbox-group name="TaxesAndInsurance1" label=""
+                                            class="leftText MainPad" options={options1} value={value1}
+                                            onchange={handleChangePITI1} type="radio">
+                                        </lightning-checkbox-group>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock red slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Rate</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number format-style="percent-fixed"
+                                                    maximum-fraction-digits="3" class="row-cells"
+                                                    value={Rate_Scenario_1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock blue slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Loan Amount</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={First_Loan_Amount_Scenario_1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock green slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Term</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-text class="row-cells"
+                                                    value={Loan_Program_Scenario_1}>
+                                                </lightning-formatted-text>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock purple slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Monthly Payment</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <template if:false={isPITI}>
+                                                    <lightning-formatted-number class="row-cells"
+                                                        format-style="currency" currency-code="USD"
+                                                        value={Monthly_Payment_Scenario_1}>
+                                                    </lightning-formatted-number>
+                                                </template>
+                                                <template if:true={isPITI}>
+                                                    <lightning-formatted-number class="row-cells"
+                                                        format-style="currency" currency-code="USD"
+                                                        value={TotalMonthlyPaymentScenario1}>
+                                                    </lightning-formatted-number>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+<!-- Fees Detail -->
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Origination Charges</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" maximum-fraction-digits="2" value={OriginationTotalS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Points or (Lender Credit)</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" maximum-fraction-digits="2" value={DiscountCreditS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Lender Fee</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={LenderFeeS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Services You Cannot Shop For</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={CreditReportFeeS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Credit Report</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={CreditReportFeeS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Services You Can Shop For</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={ServicesTotalS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Appraisal Fee</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={AppraisalFeeS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Escrow Settlement</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={EscrowFeesS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Title Insurance</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={TitleFeeS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Taxes and Other Government Fees</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={RecordingFeeS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Recording</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={RecordingFeeS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Total Fees</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={TotalFeesS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+<!--Funds to Close Detail-->
+                                    <template if:false={hideFundsToClose}>
+                                    
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Down Payment</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={DownPaymentScenario1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Escrows</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={EscrowsCalcS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Interest</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={InterestCalcS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Other</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={OtherDueAtCloseS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Deposit</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={CashDeposit1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Seller's Credit</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={SellerCredit1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock black slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Estimated Funds to Close</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={EstimatedFundsToCloseS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="bottomBar">
+                        <div class="bottomBarInner">
+                            <div class="backBTN slds-float_left">
+                                <button class="slds-button slds-button_neutral slds-button_icon  backArrow" title="Back"
+                                    onclick={closeModal}>
+                                    <lightning-icon icon-name="utility:back" alternative-text="Back"
+                                        size="small">
+                                    </lightning-icon>
+                                </button>
+                            </div>
+                            <div class="applyBTN slds-float_right">
+                                <button title="Toggle content action"
+                                    class="slds-button__icon_large slds-button slds-button_brand applyButton" onclick={navigateToApplyPage}>
+                                Apply Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+<!--Details 2 Section -->
+                <template if:true={isDetails2}>
+                    <div class="slds-col slds-size_1-of-1 Widget bottombuffer">
+                        <article class="slds-card">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="mainTable slds-wrap slds-grid slds-gutters">
+                                    <div class="slds-col slds-size_3-of-4">
+                                        <h2 class="detailsTitle"> <!--Rate &nbsp;-->
+                                            <lightning-formatted-text
+                                                    value={ProgramNameS2F}>
+                                            </lightning-formatted-text>
+                                            &nbsp;
+                                            <lightning-formatted-number
+                                                format-style="percent-fixed"
+                                                maximum-fraction-digits="3" value={Rate_Scenario_2}>
+                                            </lightning-formatted-number>
+                                        </h2>
+                                    </div>
+                                    <!--<div class="slds-col rightText slds-size_1-of-4">
+                                        <button class="slds-button rightText slds-button_icon" title="Close"
+                                            onclick={closeModal}>
+                                            <lightning-icon icon-name="utility:close" alternative-text="close"
+                                                size="small">
+                                            </lightning-icon>
+                                        </button>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning-formatted-text class="CardName" value={Scenario2Name}>
+                                        </lightning-formatted-text>
+                                    </div>-->
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning-checkbox-group name="TaxesAndInsurance2" label=""
+                                            class="leftText MainPad" options={options2} value={value2}
+                                            onchange={handleChangePITI2} type="radio">
+                                        </lightning-checkbox-group>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock red slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Rate</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number format-style="percent-fixed"
+                                                    maximum-fraction-digits="3" class="row-cells"
+                                                    value={Rate_Scenario_2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock blue slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Loan Amount</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={First_Loan_Amount_Scenario_2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock green slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Term</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-text class="row-cells"
+                                                    value={Loan_Program_Scenario_2}>
+                                                </lightning-formatted-text>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock purple slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Monthly Payment</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <template if:false={isPITI2}>
+                                                    <lightning-formatted-number class="row-cells"
+                                                        format-style="currency" currency-code="USD"
+                                                        value={Monthly_Payment_Scenario_2}>
+                                                    </lightning-formatted-number>
+                                                </template>
+                                                <template if:true={isPITI2}>
+                                                    <lightning-formatted-number class="row-cells"
+                                                        format-style="currency" currency-code="USD"
+                                                        value={TotalMonthlyPaymentScenario2}>
+                                                    </lightning-formatted-number>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Origination Charges</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" maximum-fraction-digits="2" value={OriginationTotalS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Points or (Lender Credit)</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" maximum-fraction-digits="2" value={DiscountCreditS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Lender Fee</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={LenderFeeS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Services You Cannot Shop For</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={CreditReportFeeS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Credit Report</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={CreditReportFeeS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Services You Can Shop For</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={ServicesTotalS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Appraisal Fee</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={AppraisalFeeS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Escrow Settlement</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={EscrowFeesS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Title Insurance</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={TitleFeeS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Taxes and Other Government Fees</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={RecordingFeeS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Recording</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={RecordingFeeS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Total Fees</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={TotalFeesS2}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+<!-- Detail 2 Funds to Close Section-->
+                                    <template if:false={hideFundsToClose}>
+                                                                        
+                                        <div class="topMargin slds-col slds-size_1-of-1">
+                                            <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-2">
+                                                    <h4 class="row-headers white-text">Down Payment</h4>
+                                                </div>
+                                                <div class="row-cells slds-col slds-size_1-of-2">
+                                                    <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                        currency-code="USD" value={DownPaymentScenario2}>
+                                                    </lightning-formatted-number>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="topMargin slds-col slds-size_1-of-1">
+                                            <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-2">
+                                                    <h4 class="row-headers white-text">Escrows</h4>
+                                                </div>
+                                                <div class="row-cells slds-col slds-size_1-of-2">
+                                                    <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                        currency-code="USD" value={EscrowsCalcS2}>
+                                                    </lightning-formatted-number>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="topMargin slds-col slds-size_1-of-1">
+                                            <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-2">
+                                                    <h4 class="row-headers white-text">Interest</h4>
+                                                </div>
+                                                <div class="row-cells slds-col slds-size_1-of-2">
+                                                    <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                        currency-code="USD" value={InterestCalcS2}>
+                                                    </lightning-formatted-number>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="topMargin slds-col slds-size_1-of-1">
+                                            <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-2">
+                                                    <h4 class="row-headers white-text">Other</h4>
+                                                </div>
+                                                <div class="row-cells slds-col slds-size_1-of-2">
+                                                    <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                        currency-code="USD" value={OtherDueAtCloseS2}>
+                                                    </lightning-formatted-number>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="topMargin slds-col slds-size_1-of-1">
+                                            <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-2">
+                                                    <h4 class="row-headers white-text">Deposit</h4>
+                                                </div>
+                                                <div class="row-cells slds-col slds-size_1-of-2">
+                                                    <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                        currency-code="USD" value={CashDeposit2}>
+                                                    </lightning-formatted-number>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="topMargin slds-col slds-size_1-of-1">
+                                            <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-2">
+                                                    <h4 class="row-headers white-text">Seller's Credit</h4>
+                                                </div>
+                                                <div class="row-cells slds-col slds-size_1-of-2">
+                                                    <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                        currency-code="USD" value={SellerCredit2}>
+                                                    </lightning-formatted-number>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="topMargin slds-col slds-size_1-of-1">
+                                            <div class="BackgroundBlock black slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-2">
+                                                    <h4 class="row-headers white-text">Estimated Funds to Close</h4>
+                                                </div>
+                                                <div class="row-cells slds-col slds-size_1-of-2">
+                                                    <lightning-formatted-number class="row-cells" format-style="currency"
+                                                        currency-code="USD" value={EstimatedFundsToCloseS2}>
+                                                    </lightning-formatted-number>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="bottomBar">
+                        <div class="bottomBarInner">
+                            <div class="backBTN slds-float_left">
+                                <button class="slds-button slds-button_neutral slds-button_icon  backArrow" title="Back"
+                                    onclick={closeModal}>
+                                    <lightning-icon icon-name="utility:back" alternative-text="Back"
+                                        size="small">
+                                    </lightning-icon>
+                                </button>
+                            </div>
+                            <div class="applyBTN slds-float_right">
+                                <button title="Toggle content action"
+                                    class="slds-button__icon_large slds-button slds-button_brand applyButton" onclick={navigateToApplyPage}>
+                                Apply Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+<!--Details 3 Section -->
+                <template if:true={isDetails3}>
+                    <div class="slds-col slds-size_1-of-1 Widget bottombuffer">
+                        <article class="slds-card">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="mainTable slds-wrap slds-grid slds-gutters">
+                                    <div class="slds-col slds-size_3-of-4">
+                                        <h2 class="detailsTitle"> <!--Rate &nbsp;-->
+                                            <lightning-formatted-text
+                                                    value={ProgramNameS3F}>
+                                            </lightning-formatted-text>
+                                            &nbsp;
+                                            <lightning-formatted-number
+                                                format-style="percent-fixed"
+                                                maximum-fraction-digits="3" value={Rate_Scenario_3}>
+                                            </lightning-formatted-number>
+                                        </h2>
+                                    </div>
+                                    <!--<div class="slds-col rightText slds-size_1-of-4">
+                                        <button class="slds-button rightText slds-button_icon" title="Close"
+                                            onclick={closeModal}>
+                                            <lightning-icon icon-name="utility:close" alternative-text="close"
+                                                size="small">
+                                            </lightning-icon>
+                                        </button>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning-formatted-text class="CardName" value={Scenario3Name}>
+                                        </lightning-formatted-text>
+                                    </div>-->
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning-checkbox-group name="TaxesAndInsurance3" label=""
+                                            class="leftText MainPad" options={options3} value={value3}
+                                            onchange={handleChangePITI3} type="radio">
+                                        </lightning-checkbox-group>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock red slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Rate</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number format-style="percent-fixed"
+                                                    maximum-fraction-digits="3" class="row-cells"
+                                                    value={Rate_Scenario_3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock blue slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Loan Amount</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={First_Loan_Amount_Scenario_3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock green slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Term</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-text class="row-cells"
+                                                    value={Loan_Program_Scenario_3}>
+                                                </lightning-formatted-text>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="topMargin slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="BackgroundBlock purple slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Monthly Payment</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <template if:false={isPITI3}>
+                                                    <lightning-formatted-number class="row-cells"
+                                                        format-style="currency" currency-code="USD"
+                                                        value={Monthly_Payment_Scenario_3}>
+                                                    </lightning-formatted-number>
+                                                </template>
+                                                <template if:true={isPITI3}>
+                                                    <lightning-formatted-number class="row-cells"
+                                                        format-style="currency" currency-code="USD"
+                                                        value={TotalMonthlyPaymentScenario3}>
+                                                    </lightning-formatted-number>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Origination Charges</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" maximum-fraction-digits="2" value={OriginationTotalS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Points or (Lender Credit)</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" maximum-fraction-digits="2" value={DiscountCreditS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Lender Fee</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={LenderFeeS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Services You Cannot Shop For</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={CreditReportFeeS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Credit Report</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={CreditReportFeeS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Services You Can Shop For</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={ServicesTotalS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Appraisal Fee</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={AppraisalFeeS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Escrow Settlement</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={EscrowFeesS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Title Insurance</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={TitleFeeS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock greyback slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers ">Taxes and Other Government Fees</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={RecordingFeeS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock white slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers">Recording</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={RecordingFeeS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Total Fees</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={TotalFeesS3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+<!-- Detail Section 3 Funds To Close -->
+                                <template if:false={hideFundsToClose}>
+                                                                    
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Down Payment</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={DownPaymentScenario3}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Escrows</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={EscrowsCalcS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Interest</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={InterestCalcS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Other</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={OtherDueAtCloseS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Deposit</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={CashDeposit1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock grey slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Seller's Credit</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells white-text" format-style="currency"
+                                                    currency-code="USD" value={SellerCredit1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topMargin slds-col slds-size_1-of-1">
+                                        <div class="BackgroundBlock black slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="row-headers white-text">Estimated Funds to Close</h4>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-2">
+                                                <lightning-formatted-number class="row-cells" format-style="currency"
+                                                    currency-code="USD" value={EstimatedFundsToCloseS1}>
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="bottomBar">
+                        <div class="bottomBarInner">
+                            <div class="backBTN slds-float_left">
+                                <button class="slds-button slds-button_neutral slds-button_icon backArrow" title="Back"
+                                    onclick={closeModal}>
+                                    <lightning-icon icon-name="utility:back" alternative-text="Back"
+                                        size="small">
+                                    </lightning-icon>
+                                </button>
+                            </div>
+                            <div class="applyBTN slds-float_right">
+                                <button title="Toggle content action"
+                                    class="slds-button__icon_large slds-button slds-button_brand applyButton" onclick={navigateToApplyPage}>
+                                Apply Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+</template>

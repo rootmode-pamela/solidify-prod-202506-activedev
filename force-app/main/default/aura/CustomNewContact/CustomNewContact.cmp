@@ -1,0 +1,298 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-19-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<aura:component controller="CustomNewContactCont" access="global" Implements="lightning:actionOverride,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="openPopup" type="Boolean" default="false"/>
+    <aura:attribute name="createNewLoanSec" type="Boolean" default="false"/>
+    <aura:attribute name="isSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="isError" type="Boolean" default="false"/>
+    <aura:attribute name="errorMessage" type="String"/>
+    <aura:attribute name="contactRec" type="Contact" default="{ 'sobjectType': 'Contact'}" />
+    <aura:attribute name="contact2Rec" type="Contact" default="{ 'sobjectType': 'Contact'}" />
+
+    <aura:attribute name="contactType" type="String" default=""/>
+    <aura:attribute name="isThereCoBorrower" type="String" default="Yes"/>
+    <aura:attribute name="isThereHousehold" type="Boolean" default="false"/>
+    <aura:attribute name="showConfirmModal" type="String" default="false"/>
+    <aura:attribute name="companyName" type="String"/>
+    <aura:attribute name="companyHouseholdName" type="String"/>
+
+    <aura:attribute name="isFirstSection" type="Boolean" default="true"/>
+    <aura:attribute name="isSecondSectionOther" type="Boolean" default="false"/>
+    <aura:attribute name="isSecondSectionClient" type="Boolean" default="false"/>
+    <aura:attribute name="isThirdSectionClient" type="Boolean" default="false"/>
+
+    <aura:attribute access="private" type="List" name="selectionAccount" default="[]"/>
+    <aura:attribute access="private" type="List" name="selectionHousehold" default="[]"/>
+    <aura:attribute access="private" type="List" name="selectionUser" default="[]"/>
+    <aura:attribute access="private" type="List" name="errors" default="[]"/>
+    <aura:attribute access="private" type="Boolean" name="isMultiEntry" default="false"/>
+    <aura:attribute type="Boolean" name="isNewContactFromNewLoan" default="false"/>
+
+    //onContactCreated
+    <aura:registerEvent name="onContactCreated" type="c:CustomEvent" />
+    <aura:import library="lightning:confirm" property="LightningConfirm" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:method name="setVariables" action="{!c.setVariables}">
+        <aura:attribute access="public" name="referredById" type="String"/>
+        <aura:attribute access="public" name="leadSource" type="String"/>
+    </aura:method>
+
+    <!--<button class="slds-align_absolute-center slds-button slds-button_brand" style="width:100% !important;" onclick="{!c.openNewContactButton}">
+        New Contact
+    </button>
+
+    <aura:if isTrue="{!v.openPopup}"> -->
+    <lightning:navigation aura:id="navContact"/>
+    <aura:if isTrue="{!v.showConfirmModal}" >
+        <div role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+             aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{!c.declineNewScenarioFromModal}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                    <h1 class="slds-modal__title slds-hyphenate">
+                        Do you want to create a new scenario?
+                    </h1>
+                </header>
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="brand" label="Yes" title="Yes" onclick="{!c.confirmNewScenarioFromModal}"/>
+                    <lightning:button variant="Neutral" label="No" title="No" onclick="{!c.declineNewScenarioFromModal}"/>
+                </footer>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+            <aura:set attribute="else">
+                <div role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                         aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <!-- HEADER -->
+                            <header class="slds-modal__header">
+                                <lightning:buttonIcon iconName="utility:close" onclick="{!c.cancelContact}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                                <h2 class="title slds-text-heading__medium slds-hyphenate">
+                                    New Contact
+                                </h2>
+                            </header>
+
+                            <!-- BODY -->
+                            <div class="slds-modal__content" id="modal-content-id-1">
+                                <aura:if isTrue="{!v.isSpinner}">
+                                    <lightning:spinner variant="brand" size="large" />
+                                </aura:if>
+                                <div class="slds-var-p-around_medium slds-scrollable_y" style="max-height:520px; min-height:420px;">
+                                    <div class="slds-grid slds-wrap" style="padding: 0 30px 0 30px">
+
+                                        <aura:if isTrue="{!v.isFirstSection}">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <p><ui:outputText class="slds-form-element__label" value="Type of Contact"/></p>
+                                                <ui:inputSelect aura:id="typeOfContactId" change="{!c.typeOfContactChange}">
+                                                    <ui:inputSelectOption label="--None--" text=""/>
+                                                    <ui:inputSelectOption label="Client" text="Client"/>
+                                                    <ui:inputSelectOption label="Other" text="Other"/>
+                                                </ui:inputSelect>
+                                            </div>
+                                        </aura:if>
+
+                                        <aura:if isTrue="{!v.isSecondSectionOther}">
+                                            <aura:if isTrue="{!v.contactType == 'Other'}">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Company Name"/></p>
+                                                    <c:Lookup3 referredById="{!v.contactRec.Referred_by__c}" selection="{!v.selectionAccount}" onSearch="{!c.lookupSearchAccount}" onSelection="{!c.clearErrorsOnChangeAccount}" errors="{!v.errors}" placeholder="Search Household/Company Name.." isMultiEntry="{!v.isMultiEntry}" objectLabel="Account" objectAPIName="Account"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-var-p-right_x-small">
+                                                    <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Contact First Name"/></p>
+                                                    <ui:inputText value="{!v.contactRec.FirstName}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-p-left_x-small">
+                                                    <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Contact Last Name"/></p>
+                                                    <ui:inputText value="{!v.contactRec.LastName}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-var-p-right_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Email"/></p>
+                                                    <lightning:input type="email" placeholder="Borrower email" variant="label-hidden" value="{!v.contactRec.Email}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-p-left_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Mobile Phone"/></p>
+                                                    <lightning:input type="tel" placeholder="Borrower mobile phone" variant="label-hidden" value="{!v.contactRec.MobilePhone}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-1 slds-var-m-top_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Owner"/></p>
+                                                    <c:Lookup selection="{!v.selectionUser}" onSearch="{!c.lookupSearchUser}" onSelection="{!c.clearErrorsOnChangeUser}" errors="{!v.errors}" placeholder="Search User.." isMultiEntry="{!v.isMultiEntry}"/>
+                                                </div>
+                                            </aura:if>
+                                        </aura:if>
+
+                                        <aura:if isTrue="{!v.isSecondSectionClient}">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <p><ui:outputText class="slds-form-element__label" value="Is there a Co-Borrower?"/></p>
+                                                <ui:inputSelect aura:id="isThereCoBorrowerId" change="{!c.isThereCoBorrowerChange}">
+                                                    <ui:inputSelectOption label="Yes" text="Yes"/>
+                                                    <ui:inputSelectOption label="No" text="No"/>
+                                                </ui:inputSelect>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <p><ui:outputText class="slds-form-element__label" value="Would you like to add new contact to existing household?"/></p>
+                                                <ui:inputSelect aura:id="isThereHouseholdId" change="{!c.isThereHouseholdChange}">
+                                                    <ui:inputSelectOption label="No" text="No"/>
+                                                    <ui:inputSelectOption label="Yes" text="Yes"/>
+                                                </ui:inputSelect>
+                                            </div>
+                                            <aura:if isTrue="{!v.isThereHousehold}" >
+                                                <div class="slds-col slds-size_1-of-1 slds-var-m-top_x-small">
+                                                    <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Household"/></p>
+                                                    <c:Lookup3 referredById="{!v.contactRec.Referred_by__c}" selection="{!v.selectionHousehold}" onSearch="{!c.lookupSearchAccount}" onSelection="{!c.clearErrorsOnChangeHousehold}" errors="{!v.errors}" placeholder="Search Household/Company Name.." isMultiEntry="{!false}" objectLabel="Account" objectAPIName="Account"/>
+                                                </div>
+                                            </aura:if>
+                                        </aura:if>
+
+                                        <aura:if isTrue="{!v.isThirdSectionClient}">
+                                            <aura:if isTrue="{!v.isThereCoBorrower == 'Yes'}">
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-var-p-right_x-small">
+                                                    <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Contact First Name"/></p>
+                                                    <ui:inputText value="{!v.contactRec.FirstName}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-p-left_x-small">
+                                                    <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Contact Last Name"/></p>
+                                                    <ui:inputText value="{!v.contactRec.LastName}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-var-p-right_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Email"/></p>
+                                                    <lightning:input type="email" placeholder="Borrower email" variant="label-hidden" value="{!v.contactRec.Email}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-p-left_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Mobile Phone"/></p>
+                                                    <lightning:input type="tel" placeholder="Borrower mobile phone" variant="label-hidden" value="{!v.contactRec.MobilePhone}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-var-p-right_x-small">
+                                                    <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Co-Borrower First Name"/></p>
+                                                    <ui:inputText value="{!v.contact2Rec.FirstName}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-p-left_x-small">
+                                                    <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Co-Borrower Last Name"/></p>
+                                                    <ui:inputText value="{!v.contact2Rec.LastName}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-var-p-right_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Email"/></p>
+                                                    <lightning:input type="email" placeholder="Co-Borrower email" variant="label-hidden" value="{!v.contact2Rec.Email}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-p-left_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Mobile Phone"/></p>
+                                                    <lightning:input type="tel" placeholder="Co-Borrower mobile phone" variant="label-hidden" value="{!v.contact2Rec.MobilePhone}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-1 slds-var-m-top_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Owner"/></p>
+                                                    <c:Lookup selection="{!v.selectionUser}" onSearch="{!c.lookupSearchUser}" onSelection="{!c.clearErrorsOnChangeUser}" errors="{!v.errors}" placeholder="Search User.." isMultiEntry="{!v.isMultiEntry}"/>
+                                                </div>
+                                            </aura:if>
+
+                                            <aura:if isTrue="{!v.isThereCoBorrower == 'No'}">
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-var-p-right_x-small">
+                                                    <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Contact First Name"/></p>
+                                                    <ui:inputText value="{!v.contactRec.FirstName}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-p-left_x-small">
+                                                    <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Contact Last Name"/></p>
+                                                    <ui:inputText value="{!v.contactRec.LastName}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-var-p-right_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Email"/></p>
+                                                    <lightning:input type="email" placeholder="Borrower email" variant="label-hidden" value="{!v.contactRec.Email}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small slds-p-left_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Mobile Phone"/></p>
+                                                    <lightning:input type="tel" placeholder="Borrower mobile phone" variant="label-hidden" value="{!v.contactRec.MobilePhone}"/>
+                                                </div>
+
+                                                <div class="slds-col slds-size_1-of-1 slds-var-m-top_x-small">
+                                                    <p><ui:outputText class="slds-form-element__label" value="Owner"/></p>
+                                                    <c:Lookup selection="{!v.selectionUser}" onSearch="{!c.lookupSearchUser}" onSelection="{!c.clearErrorsOnChangeUser}" errors="{!v.errors}" placeholder="Search User.." isMultiEntry="{!v.isMultiEntry}"/>
+                                                </div>
+                                            </aura:if>
+                                        </aura:if>
+
+                                    </div>
+                                </div>
+
+                                <!-- FOOTER -->
+                                <footer class="slds-modal__footer">
+                                    <aura:if isTrue="{!v.isError}">
+                                        <span class="slds-text-color_error" style="padding-right:5px;">{!v.errorMessage}</span>
+                                    </aura:if>
+
+
+                                    <!--
+                        <lightning:button variant="brand" label="Save" title="Save" onclick="{!c.saveContact}"/>
+                        -->
+
+                                    <aura:if isTrue="{!v.isFirstSection || v.isSecondSectionClient}">
+                                        <lightning:button variant="brand" label="Next" title="Next" onclick="{!c.nextContact}"/>
+                                    </aura:if>
+
+                                    <aura:if isTrue="{!v.isFirstSection}">
+                                        <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.cancelContact}"/>
+                                    </aura:if>
+
+
+
+
+                                    <aura:if isTrue="{!v.isSecondSectionOther}">
+                                        <lightning:button variant="brand" label="Save" title="Save" onclick="{!c.saveContactOther}"/>
+                                    </aura:if>
+
+                                    <aura:if isTrue="{!v.isThirdSectionClient}">
+                                        <lightning:button aura:id="saveContactClientBtn" variant="brand" label="Save" title="Save" onclick="{!c.saveContactClient}"/>
+
+                                        <aura:if isTrue="{!not(v.isNewContactFromNewLoan)}">
+                                            <lightning:button aura:id="saveContactClientWithNewLoanBtn" variant="brand" label="Save &amp; Create New Scenario" title="Save &amp; Create New Scenario" onclick="{!c.saveContactClient}"/>
+                                        </aura:if>
+                                    </aura:if>
+
+                                    <aura:if isTrue="{!v.isSecondSectionOther || v.isSecondSectionClient || v.isThirdSectionClient}">
+                                        <lightning:button variant="neutral" label="Back" title="Back" onclick="{!c.backContact}"/>
+                                    </aura:if>
+
+
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </aura:set>
+    </aura:if>
+
+    <!-- </aura:if> -->
+
+    <aura:if isTrue="{!v.createNewLoanSec}">
+        <c:CustomNewLoan openPopup="true" doNotDisplayButton="true"/>
+    </aura:if>
+
+    <aura:html tag="style">
+        .slds-modal__container {
+            width: 100% !important;
+            max-width: 40rem !important;
+        }
+    </aura:html>
+</aura:component>

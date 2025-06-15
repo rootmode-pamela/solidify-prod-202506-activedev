@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ResponseHandler__c</fullName>
+    <formula>IF(AND(WEEKDAY(DATEVALUE(CreatedDate))=6, (NOW()-CreatedDate)*24&gt;66), true,
+IF(AND(WEEKDAY(DATEVALUE(CreatedDate))=7, (NOW()-CreatedDate)*24&gt;42), true,
+IF(AND(WEEKDAY(DATEVALUE(CreatedDate))=1, (NOW()-CreatedDate)*24&gt;30), true,
+IF((NOW()-CreatedDate)*24&gt;24, true,
+false))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>ResponseHandler</label>
+    <type>Checkbox</type>
+</CustomField>

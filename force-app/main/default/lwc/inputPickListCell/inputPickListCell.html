@@ -1,0 +1,18 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-17-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:true={isPickList}>
+        <lightning-combobox
+                name="progress"
+                variant="label-hidden"
+                value={value}
+                placeholder="Select Values"
+                options={options}
+                onchange={handleChange} ></lightning-combobox>
+    </template>
+</template>

@@ -1,0 +1,183 @@
+<aura:component controller="CustomNewLoanCont" access="global" Implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="openPopup" type="Boolean" default="true"/>
+    <aura:attribute name="doNotDisplayButton" type="Boolean" default="false"/>
+    <aura:attribute name="isSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="isError" type="Boolean" default="false"/>
+    <aura:attribute name="errorMessage" type="String"/>
+    <aura:attribute name="loanRec" type="Opportunity" default="{ 'sobjectType': 'Opportunity'}" />
+    <aura:attribute name="loanRecBorrowerName" type="String" default="" />
+    <aura:attribute name="subjectPropertyAddress" type="String" default="" />
+    <aura:attribute name="isPurchaseorPurch" type="Boolean" default="false" />
+
+    <aura:attribute name="purposePicklist" type="Object[]"/>
+    <aura:attribute name="leadSourcePicklist" type="Object[]"/>
+    <aura:attribute name="occupancyPicklist" type="Object[]"/>
+    <aura:attribute name="loanTypePicklist" type="Object[]"/>
+    <aura:attribute name="loanProgramPicklist" type="Object[]"/>
+    <aura:attribute name="impoundPicklist" type="Object[]"/>
+    <aura:attribute name="lenderPicklist" type="Object[]"/>
+
+    <aura:attribute access="private" type="List" name="selectionAccount" default="[]"/>
+    <aura:attribute access="private" type="List" name="selectionBorrower" default="[]"/>
+    <aura:attribute access="private" type="List" name="selectionCoBorrower" default="[]"/>
+    <aura:attribute access="private" type="List" name="selectionReferredBy" default="[]"/>
+    <aura:attribute access="private" type="List" name="selectionProperty" default="[]"/>
+    <aura:attribute access="private" type="List" name="selectionUser" default="[]"/>
+    <aura:attribute access="private" type="List" name="errors" default="[]"/>
+    <aura:attribute access="private" type="Boolean" name="isMultiEntry" default="false"/>
+    <aura:attribute type="Object" name="contactRecord"/>
+
+    <aura:attribute name="openPopupProp" type="Boolean" default="false"/>
+    <!--<aura:attribute name="isDisplayPopupProp" type="Boolean" default="false"/>
+    <aura:attribute name="isDisplayPopupLead" type="Boolean" default="false"/>-->
+
+    <aura:registerEvent name="onNewContact" type="c:CustomEvent" />
+
+    <lightning:quickActionAPI aura:id="quickActionAPI" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.contactRecord}" action="{!c.onContactRecordChange}"/>
+
+   
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" 
+                 aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{!c.cancelLoan}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                    <h2 class="title slds-text-heading--medium slds-hyphenate">
+                        New Loan Scenario
+                    </h2>
+                </header>
+
+                <!-- BODY -->
+                <div class="slds-modal__content" id="modal-content-id-1" style="overflow: initial">
+                    <aura:if isTrue="{!v.isSpinner}">
+                        <lightning:spinner variant="brand" size="large" />
+                    </aura:if>
+                    <div class="slds-p-around_medium slds-scrollable_y" style="height:520px;">
+                        
+                        <div class="slds-grid slds-wrap" style="padding: 0 30px 0 30px">
+
+<!--                            <div class="slds-col slds-size_1-of-1">
+                                <p><ui:outputText class="slds-text-color_error" value="*"/> <ui:outputText class="slds-form-element__label" value="Scenario Name"/></p>
+                                <ui:inputText value="{!v.loanRec.Name}" />
+                            </div>-->
+
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p><ui:outputText class="slds-text-color_error" value="*"/> <ui:outputText class="slds-form-element__label" value="Borrower"/></p>
+                                <c:Lookup showNewOption="true" selection="{!v.selectionBorrower}" onSearch="{!c.lookupSearchContact}" onSelection="{!c.clearErrorsOnChangeBorrower}" errors="{!v.errors}" placeholder="Search Borrower.." isMultiEntry="{!v.isMultiEntry}"/>
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p> <ui:outputText class="slds-form-element__label" value="CoBorrower"/></p>
+                                <c:Lookup selection="{!v.selectionCoBorrower}" onSearch="{!c.lookupSearchContact}" onSelection="{!c.clearErrorsOnChangeCoBorrower}" errors="{!v.errors}" placeholder="Search CoBorrower.." isMultiEntry="{!v.isMultiEntry}"/>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p> <ui:outputText class="slds-form-element__label" value="Referred By"/></p>
+                                <c:Lookup selection="{!v.selectionReferredBy}" onSearch="{!c.lookupSearchContact}" onSelection="{!c.clearErrorsOnChangeReferredBy}" errors="{!v.errors}" placeholder="Search Referred By.." isMultiEntry="{!v.isMultiEntry}"/>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p><ui:outputText class="slds-form-element__label" value="Lead Source"/></p>
+                                <ui:inputSelect aura:id="leadSourceId" change="{!c.leadSourceChange}" value="">
+                                    <aura:iteration items="{!v.leadSourcePicklist}" var="item">
+                                        <ui:inputSelectOption label="{!item.label}" text="{!item.text}"/>
+                                    </aura:iteration>
+                                </ui:inputSelect>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Purpose"/></p>
+                                <ui:inputSelect aura:id="purposeId" change="{!c.purposeChange}" value="">
+                                    <aura:iteration items="{!v.purposePicklist}" var="item">
+                                        <ui:inputSelectOption label="{!item.label}" text="{!item.text}"/>
+                                    </aura:iteration>
+                                </ui:inputSelect>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p><ui:outputText class="slds-text-color_error" value="*"/><ui:outputText class="slds-form-element__label" value="Subject Property Name"/></p>
+                                <c:Lookup2 selection="{!v.selectionProperty}" onSearch="{!c.lookupSearchProperty}" onSelection="{!c.clearErrorsOnChangeProperty}" errors="{!v.errors}" placeholder="Search Property.." objectLabel="Property" objectAPIName="Properties__c" isMultiEntry="{!v.isMultiEntry}" contactId="{!v.loanRec.Borrower_Record__c}" accountId="{!v.loanRec.AccountId}"/>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p><ui:outputText class="slds-form-element__label" value="Occupancy"/></p>
+                                <ui:inputSelect aura:id="occupancyId" change="{!c.occupancyChange}" value="">
+                                    <aura:iteration items="{!v.occupancyPicklist}" var="item">
+                                        <ui:inputSelectOption label="{!item.label}" text="{!item.text}"/>
+                                    </aura:iteration>
+                                </ui:inputSelect>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p><ui:outputText class="slds-form-element__label" value="Loan Type"/></p>
+                                <ui:inputSelect aura:id="loanTypeId" change="{!c.loanTypeChange}" value="">
+                                    <ui:inputSelectOption label="--None--" text=""/>
+                                    <aura:iteration items="{!v.loanTypePicklist}" var="item">
+                                        <ui:inputSelectOption label="{!item.label}" text="{!item.text}"/>
+                                    </aura:iteration>
+                                </ui:inputSelect>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p><ui:outputText class="slds-form-element__label" value="Loan Program"/></p>
+                                <ui:inputSelect aura:id="loanProgramId" change="{!c.loanProgramChange}" value="">
+                                    <ui:inputSelectOption label="--None--" text=""/>
+                                    <aura:iteration items="{!v.loanProgramPicklist}" var="item">
+                                        <ui:inputSelectOption label="{!item.label}" text="{!item.text}"/>
+                                    </aura:iteration>
+                                </ui:inputSelect>
+                            </div>
+
+                            <aura:if isTrue="{!v.isPurchaseorPurch}">
+
+                                    <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                        <p><ui:outputText class="slds-form-element__label" value="Est Purchase Price"/></p>
+                                        <ui:inputCurrency value="{!v.loanRec.Purchase_Price__c}"/>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                        <p><ui:outputText class="slds-form-element__label" value="Down Payment"/></p>
+                                        <ui:inputCurrency value="{!v.loanRec.Down_Payment__c}"/>
+                                    </div>
+
+                                <aura:set attribute="else">
+                                    <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                        <p><ui:outputText class="slds-form-element__label" value="Est Property Value"/></p>
+                                        <ui:inputCurrency value="{!v.loanRec.Property_Value__c}"/>
+                                    </div>
+                                </aura:set>
+
+                            </aura:if>
+
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p><ui:outputText class="slds-form-element__label" value="Loan Amount"/></p>
+                                <ui:inputCurrency value="{!v.loanRec.Amount}"/>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <p> <ui:outputText class="slds-form-element__label" value="Owner"/></p>
+                                <c:Lookup selection="{!v.selectionUser}" onSearch="{!c.lookupSearchUser}" onSelection="{!c.clearErrorsOnChangeUser}" errors="{!v.errors}" placeholder="Search User.." isMultiEntry="{!v.isMultiEntry}"/>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <!-- FOOTER -->
+                    <footer class="slds-modal__footer">
+                        <aura:if isTrue="{!v.isError}">
+                            <span class="slds-text-color_error" style="padding-right:5px;">{!v.errorMessage}</span>
+                        </aura:if>
+
+                        <lightning:button variant="brand" label="Save" title="Save" onclick="{!c.saveLoan}"/>
+                        <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.cancelLoan}"/>
+                    </footer>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+
+</aura:component>

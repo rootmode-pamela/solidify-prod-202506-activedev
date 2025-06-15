@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Closed_Loans</fullName>
+    <columns>Household__c</columns>
+    <columns>NAME</columns>
+    <columns>Current_Opportunity__c</columns>
+    <columns>Most_Recent_Closed_Opportunity__c</columns>
+    <columns>Days_Since_Most_Recent_Closing__c</columns>
+    <columns>Lender_of_Most_Recent_Closing__c</columns>
+    <columns>Purpose_of_Most_Recent_Closing__c</columns>
+    <columns>Loan_Program_of_Most_Recent_Closing__c</columns>
+    <columns>Loan_Amt_with_MIP_of_Most_Recent_Closing__c</columns>
+    <columns>Scheduled_Balance_of_Most_Recent_Closing__c</columns>
+    <columns>Rate_of_Most_Recent_Closing__c</columns>
+    <columns>Appraised_Value_of_Most_Recent_Closing__c</columns>
+    <columns>LTV_of_Most_Recent_Closing__c</columns>
+    <columns>Property_Type__c</columns>
+    <columns>Loan_Originator_of_Most_Recent_Closing__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>Most_Recent_Closing__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Loan_Originator_of_Most_Recent_Closing__c</field>
+        <operation>contains</operation>
+        <value>Broderick</value>
+    </filters>
+    <label>My Closed Loans</label>
+</ListView>

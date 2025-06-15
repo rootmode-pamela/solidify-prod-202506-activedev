@@ -1,0 +1,3 @@
+<design:component>
+    <design:attribute name="RecordType" label="Record Type" datasource="Scenario,Mortgage" default="Scenario" />
+</design:component>

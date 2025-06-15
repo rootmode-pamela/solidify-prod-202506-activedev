@@ -1,0 +1,220 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="global">
+    <aura:attribute name="recordId" type="String"/>
+	<!--<ltng:require scripts="{!$Resource.Chartjs}" afterScriptsLoaded="{!c.generateChart}"/>-->
+
+    
+    <lightning:recordViewForm aura:id="form"
+                                  recordId="{!v.recordId}"
+                                  objectApiName="Proposal__c"     
+                                  class="slds-card__body_inner ">
+          
+       <!--LOGO SECTION-->  
+    <div class="slds-brand-band slds-brand-band_small">     
+        <div>
+        <img class='slds-align_absolute-center' src="{!$Resource.logoHeaderNew}"/>
+        </div>
+        <div class="slds-grid ">
+            <div class="slds-size_3-of-12"></div>
+            <div class="slds-size_6-of-12 slds-grid_align-space">
+    
+                
+                
+     <!--HEADER SECTION -->  
+                
+	<lightning:card class="slds-p-horizontal_x-large ">
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-4 slds-m-right_small ">
+                <h1 class="header slds-text-align_center">Property Name</h1>
+                <lightning:outputField fieldName="Property__c" aura:id="propertyText" variant="label-hidden" class="slds-text-align_center"/>
+        	</div>
+            <div class="slds-col slds-size_1-of-4 slds-m-right_small">
+                 <h1 class="header slds-text-align_center">Analysis Type</h1>
+                <lightning:outputField fieldName="RecordTypeId" aura:id="analysis" variant="label-hidden" class="slds-text-align_center" />  
+            </div>
+        	<div class="slds-col slds-size_2-of-12 slds-text-align_center ">
+            	<h1 class="header slds-align_absolute-center">Borrower</h1>
+           	 	<lightning:outputField fieldName="Borrower__c" aura:id="borrower" variant="label-hidden" class="slds-text-align_center"/>
+          	</div>
+            <div class="slds-col slds-size_1-of-3 slds-p-left_xx-small slds-p-right_large">
+                <h1 class="header slds-text-align_center">10 Year Treasury Yield</h1>
+                <lightning:outputField fieldName="X10_Yr_Treasury_Yield__c" aura:id="treasury" variant="label-hidden" class="slds-text-align_center"/>
+            </div>
+               
+        </div> 
+        
+        <br/>
+        
+        
+   <!--CURRENT LOAN SECTION-->    
+        
+            <div class="slds-box slds-theme_shade slds-align_absolute-center">
+                <h1 class="sectionTitle"><b>Current Loan</b></h1>
+            </div>
+            
+            <div class="slds-grid slds-size_1-of-1">
+                <div class="slds-grid slds-size_1-of-2">
+                    <div class="slds-col slds-size_1-of-6"></div>
+                    <div class="slds-col slds-size_3-of-8 slds-p-top_small" style="font-weight: bold">
+                        
+                        <p >Loan Amount:</p>
+                        <p >Interest Rate:</p>
+                        <p >Term (months):</p>
+                        <p >Monthly Payment:</p>
+                    </div>
+                
+                <div class="slds-col slds-size_1-of-3 slds-p-top_small">
+                    <lightning:outputField fieldName="Current_Loan_Amount__c" aura:id="currAmt" variant="label-hidden" class="slds-align_absolute-center"/>
+                    <lightning:outputField fieldName="Current_Interest_Rate__c" aura:id="currIR" variant="label-hidden" class="slds-align_absolute-center"/>
+                    <lightning:outputField fieldName="Current_Loan_Term__c" aura:id="currIR" variant="label-hidden" class="slds-align_absolute-center"/>
+                    <lightning:outputField fieldName="Current_Loan_Monthly_Payment__c" aura:id="currPayment" variant="label-hidden" class="slds-align_absolute-center"/>
+                </div>
+                </div>
+                
+              <div class="slds-grid slds-size_1-of-2">                  
+                <div style="font-weight: bold;" class="slds-col slds-size_4-of-10 slds-p-top_small slds-p-bottom_small">
+                    <p >First Payment Date:</p>
+                    <p >Most Recent Payment Date:</p>
+                    <p >Payments Made:</p>
+                    <p >Payments Remaining:</p>
+                    <p >Balance Remaining:</p>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-3 slds-p-top_small slds-p-left_x-large ">
+                    <lightning:outputField fieldName="Current_Loan_First_Payment__c" aura:id="currIR" variant="label-hidden" class="slds-align_absolute-center"/>
+                    <lightning:outputField fieldName="Current_Loan_Last_Payment_Made__c" aura:id="currIR" variant="label-hidden" class="slds-align_absolute-center"/>
+                    <lightning:outputField fieldName="Current_Loan_Number_Payments_Made__c" aura:id="currIR" variant="label-hidden" class="slds-align_absolute-center"/>
+                    <lightning:outputField fieldName="Current_Loan_Payments_Remaining__c" aura:id="currIR" variant="label-hidden" class="slds-align_absolute-center"/>
+                    <lightning:outputField fieldName="Current_Loan_Balance_Remaining__c" aura:id="currIR" variant="label-hidden" class="slds-align_absolute-center"/>           
+                </div>
+                </div>
+            </div>
+
+        
+ <!--PROPOSED LOAN SECTION-->
+        
+            <div class="slds-box slds-theme_shade slds-align_absolute-center">
+                <h1 class="sectionTitle"><b>Proposed Loan</b></h1>
+            </div> 
+            
+                <div class="slds-grid slds-size_1-of-1">
+                    <div class="slds-grid slds-size_1-of-2">                      
+                    	<div class="slds-col slds-size_1-of-6">
+                        </div>
+                            <div class="slds-col  slds-size_3-of-8 slds-p-top_small" style="font-weight: bold;" >
+                                <p >Loan Amount:</p>
+                                <p >Interest Rate:</p>
+                            </div>
+                
+                            <div class="slds-col slds-size_1-of-3 slds-p-top_small">
+                                <lightning:outputField fieldName="New_Loan_Amount__c" aura:id="newAmt" variant="label-hidden" class="slds-align_absolute-center"/>
+                                <lightning:outputField fieldName="New_Loan_Interest_Rate__c" aura:id="newIR" variant="label-hidden" class="slds-align_absolute-center"/>           
+                            </div>
+                	</div>
+              <div class="slds-grid slds-size_1-of-2">      
+                <div  class="slds-col slds-size_4-of-10 slds-p-top_small " style="font-weight: bold;">
+                    <p >Proposed Term (months):</p>
+                    <p >Monthly Payment:</p>
+                  </div>
+                  <div class="slds-col slds-size_1-of-3 slds-p-top_small slds-p-left_x-large ">
+                    <lightning:outputField fieldName="New_Loan_Term__c" aura:id="newTerm" variant="label-hidden" class="slds-align_absolute-center"/>
+                    <lightning:outputField fieldName="New_Loan_Monthly_Payment__c" aura:id="newPayment" variant="label-hidden" class="slds-align_absolute-center"/>
+            	  </div>
+       
+        </div>
+        </div>
+                
+	<!--BENEFITS AND ADVANTAGES SECTION-->
+                      
+			<lightning:card >
+                 
+        				<div class="slds-box slds-theme_shade slds-align_absolute-center">
+            				<h1 class="sectionTitle"><b>Benefits and Advantages</b></h1>
+           				</div>
+                
+                     
+     <div class="slds-grid slds-gutters_x-small ">
+           <div class="slds-col slds-size_1-of-3">
+       			<lightning:card >   
+                    <div class="slds-box benefitBox">
+          				<div class=" slds-theme_default slds-align_absolute-center slds-p-bottom_small slds-p-top_xx-small benefitTitle">
+                            <h2 style="text-align: center"><b>Take the Monthly Savings</b></h2>
+                        </div>           				
+            				<p style="text-align: center" class="slds-p-top_x-small slds-p-bottom_xx-small slds-align_absolute-center payment">The new loan will reduce your monthly payments by:</p>
+
+            			<div class="slds-p-around_xx-small parent">
+                            <lightning:outputField fieldName="Monthly_Payment_Savings__c" aura:id="paymentReduction" variant="label-hidden" class="slds-align_absolute-center"/>
+           				</div>                                              
+                    </div>
+           		</lightning:card>
+              </div>
+           
+           <div class="slds-col slds-size_1-of-3">    
+        			<lightning:card>
+                           <div class= "slds-box benefitBox">
+                                <div class="slds-p-bottom_small slds-p-top_xx-small slds-theme_default slds-align_absolute-center benefitTitle">
+                                    <h2 style="text-align: center"><b>Make Your Current Payment</b></h2>
+                                </div>         
+                                <div >
+                                    <p style="text-align: center" class="slds-p-top_x-small slds-p-bottom_xx-small slds-align_absolute-center">The new loan will pay off this many months sooner:</p>
+                                    <div class="parent ">
+                                           <lightning:outputField fieldName="Same_Payment_Term_Reduction__c" aura:id="newAmt" variant="label-hidden" class="slds-align_absolute-center amount"/>
+                                    </div>
+                                    <p style="text-align: center" class="slds-align_absolute-center slds-p-bottom_xx-small slds-p-top_small">Which equates to total savings of:</p>
+                                      <div class="parent">
+                                      <lightning:outputField fieldName="Early_Payoff_Savings__c" aura:id="newIR" variant="label-hidden" class="slds-align_absolute-center"/>    
+                                    </div>
+                                </div>
+                        
+            					<div class="slds-p-around_small">                                                          
+        					</div>                            
+                        </div>                        
+           			</lightning:card>
+              </div> 
+           
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning:card>  
+                        <div class="slds-box benefitBox">
+                       <div class="slds-p-top_xx-small slds-p-bottom_small slds-theme_default slds-align_absolute-center benefitTitle">
+                    		<h2><b>Stay On Pace and Save</b></h2>
+        				</div> 	
+                            
+        				<div>
+                            <p style="text-align: center" class="slds-p-top_x-small slds-p-bottom_xx-small slds-align_absolute-center">Make this payment on new loan:</p>
+                              <div class="parent">
+							<lightning:outputField fieldName="New_Loan_Payment_To_Keep_Term__c" aura:id="newPaymentTerm" variant="label-hidden" class="slds-align_absolute-center"/>
+                            </div>
+                            
+                            <p style="text-align: center" class="slds-align_absolute-center slds-p-top_small slds-p-bottom_xx-small">Which will enable you to stay on current monthly pace of:</p>
+                              <div class="parent">
+                                  <lightning:outputField fieldName="Current_Loan_Payments_Remaining__c" aura:id="newTermReduction" variant="label-hidden" class="slds-align_absolute-center"/>
+                            </div>
+                            
+                            <p style="text-align: center" class="slds-align_absolute-center slds-p-top_xx-small slds-p-bottom_xx-small">AND save you this much monthly:</p>
+                            <div class="parent">
+                            <lightning:outputField fieldName="Stay_On_Pace_Monthly_Savings__c"  variant="label-hidden" class="slds-align_absolute-center"/>
+                            </div> 
+                            
+                            
+                                                                </div>
+                                                                
+                                                                <div class="slds-p-around_small"></div> 
+                                                           </div>
+                                                </lightning:card>
+                                            </div>     
+                                        </div>
+                                        
+                                   </lightning:card>
+                           </lightning:card>
+                     </div>
+                 </div>
+                                                    
+                                                </div>
+<!--
+          <div class="slds-box" style="width:800px; height:700px">
+			<canvas aura:id="barchart"  ></canvas>
+    	 </div>
+        		-->
+    </lightning:recordViewForm>
+    
+    <div> &nbsp;</div>
+</aura:component>

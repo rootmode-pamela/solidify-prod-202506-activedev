@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loan_Program_Scenario_1__c</fullName>
+    <label>Loan_Program_Scenario_1</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CF30</fullName>
+                <default>false</default>
+                <label>CF30</label>
+            </value>
+            <value>
+                <fullName>CF25</fullName>
+                <default>false</default>
+                <label>CF25</label>
+            </value>
+            <value>
+                <fullName>CF20</fullName>
+                <default>false</default>
+                <label>CF20</label>
+            </value>
+            <value>
+                <fullName>CF15</fullName>
+                <default>false</default>
+                <label>CF15</label>
+            </value>
+            <value>
+                <fullName>CF10</fullName>
+                <default>false</default>
+                <label>CF10</label>
+            </value>
+            <value>
+                <fullName>HB30</fullName>
+                <default>false</default>
+                <label>HB30</label>
+            </value>
+            <value>
+                <fullName>HB25</fullName>
+                <default>false</default>
+                <label>HB25</label>
+            </value>
+            <value>
+                <fullName>HB20</fullName>
+                <default>false</default>
+                <label>HB20</label>
+            </value>
+            <value>
+                <fullName>HB15</fullName>
+                <default>false</default>
+                <label>HB15</label>
+            </value>
+            <value>
+                <fullName>HB10</fullName>
+                <default>false</default>
+                <label>HB10</label>
+            </value>
+            <value>
+                <fullName>JF30</fullName>
+                <default>false</default>
+                <label>JF30</label>
+            </value>
+            <value>
+                <fullName>JF15</fullName>
+                <default>false</default>
+                <label>JF15</label>
+            </value>
+            <value>
+                <fullName>FHA 30</fullName>
+                <default>false</default>
+                <label>FHA 30</label>
+            </value>
+            <value>
+                <fullName>FHA 15</fullName>
+                <default>false</default>
+                <label>FHA 15</label>
+            </value>
+            <value>
+                <fullName>VA 30</fullName>
+                <default>false</default>
+                <label>VA 30</label>
+            </value>
+            <value>
+                <fullName>VA 15</fullName>
+                <default>false</default>
+                <label>VA 15</label>
+            </value>
+            <value>
+                <fullName>C 3-1 ARM</fullName>
+                <default>false</default>
+                <label>C 3-1 ARM</label>
+            </value>
+            <value>
+                <fullName>C 5-1 ARM</fullName>
+                <default>false</default>
+                <label>C 5-1 ARM</label>
+            </value>
+            <value>
+                <fullName>C 7-1 ARM</fullName>
+                <default>false</default>
+                <label>C 7-1 ARM</label>
+            </value>
+            <value>
+                <fullName>C 10-1 ARM</fullName>
+                <default>false</default>
+                <label>C 10-1 ARM</label>
+            </value>
+            <value>
+                <fullName>H 3-1 ARM</fullName>
+                <default>false</default>
+                <label>H 3-1 ARM</label>
+            </value>
+            <value>
+                <fullName>H 5-1 ARM</fullName>
+                <default>false</default>
+                <label>H 5-1 ARM</label>
+            </value>
+            <value>
+                <fullName>H 7-1 ARM</fullName>
+                <default>false</default>
+                <label>H 7-1 ARM</label>
+            </value>
+            <value>
+                <fullName>H 10-1 ARM</fullName>
+                <default>false</default>
+                <label>H 10-1 ARM</label>
+            </value>
+            <value>
+                <fullName>J 3-1 ARM</fullName>
+                <default>false</default>
+                <label>J 3-1 ARM</label>
+            </value>
+            <value>
+                <fullName>J 5-1 ARM</fullName>
+                <default>false</default>
+                <label>J 5-1 ARM</label>
+            </value>
+            <value>
+                <fullName>J 7-1 ARM</fullName>
+                <default>false</default>
+                <label>J 7-1 ARM</label>
+            </value>
+            <value>
+                <fullName>J 10-1 ARM</fullName>
+                <default>false</default>
+                <label>J 10-1 ARM</label>
+            </value>
+            <value>
+                <fullName>FHA 5-1 ARM</fullName>
+                <default>false</default>
+                <label>FHA 5-1 ARM</label>
+            </value>
+            <value>
+                <fullName>VA 5-1 ARM</fullName>
+                <default>false</default>
+                <label>VA 5-1 ARM</label>
+            </value>
+            <value>
+                <fullName>2nd / Heloc</fullName>
+                <default>false</default>
+                <label>2nd / Heloc</label>
+            </value>
+            <value>
+                <fullName>Interest Only - ARM</fullName>
+                <default>false</default>
+                <label>Interest Only - ARM</label>
+            </value>
+            <value>
+                <fullName>Interest Only - Fixed</fullName>
+                <default>false</default>
+                <label>Interest Only - Fixed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

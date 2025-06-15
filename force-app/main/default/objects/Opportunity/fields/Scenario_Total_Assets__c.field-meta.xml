@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scenario_Total_Assets__c</fullName>
+    <externalId>false</externalId>
+    <formula>Scenario_Liquid_Assets__c +  Scenario_Investments__c +  Scenario_Retirement_Assets__c +  Scenario_Gift_Funds__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Assets</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

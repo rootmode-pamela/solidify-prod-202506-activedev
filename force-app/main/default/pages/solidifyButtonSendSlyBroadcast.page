@@ -1,0 +1,38 @@
+<apex:page standardController="Lead"
+    recordSetVar="leads"
+    extensions="solidifyButtonSendSlyBroadcast"
+    showHeader="false"
+    id="slyLead">
+    
+    <apex:form id="slyform">
+        <apex:pageMessage summary="{!mySelectedSize} Records Selected to Recieve Voicemails" 
+            severity="info"
+            id="slySelected"
+        />   
+        
+        <apex:pageBlock title="Send Slybroadcast Voicemails" mode="edit" id="slypage">          
+ <apex:pageMessages />
+        <apex:pageBlockSection title="Voicemails Blast Details" id="vmdetails" >
+           <apex:outputLabel for="slyCallerId">Caller Id Number: </apex:outputLabel>
+            <apex:inputText id="slyCallerId" value="{!callerId}" required="true"/>
+                
+            <apex:outputLabel for="slyAudioFile">Audio File Name (must match EXACTLY in Sly): </apex:outputLabel>
+            <apex:inputText id="slyAudioFile" value="{!audioFile}" required="true" />
+            <apex:outputLabel for="slyPhoneNumbers">Phone numbers to send to (based on selection):</apex:outputLabel>
+            <apex:outputText id="slyPhoneNumbers" value="{!phones}"/>           
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom" id="mubut">
+            <apex:commandButton value="Cancel" action="{!cancel}" id="butcan"/>  
+           <c:solidifySendSlyBroadcast AudioFile="{!audioFile}" CallerId="{!callerId}" Phones="{!phones}"/>  
+          </apex:pageBlockButtons>   
+   
+</apex:pageBlock>
+        
+        <apex:pageBlock title="Selected Leads" id="muselectedlist">
+            <apex:pageBlockTable value="{!selected}" var="lead" id="mutab">
+                <apex:column value="{!lead.Name}" id="leadname"/>
+                <apex:column value="{!lead.MobilePhone}" id="leadphone"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

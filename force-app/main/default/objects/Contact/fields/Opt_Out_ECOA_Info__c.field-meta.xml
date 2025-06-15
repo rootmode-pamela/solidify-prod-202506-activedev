@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opt_Out_ECOA_Info__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Contact declined to provide information on Sex, Race and Ethnicity for Equal Credit Opportunity Act reporting purposes.</description>
+    <inlineHelpText>Contact declined to provide Sex, Race and Ethnicity</inlineHelpText>
+    <label>Opt Out ECOA Info</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

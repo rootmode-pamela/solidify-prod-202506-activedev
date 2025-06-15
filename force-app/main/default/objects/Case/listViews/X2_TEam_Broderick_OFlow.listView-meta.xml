@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2_TEam_Broderick_OFlow</fullName>
+    <booleanFilter>1 AND 2 AND (3 OR 4) AND 5</booleanFilter>
+    <columns>Loan_Household__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Lead__c</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>Followup_Overdue__c</columns>
+    <columns>Loan_Stage__c</columns>
+    <columns>Loan__c</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.PRIORITY</columns>
+    <columns>OWNER_NAME</columns>
+    <columns>Loan_Originator__c</columns>
+    <columns>CASES.CREATED_DATE</columns>
+    <columns>CONTACT.FIRST_NAME</columns>
+    <columns>CONTACT.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.CLOSED</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>New,Qualifying,Proposal,Requested,Pre-Approve,House Hunting,Place,Lock,Remedy,Active Locked</value>
+    </filters>
+    <filters>
+        <field>Loan_Originator__c</field>
+        <operation>contains</operation>
+        <value>broderick</value>
+    </filters>
+    <filters>
+        <field>Loan_Originator__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>Loan_Lock_Expiration__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>2. Team Broderick OFlow</label>
+    <sharedTo>
+        <group>Team_Broderick</group>
+    </sharedTo>
+</ListView>

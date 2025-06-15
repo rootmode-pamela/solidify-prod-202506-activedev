@@ -1,0 +1,76 @@
+<template>
+    <lightning-card title="Liabilities" icon-name="standard:record">
+        <template lwc:if={assets}>
+            
+            <div class="slds-var-m-around_medium">
+
+                <lightning-datatable
+                key-field="Id"
+                data={assets}
+                columns={columns}
+                hide-checkbox-column = true
+                editable="true"
+                onrowaction={handleRowAction}
+                draft-values={saveDraftValues}
+                onsave={handleSave}>
+                </lightning-datatable>
+            </div>
+            <div class="slds-var-m-around_medium">
+                <lightning-layout class="slds-var-m-vertical_x-small">
+                    <lightning-layout-item class="slds-size_1-of-3">
+                        <div  class="slds-text-heading_small">
+                        Blended Rate:     {blendedRate} %
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-size_1-of-3">
+                        <lightning-button label="New Liability" onclick={handleShowPopup}></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </template>
+        <template lwc:elseif={error}>
+            <p>Error</p>
+           <!--<c-error-panel errors={error}></c-error-panel> -->
+        </template>
+
+        <template if:true={showPopup}>
+            <section>
+            <div class="slds-modal_container">
+            <lightning-modal-header label="New Liability"></lightning-modal-header>
+            <lightning-modal-body> 
+                <lightning-card title="Create New Liability" icon-name="standard:record">
+                    <div class="slds-var-m-around_medium">
+                        <div if:true={errors} class="slds-notify slds-notify_alert slds-alert_error">
+                            {errors}
+                          </div>
+                          <lightning-record-edit-form
+                            object-api-name="Asset__c"
+                            columns="2"
+                            onsuccess={closePopupSuccess}>
+                        
+                            <lightning-input-field field-name="Name"></lightning-input-field>
+                            <lightning-input-field field-name="Amount__c"></lightning-input-field>
+                            <lightning-input-field field-name="Payment__c"></lightning-input-field>
+                            <lightning-input-field field-name="Interest_Rate__c"></lightning-input-field>
+                            <lightning-input-field field-name="Type__c"></lightning-input-field>
+                            <lightning-input-field field-name="Planned_Payment__c"></lightning-input-field>
+                            <lightning-input-field field-name="Loan__c" value={recordId} disabled="true" hidden></lightning-input-field>
+                            <lightning-input-field field-name="AssetOrLiability__c" value="Liability" disabled="true" hidden></lightning-input-field>
+
+                            <lightning-button
+                            class="slds-m-top_small"
+                            type="submit"
+                            onclick={handleSubmit}
+                            label="Create new"
+                        ></lightning-button>
+                        </lightning-record-edit-form>
+                        
+                    </div>
+                </lightning-card>
+                </lightning-modal-body> 
+            </div>
+            </section>
+        </template>
+
+    </lightning-card>
+</template>

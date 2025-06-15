@@ -1,0 +1,7 @@
+<design:component label="11|1: 2 Column - Left Tray Closed">
+    <flexipage:template >
+        <flexipage:region name="header"     defaultWidth="LARGE" />
+        <flexipage:region name="left"       defaultWidth="LARGE" />
+        <flexipage:region name="middle"     defaultWidth="SMALL" />
+    </flexipage:template>
+</design:component>

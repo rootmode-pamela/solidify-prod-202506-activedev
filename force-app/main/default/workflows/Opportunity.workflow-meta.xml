@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Loan_Originator_Change_Alert</fullName>
+        <ccEmails>pamelawhite858@gmail.com</ccEmails>
+        <description>Loan Originator Change Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Loan_Originator_User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/LoanNewLOAssignmentNotificationSAMPLE</template>
+    </alerts>
+    <alerts>
+        <fullName>Opp_In_ProspectStage</fullName>
+        <ccEmails>processing@solidify.com</ccEmails>
+        <description>Opp Reaches Prospect/Preapproval Stage</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Opp_Reaches_Prospect_Stage</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Processor_Notes</fullName>
+        <description>Send Processor Notes</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <field>Loan_Originator_User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Loan_Processor_User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Convo_Log_Notes_1717388238704</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Submit_Notes</fullName>
+        <description>Send Submit Notes</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <field>Loan_Originator_User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Loan_Processor_User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Submit_Notes_1715836049008</template>
+    </alerts>
+    <alerts>
+        <fullName>Stale_Dormant_Loan_Email_Alert</fullName>
+        <description>Stale/Dormant Loan Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Stale_Dormant_Loan_Email_Alert</template>
+    </alerts>
+    <alerts>
+        <fullName>X1_Day_Lock_Email_Alert</fullName>
+        <description>1 Day Lock Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/X1_Day_Post_Close_Lock_Email</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Loan_Amount_to_Amount</fullName>
+        <description>This field update will push the Loan Amount value to the standard Amount field.</description>
+        <field>Amount</field>
+        <formula>Loan_Amount__c</formula>
+        <name>Loan Amount to Amount</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Interest_Rate_Per_Period</fullName>
+        <description>This field update will set the Interest Rate Per Period on the Opportunity.</description>
+        <field>Interest_Rate_Per_Period__c</field>
+        <formula>Interest_Rate__c / 12</formula>
+        <name>Set Interest Rate Per Period</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Payment_Amount</fullName>
+        <description>This field update will set the monthly payment amount for the loan.</description>
+        <field>Payment_Amount__c</field>
+        <formula>IF( NOT(ISBLANK(Interest_Rate_Per_Period__c)) &amp;&amp; NOT(ISBLANK(Total_Periods__c)),
+ (
+  ( Interest_Rate_Per_Period__c *
+   ((1+Interest_Rate_Per_Period__c)^Total_Periods__c) 
+  ) / 
+  (
+   (
+    ((1+Interest_Rate_Per_Period__c)^Total_Periods__c) - 1
+   )
+  )
+ ) * Amount,
+0)</formula>
+        <name>Set Payment Amount</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Total_Periods</fullName>
+        <description>This field will set the Total Periods for the loan, based on the Program Name.</description>
+        <field>Total_Periods__c</field>
+        <formula>IF(CONTAINS(TEXT( Loan_Program__c), &apos;ARM&apos;),
+       30,
+       IF(CONTAINS(TEXT( Loan_Program__c), &apos;HELOC&apos;),
+          30,
+          IF(CONTAINS(TEXT( Loan_Program__c), &apos;2ND&apos;),
+             30,
+             VALUE(RIGHT(TEXT( Loan_Program__c ),2))
+            )
+          )
+      )*12</formula>
+        <name>Set Total Periods</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Loan Amount to Amount</fullName>
+        <actions>
+            <name>Loan_Amount_to_Amount</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.Loan_Amount__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This workflow rule will push the value from Loan Amount to the standard Amount field on converting a lead to an opportunity.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

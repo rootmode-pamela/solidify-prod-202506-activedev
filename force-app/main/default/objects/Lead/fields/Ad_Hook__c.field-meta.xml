@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ad_Hook__c</fullName>
+    <description>The promotion or hook of the ad (ie Special Purchase Programs)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Received your inquiry about our ad regarding _____  (special purchase programs)</inlineHelpText>
+    <label>Ad Hook</label>
+    <length>100</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

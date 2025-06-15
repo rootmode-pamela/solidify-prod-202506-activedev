@@ -1,0 +1,11 @@
+.input-label-inactive {
+    width: 95%;
+    padding: 4px;
+    word-wrap: break-word;
+    hyphens: auto;
+    display: inline-block;
+    font-size: 0.75rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    margin-bottom: 0.125rem;
+}

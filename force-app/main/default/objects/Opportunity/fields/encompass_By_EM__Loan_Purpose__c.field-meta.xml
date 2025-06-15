@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>encompass_By_EM__Loan_Purpose__c</fullName>
+    <deprecated>false</deprecated>
+    <label>Loan Purpose</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Purchase</fullName>
+                <default>false</default>
+                <label>Purchase</label>
+            </value>
+            <value>
+                <fullName>Construction - Perm</fullName>
+                <default>false</default>
+                <label>Construction - Perm</label>
+            </value>
+            <value>
+                <fullName>No cash-Out Refi</fullName>
+                <default>false</default>
+                <label>No cash-Out Refi</label>
+            </value>
+            <value>
+                <fullName>Construction</fullName>
+                <default>false</default>
+                <label>Construction</label>
+            </value>
+            <value>
+                <fullName>Cash-Out Refi</fullName>
+                <default>false</default>
+                <label>Cash-Out Refi</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

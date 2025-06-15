@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Down_Payment_Range__c</fullName>
+    <label>Down Payment Range</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Zero Down</fullName>
+                <default>false</default>
+                <label>Zero Down</label>
+            </value>
+            <value>
+                <fullName>Minimum Down</fullName>
+                <default>false</default>
+                <label>Minimum Down</label>
+            </value>
+            <value>
+                <fullName>3% - 20% Down</fullName>
+                <default>false</default>
+                <label>3% - 20% Down</label>
+            </value>
+            <value>
+                <fullName>20 - 40% Down</fullName>
+                <default>false</default>
+                <label>20 - 40% Down</label>
+            </value>
+            <value>
+                <fullName>More than 40% Down</fullName>
+                <default>false</default>
+                <label>More than 40% Down</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

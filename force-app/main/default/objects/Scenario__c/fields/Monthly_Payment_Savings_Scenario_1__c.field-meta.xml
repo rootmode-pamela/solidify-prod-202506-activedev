@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Monthly_Payment_Savings_Scenario_1__c</fullName>
+    <formula>First_Loan_Amount_Scenario_1__c *(  Rate_Scenario_1__c /12)*((1+(  Rate_Scenario_1__c /12))^  (Term_Due__c * 12)) /(((1+(  Rate_Scenario_1__c /12))^  (Term_Due__c * 12)) -1)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Monthly Payment Savings Scenario 1</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

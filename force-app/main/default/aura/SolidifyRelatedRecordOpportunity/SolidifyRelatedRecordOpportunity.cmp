@@ -1,0 +1,66 @@
+<aura:component access="global">
+
+    <aura:attribute name="recordId" type="String" access="global" />
+    <aura:attribute name="objectApiName" type="String" access="global" default="Properties__c" />
+    <aura:attribute name="fieldsChanged" type="Boolean" default="false" />
+
+    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+        <div class="slds-media__figure">
+            <lightning:icon iconName="custom:custom64" title="Most Recent Closing on Subject" size="small" />
+        </div>
+        <div class="slds-media__body">
+            <h2 class="slds-card__header-title">
+                <p>Most Recent Closing on Subject</p>
+            </h2>
+        </div>
+    </header>
+
+    <lightning:recordEditForm aura:id="recordEditForm" 
+                              recordId="{!v.recordId}" 
+                              objectApiName="{!v.objectApiName}" 
+                              onsuccess="{!c.showSuccess}">
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="Most_Recent_Closed_Opportunity__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Loan_Originator_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Purpose_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Occupancy_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Property_Type__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Number_of_Units__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Purchase_Price_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Appraised_Value_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="CLTV_of_Most_Recent_Closed_Loan__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="LTV_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="Rate_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Lender_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Days_Since_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Loan_Amount__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Loan_Amt_with_MIP_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Loan_Program_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="P_I_of_Most_Recent_Closed_Loan__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="PITI_of_Most_Recent_Closed_Loan__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="First_Payment_Most_Recent_Closed_Loan__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Scheduled_Balance_of_Most_Recent_Closing__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Escrows_Waived_Most_Recent_Closed_Loan__c" onchange="{!c.fieldChanged}" />
+                <lightning:inputField fieldName="Qual_Fico__c" onchange="{!c.fieldChanged}" />
+            </div>
+        </div>
+        <aura:if isTrue="{!v.fieldsChanged}">
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-1">
+                    <div style="padding-left: calc(50% - 30px)">
+                        <lightning:button variant="brand"
+                                          label="Save"
+                                          title="Save"
+                                          type="submit"
+                                          onclick="{!c.submit}" />
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+    </lightning:recordEditForm>
+
+</aura:component>

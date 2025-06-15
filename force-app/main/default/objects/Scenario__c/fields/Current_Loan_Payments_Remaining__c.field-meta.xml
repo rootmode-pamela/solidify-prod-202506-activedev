@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Loan_Payments_Remaining__c</fullName>
+    <externalId>false</externalId>
+    <formula>CEILING((LOG((-Current_Payment__c)/((Current_Balance__c*(Current_Rate__c/12)- Current_Payment__c ))))/(LOG(1+(Current_Rate__c/12))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Current Loan Payments Remaining</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

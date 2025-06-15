@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Followup_Overdue__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(  
+  Followup_Date__c &gt; TOday(), 
+  IMAGE(&apos;https://img.icons8.com/color/48/000000/low-importance--v1.png&apos;, &apos;Not due&apos;,15,15), 
+  IF (
+    Followup_Date__c == TODAY(),  
+    IMAGE(&apos;https://img.icons8.com/color/48/000000/medium-priority.png&apos;, &apos;Due Today&apos;, 15,15), 
+    IMAGE( &apos;https://img.icons8.com/color/48/000000/high-priority.png&apos;, &apos;Overdue&apos;, 15,15)
+  )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Followup Overdue</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Condo__c</fullName>
+    <formula>IF(CONTAINS(Subject_Prop_Type__c , &apos;Condo&apos;), true, false)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Condo</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

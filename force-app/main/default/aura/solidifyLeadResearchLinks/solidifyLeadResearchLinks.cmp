@@ -1,0 +1,70 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+ 	<aura:attribute name="record" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+
+    <force:recordData aura:id="recordLoader"
+      recordId="{!v.recordId}"
+      fields="Id,Subject_Property_Street__c,Subject_Property_City__c,Subject_Property_State__c,Subject_Property_Zip__c,Subject_Property_County__c,Name,FirstName,LastName,Nickname__c,Greeting_Name__c,Company,Email"
+      targetRecord="{!v.record}"
+      targetFields="{!v.simpleRecord}"
+      recordUpdated="{!c.recordUpdate}"
+      />
+	<lightning:card >
+           <div class="slds-grid slds-gutters slds-p-horizontal_medium">
+            <div class="slds-col  slds-size_1-of-3">
+                <div class="slds-section slds-is-open slds-text-heading_small">
+                    <p></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://www.linkedin.com/search/results/index/?keywords='+ v.simpleRecord.LastName + '%20' 
+                                                                           															   + v.simpleRecord.Greeting_Name__c + '%20OR%20' 
+                                                                           															   + '&amp;origin=GLOBAL_SEARCH_HEADER'}" label="Linked In" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://facebook.com/search/top/?q='+ v.simpleRecord.Email}" label="Facebook Email Search" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://facebook.com/search/top/?q='+ v.simpleRecord.Greeting_Name__c + ' ' + v.simpleRecord.LastName}" label="Facebook Name Search" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://tools.usps.com/zip-code-lookup.htm?byaddress" 
+                                                                    label="USPS Address" 
+                                                                    target="_blank"/></p> 
+					<p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'http://maps.google.com/maps?f=q&amp;hl=en&amp;q=' + v.simpleRecord.Subject_Property_Street__c +  (v.simpleRecord.Subject_Prop_City__c != null ? '+' : '' ) 
+                                                                           														+ v.simpleRecord.Subject_Property_City__c +  (v.simpleRecord.Subject_Prop_State__c != null ? '+' : '' ) 
+                                                                           														+ v.simpleRecord.Subject_Property_State__c + '&amp;om=1'}" label="Google Maps" target="_blank"/></p>
+            	</div>
+
+             </div>
+            
+            <div class="slds-col slds-size_1-of-3">
+                <div class="slds-section slds-is-open slds-text-heading_small">
+                    
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://www.zillow.com/homes/1_ah/' + v.simpleRecord.Subject_Property_Street__c +  (v.simpleRecord.Subject_Property_City__c != null ? ',-' : '' ) 
+                                                                           										  + v.simpleRecord.Subject_Property_City__c + (v.simpleRecord.Subject_Property_State__c != null ? ',-' : '' ) 
+                                                                           										  + v.simpleRecord.Subject_Property_State__c + (v.simpleRecord.Subject_Property_Zip__c != null ? ',-' : '' ) 
+                                                                           										  + v.simpleRecord.Subject_Property_Zip__c + '_rb/?view=public'}" 
+                     label="Zillow Value" 
+                     target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://www.google.com/search?q=' + v.simpleRecord.Subject_Property_Street__c +  (v.simpleRecord.Subject_Prop_City__c != null ? '+' : '' ) 
+                                                                           										+ v.simpleRecord.Subject_Property_City__c +  (v.simpleRecord.Subject_Prop_State__c != null ? '+' : '' ) 
+                                                                           										+ v.simpleRecord.Subject_Property_State__c +  (v.simpleRecord.Subject_Prop_Zip__c != null ? '+' : '' ) 
+                                                                           										+ v.simpleRecord.Subject_Prop_Zip__c}"
+                                                                    label="Google Value"
+                                                                    target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://www.titlepro247.com/" label="Title Pro 247" target="_blank"/></p>
+					<p class="slds-m-bottom_xx-small"><ui:outputURL value="https://onlinegeocoder.fanniemae.com/loanlimitgeocoder/pages/Online.aspx" label="Loan Limit Geocoder" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://miq.mgic.com/miq/" label="MGIC" target="_blank"/></p>
+                    
+                    
+                    
+                    
+            	</div>
+            </div>
+            <div class="slds-col slds-size_1-of-3 slds-text-heading_small"> 
+                <div class="slds-section slds-is-open">
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://rates.fntg.com/" label="Purchase Fee Finder" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://pricing.fntg.com/" label="Refi Fee Finder" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://downpaymentresource.com" label="Down Payment Asst." target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://homeready-eligibility.fanniemae.com/homeready/" label="HomeReady (Fannie)" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://www.freddiemac.com/homepossible/eligibility.html" label="Home Poss. (Freddie)" target="_blank"/></p>
+  					<p class="slds-m-bottom_xx-small"><ui:outputURL value="https://loanlookup.freddiemac.com/" label="Freddie Loan Lookup" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://www.knowyouroptions.com/loanlookup#" label="Fannie Loan Lookup" target="_blank"/></p>
+  				
+            </div>
+             </div>
+        </div>
+</lightning:card>
+</aura:component>

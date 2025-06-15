@@ -1,0 +1,26 @@
+<aura:component implements="force:lightningQuickAction,flexipage:availableforRecordHome,force:hasRecordId">
+ 	<aura:attribute name="lead" type="Lead" />
+    
+    <force:recordData aura:id="leadRecord"
+                  mode="EDIT"
+                  recordId="{!v.recordId}"
+                  targetFields="{!v.Lead}"
+                  targetError="{!v.recordError}"
+                  fields="Id, Status, Archive_Reason__c"
+                      />
+
+	<lightning:recordEditForm aura:id="leadArchiveReason" recordId="{!v.recordId}" objectApiName="Lead">
+        <lightning:messages />
+		<aura:if isTrue="{!not(empty(v.recordError))}">
+        	<div class="recordError">
+            	{!v.recordError}</div>
+    	</aura:if>
+    
+             <lightning:inputField fieldName="Status" />
+        	<lightning:inputField fieldName="Archive_Reason__c"/>
+	 <lightning:button class="slds-m-top_small" type="submit" label="Update" />
+              
+    </lightning:recordEditForm>
+   
+
+</aura:component>

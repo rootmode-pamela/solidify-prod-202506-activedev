@@ -1,0 +1,85 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+        <div class="slds-modal__container modal-window">
+            <header class="slds-modal__header">
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"><b>Quick Blended Rate</b></h2>
+            </header>
+
+            <div class="slds-modal__content slds-p-bottom_x-small" id="modal-content-id-2">
+                <div class="slds-box slds-p-around_medium">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                        <thead>
+                            <tr>
+                                <th style="width: 30% !important;">Description</th>
+                                <th style="width: 30% !important;">Amount</th>
+                                <th style="width: 30% !important;">Interest Rate (%)</th>
+                                <th style="width: 3% !important;"></th>
+                                <th style="width: 3% !important;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={addRowLengthExeed}>
+                                <tr>
+                                    <td colspan="5">
+                                        <p style="color: red; font-weight: bold; font-size: 14px !important;">*Maximum
+                                            number of rows
+                                            (10) reached...</p>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template for:each={rows} for:item="row" for:index="index">
+                                <tr key={row.id}>
+                                    <td style="width: 30% !important;">
+                                        <lightning-input type="text" value={row.description} data-index={index}
+                                            data-field="description"></lightning-input>
+                                    </td>
+                                    <td style="width: 30% !important;">
+                                        <lightning-input type="number" formatter="currency" step="0.01" min="0"
+                                            value={row.amount} onchange={handleAmountChange} data-index={index}
+                                            data-field="amount"></lightning-input>
+                                    </td>
+                                    <td style="width: 30% !important;">
+                                        <lightning-input type="number" formatter="percent-fixed" step="0.01" min="0"
+                                            value={row.interestRate} onchange={handleInterestChange} data-index={index}
+                                            data-field="interestRate"></lightning-input>
+                                    </td>
+                                    <td style="padding-top: 2% !important;">
+                                        <template if:true={index}>
+                                            <lightning-button-icon icon-name="utility:delete" alternative-text="Delete"
+                                                onclick={handleDeleteRow} data-index={index}></lightning-button-icon>
+                                        </template>
+                                    </td>
+                                    <td style="padding-top: 2%!important;">
+                                        <template if:true={row.isLast}>
+                                            <lightning-button-icon icon-name="utility:add" alternative-text="Add"
+                                                onclick={addRow} data-index={index}></lightning-button-icon>
+                                        </template>
+                                    </td>
+                                </tr>
+                            </template>
+                            <tr>
+                                <td style="width: 30% !important;"></td>
+                                <td style="width: 31% !important;"><b><span style="color: blue !important;">Total
+                                            Amount : </span><template
+                                            if:true={totalAmount}>&#36;</template>{totalAmount}</b></td>
+                                <td><b><span style="color: blue !important;">Blended Rate : </span>
+                                        {blendedRate}<template if:true={blendedRate}>%</template></b>
+                                </td>
+                                <td style="width: 3% !important;"></td>
+                                <td style="width: 3% !important;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                    </div>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning-button label="Close" class="my-brand slds-float_right" variant="neutral"
+                    onclick={closeModal}></lightning-button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

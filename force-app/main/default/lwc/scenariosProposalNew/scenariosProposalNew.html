@@ -1,0 +1,622 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-14-2022
+  @last modified by  : Ashton Kuehne
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   04-08-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+    <div class="container">
+        <article class="slds-card">
+            <div class="component slds-card__body slds-card__body_inner">
+                <lightning-record-edit-form object-api-name={ProposalObject} onsuccess={handleSuccess} onsubmit={handleSubmitForm}>
+                    <lightning-messages></lightning-messages>
+                    <div class="searchBox">
+                        <!-- selection={initialSelection}-->
+                        <c-lookup-l-w-c selection={initialSelection} errors={errors} onsearch={handleLookupSearch}
+                            onselectionchange={handleLookupSelectionChange} label="Search Leads, Loans, or Contacts"
+                            placeholder="Leads, Loans, or Contacts" new-record-options={newRecordOptions} required>
+                        </c-lookup-l-w-c>
+                        <!--<template if:true={SelectedisLead}>
+                            <lightning-input-field field-name={PropLead} variant="label-hidden" value={userId}>
+                            </lightning-input-field>
+                        </template>
+                        <template if:true={SelectedisContact}>
+                            <lightning-input-field field-name={PropContact} variant="label-hidden" value={userId}>
+                            </lightning-input-field>
+                        </template>
+                        <template if:true={SelectedisLoan}>
+                            <lightning-input-field field-name={PropLoan} variant="label-hidden" value={userId}>
+                            </lightning-input-field>
+                        </template>-->
+                    </div>
+                    <div class="mainTable slds-grid">
+                        <div class="nopad slds-col slds-size_3-of-12">
+                            <div class="calc-left">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Purpose</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field field-name={Purpose} variant="label-hidden"
+                                            onchange={handlePick} value={PurposeValue}>
+                                        </lightning-input-field>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Solidify Contact:</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field field-name={SolidifyContact} variant="label-hidden" value={userId}>
+                                        </lightning-input-field>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-1"><br></div>
+
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Occupancy</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field value={OccupancyValue} field-name={Occupancy} variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Subject Property Type</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field field-name={SubjectPropertyType} variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Number Of Units</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field value={NumberOfUnitsV} field-name={NumberOfUnits} variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Estimated Value</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field value={EstimatedValue} field-name={EstimatedValue} variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+
+                                    <template if:true={isRefinance}>
+                                        <div class="slds-col slds-size_1-of-1"><br></div>
+
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <h4 class="labels">Current Program</h4>
+                                        </div>
+                                        <div class="currentFields slds-col slds-size_1-of-2">
+                                            <lightning-input-field value={CurrentProgramV} field-name={CurrentProgram} variant="label-hidden">
+                                            </lightning-input-field>
+                                        </div>
+
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <h4 class="labels">Current Balance</h4>
+                                        </div>
+                                        <div class="currentFields slds-col slds-size_1-of-2">
+                                            <lightning-input-field value={CurrentBalanceV} field-name={CurrentBalance} variant="label-hidden">
+                                            </lightning-input-field>
+                                        </div>
+
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <h4 class="labels">Current Rate</h4>
+                                        </div>
+                                        <div class="currentFields slds-col slds-size_1-of-2">
+                                            <lightning-input-field value={CurrentRateV} field-name={CurrentRate} variant="label-hidden">
+                                            </lightning-input-field>
+                                        </div>
+
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <h4 class="labels">Current Payment
+                                                <lightning-helptext
+                                                    content="Input actual payment borrower makes.  May be more than scheduled.">
+                                                </lightning-helptext>
+                                            </h4>
+                                        </div>
+                                        <div class="currentFields slds-col slds-size_1-of-2">
+                                            <lightning-input-field value={CurrentPaymentV} field-name={CurrentPayment} variant="label-hidden">
+                                            </lightning-input-field>
+                                        </div>
+                                    </template>
+
+                                    <div class="slds-col slds-size_1-of-1"><br></div>
+
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Estimated Taxes</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field value={TaxesValue} field-name={EstimatedTaxS1} variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Estimated Insurance</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field value={InsuranceValue} field-name={EstimatedInsuranceS1} variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Estimated Mortgage Insurance</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field field-name={EstMortgageInsuranceS1}
+                                            variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Estimated HOA</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field value={HOAValue} field-name={EstimatedHoaS1} variant="label-hidden">
+                                        </lightning-input-field>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h4 class="labels">Copy over to Scenario 2 and 3</h4>
+                                    </div>
+                                    <div class="currentFields slds-col slds-size_1-of-2">
+                                        <lightning-input-field field-name={CopytoS1And2} variant="label-hidden" onchange={handleCopytoChange}>
+                                        </lightning-input-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nopad calc-rightContainer slds-col slds-size_9-of-12">
+                            <div class="calc-right">
+                                <div class="table slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_2-of-5">
+                                                <h3></h3>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <h3>Scenario 1</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <h3>Scenario 2</h3>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <h3>Scenario 3</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <template if:true={isRefinance}>
+                                        <div class="row slds-col slds-size_1-of-1">
+                                            <div class="slds-grid slds-wrap">
+                                                <div class="row-headers slds-col slds-size_2-of-5">
+                                                    <h4 class="row-headers">Purpose:</h4>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={PurposeS1}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={PurposeS2}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={PurposeS3}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Loan Program:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={LoanProgramS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={LoanProgramS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={LoanProgramS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <template if:false={isRefinance}>
+                                        <div class="row slds-col slds-size_1-of-1">
+                                            <div class="slds-grid slds-wrap">
+                                                <div class="row-headers slds-col slds-size_2-of-5">
+                                                    <h4 class="row-headers">Down Payment:</h4>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={DwnPaymentS1}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={DwnPaymentS2}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={DwnPaymentS3}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Loan Amount:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={LoamAmtS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={LoamAmtS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={LoamAmtS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Rate:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={RateScenarioS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={RateScenarioS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={RateScenarioS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <template if:true={isUFMIP1}>
+                                        <div class="row slds-col slds-size_1-of-1">
+                                            <div class="slds-grid slds-wrap">
+                                                <div class="row-headers slds-col slds-size_2-of-5">
+                                                    <h4 class="row-headers">UFMIP/FF:</h4>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={UFMIPFFS1}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={UFMIPFFS2}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={UFMIPFFS3}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <template if:true={isCancel1}>
+                                        <div class="row slds-col slds-size_1-of-1">
+                                            <div class="slds-grid slds-wrap">
+                                                <div class="row-headers slds-col slds-size_2-of-5">
+                                                    <h4 class="row-headers">Cancel at %:</h4>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={CancelMIAtS1}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={CancelMIAtS2}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-5">
+                                                    <lightning-input-field class="row-cells" field-name={CancelMIAtS3}
+                                                        variant="label-hidden">
+                                                    </lightning-input-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Discount(Credit):</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={DiscountCreditS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={DiscountCreditS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={DiscountCreditS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Lender Fee:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={LenderFeeS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={LenderFeeS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={LenderFeeS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Appraisal Fee:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={AppraisalFeeS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={AppraisalFeeS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={AppraisalFeeS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Credit Report Fee:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={CreditReportFeeS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={CreditReportFeeS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={CreditReportFeeS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Escrow Fee:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={EscrowFeesS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={EscrowFeesS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={EscrowFeesS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Title Fee:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={TitleFeeS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={TitleFeeS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={TitleFeeS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Recording Fee:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={RecordingFeeS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={RecordingFeeS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={RecordingFeeS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <h3>Monthly Breakdown</h3>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Estimated Taxes:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={EstimatedTaxS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={EstimatedTaxS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={EstimatedTaxS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Estimated Insurance:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells"
+                                                    field-name={EstimatedInsuranceS1} variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells"
+                                                    field-name={EstimatedInsuranceS2} variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells"
+                                                    field-name={EstimatedInsuranceS3} variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Estimated Mortgage Insurance:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells"
+                                                    field-name={EstMortgageInsuranceS1} variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells"
+                                                    field-name={EstMortgageInsuranceS2} variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells"
+                                                    field-name={EstMortgageInsuranceS3} variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-headers slds-col slds-size_2-of-5">
+                                                <h4 class="row-headers">Estimated HOA:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={EstimatedHoaS1}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={EstimatedHoaS2}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                <lightning-input-field class="row-cells" field-name={EstimatedHoaS3}
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-clearfix">
+                                    <div class="pageBtn slds-float_right slds-m-bottom_large">
+                                        <lightning-button class="my-brand-button btn" type="submit" label="Create Proposal"></lightning-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-record-edit-form>
+            </div>
+        </article>
+    </div>
+</template>

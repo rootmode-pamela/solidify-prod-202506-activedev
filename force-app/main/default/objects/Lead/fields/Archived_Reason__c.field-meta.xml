@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Archived_Reason__c</fullName>
+    <label>Archived Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Requested Do Not Call</fullName>
+                <default>false</default>
+                <label>Requested Do Not Call</label>
+            </value>
+            <value>
+                <fullName>Invalid Phone/Email</fullName>
+                <default>false</default>
+                <label>Invalid Phone/Email</label>
+            </value>
+            <value>
+                <fullName>No Response</fullName>
+                <default>false</default>
+                <label>No Response</label>
+            </value>
+            <value>
+                <fullName>Sales/Competitor Inquiry</fullName>
+                <default>false</default>
+                <label>Sales/Competitor Inquiry</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Opted to Payoff Mortgage</fullName>
+                <default>false</default>
+                <label>Opted to Payoff Mortgage</label>
+            </value>
+            <value>
+                <fullName>Opted Not to Buy a Home</fullName>
+                <default>false</default>
+                <label>Opted Not to Buy a Home</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

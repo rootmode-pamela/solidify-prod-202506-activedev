@@ -1,0 +1,50 @@
+<template>
+
+    <div if:true={isLoading} style="height: 20px; position:relative">
+        <lightning-spinner variant="base" size="small"></lightning-spinner>
+      </div>
+      
+    <lightning-card title="Add New Record">
+        <div class="slds-p-around_medium">
+            <div class="slds-card check">
+                <template for:each={filterList} for:item="filterData" for:index="index">
+                    <div key={filterData} class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_1-of-9" style="width: 20% !important;">
+                            <lightning-input label="Name" name="assetName" value={filterData.Name} data-index={index} onchange={handleChange} required class="left-align"></lightning-input>
+                        </div>
+                        &nbsp;&nbsp;
+                        <div class="slds-col slds-size_1-of-9" style="width: 10% !important;">
+                            <lightning-combobox label="Type" name="assetType" data-index={index}
+                              placeholder="" onchange={handleChange} value={filterData.description}
+                              options={pickListOptions} class="left-align">
+                           </lightning-combobox>
+                        </div>
+                        &nbsp;&nbsp; 
+                        <div class="slds-col slds-size_1-of-9" style="width: 10% !important;">
+                            <lightning-input label="Amount" name="assetAmount" type="number" value={filterData.amount} data-index={index} onchange={handleChange} required class="left-align"></lightning-input>
+                        </div>
+                        &nbsp;&nbsp;
+                        <div class="slds-p-left_xx-small" style="margin-top: 22px !important;">
+                            <lightning-button-icon icon-name="utility:delete" alternative-text="Delete" title="Delete" data-index={filterData.id} onclick={handleRemoveRow} style="color: #BA0517 !important;"  class="left-aligned-icon"></lightning-button-icon>
+                            &nbsp;&nbsp;
+                            <lightning-button-icon icon-name="utility:add" alternative-text="Add Row" title="Add Row" data-index={filterData.id} onclick={handleAddRow} style="color: green !important;"  class="left-aligned-icon"></lightning-button-icon>
+                        </div> 
+                        &nbsp;&nbsp;
+                        <div class="slds-col slds-size_1-of-9"> </div>
+                    </div>
+                </template>
+            </div>
+            <br/>
+            &nbsp;&nbsp;
+            <lightning-button 
+                label="Save"
+                title="Save"
+                class="slds-float_right"
+                variant="brand" 
+                onclick={saveRows} 
+                style="padding-right: 85px !important;">
+            </lightning-button>
+        </div>
+    </lightning-card>
+
+</template>

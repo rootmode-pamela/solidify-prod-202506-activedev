@@ -1,0 +1,8 @@
+<design:component label="1|10|1 - Dual Tray (Right Open)">
+    <flexipage:template >
+        <flexipage:region name="header"    defaultWidth="LARGE" />
+        <flexipage:region name="left"      defaultWidth="SMALL" />
+        <flexipage:region name="middle"    defaultWidth="LARGE" />
+        <flexipage:region name="right"     defaultWidth="SMALL" />
+    </flexipage:template>
+</design:component>

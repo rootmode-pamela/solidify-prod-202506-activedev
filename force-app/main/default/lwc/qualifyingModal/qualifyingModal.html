@@ -1,0 +1,252 @@
+<template>
+    <lightning-record-edit-form
+            record-id={recordId}
+            object-api-name="Opportunity"
+            onsuccess={handleSuccess}
+            onerror={handleError}
+    >
+        <lightning-messages> </lightning-messages>
+        <section role="dialog"  tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container modal-window">
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </template>
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Qualifying Details</h2>
+                </header>
+                <template if:true={isScenario}>
+                    <div class="slds-modal__content slds-p-bottom_x-small" id="modal-content-id-1">
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col income-column">
+                                <div class="slds-align_absolute-center slds-text-heading_medium slds-hyphenate slds-m-bottom_small main-column-width">Income</div>
+                                <table class="slds-table slds-table_cell-buffer slds-no-row-hover top-border">
+                                    <tbody>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncome} class="margin-bottom-unset" data-id="incBorrowerBase" field-name="Inc_Borrower_Base__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncome} class="margin-bottom-unset" data-id="incCoBorrowerBase" field-name="Inc_CoBorrower_Base__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncome} class="margin-bottom-unset" data-id="incBorrowerOvertime" field-name="Inc_Borrower_Overtime__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncome} class="margin-bottom-unset" data-id="incCoBorrowerOvertime" field-name="Inc_CoBorrower_Overtime__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncome} class="margin-bottom-unset" data-id="incBorrowerBonuses" field-name="Inc_Borrower_Bonuses__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncome} class="margin-bottom-unset" data-id="incCoBorrowerBonuses" field-name="Inc_CoBorrower_Bonuses__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncome} class="margin-bottom-unset" data-id="incBorrowerCommission" field-name="Inc_Borrower_Commission__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncome} class="margin-bottom-unset" data-id="incCoBorrowerCommission" field-name="Inc_CoBorrower_Commission__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncome} class="margin-bottom-unset" data-id="incBorrowerOther" field-name="Inc_Borrower_Other__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncome} class="margin-bottom-unset" data-id="incCoBorrowerOther" field-name="Inc_CoBorrower_Other__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="main-column-width input-padding-x">
+                                    <lightning-input-field data-id="totalIncome" disabled="true" class="margin-bottom-unset" field-name="Total_Income__c" variant="label-stacked" ></lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-col">
+                                <table class="slds-table slds-table_cell-buffer slds-no-row-hover">
+                                    <tbody>
+                                    <tr>
+                                        <td class="input-rows"><div class="slds-align_absolute-center slds-text-heading_medium slds-hyphenate slds-m-bottom_small">Assets</div></td>
+                                        <td class="input-rows"><div class="slds-align_absolute-center slds-text-heading_medium slds-hyphenate slds-m-bottom_small">Debts</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeAssets} class="top-border margin-bottom-unset" data-id="scenarioLiquidAssets" field-name="Scenario_Liquid_Assets__c" variant="label-stacked" ></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeDebts} class="top-border margin-bottom-unset" data-id="primaryHousingTotal" field-name="Exp_Primary_Housing_Total_del__c" variant="label-stacked" ></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeAssets} class="margin-bottom-unset" data-id="scenarioInvestments" field-name="Scenario_Investments__c" variant="label-stacked" ></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeDebts} class="margin-bottom-unset" data-id="allOthProp" field-name="Exp_All_Oth_Prop__c" variant="label-stacked" ></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeAssets} class="margin-bottom-unset" data-id="scenarioRetirement_Assets" field-name="Scenario_Retirement_Assets__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeDebts} class="margin-bottom-unset" data-id="allOtherPayment" field-name="Exp_All_Other_Payments__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeAssets} class="margin-bottom-unset" data-id="scenarioGiftFunds" field-name="Scenario_Gift_Funds__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"></td>
+                                        <td class="input-rows"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field class="margin-bottom-unset" data-id="totalAssets" disabled="true" field-name="Scenario_Total_Assets__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field class="margin-bottom-unset" data-id="totalDebts" disabled="true" field-name="Scenario_Total_Liabilities__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field class="top-border margin-bottom-unset margin-top-ratio" field-name="Borrower_FICO__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field class="top-border margin-bottom-unset margin-top-ratio" field-name="Co_Borrower_Fico__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <template if:true={isMortgage}>
+                    <div class="slds-modal__content slds-p-bottom_x-small" id="modal-content-id-2">
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col income-column">
+                                <div class="slds-align_absolute-center slds-text-heading_medium slds-hyphenate slds-m-bottom_small main-column-width">Income</div>
+                                <table class="slds-table slds-table_cell-buffer slds-no-row-hover top-border">
+                                    <tbody>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgage} class="margin-bottom-unset" data-id="incBorrowerBase" field-name="Inc_Borrower_Base__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgage} class="margin-bottom-unset" data-id="incCoBorrowerBase" field-name="Inc_CoBorrower_Base__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgage} class="margin-bottom-unset" data-id="encompassTotalBaseInc" field-name="Encompass_Total_Base_Income__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgage} class="margin-bottom-unset" data-id="incBorrowerOther" field-name="Inc_Borrower_Other__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgage} class="margin-bottom-unset" data-id="incCoBorrowerOther" field-name="Inc_CoBorrower_Other__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgage} class="margin-bottom-unset" data-id="encompassTotalOtherInc" field-name="Encompass_Total_Other_Income__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows slds-hidden"></td>
+                                        <td class="input-rows slds-hidden"></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgage} class="margin-bottom-unset" data-id="incSubjectPropertyNet" field-name="Income_Subject_Property_Net__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows slds-hidden"></td>
+                                        <td class="input-rows slds-hidden"></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgage} class="margin-bottom-unset" data-id="additionalApplicantInc" field-name="Additional_Applicant_Income__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td><lightning-input-field data-id="borrowerTotalIncome" disabled="true" class="margin-bottom-unset" field-name="Inc_Borrower_Total__c" variant="label-stacked" ></lightning-input-field></td>
+                                        <td><lightning-input-field data-id="coBorrowerTotalIncome" disabled="true" class="margin-bottom-unset" field-name="Inc_CoBorrower_Total__c" variant="label-stacked" ></lightning-input-field></td>
+                                        <td><lightning-input-field data-id="totalIncome" disabled="true" class="margin-bottom-unset" field-name="Total_Income__c" variant="label-stacked" ></lightning-input-field></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="slds-col">
+                                <table class="slds-table slds-table_cell-buffer slds-no-row-hover">
+                                    <tbody>
+                                    <tr>
+                                        <td class="input-rows"><div class="slds-align_absolute-center slds-text-heading_medium slds-hyphenate slds-m-bottom_small">Assets</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeAssetsMortgage} class="top-border margin-bottom-unset" data-id="bankRetirementStocks" field-name="Bank_Retirement_Stocks__c" variant="label-stacked" ></lightning-input-field></td>
+                                        <!--<td class="input-rows"><lightning-input-field onchange={handleChangeDebts} class="top-border margin-bottom-unset" data-id="primaryHousingTotal" field-name="Exp_Primary_Housing_Total_del__c" variant="label-stacked" ></lightning-input-field></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeAssetsMortgage} class="margin-bottom-unset" data-id="otherAssets" field-name="Other_Assets__c" variant="label-stacked"></lightning-input-field></td>
+                                        <!--<td class="input-rows"><lightning-input-field onchange={handleChangeDebts} class="margin-bottom-unset" data-id="allOtherPayment" field-name="Exp_All_Other_Payments__c" variant="label-stacked"></lightning-input-field></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeAssetsMortgage} class="margin-bottom-unset" data-id="scenarioGiftFunds" field-name="Gifts_Grants__c" variant="label-stacked"></lightning-input-field></td>
+                                        <!--<td class="input-rows"></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field class="margin-bottom-unset" data-id="totalAssets" disabled="true" field-name="Total_Assets__c" variant="label-stacked"></lightning-input-field></td>
+                                        <!--<td class="input-rows"><lightning-input-field class="margin-bottom-unset" data-id="totalDebts" disabled="true" field-name="Scenario_Total_Liabilities__c" variant="label-stacked"></lightning-input-field></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"></td>
+                                        <td class="input-rows"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col income-column top-border">
+                                <!-- Itemized Income - first two jobs -->
+                                <div class="slds-align_absolute-center slds-text-heading_medium slds-hyphenate slds-m-bottom_small main-column-width" style="font-style: italic;">Itemized Income - first two jobs</div>
+                                <table class="slds-table slds-table_cell-buffer slds-no-row-hover top-border">
+                                    <tbody>
+                                    <!--<tr>
+                                        <td class="input-rows"><div class="slds-align_absolute-center slds-text-heading_medium slds-hyphenate slds-m-bottom_small" style="font-style: italic;">Itemized Income - first two jobs</div></td>
+                                    </tr>-->
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" data-id="incBorrowerOvertime" field-name="Inc_Borrower_Overtime__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" data-id="incCoBorrowerOvertime" field-name="Inc_CoBorrower_Overtime__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" disabled="true"  data-id="incTotalOvertime" field-name="Inc_Total_Overtime__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" data-id="incBorrowerBonuses" field-name="Inc_Borrower_Bonuses__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" data-id="incCoBorrowerBonuses" field-name="Inc_CoBorrower_Bonuses__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" disabled="true"  data-id="incTotalBonuses" field-name="Inc_Total_Bonuses__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" data-id="incBorrowerCommission" field-name="Inc_Borrower_Commission__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" data-id="incCoBorrowerCommission" field-name="Inc_CoBorrower_Commission__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" disabled="true"  data-id="incTotalCommission" field-name="Inc_Total_Commission__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" data-id="incBorrowerOtherItemized" field-name="Inc_Borrower_Other__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" data-id="incCoBorrowerOtherItemized" field-name="Inc_CoBorrower_Other__c" variant="label-stacked"></lightning-input-field></td>
+                                        <td class="input-rows"><lightning-input-field onchange={handleChangeIncomeMortgageItemized} class="margin-bottom-unset" readonly="true" disabled="true"  data-id="encompassTotalOtherIncItemized" field-name="Encompass_Total_Other_Income__c" variant="label-stacked"></lightning-input-field></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="slds-col">
+                                <table class="slds-table slds-table_cell-buffer slds-no-row-hover top-border">
+                                    <tbody>
+                                    <tr>
+                                        <td class="input-rows"><div class="slds-align_absolute-center slds-text-heading_medium slds-hyphenate slds-m-bottom_small">Debts</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows">
+                                            <lightning-input-field disabled="true" onchange={handleChangeDebtsMortgage}
+                                                                   class="top-border margin-bottom-unset"
+                                                                   data-id="primaryHousingTotal"
+                                                                   field-name="Exp_Primary_Housing_Total_del__c"
+                                                                   variant="label-stacked"></lightning-input-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows">
+                                            <lightning-input-field disabled="true" onchange={handleChangeDebtsMortgage}
+                                                                   class="margin-bottom-unset" data-id="subjectNegFlow"
+                                                                   field-name="Exp_Subject_Prop_Net_Neg__c"
+                                                                   variant="label-stacked"></lightning-input-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows">
+                                            <lightning-input-field disabled="true" onchange={handleChangeDebtsMortgage}
+                                                                   class="margin-bottom-unset" data-id="allOthProp"
+                                                                   field-name="Exp_All_Oth_Prop__c"
+                                                                   variant="label-stacked"></lightning-input-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows">
+                                            <lightning-input-field disabled="true" onchange={handleChangeDebtsMortgage}
+                                                                   class="margin-bottom-unset" data-id="allOtherPayment"
+                                                                   field-name="Exp_All_Other_Payments__c"
+                                                                   variant="label-stacked"></lightning-input-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input-rows">
+                                            <lightning-input-field class="margin-bottom-unset" data-id="totalDebts"
+                                                                   disabled="true"
+                                                                   field-name="Total_Liabilities__c"
+                                                                   variant="label-stacked"></lightning-input-field>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" class="slds-m-left_x-small" label="Cancel" title="Cancel" onclick={closeModal}></lightning-button>
+                    <template if:true={recordId}>
+                    <lightning-button variant="neutral" class="slds-m-left_x-small" label="Save" title="Save" type="submit" onclick={handleSubmit}></lightning-button>
+                        </template>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </lightning-record-edit-form>
+</template>

@@ -1,0 +1,142 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+    
+    <force:recordData aura:id="contactInfo"
+                      recordId="{!v.recordId}"
+                      targetFields="{!v.simpleRecord}"
+                      fields="Buyers_Agent__r.FirstName,Buyers_Agent__r.LastName,Buyers_Agent__r.Email,Buyers_Agent__r.MobilePhone,
+                              Buyers_Agent__r.AccountName__c,Lender_AE__r.FirstName,Lender_AE__r.LastName,Lender_AE__r.Email,Lender_AE__r.MobilePhone,
+                              Lender_AE__r.AccountName__c,Escrow_Contact__r.FirstName,Escrow_Contact__r.LastName,Escrow_Contact__r.Email,Escrow_Contact__r.MobilePhone,
+                              Escrow_Contact__r.AccountName__c,Sellers_Agent__r.FirstName,Sellers_Agent__r.LastName,Sellers_Agent__r.Email,
+                              Sellers_Agent__r.MobilePhone,Sellers_Agent__r.AccountName__c,Sellers_Agent__r.AccountId,Lender_AE__c,Escrow_Contact__c,Buyers_Agent__c,
+                              Sellers_Agent__c"
+                      targetRecord="{v.record}"/>
+    				  
+    
+	<div class="slds-grid slds-grid_align-spread slds-wrap ">
+ 
+            <div class="slds-p-right_x-small slds-p-bottom_x-small slds-size_6-of-12">
+        <div class="slds-grid slds-wrap slds-box_border">
+            <div class="slds-border--bottom slds-p-around_small slds-size_12-of-12">
+                <span class="slds-p-around_small slds-text-heading_small">Lender AE</span>
+                <div class="slds-float_right slds-p-right_small">
+                <lightning:button variant="neutral" label="View" onclick="{!c.goToLender}"/>
+                </div>                                        
+            </div>
+                <p class="slds-p-horizontal_small slds-list__item">
+                	<div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Name:</div>
+						<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedText title="Name" value="{!v.simpleRecord.Lender_AE__r.FirstName + ' ' + v.simpleRecord.Lender_AE__r.LastName}" /></p>
+                        </div>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Email:</div>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedEmail title="Send Email" value="{!v.simpleRecord.Lender_AE__r.Email}" /></p>
+                        </div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Phone:</div>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedPhone title="Phone" value="{!v.simpleRecord.Lender_AE__r.MobilePhone}" /></p>
+                        </div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small size_4-of-12">Account:</div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedText title="Account Name" value="{!v.simpleRecord.Lender_AE__r.AccountName__c}" /></p>
+                		</div>
+                    </div>
+            </p>
+        </div>
+    </div>
+            <div class="slds-p-left_x-small slds-p-bottom_x-small slds-size_6-of-12">
+        <div class="slds-grid slds-wrap slds-box_border">
+            <div class="slds-border--bottom slds-p-around_small slds-size_12-of-12">
+                <span class="slds-p-around_small slds-text-heading_small">Escrow Officer</span>
+                <div class="slds-float_right slds-p-right_small">
+                 <lightning:button variant="neutral" label="View" onclick="{!c.goToEscrow}"/>
+                </div>
+            </div>
+                <p class="slds-p-horizontal_small slds-list__item">
+                	<div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Name:</div>
+						<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedText title="Name" value="{!v.simpleRecord.Escrow_Contact__r.FirstName + ' ' + v.simpleRecord.Escrow_Contact__r.LastName}" /></p>
+                		</div>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Email:</div>
+						<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedEmail title="Name" value="{!v.simpleRecord.Escrow_Contact__r.Email}" /></p>
+                		</div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Phone:</div>
+						<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedPhone title="Name" value="{!v.simpleRecord.Escrow_Contact__r.MobilePhone}" /></p>
+                		</div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small size_4-of-12">Account:</div>
+						<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedText title="Name" value="{!v.simpleRecord.Escrow_Contact__r.AccountName__c}" /></p>
+                		</div>
+                </div>
+            </p>
+        </div>
+    </div>
+            <div class="slds-p-right_x-small slds-p-top_x-small slds-size_6-of-12">
+        <div class="slds-grid slds-wrap slds-box_border">
+            <div class="slds-border--bottom slds-p-around_small slds-size_12-of-12">
+                <span class="slds-p-around_small slds-text-heading_small">Buyer's Agent</span>
+                <div class="slds-float_right slds-p-right_small">
+                 <lightning:button variant="neutral" label="View" onclick="{!c.goToBuyer}"/>
+                </div>
+            </div>
+                <p class="slds-p-horizontal_small slds-list__item">
+                	<div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Name:</div>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedText title="Name" value="{!v.simpleRecord.Buyers_Agent__r.FirstName + ' ' + 
+                                                                                                  v.simpleRecord.Buyers_Agent__r.LastName}" /></p>
+                        </div>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Email:</div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedEmail title="Send Email" value="{!v.simpleRecord.Buyers_Agent__r.Email}" /></p>
+                        </div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Phone:</div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                            <p class="slds-truncate"><lightning:formattedPhone title="Phone" value="{!v.simpleRecord.Buyers_Agent__r.MobilePhone}" /></p>
+                        </div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small size_4-of-12">Account:</div>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                            <p class="slds-truncate"><lightning:formattedText title="Account" value="{!v.simpleRecord.Buyers_Agent__r.AccountName__c}" /></p>                      
+                        </div>
+                </div>
+            </p>
+        </div>
+    </div>
+            <div class="slds-p-left_x-small slds-p-top_x-small slds-size_6-of-12">
+        <div class="slds-grid slds-wrap slds-box_border">
+            <div class="slds-border--bottom slds-p-around_small slds-size_12-of-12">
+                <span class="slds-p-around_small slds-text-heading_small">Listing Agent</span>
+                <div class="slds-float_right slds-p-right_small">
+                 <lightning:button variant="neutral" label="View" onclick="{!c.goToLister}"/>
+                </div>
+            </div>
+                <p class="slds-p-horizontal_small slds-list__item">
+                	<div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Name:</div>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        <p class="slds-truncate"><lightning:formattedText title="Name" value="{!v.simpleRecord.Sellers_Agent__r.FirstName + ' ' + 
+                                                                                                  v.simpleRecord.Sellers_Agent__r.LastName}" /></p>
+                        </div>
+                         <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Email:</div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                        	<p class="slds-truncate"><lightning:formattedEmail title="Send Email" value="{!v.simpleRecord.Sellers_Agent__r.Email}" /></p>
+                        </div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_4-of-12">Phone:</div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                            <p class="slds-truncate"><lightning:formattedPhone title="Phone" value="{!v.simpleRecord.Sellers_Agent__r.MobilePhone}" /></p>
+                        </div>
+                    	<div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small size_4-of-12">Account:</div>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_8-of-12">
+                            <p class="slds-truncate"><lightning:formattedText title="Account" value="{!v.simpleRecord.Sellers_Agent__r.AccountName__c}" /></p>                      
+                        </div>
+                    </div>
+            </p>
+        </div>
+    </div>
+    </div>
+</aura:component>

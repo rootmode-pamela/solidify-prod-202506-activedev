@@ -1,0 +1,13 @@
+.THIS .title {
+    font-weight: bold;
+    background-color: #D3D3D3;
+}
+
+
+.THIS .changeHighlight div {
+    outline: red auto 1px;
+}
+
+.THIS button.changeHighlight {
+    background: red ;    
+}

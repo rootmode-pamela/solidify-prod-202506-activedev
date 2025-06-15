@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionNumber>5</activeVersionNumber>
+    <description>Initiates a task to send a preapproval gift when a loan with a subject property address of TBD reaches the &quot;Pre-Approved&quot; stage.</description>
+    <masterLabel>Loan: Send Preapproval Gift</masterLabel>
+</FlowDefinition>

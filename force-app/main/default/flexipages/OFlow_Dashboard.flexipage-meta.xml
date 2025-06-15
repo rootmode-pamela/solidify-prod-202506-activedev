@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>kanBanId</name>
+                    <value>a3E5G000000pMzUUAU</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>recordId</name>
+                    <value>a3E5G000000pMzUUAU</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>style</name>
+                </componentInstanceProperties>
+                <componentName>FLX_KB:KanBanComponent</componentName>
+                <identifier>FLX_KB_KanBanComponent</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>main</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <masterLabel>OFlow Dashboard</masterLabel>
+    <template>
+        <name>flexipage:defaultAppHomeTemplate</name>
+    </template>
+    <type>AppPage</type>
+</FlexiPage>

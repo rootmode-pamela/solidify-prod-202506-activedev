@@ -1,0 +1,92 @@
+<aura:component controller="ResearchSearchController" implements="flexipage:availableForAllPageTypes">
+    <aura:attribute name="loanTypes" type="String[]" />
+    <aura:attribute name="loanPrograms" type="String[]" />
+    <aura:attribute name="proposalTypes" type="String[]" />
+    <aura:attribute name="loanPurposes" type="String[]" />
+    <aura:attribute name="loanOriginators" type="String[]" />
+    <aura:attribute name="loanOccupancies" type="String[]" />
+    <aura:attribute name="selectedLoanType" type="String" default=""/>
+    <aura:attribute name="selectedLoanProgram" type="String" default=""/>
+    <aura:attribute name="selectedPurpose" type="String" default=""/>
+    <aura:attribute name="selectedProposalType" type="String" default=""/>
+    <aura:attribute name="selectedOriginator" type="String" default=""/>        
+    <aura:attribute name="selectedOccupancy" type="String" default=""/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="formSubmit" type="c:FormSubmit"/>
+   
+	<lightning:layout horizontalAlign="center" multipleRows="true">
+        <lightning:layoutItem padding="around-small">
+        <lightning:select aura:id="loanType" name="loanType" label="Loan Type"
+                                          onchange="{!c.handleTypeChange}">
+                            <option value="">All Types</option>
+                            <aura:iteration items="{!v.loanTypes}" var="type">
+                                <option value="{!type}" text="{!type}"/>
+                            </aura:iteration>
+                        </lightning:select>
+        </lightning:layoutItem >
+        <lightning:layoutItem padding="around-small">
+        <lightning:select aura:id="loanProgram" name="loanProgram" label="Loan Program"
+                                          onchange="{!c.handleLoanProgramChange}">
+                            <option value="">All Programs</option>
+                            <aura:iteration items="{!v.loanPrograms}" var="type">
+                                <option value="{!type}" text="{!type}"/>
+                            </aura:iteration>
+                        </lightning:select>
+        </lightning:layoutItem >
+        <lightning:layoutItem padding="around-small">
+        <lightning:select aura:id="loanPurpose" name="loanPurpose" label="Purpose"
+                                          onchange="{!c.handlePurposeChange}">
+                            <option value="">All</option>
+                            <aura:iteration items="{!v.loanPurposes}" var="purp">
+                                <option value="{!purp}" text="{!purp}"/>
+                            </aura:iteration>
+                        </lightning:select>
+        </lightning:layoutItem >
+        <lightning:layoutItem padding="around-small">
+            <lightning:input aura:id="loanMinIR" name="loanMinIR" type="number" format = "percent-fixed" step=".005" label="Min Interest Rate"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small">
+            <lightning:input aura:id="minBal" name="minBal" type="number" label="Min Scheduled Balance"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small">
+            <lightning:input aura:id="maxBal" name="maxBal" type="number" label="Max Scheduled Balance"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small">
+            <lightning:input aura:id="minFico" name="minFico" type="number" label="Min Borrower FICO"/>
+        </lightning:layoutItem>
+        <!--
+        <lightning:layoutItem padding="around-small">
+            <lightning:input aura:id="maxFico" name="maxFico" type="number" label="Max Borrower FICO"/>
+        </lightning:layoutItem>
+		-->
+        <lightning:layoutItem padding="around-small">
+        <lightning:select aura:id="loanOriginator"  name="loanOriginator" label="Loan Originator" onchange="{!c.handleLOChange}">
+            <option value="">All</option>
+            <aura:iteration items="{!v.loanOriginators}" var="lo">
+                <option value="{!lo}" text="{!lo}"/>
+            </aura:iteration>
+        </lightning:select>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small">
+            <lightning:select aura:id="loanOccupancy" name="loanOccupancy" label="Occupancy" onchange="{!c.handleOccChange}">
+                <option value="">All</option>
+                <aura:iteration items="{!v.loanOccupancies}" var="occ">
+                	<option value="{!occ}" text="{!occ}"/>
+            	</aura:iteration>
+            </lightning:select>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small">
+            <lightning:input aura:id="minDaysClosed" name="minDaysClosed" type="number" dateStyle="short" label="Min Days Closed"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small">
+            <lightning:input aura:id="loanFirstClose" name="loanFirstClose" type="date" dateStyle="short" label="From Closed Date"/>
+        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small">
+            <lightning:input aura:id="loanLastClose" name="loanLastClose" type="date" dateStyle="short" label="To Closed Date"/>
+        </lightning:layoutItem>
+        <lightning:button class="slds-button marginTopButton" variant="brand" label="Search" onclick="{!c.onFormSubmit}"/>
+        
+
+    </lightning:layout>
+</aura:component>

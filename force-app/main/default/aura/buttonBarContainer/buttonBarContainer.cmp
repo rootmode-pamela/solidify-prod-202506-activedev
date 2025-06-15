@@ -1,0 +1,20 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global" controller="ButtonBarController">
+<!--    controller=""-->
+
+    <aura:attribute name="RecordType" type="String" />
+    <aura:attribute name="FromObject" type="String" />
+    <aura:attribute name="sObjectName" type="String"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:messages />
+
+    <aura:if isTrue="{!v.RecordType == 'Scenario'}" >
+        <c:buttonBar recordId="{!v.recordId}" objectApiName="{!v.sObjectName}" object="{!v.sObjectName}" recordTypeName="{!v.RecordType}" />
+    </aura:if>
+
+    <aura:if isTrue="{!v.RecordType == 'Mortgage'}" >
+        <c:buttonBar recordId="{!v.recordId}" objectApiName="{!v.sObjectName}" object="{!v.sObjectName}" recordTypeName="{!v.RecordType}" />
+    </aura:if>
+
+</aura:component>

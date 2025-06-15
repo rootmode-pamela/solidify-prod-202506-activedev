@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Leads_Lower_My_Bills</fullName>
+    <columns>FULL_NAME</columns>
+    <columns>LEAD.LEAD_SOURCE</columns>
+    <columns>LEAD.CREATED_DATE</columns>
+    <columns>RCDisposition__c</columns>
+    <columns>LEAD.LAST_ACTIVITY</columns>
+    <columns>Purpose__c</columns>
+    <columns>LEAD.EMAIL</columns>
+    <columns>LEAD.STATUS</columns>
+    <columns>LEAD.MOBILE_PHONE</columns>
+    <columns>LEAD.STATE</columns>
+    <columns>pi__score__c</columns>
+    <columns>Ad_Area__c</columns>
+    <columns>Ad_Description__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>LEAD.LEAD_SOURCE</field>
+        <operation>equals</operation>
+        <value>Lower My Bills</value>
+    </filters>
+    <label>All Leads - Lower My Bills</label>
+    <sharedTo>
+        <group>Team_Broderick</group>
+    </sharedTo>
+</ListView>

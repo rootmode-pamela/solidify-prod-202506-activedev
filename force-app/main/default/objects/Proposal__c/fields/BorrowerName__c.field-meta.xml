@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BorrowerName__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Borrower__c != null, Borrower__r.FirstName + &apos; &apos; + Borrower__r.LastName, Borrower_Lead__r.FirstName + &apos; &apos; + Borrower_Lead__r.LastName )</formula>
+    <label>Borrower Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

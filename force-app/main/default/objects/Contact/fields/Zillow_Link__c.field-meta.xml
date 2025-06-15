@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Zillow_Link__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(SUBSTITUTE(&quot;https://www.zillow.com/homes/&quot; + SUBSTITUTE( Present_Address__c, &quot; &quot;, &quot;%20&quot;) + &quot;,%20&quot; + SUBSTITUTE( Present_Address_City__c,&quot; &quot;, &quot;%20&quot;) + &quot;,%20&quot; +  Present_Address_State__c + &quot;,%20&quot; +  Present_Address_Zip__c  + &quot;_rb&quot;, &quot; &quot;, &quot;%20&quot;), &quot;Zillow Value&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Zillow Link</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

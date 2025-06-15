@@ -1,0 +1,408 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+        <aura:attribute name="isOpen" type="boolean" default="false"/>
+        <aura:attribute name="Opportunity" type="Object" />
+    	<aura:attribute name="recordError" type="String" />
+    
+            <force:recordData aura:id="loanRecord"
+                          recordId="{!v.recordId}"
+                          targetFields="{!v.Opportunity}"
+                          targetError="{!v.recordError}"
+                          fields="Loan_Type__c, Loan_Program__c, Impounds_Formula__c, LTV__c, CLTV__c, DTI_Top__c, DTI__c,
+                            Borrower_FICO__c, Co_Borrower_Fico__c,Interest_Rate__c,Purchase_Price__c, Loan_Amount__c,Property_Value__c,Lender_Credit__c, 
+                                  Seller_Credit__c,Purpose__c,Occupancy__c,Loan_Program__c,Amount,Interest_Rate__c,Lender_Admin_Fee__c,
+                                  Subject_Property_Name__r.Property_Street__c,Subject_Property_Name__r.Property_City__c,Subject_Property_Name__r.Property_Zip__c,
+                                  Subject_Property_Name__r.Property_State__c,Subject_Property_Name__r.Number_of_Units__c,Subject_Property_Name__r.Property_Type__c,
+                                  Exp_Subject_Prop_Net_Neg__c, Exp_All_Oth_Prop__c,Exp_All_Other_Payments__c, Total_Liabilities__c,Exp_Rent__c, 
+                                  Exp_1Mtg_Present__c,Exp_1Mtg_Proposed__c, Exp_OthFin_Present__c, Exp_OthFin_Proposed__c,Exp_HazIns_Present__c, Exp_HazIns_Proposed__c,
+                                  Exp_Taxes_Present__c,Exp_Taxes_Proposed__c, Exp_MtgIns_Present__c, Exp_MtgIns_Proposed__c,Exp_HOA_Present__c, Exp_HOA_Proposed__c,
+                                  Exp_Other_Present__c,Exp_Other_Present__c,Exp_Total_Present__c, Exp_Total_Proposed__c,Refi_Total_Debts__c,Prepaids__c,Closing_Costs__c,
+                                  Discount_Points__c,MIP_FF__c,Lender_Credit__c,Seller_Credit__c,Cash_From_To_Borrower__c,Subject_Property_Name__c,Qual_FICO__c,
+                                  Appraised_Value__c,Last_Point_Update__c,Escrows_Waived_Formula__c" />
+                                        
+    		<lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Opportunity">
+            
+                <!--SUBJECT PROPERTY START--> 
+                
+                
+                <div class="slds-clearfix slds-grid slds-grid_align-spread slds-wrap">
+                        <div class="slds-col slds-float_left slds-size_4-of-12 slds-p-around--x-small">
+                        <div class="slds-p-horizontal_x-small slds-p-bottom_x-small slds-size_12-of-12 ">
+                            <div style="border-color:#003366;border-width:1px; background-color:#E8E8E8" class="slds-grid slds-wrap slds-box_border blueIcon">
+                                <div style="border-color:#003366; border-width:1px" class="blueIcon slds-border--bottom slds-p-top_x-small slds-p-bottom_xx-small slds-p-left_xx-small slds-size_12-of-12">
+                                    <lightning:icon iconName="utility:company" alternativeText=""/>
+                                    <span style="font-weight: bold;color:#003366;font-size: 16px" class="slds-text-heading_small slds-p-left_x-small slds-p-top_medium">Subject Property</span>
+                                    <div class="slds-float_right slds-p-right_small slds-p-bottom_xx-small">
+                                    <lightning:button variant="neutral" label="View" onclick="{!c.goToProp}"/>    
+                                  
+                                    
+                                    </div></div>
+                                
+                                    <p style="color:#003366" class="slds-p-horizontal_small slds-list__item">
+                                        <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Street</div>
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">
+                                                {!v.Opportunity.Subject_Property_Name__r.Property_Street__c}
+                                            </div>
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small arive-label slds-size_6-of-12">
+                                                 City:
+                                            </div>
+                                                <div style="border-color:#003366" class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small arive-info slds-size_6-of-12">
+                                                 {!v.Opportunity.Subject_Property_Name__r.Property_City__c}
+                                                </div>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">State:</div>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Subject_Property_Name__r.Property_State__c}</div>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Type:</div>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Subject_Property_Name__r.Property_Type__c}</div>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Zip Code:</div>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Subject_Property_Name__r.Property_Zip__c}</div>
+                                                <div class="slds-text-body_small slds-size_12-of-12">           
+                                            </div>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                <!--LOAN SPECS START-->     
+                <div style="border-color:#003366" class="slds-grid slds-grid_align-spread slds-wrap slds-size-12-of-12 ">
+                                <div style="border-color:#003366 " class="slds-p-around--x-small slds-size_12-of-12">
+                                    <div style="border-color:#003366; border-width:1px; background-color:#E8E8E8" class="slds-grid slds-wrap slds-box_border">
+                                        <div style="border-color:#003366;background-color:#E8E8E8; border-width:1px" class="slds-border--bottom slds-p-top_x-small slds-p-bottom_xx-small slds-p-left_xx-small slds-size_12-of-12">
+                                            <lightning:icon class="blue" iconName="utility:metrics" alternativeText=""/>
+                                            <span style="color:#003366;font-weight: bold;font-size: 16px" class="slds-text-heading_small slds-p-top_medium slds-p-left_x-small ">Loan Specs</span>
+                                            <span class="slds-float_right slds-p-right_small slds-p-bottom_xx-small">
+                                            <lightning:button variant="neutral" label="View All" onclick="{!c.openModal}"/>
+                                            </span>
+                                        </div> 
+                                        
+                                            <p class="slds-p-horizontal_small slds-list__item">
+                                                <div style="color:#003366;" class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-wrap">
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Purpose:</div>
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Purpose__c}</div>
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Occupancy:</div>
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Occupancy__c}</div>
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Program:</div>
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Loan_Program__c}</div>
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Loan Amount:</div>
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12"><lightning:formattedNumber style="currency" value="{!v.Opportunity.Loan_Amount__c}"/></div>
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">Interest Rate:</div>
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-p-around_xx-small slds-size_6-of-12">{!v.Opportunity.Interest_Rate__c}</div>
+                                                </div>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                    
+                            </div>
+                        </div>
+                    	
+                        <div class="slds-col slds-float_left slds-size_6-of-12 slds-p-top_x-small">
+                        
+                    	<lightning:tabset variant="scoped">
+                        
+                        	<lightning:tab label="Housing">
+                            	<c:solidifyMonthlyExpenses/>
+                       	 	</lightning:tab>
+                                                           
+        					<lightning:tab label="Financials">             
+            					<c:solidifyIncAssetLiab/>          
+        					</lightning:tab>
+                        
+        					<lightning:tab label="Closing Summary">
+                            	<c:solidifyClosingSummary/>
+        					</lightning:tab>
+    
+                    	</lightning:tabset>
+                            
+						</div>
+                    	<div class="slds-col slds-float_left slds-size_2-of-12 slds-p-top_x-small">
+                    	</div>
+                </div>
+                           
+    
+        			<!--VIEW ALL MODAL-->
+    
+    				            <aura:if isTrue="{!and( v.isOpen, v.Opportunity.Last_Point_Update__c != null)}">
+                                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                    <div class="slds-modal__container">
+                                        <header class="slds-modal__header">
+                                            <h2 id="modal-heading-01" class="slds-text'heading_medium slds-hyphenate"> Additional Loan Specs</h2>
+                                        </header>
+                                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                                
+                                              <thead>
+                                                <tr class="slds-line-height_reset">
+                                                  <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Criteria">Criteria</div>
+                                                  </th>
+                                                  <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Value">Value</div>
+                                                  </th>
+                                                </tr>
+                                               </thead>
+                                                
+                                                    <tbody>
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">Purpose</div>
+                                                            </th>
+                                                             <td data-label="Account Name">{!v.Opportunity.Purpose__c}</td>
+                                                           </tr>
+                                                            <tr class="slds-hint-parent">
+                                                                <th scope="row">
+                                                                    <div class="slds-truncate">Occupancy</div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                 {!v.Opportunity.Occupancy__c}
+                                                              </td>
+                                                           </tr>
+                                                        
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate" >
+                                                                  Loan Type
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Loan_Type__c}
+                                                              </td>
+                                                           </tr>
+                                                        
+                                                          <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate" >
+                                                                  Program
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Loan_Program__c}
+                                                              </td>
+                                                           </tr>
+                                                        
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate" >
+                                                                  Purchase Price
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Purchase_Price__c}
+                                                              </td>
+                                                           </tr>
+                                                        
+                                                          <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate" >
+                                                                  Appraised Value
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Appraised_Value__c}
+                                                              </td>
+                                                           </tr>
+                                                        
+                                                           <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">
+                                                                  Loan Amount with MIP
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Loan_Amount__c}
+                                                              </td>
+                                                           </tr>
+                                                            <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate" >
+                                                                  Interest Rate
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Interest_Rate__c}
+                                                              </td>
+                                                           </tr>
+                                                <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">
+                                                                  Borrower FICO
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Borrower_FICO__c}
+                                                              </td>
+                                                           </tr>
+                                                            <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">
+                                                                 Co-Borrower FICO
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Co_Borrower_Fico__c}
+                                                              </td>
+                                                           </tr>
+                                                        
+                                                          <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate" >
+                                                                  Qualifying FICO
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Qual_FICO__c}
+                                                              </td>
+                                                           </tr>
+                                                        
+                                                      <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">
+                                                                   LTV
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.LTV__c}
+                                                              </td>
+                                                           </tr>
+                                                         <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">
+                                                                   CLTV
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.CLTV__c}
+                                                              </td>
+                                                           </tr>
+                                                            <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">
+                                                                   Top DTI
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.DTI_Top__c}
+                                                              </td>
+                                                           </tr>
+                                                          <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">
+                                                                   Bottom DTI
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.DTI__c}
+                                                              </td>
+                                                           </tr>
+                                               
+                                                           <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">
+                                                                   Escrows Waived
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Escrows_Waived_Formula__c}
+                                                              </td>
+                                                           </tr>
+                                                        
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">
+                                                                   Lender Admin Fee
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Lender_Admin_Fee__c}
+                                                              </td>
+                                                           </tr>
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div class="slds-truncate">
+                                                                   Units
+                                                                </div>
+                                                              </th>
+                                                              <td data-label="Account Name">
+                                                                {!v.Opportunity.Subject_Property_Name__r.Number_of_Units__c}
+                                                              </td>
+                                                        </tr>                                                       
+                                                        </tbody>
+                                                     </table>
+                                                   </div>
+                                    
+                                               <footer class="slds-modal__footer">
+                                                       <lightning:button variant="neutral"
+                                                                                  label="Cancel"
+                                                                                  title="Cancel"
+                                                                                  onclick="{!c.closeModal}"/>
+													<!-- <lightning:button variant="neutral"
+                                                                                  label="Save"
+                                                                                  title="Save"
+                                                                                  /> -->
+                                               </footer>
+                                         </div>
+                                    </section> 
+                    		<div class="slds-backdrop slds-backdrop_open"></div>
+                        </aura:if>
+                    </lightning:recordViewForm>
+                
+    
+    					<!--Edit All Modal -->
+                        <aura:if isTrue="{!and( v.isOpen, v.Opportunity.Last_Point_Update__c == null)}">
+                                    <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Opportunity" 
+                                                              onsuccess="{!c.onsuccess}" density="compact">
+
+                                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                    <div class="slds-modal__container">
+                                        <header class="slds-modal__header">
+                                            <h2 id="modal-heading-01" class="slds-text'heading_medium slds-hyphenate"> Additional Loan Specs</h2>
+                                        </header>
+                                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                            
+                                                <tbody>
+                                                        <tr class="slds-hint-parent">
+                                                            <lightning:inputField fieldName="Purpose__c" />
+                                                        
+                                                            <lightning:inputField fieldName="Occupancy__c" />
+                                                        
+                                                            <lightning:inputField fieldName="Loan_Type__c"/> 
+                                                        
+                                                    <lightning:inputField fieldName="Loan_Program__c"/>
+                                                            <lightning:inputField fieldName="Purchase_Price__c"/>
+                                                            <lightning:inputField fieldName="Property_Value__c"/>
+                                                                <lightning:inputField fieldName="Loan_Amount__c"/>
+                                                                <lightning:inputField fieldName="Interest_Rate__c"/>
+                                                                <lightning:inputField fieldName="Borrower_FICO__c"/>
+                                                            <lightning:inputField fieldName="Co_Borrower_FICO__c"/>
+                                                                <lightning:inputField fieldName="Qual_FICO__c"/>
+                                                            <lightning:inputField fieldName="LTV__c"/>
+                                                                <lightning:inputField fieldName="CLTV__c"/>
+                                                            <lightning:inputField fieldName="DTI_Top__c"/>
+                                                                <lightning:inputField fieldName="DTI__c"/>
+                                                                <lightning:inputField fieldName="Impounds__c"/>
+                                                                <lightning:inputField fieldName="Escrows_Waived__c"/>
+                                                                <lightning:inputField fieldName="Lender_Admin_Fee__c"/>
+                                                                
+                                                        </tr>                                                       
+                                                        </tbody>
+                                                     </table>
+                                                   </div>
+                                    
+                                               <footer class="slds-modal__footer">
+                                                       <lightning:button variant="neutral"
+                                                                                  label="Cancel"
+                                                                                  title="Cancel"
+                                                                                  onclick="{!c.closeModal}"/>
+													 <lightning:button variant="neutral"
+                                                                                  label="Save"
+                                                                                  title="Save"
+                                                                                  type="submit"
+                                                                                  /> 
+                                               </footer>
+                                         </div>
+                                    </section> 
+                    		<div class="slds-backdrop slds-backdrop_open"></div>
+                                    </lightning:recordEditForm>
+                        </aura:if> 
+
+ 	</aura:component>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alert__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    OR(
+        ISPICKVAL(StageName, &quot;Funded&quot;),
+        ISPICKVAL(StageName, &quot;Closed&quot;),
+        ISPICKVAL(StageName, &quot;Canceled&quot;)
+    ),
+    &quot;⚪&quot;, /* Gray = deal is done or canceled */
+    IF(
+        OR(
+            AND(
+                NOT(ISBLANK(Lock_Expiration__c)),
+                (Lock_Expiration__c - TODAY()) &lt;= 7
+            ),
+            AND(
+                NOT(ISBLANK(COE__c)),
+                (COE__c - TODAY()) &lt;= 7
+            ),
+            AND(
+                NOT(ISBLANK(LastActivityDate)),
+                (TODAY() - LastActivityDate) &gt; 7
+            ),
+            AND(
+                ISBLANK(LastActivityDate),
+                (TODAY() - DATEVALUE(LastModifiedDate)) &gt; 7
+            )
+        ),
+        &quot;🔴&quot;, /* Red = urgent deadline or inactivity */
+        IF(
+            AND(
+                NOT(ISBLANK(Next_Deadline__c)),
+                (Next_Deadline__c - TODAY()) &lt; 3
+            ),
+            &quot;🟡&quot;, /* Yellow = upcoming deadline within 3 days */
+            &quot;&quot;
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Alert</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

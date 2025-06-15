@@ -1,0 +1,192 @@
+<template>
+    <div style="height: 50%;height: 28rem;overflow-y: auto;border-radius: 0.3rem;">
+        <template if:false={showShareSummary} >
+            <lightning-record-edit-form record-id={loanId} object-api-name={LoanObject}
+                                        onsubmit={handleSubmit} onsuccess={handleSuccess}>
+                <div style="height: 100%">
+                    <div if:true={isLoad}>
+                        <lightning-spinner alternative-text="Loading" variant="brand" size="medium"></lightning-spinner>
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-3 slds-p-right_x-small">
+                            <div style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                                <h3 class="slds-section__title">
+                                    <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                                        <strong>Key Info</strong>
+                                    </div>
+                                </h3>
+
+                                <div class="slds-p-around_x-small">
+                                    <div if:false={isPurchOrPurchase}>
+                                        <c-dynamical-input value={Primary_Goal_value} oninputchange={handleChangeKeyInfoSection} show-edit-input={keyInfoSection} field-name="Primary Goal">
+                                            <lightning-input-field field-name={PrimaryGoal}></lightning-input-field>
+                                        </c-dynamical-input>
+                                    </div>
+
+                                    <c-dynamical-input value={Appraisal_value} oninputchange={handleChangeKeyInfoSection} show-edit-input={keyInfoSection} field-name="Appraisal">
+                                        <lightning-input-field field-name={Appraisal}></lightning-input-field>
+                                    </c-dynamical-input>
+
+                                    <c-dynamical-input value={Escrows_value} oninputchange={handleChangeKeyInfoSection} show-edit-input={keyInfoSection} field-name="Escrows">
+                                        <lightning-input-field field-name={Escrows}></lightning-input-field>
+                                    </c-dynamical-input>
+
+                                    <c-dynamical-input value={Admin_Fee_value} oninputchange={handleChangeKeyInfoSection} show-edit-input={keyInfoSection} field-name="Admin Fee">
+                                        <lightning-input-field field-name={AdminFee}></lightning-input-field>
+                                    </c-dynamical-input>
+
+                                    <c-dynamical-input value={Other_Liens_New_value} oninputchange={handleChangeKeyInfoSection} show-edit-input={keyInfoSection} field-name="Other Liens">
+                                        <lightning-input-field field-name={OtherLiensNew}></lightning-input-field>
+                                    </c-dynamical-input>
+
+                                    <c-dynamical-input value={IncomeType_value} oninputchange={handleChangeKeyInfoSection} show-edit-input={keyInfoSection} field-name="Income Type">
+                                        <lightning-input-field field-name={IncomeType}></lightning-input-field>
+                                    </c-dynamical-input>
+
+                                    <c-dynamical-input value={Vesting_value} oninputchange={handleChangeKeyInfoSection} show-edit-input={keyInfoSection} field-name="Vesting">
+                                        <lightning-input-field field-name={Vesting}></lightning-input-field>
+                                    </c-dynamical-input>
+
+                                    <div if:false={isPurchOrPurchase}>
+                                        <c-dynamical-input value={Closing_Funds_value} oninputchange={handleChangeKeyInfoSection} show-edit-input={keyInfoSection} field-name="Closing Funds">
+                                            <lightning-input-field field-name={ClosingFunds}></lightning-input-field>
+                                        </c-dynamical-input>
+                                    </div>
+
+                                    <c-dynamical-input value={Fee_Structure_value} oninputchange={handleChangeKeyInfoSection} show-edit-input={keyInfoSection} field-name="Fee Structure">
+                                        <lightning-input-field field-name={FeeStructure}></lightning-input-field>
+                                    </c-dynamical-input>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-3 slds-p-left_x-small slds-p-right_x-small">
+                            <div style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                                <h3 class="slds-section__title">
+                                    <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                                        <strong>Contacts</strong>
+                                    </div>
+                                </h3>
+
+                                <div class="slds-p-around_x-small">
+
+                                    <c-dynamical-input value={Loan_Originator_value} oninputchange={handleChangeContactSection} show-edit-input={contactSection}  field-name="Loan Originator">
+                                        <lightning-input-field field-name={LoanOriginator}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={Co_Loan_Originator_value} oninputchange={handleChangeContactSection} show-edit-input={contactSection} field-name="Co-Loan Originator">
+                                        <lightning-input-field field-name={CoLoanOriginator}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={Loan_Processor_value} oninputchange={handleChangeContactSection} show-edit-input={contactSection} field-name="Loan Processor">
+                                        <lightning-input-field field-name={LoanProcessor}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={LeadSource_Field_value} oninputchange={handleChangeContactSection} show-edit-input={contactSection} field-name="Lead Source">
+                                        <lightning-input-field field-name={LeadSource}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={Referred_By_Field_value} oninputchange={handleChangeContactSection} show-edit-input={contactSection} field-name="Referred By">
+                                        <lightning-input-field field-name={ReferredBy}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={Lender_value} oninputchange={handleChangeContactSection} show-edit-input={contactSection} field-name="Lender">
+                                        <lightning-input-field field-name={Lender}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={Lender_AE__c_value} oninputchange={handleChangeContactSection} show-edit-input={contactSection} field-name="Lender AE">
+                                        <lightning-input-field field-name={LenderAE}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={Escrow_Contact_value} oninputchange={handleChangeContactSection} show-edit-input={contactSection} field-name="Escrow Contact">
+                                        <lightning-input-field field-name={EscrowContact}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <div if:true={isPurchase}>
+                                        <c-dynamical-input value={Buyers_Agent_Field_value} oninputchange={handleChangeContactSection} show-edit-input={contactSection} field-name="Buyers Agent">
+                                            <lightning-input-field field-name={BuyersAgent}></lightning-input-field>
+                                        </c-dynamical-input>
+                                        <c-dynamical-input value={Sellers_Agent_value} oninputchange={handleChangeContactSection} show-edit-input={contactSection} field-name="Sellers Agent">
+                                            <lightning-input-field field-name={SellersAgent}></lightning-input-field>
+                                        </c-dynamical-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-3 slds-p-left_x-small">
+                            <div style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                                <h3 class="slds-section__title">
+                                    <div class="slds-button slds-section__title-action" aria-controls="upcoming-activities-section">
+                                        <strong>Timeline</strong>
+                                    </div>
+                                </h3>
+
+                                <div class="slds-p-around_x-small">
+                                    <c-dynamical-input value={Initial_Docs_In_By_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="Initial Docs Due">
+                                        <lightning-input-field field-name={InitialDocsInBy}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={LE_Acknowledged_By_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="Acknowledge LE">
+                                        <lightning-input-field field-name={LEAcknowledgedBy}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <div if:true={isPurchaseAndInAZ}>
+                                        <c-dynamical-input value={Loan_Status_Update_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="Loan Status Update">
+                                            <lightning-input-field field-name={LoanStatusUpdate}></lightning-input-field>
+                                        </c-dynamical-input>
+                                    </div>
+                                    <div if:true={isPurchase}>
+                                        <c-dynamical-input value={Appraisal_Contingency_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="Appraisal Contingency">
+                                            <lightning-input-field field-name={AppraisalContingency}></lightning-input-field>
+                                        </c-dynamical-input>
+                                        <c-dynamical-input value={Loan_Contingency_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="Loan Contingency">
+                                            <lightning-input-field field-name={LoanContingency}></lightning-input-field>
+                                        </c-dynamical-input>
+                                    </div>
+                                    <c-dynamical-input value={Approval_Expected_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="Approval Expected">
+                                        <lightning-input-field field-name={ApprovalExpected}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={Final_Conditions_In_By_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="Conditions Due">
+                                        <lightning-input-field field-name={FinalConditionsInBy}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={CD_Out_By_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="Acknowledge CD">
+                                        <lightning-input-field field-name={CDOutBy}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={Sign_Final_Docs_By_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="Sign Final Docs">
+                                        <lightning-input-field field-name={SignFinalDocsBy}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <c-dynamical-input value={COE_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="COE">
+                                        <lightning-input-field field-name={COE}></lightning-input-field>
+                                    </c-dynamical-input>
+                                    <div if:true={isPurchOrPurchase}>
+                                        <c-dynamical-input value={Lock_Expiration_value} oninputchange={handleChangeTimelineSection} show-edit-input={timelineSection} field-name="Lock Expiration">
+                                            <lightning-input-field field-name={LockExpiration}></lightning-input-field>
+                                        </c-dynamical-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-var-m-top_medium" style="position:sticky; bottom: 0;z-index: 3">
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap">
+                                <div>
+                                    <lightning-button variant="brand" type="submit" label="Save"></lightning-button>
+                                </div>
+                                <div style="margin-left: 0.5rem">
+                                    <lightning-button variant="brand-outline"  onclick={handleCancel} label="Cancel"></lightning-button>
+                                </div>
+                                <!--<div style="margin-left: 0.5rem;margin-right: 0.5rem;">
+                                    <lightning-button variant="brand-outline"  onclick={handleEditAll} label="Edit All"></lightning-button>
+                                </div>-->
+                                <div style="margin-right: 1rem;position: absolute; right: 0">
+                                    <lightning-button icon-name={iconName} label={buttonTitle} variant="brand" onclick={launchFlow}></lightning-button>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+
+            </lightning-record-edit-form>
+        </template>
+
+        <div class={flowClass}>
+            <lightning-flow onstatuschange={handleStatusChange}></lightning-flow>
+            <!--<div style="margin-right: 0.5rem">
+                <lightning-button variant="brand-outline"  onclick={handleBackToSetup} label="Back to Setup"></lightning-button>
+            </div>-->
+        </div>
+    </div>
+</template>

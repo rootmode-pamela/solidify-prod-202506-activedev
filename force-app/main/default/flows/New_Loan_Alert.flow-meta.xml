@@ -1,0 +1,895 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Copy_1_of_Post_to_Opportunity_chatter_feed</name>
+        <label>Copy 1 of Post to Opportunity chatter feed</label>
+        <locationX>974</locationX>
+        <locationY>1898</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Copy_1_of_If_Email_is_Empty</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>NewLoanAlert_NonPurchase</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Email_Alert</name>
+        <label>Email Alert</label>
+        <locationX>1106</locationX>
+        <locationY>2114</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>NewLoanAlert_NonPurchase</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>Emails_0</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>New Loan Alert</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>Email_Alert_0</name>
+        <label>Email Alert</label>
+        <locationX>578</locationX>
+        <locationY>2114</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>NewLoanAlert_Purchase</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>Emails_0</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>New Loan Alert</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>Non_Purchase_Message</name>
+        <label>Non-Purchase Message</label>
+        <locationX>1194</locationX>
+        <locationY>1622</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Copy_1_of_Message_loop_in_Chatter</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>NewLoanAlert_NonPurchase</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>Copy_1_of_Message_loop_in_Chatter</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Post_to_Opportunity_chatter_feed</name>
+        <label>Post to Opportunity chatter feed</label>
+        <locationX>446</locationX>
+        <locationY>1898</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>If_Email_is_Empty</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>NewLoanAlert_Purchase</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Purchase_Message</name>
+        <label>Purchase Message</label>
+        <locationX>666</locationX>
+        <locationY>1622</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Message_loop_in_Chatter</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>NewLoanAlert_Purchase</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>Message_loop_in_Chatter</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>52.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Add_a_first_id_into_id_collection</name>
+        <label>Add a first id into id collection</label>
+        <locationX>1370</locationX>
+        <locationY>1298</locationY>
+        <assignmentItems>
+            <assignToReference>SingleIdValue</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>SingleIdFormula</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>UserIdCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>SingleIdValue</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Reset_value_from_userIds</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assignee_UserSelection_to_UserIds</name>
+        <label>Assignee UserSelection to UserIds</label>
+        <locationX>1040</locationX>
+        <locationY>1082</locationY>
+        <assignmentItems>
+            <assignToReference>UserIds</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UserSelection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>UserIds</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>;</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>If_UserIds_is_blank</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Get_Profile_Id</name>
+        <label>Get Profile Id</label>
+        <locationX>633</locationX>
+        <locationY>458</locationY>
+        <assignmentItems>
+            <assignToReference>ProfileIdCollections</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Profile_Loop.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Profile_Loop</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Reset_value_from_userIds</name>
+        <label>Reset value from userIds</label>
+        <locationX>1370</locationX>
+        <locationY>1406</locationY>
+        <assignmentItems>
+            <assignToReference>UserIds</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UpdateUserIds</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>If_UserIds_is_blank</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Copy_1_of_If_Email_is_Empty</name>
+        <label>If Email is Empty</label>
+        <locationX>974</locationX>
+        <locationY>2006</locationY>
+        <defaultConnector>
+            <targetReference>Email_Alert</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Copy_1_of_Email_Validation</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Emails_0</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <label>Email Validation</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Copy_1_of_Is_UserSelection_empty</name>
+        <label>Copy 1 of Is UserSelection empty</label>
+        <locationX>446</locationX>
+        <locationY>1406</locationY>
+        <defaultConnector>
+            <targetReference>Message_loop_in_Chatter</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Copy_1_of_UserSelection_empty_condition</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>UserSelection</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Post_to_Opportunity_chatter_feed</targetReference>
+            </connector>
+            <label>UserSelection empty condition</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>If_Email_is_Empty</name>
+        <label>If Email is Empty</label>
+        <locationX>446</locationX>
+        <locationY>2006</locationY>
+        <defaultConnector>
+            <targetReference>Email_Alert_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Email_Validation</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Emails_0</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <label>Email Validation</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>If_UserIds_is_blank</name>
+        <label>If UserIds is blank</label>
+        <locationX>1040</locationX>
+        <locationY>1190</locationY>
+        <defaultConnector>
+            <targetReference>Add_a_first_id_into_id_collection</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>UserIds_is_blank_condition</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>UserIds</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loan_Purpose</targetReference>
+            </connector>
+            <label>UserIds_is_blank_condition</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_UserSelection_empty</name>
+        <label>Is UserSelection empty</label>
+        <locationX>974</locationX>
+        <locationY>1406</locationY>
+        <defaultConnector>
+            <targetReference>Copy_1_of_Message_loop_in_Chatter</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>UserSelection_empty_condition</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>UserSelection</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_1_of_Post_to_Opportunity_chatter_feed</targetReference>
+            </connector>
+            <label>UserSelection empty condition</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Loan_Purpose</name>
+        <label>Loan Purpose</label>
+        <locationX>710</locationX>
+        <locationY>1298</locationY>
+        <defaultConnector>
+            <targetReference>Is_UserSelection_empty</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Non-Purchase</defaultConnectorLabel>
+        <rules>
+            <name>Purchase</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Loan.Purpose__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Purch</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Loan.Purpose__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Purchase</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_1_of_Is_UserSelection_empty</targetReference>
+            </connector>
+            <label>Purchase</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Validate_user_input</name>
+        <label>Validate user input</label>
+        <locationX>545</locationX>
+        <locationY>866</locationY>
+        <defaultConnector>
+            <targetReference>Email_Preview</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Check_if_endpoint_is_setted</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Emails_0</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>UserSelection</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Message</targetReference>
+            </connector>
+            <label>Check if endpoint is setted</label>
+        </rules>
+    </decisions>
+    <dynamicChoiceSets>
+        <name>ProfileIdSet</name>
+        <dataType>String</dataType>
+        <displayField>Id</displayField>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Sales Agent</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Processor</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Sys Admin API</stringValue>
+            </value>
+        </filters>
+        <object>Profile</object>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>UserChoiceFromRecords</name>
+        <collectionReference>User_Records</collectionReference>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <object>User</object>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
+    <environments>Default</environments>
+    <formulas>
+        <name>RemoveIdUserIds</name>
+        <dataType>String</dataType>
+        <expression>TRIM(
+SUBSTITUTE( {!UserIds} ,  {!SingleIdValue}+&quot;;&quot; ,  &quot;&quot;  )
+)</expression>
+    </formulas>
+    <formulas>
+        <name>SingleIdFormula</name>
+        <dataType>String</dataType>
+        <expression>TRIM(                                                                                                         
+SUBSTITUTE(
+LEFT( {!UserIds} , FIND(&quot;;&quot;,  {!UserIds} )),
+&quot;;&quot;,                                                                                          
+&quot;&quot;))</expression>
+    </formulas>
+    <formulas>
+        <name>UpdateUserIds</name>
+        <dataType>String</dataType>
+        <expression>TRIM(
+SUBSTITUTE( {!UserIds} ,  {!SingleIdValue}+&quot;;&quot;,  &quot;&quot;  )
+)</expression>
+    </formulas>
+    <interviewLabel>New Loan Alert {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>New Loan Alert</label>
+    <loops>
+        <name>Copy_1_of_Message_loop_in_Chatter</name>
+        <label>Message loop in Chatter (Non-Purchase)</label>
+        <locationX>1106</locationX>
+        <locationY>1514</locationY>
+        <collectionReference>UserIdCollection</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Non_Purchase_Message</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Copy_1_of_Post_to_Opportunity_chatter_feed</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Message_loop_in_Chatter</name>
+        <label>Message loop in Chatter</label>
+        <locationX>578</locationX>
+        <locationY>1514</locationY>
+        <collectionReference>UserIdCollection</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Purchase_Message</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Post_to_Opportunity_chatter_feed</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Profile_Loop</name>
+        <label>Profile Loop</label>
+        <locationX>545</locationX>
+        <locationY>350</locationY>
+        <collectionReference>Get_Profiles</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_Profile_Id</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>User_Records</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Loan</name>
+        <label>Get Loan</label>
+        <locationX>545</locationX>
+        <locationY>134</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Profiles</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Profiles</name>
+        <label>Get Profiles</label>
+        <locationX>545</locationX>
+        <locationY>242</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Profile_Loop</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Sales Agent</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Processor</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Sys Admin API</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Profile</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>User_Records</name>
+        <label>User Records</label>
+        <locationX>545</locationX>
+        <locationY>650</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>New_Loan_Alert_0</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>ProfileId</field>
+            <operator>In</operator>
+            <value>
+                <elementReference>ProfileIdCollections</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>User</object>
+        <sortField>Name</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <name>Email_Preview</name>
+        <label>Email Preview</label>
+        <locationX>1040</locationX>
+        <locationY>974</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Assignee_UserSelection_to_UserIds</targetReference>
+        </connector>
+        <fields>
+            <name>DisplayEmail</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;&lt;u&gt;Email Preview&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;{!NewLoanAlert_NonPurchase}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Get_Loan.Purpose__c</leftValueReference>
+                    <operator>NotEqualTo</operator>
+                    <rightValue>
+                        <stringValue>Purch</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>DisplayPurchaseTemplate</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;&lt;u&gt;Email Preview&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;u&gt;{!NewLoanAlert_Purchase}&lt;/u&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Get_Loan.Purpose__c</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Purch</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Message</name>
+        <label>Message</label>
+        <locationX>50</locationX>
+        <locationY>974</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>New_Loan_Alert_0</targetReference>
+        </connector>
+        <fields>
+            <name>ErrorMessage</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;Warning&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;You should fill in email address or select Users to post message in Chatter&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>New_Loan_Alert_0</name>
+        <label>New Loan Alert</label>
+        <locationX>545</locationX>
+        <locationY>758</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Validate_user_input</targetReference>
+        </connector>
+        <fields>
+            <name>Emails_0</name>
+            <dataType>String</dataType>
+            <fieldText>Emails (comma separated)</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>UserSelection</name>
+            <choiceReferences>UserChoiceFromRecords</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Post to Chatter user</fieldText>
+            <fieldType>MultiSelectPicklist</fieldType>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Notes_0</name>
+            <fieldText>Notes / Additional Commentary</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>419</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Loan</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>NewLoanAlert_NonPurchase</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Client: {!Get_Loan.Household_Name__c}
+
+Notes:
+{!Notes_0}
+
+Loan Name: {!Get_Loan.Name}
+Property St: {!Get_Loan.Subject_Prop_Street__c}
+Lender: {!Get_Loan.Lender__c}
+Loan Processor: {!Get_Loan.Loan_Processor_User__r.Name}
+Escrow Officer: {!Get_Loan.Escrow_Contact__r.Name}
+
+Purpose: {!Get_Loan.Purpose__c}
+Occupancy: {!Get_Loan.Occupancy__c}
+Prop Type: {!Get_Loan.Subject_Prop_Type__c}
+Program: {!Get_Loan.Loan_Program__c}
+Rate: {!Get_Loan.Interest_Rate__c}
+Loan Amt: {!Get_Loan.Loan_Amount__c}
+Value: {!Get_Loan.Property_Value__c}
+FICO: {!Get_Loan.Qual_FICO__c}
+
+Appraisal: {!Get_Loan.Appraisal__c}
+Impounds: {!Get_Loan.Escrows__c}
+Admin Fee: {!Get_Loan.Admin_Fee__c}
+Fee Structure: {!Get_Loan.Fee_Structure__c}
+Other Liens: {!Get_Loan.Other_Liens__c}
+Income Type: {!Get_Loan.IncomeType__c}
+Vesting: {!Get_Loan.Vesting__c}
+Closing Funds: {!Get_Loan.Closing_Funds__c}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>NewLoanAlert_Purchase</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Client: {!Get_Loan.Household_Name__c}
+
+Notes:
+{!Notes_0}
+
+Loan Name: {!Get_Loan.Name}
+Property St: {!Get_Loan.Subject_Prop_Street__c}
+Lender: {!Get_Loan.Lender__c}
+Buyer&apos;s Agent: {!Get_Loan.Buyers_Agent__r.Name}
+Listing Agent: {!Get_Loan.Sellers_Agent__r.Name}
+Loan Processor: {!Get_Loan.Loan_Processor_User__r.Name}
+Escrow Officer: {!Get_Loan.Escrow_Contact__r.Name}
+
+Purpose: {!Get_Loan.Purpose__c}
+Occupancy: {!Get_Loan.Occupancy__c}
+Prop Type: {!Get_Loan.Subject_Prop_Type__c}
+Program: {!Get_Loan.Loan_Program__c}
+Purchase Price: {!Get_Loan.Purchase_Price__c}
+Loan Amt: {!Get_Loan.Loan_Amount__c}
+Rate: {!Get_Loan.Interest_Rate__c}
+Value: {!Get_Loan.Property_Value__c}
+FICO: {!Get_Loan.Qual_FICO__c}
+
+Appraisal: {!Get_Loan.Appraisal__c}
+Impounds: {!Get_Loan.Escrows__c}
+Admin Fee: {!Get_Loan.Admin_Fee__c}
+Fee Structure: {!Get_Loan.Fee_Structure__c}
+Other Liens: {!Get_Loan.Other_Liens__c}
+Income Type: {!Get_Loan.IncomeType__c}
+Vesting: {!Get_Loan.Vesting__c}
+Closing Funds: {!Get_Loan.Closing_Funds__c}</text>
+    </textTemplates>
+    <variables>
+        <name>ProfileIdCollections</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SingleIdValue</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>UserIdCollection</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>UserIds</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

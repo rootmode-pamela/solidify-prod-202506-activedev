@@ -1,0 +1,51 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+ 	<aura:attribute name="record" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+
+    <force:recordData aura:id="recordLoader"
+      recordId="{!v.recordId}"
+      fields="Id, Property_Street__c, Property_City__c, Property_State__c, Property_Zip__c, Property_County__c"
+      targetRecord="{!v.record}"
+      targetFields="{!v.simpleRecord}"
+      />
+
+           <div class="slds-grid slds-gutters slds-p-horizontal_medium">
+            <div class="slds-col  slds-size_1-of-3">
+                <div class="slds-section slds-is-open slds-text-heading_small">
+                    <p></p>				
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://www.zillow.com/homes/1_ah/' + v.simpleRecord.Property_Street__c + ',-' + v.simpleRecord.Property_City__c + ',-' + v.simpleRecord.Property_State__c + '-' + v.simpleRecord.Property_Zip__c + '_rb/?view=public'}" 
+                     label="Zillow Value" 
+                     target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://www.google.com/search?q=' + v.simpleRecord.Property_Street__c + '+' + v.simpleRecord.Property_City__c + '+' + v.simpleRecord.Property_State__c + '+' + v.simpleRecord.Property_Zip__c}" label="Google Value" target="_blank"/></p>
+
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://onlinegeocoder.fanniemae.com/loanlimitgeocoder/pages/Online.aspx" label="Loan Limit Geocoder" target="_blank"/></p> 
+                   
+            	</div>
+
+             </div>
+               
+                <div class="slds-col  slds-size_1-of-3">
+                <div class="slds-section slds-is-open slds-text-heading_small">
+                    <p></p>		    
+                        <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://www.titlepro247.com/index.aspx" label="Title Pro 247" target="_blank"/></p>
+                        <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'http://www.google.com/search?ei=hbxXWqbrN9PejwPb3YGQDg&amp;q=' + v.simpleRecord.Property_County__c + '+county+property+tax+bill+search&amp;oq=' + v.simpleRecord.Property_County__c + '+county+property+tax+bill+search&amp;gs_l=psy-ab.3..0.3951.6005.0.6573.12.11.1.0.0.0.150.1120.5j6.11.0....0...1c.1.64.psy-ab..1.10.937...0i7i30k1j0i8i7i30k1j0i13k1.0.ALi6IA_tJoA'}" label="Prop Tax Bill Search" target="_blank"/></p>
+                        <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'http://maps.google.com/maps?f=q&amp;hl=en&amp;q=' + v.simpleRecord.Property_Street__c + '+' + v.simpleRecord.Property_City__c + '+' + v.simpleRecord.Property_State__c + '&amp;om=1'}" label="Google Maps" target="_blank"/></p>
+                        <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://www.mgic.com/ratefinder-rates/quickQuoteDataEntry.htm" label="MGIC" target="_blank"/></p>
+                    </div>
+               </div>
+               
+            <div class="slds-col slds-size_1-of-3">
+                <div class="slds-section slds-is-open slds-text-heading_small">
+
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://downpaymentresource.com" label="Down Payment Asst." target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://homeready-eligibility.fanniemae.com/homeready/" label="HomeReady (Fannie)" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://www.freddiemac.com/homepossible/eligibility.html" label="Home Poss. (Freddie)" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://ww3.freddiemac.com/loanlookup/" label="Freddie HARP" target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://www.knowyouroptions.com/loanlookup#" label="Fannie HARP" target="_blank"/></p>  				
+                    
+            	</div>
+            </div>
+
+        </div>
+
+</aura:component>

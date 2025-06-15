@@ -1,0 +1,137 @@
+<aura:component controller="solidify_proposalController" implements="lightning:availableForFlowScreens,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,lightning:actionOverride,lightning:isUrlAddressable,force:LightningQuickAction" access="global">
+    <!--    <aura:attribute name="recordId" type="String"/>  -->
+    <aura:attribute name="recordIdFromButton" type="String"/>
+    <aura:attribute name="sObjectFromButton" type="String"/>
+    <aura:attribute name="contactId" type="String"/>
+    <aura:attribute name="leadId" type="String"/> 
+    <aura:attribute name="propertyId" type="String"/>
+    <aura:attribute name="recordName" type="String"/>    
+    <aura:attribute name="contactName" type="String"/> 
+    <aura:attribute name="propName" type="String"/>
+    <aura:attribute name="proposalName" type="String"/>
+    <aura:attribute name="loanId" type="String"/>
+    <aura:attribute name="showLoanInput" type="Boolean"/>
+    <aura:attribute name="showPropInput" type="Boolean"/> 
+    <aura:attribute name="displayProp" type="Boolean" default="false"/> 
+    <aura:attribute name="displayContact" type="Boolean" default="false"/> 
+    <aura:attribute name="noProps" type="Boolean" default="false"/> 
+    <aura:attribute name="noLoans" type="Boolean" default="false"/> 
+    <aura:attribute name="multipleProps" type="Boolean" default="false"/> 
+    
+    
+    <aura:attribute name="newProposal" type = "sObject"/>
+    <aura:attribute name="simpleNewProposal" type = "Proposal__c" default="{ 'sobjectType': 'Proposal__c', 'RecordTypeId': '012f4000000OatvAAC'}"/>
+    <aura:attribute name="newProposalError" type = "String"/>
+    
+    <lightning:navigation aura:id="navService" />
+    
+    <aura:attribute access="private" type="List" name="borrowerSelection" default="[]"/>
+    <!--   <aura:attribute access="private" type="List" name="errors" default="[]"/>  -->
+    <aura:attribute access="private" type="List" name="propList" />
+    
+    <!--    <lightning:notificationsLibrary aura:id="notificationsLibrary"/>  -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+       
+    <lightning:card iconName="standard:account" 
+                    title="New Proposal"
+                    class="slds-p-around_large">
+        
+        <force:recordData aura:id="proposalRecordCreator"
+                          layoutType = "FULL"
+                          targetRecord="{!v.newProposal}"
+                          targetFields = "{!v.simpleNewProposal}"
+                          targetError="{!v.newProposalError}"
+                          />
+        <!-- fields="RecordTypeId,Name,Borrower__c,Borrower_Lead__c,Property__c,New_Loan_Amount__c,New_Loan_Interest_Rate__c,New_Loan_Term__c,X10_Yr_Treasury_Yield__c" -->
+        
+        <lightning:messages/>
+        
+        
+        <aura:if isTrue="{!v.displayContact}">
+            <div class="slds-form-element">
+            <div class="slds-form-element__control"><lightning:input id="contactName" value="{!v.contactName}" disabled="true" label = "Selected Contact: "/></div>
+            </div>
+         <aura:set attribute="else">
+                <c:Lookup selection="{!v.borrowerSelection}" onSearch="{!c.lookupBorrowerSearch}" onSelection="{!c.borrowerSelected}" errors="{!v.errors}" label="Search for Borrower" placeholder="Search Lead or Contacts" isMultiEntry="false"/>
+         </aura:set>
+        </aura:if>    
+        
+        <aura:if isTrue="{!v.displayLoan}">
+            <div><lightning:formattedText aura:id="loanName" value="{!v.loanName}" label = "Selected Loan: "/></div>
+        </aura:if>    
+        
+        <aura:if isTrue="{!v.displayProp}">
+            <div class="slds-form-element">
+            <div class="slds-form-element__control"><lightning:input id="propName" value="{!v.propName}" label="Selected Property: " disabled="true"/></div>
+            </div>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.showPropInput}">  
+            <aura:if isTrue="{!not(v.noProps)}">
+                <lightning:select name="Property__c" label="Property" value="{!v.simpleNewProposal.Property__c}" aura:id="propertyText" onchange="{!c.propertySelected}" >
+                    <aura:if isTrue="{!v.multipleProps}">
+                        <option text="--Select Property--"/>        
+                    </aura:if>
+                    <aura:iteration items="{!v.propList}" var="prop">
+                        <option text="{!prop.Name}" value="{!prop.Id}" selected="{!prop.selected}"/>
+                    </aura:iteration>
+                    
+                </lightning:select>
+                
+                <aura:set attribute="else">
+                    No properties are associated with this Contact's Household
+                </aura:set>
+            </aura:if>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.showLoanInput}" >     
+            <div class="slds-grid slds-gutters">
+                <aura:if isTrue="{!v.showCurrentLoan}">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning:formattedText value="{!v.simpleNewProposal.Current_Loan_Amount__c}" />
+                        <lightning:formattedText value="{!v.simpleNewProposal.Current_Interest_Rate__c}" />
+                        <lightning:formattedText value="{!v.simpleNewProposal.Current_Loan_Term__c}" />
+                        <lightning:formattedText value="{!v.simpleNewProposal.Current_Loan_Balance_Remaining__c}" />
+                        
+                        <lightning:formattedText value="{!v.simpleNewProposal.Current_Loan_First_Payment__c}" />
+                        <lightning:formattedText value="{!v.simpleNewProposal.Current_Loan_Last_Payment_Made__c}" />
+                        <lightning:formattedText value="{!v.simpleNewProposal.Current_Loan_Monthly_Payment__c}" />
+                    </div>
+                    
+                </aura:if>
+                
+                <aura:if isTrue="{!not(v.showCurrentLoan)}">
+                    <div class="slds-col slds-size_1-of-2">
+                        <aura:if isTrue="{!v.noLoans}"><div>This Property does not have a Most Recent Closed Loan.</div></aura:if>	
+                        <lightning:input value="{!v.simpleNewProposal.Current_Loan_Amount__c}" type="number" formatter="currency" name="Current_Loan_Amount__c" label="Current Loan Original Amount" aura:id="reqField" required="true"/>
+                        <lightning:input value="{!v.simpleNewProposal.Current_Interest_Rate__c}" type="percent-fixed" formatter="percent" step="0.001" name="Current_Loan_Interest_Rate__c" label="Current Loan Interest Rate" aura:id="reqField" required="true" />
+                        <lightning:input value="{!v.simpleNewProposal.Current_Loan_Term__c}" step = '1' name="Current_Loan_Term__c" label="Current Loan Term (months)" aura:id="reqField" required="true"/>
+                        
+                        <lightning:input value="{!v.simpleNewProposal.Current_Loan_First_Payment__c}" type="date" name="Current_Loan_First_Payment__c" label="Current Loan First Payment" aura:id="currLoanFirstPay"/>
+                        <lightning:input value="{!v.simpleNewProposal.Current_Loan_Last_Payment_Made__c}" type="date"  name="Current_Loan_Last_Payment_Made__c" label="Current Loan Last Payment" aura:id="currLoanLastPay" />
+                        <lightning:input value="{!v.simpleNewProposal.Current_Loan_Balance_Remaining__c}"  type="number" format="currency" name="Current_Loan_Balance_Remaining__c" label="Current Loan Balance Remaining" aura:id="reqField" required="true" />
+                        
+                    </div>
+                    
+                </aura:if>  
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:input value="{!v.simpleNewProposal.New_Loan_Amount__c}" type="number" formatter="currency" name="New_Loan_Amount__c" label="New Loan Amount" aura:id="reqField" required="true"/>
+                    <lightning:input value="{!v.simpleNewProposal.New_Loan_Interest_Rate__c}" type="percent-fixed" formatter="percent" step="0.001" name="New_Loan_Interest_Rate__c" label="New Loan Interest Rate" aura:id="reqField" required="true"/>
+                    <lightning:input value="{!v.simpleNewProposal.New_Loan_Term__c}" type ="number" step = '1' name="New_Loan_Term__c" label="New Loan Term (months)" aura:id="reqField" required="true"/>
+                    <lightning:input value="{!v.simpleNewProposal.X10_Yr_Treasury_Yield__c}" type="percent-fixed"  name="Treasury_Rate__c" label="Treasury Rate" aura:id="treasRate"/>
+                </div>
+            </div>
+        </aura:if>  
+        
+        <aura:if isTrue="{!v.showLoanInput}">  
+            <div class="slds-m-top_medium">
+                <lightning:button variant="brand" label="Save" onclick="{!c.handleSubmit}"/>
+            </div>
+        </aura:if>  
+    </lightning:card>
+    
+    <aura:if isTrue="{!not(empty(v.newProposalError))}">
+        <div class="recordError">
+            {!v.newProposalError}</div>
+    </aura:if>
+</aura:component>

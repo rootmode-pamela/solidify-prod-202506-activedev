@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X1_Day_Until_Lock_Expiration__c</fullName>
+    <formula>IF( Lock_Expiration__c - TODAY() = 1, true, false)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>1 Day Until Lock Expiration</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

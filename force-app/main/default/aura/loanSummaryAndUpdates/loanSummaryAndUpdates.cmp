@@ -1,0 +1,138 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
+	
+	<aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="editSummaryNote" type="boolean" default="false"/>
+    <aura:attribute name="editSubmissionNote" type="boolean" default="false"/>
+    
+            <lightning:recordEditForm
+                                  recordId = "{!v.recordId}"
+                                  objectApiName = "Opportunity"
+                                  onsuccess = "{!c.handleSuccess}">
+                                  
+        	<lightning:messages />
+    <lightning:layout>
+		<lightning:layoutItem padding="around-small" size="6">
+            <div class="slds-box">
+            	<lightning:outputField aura:id = "SubmissionNotes" fieldName = "Submission_Notes__c" variant="label-stacked"/>
+            	<lightning:button class="slds-m-top_small" variant="brand" label="Edit Submission Note" onclick="{!c.openEditSubmissionNote}"/>
+            	</div>
+            	<div class="slds-box">
+            	<lightning:outputField aura:id = "SummaryNotes" fieldName = "Summary_Notes__c" variant="label-stacked"/>
+            	<lightning:button class="slds-m-top_small" variant="brand" label="Edit Summary Note" onclick="{!c.openEditSummaryNote}"/>
+                </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small" size="6">
+
+            <div  class="slds-p-top_small">
+            <c:fieldHistoryController aura:id="fieldHistoryComponent" fieldName = "Processor_Note__c" fieldLabel = "Processor Notes" recordId = "{!v.recordId}"/>
+            </div>
+            
+            <lightning:inputField aura:id = "ProcessorNotes" fieldName = "Processor_Note__c" variant="label-stacked"/>
+
+            
+             <lightning:button class="slds-m-top_small" type="submit" label="Save Updates" />
+            
+            
+            <div  class="slds-p-top_small">
+            <c:fieldHistoryController aura:id="fieldHistoryComponent2" fieldName = "X3rd_Party_Notes__c" fieldLabel = "3rd Party Notes" recordId = "{!v.recordId}" recordLimit="2"/>
+            </div>
+
+            <lightning:inputField aura:id = "ThirdPartyNotes" fieldName="X3rd_Party_Notes__c" variant="label-stacked"/>
+
+             <lightning:button class="slds-m-top_small" type="submit" label="Save Updates" />
+            
+            
+
+
+        </lightning:layoutItem>
+
+    </lightning:layout>
+                      </lightning:recordEditForm> 
+    
+    <!-- Modal for Summary Note Edits -->
+    <aura:if isTrue="{!v.editSummaryNote}">
+             
+            <!-- Modal/Popup Box starts here-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container slds-p-around_medium">
+                    <!-- Modal/Popup Box Header Starts here-->
+                    <lightning:recordEditForm
+                                  aura:id = "editSummaryNote"
+                                  recordId = "{!v.recordId}"
+                                  objectApiName = "Opportunity"
+                                  onsuccess = "{!c.handleSuccessSummaryNote}">
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.handleCancelModal }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit Summary Notes</h2>
+                    </header>
+                    <!--Modal/Popup Box Body Starts here-->
+
+                                
+                    <lightning:inputField aura:id = "SummaryNotes" fieldName = "Summary_Notes__c" disabled = "false" />
+                    
+           
+                   
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral"
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.handleCancelModal }"/>
+                        <lightning:button
+                                          label="OK"
+                                                                                   type="submit"/>
+                    </footer>
+                                 </lightning:recordEditForm>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+    
+     <!-- Modal for Submission Note Edits -->
+    <aura:if isTrue="{!v.editSubmissionNote}">
+             
+            <!-- Modal/Popup Box starts here-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box Header Starts here-->
+                    <lightning:recordEditForm
+                                  aura:id = "editSubmissionNote"
+                                  recordId = "{!v.recordId}"
+                                  objectApiName = "Opportunity"
+                                  onsuccess = "{!c.handleSuccessSubmissionNote}">
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.handleCancelModal }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit Submission Notes</h2>
+                    </header>
+                    <!--Modal/Popup Box Body Starts here-->
+
+                                
+                    <lightning:inputField aura:id = "SubmissionNotes" fieldName = "Submission_Notes__c" disabled = "false" />
+                    
+           
+                   
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral"
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.handleCancelModal }"/>
+                        <lightning:button
+                                          label="OK"
+                                          type="submit"/>
+                    </footer>
+                                 </lightning:recordEditForm>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+    
+    
+    
+    </aura:component>

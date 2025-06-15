@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>encompass_By_EM__Refinance_Purpose__c</fullName>
+    <deprecated>false</deprecated>
+    <label>Refinance Purpose</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cash-Out Debt Consolidation</fullName>
+                <default>false</default>
+                <label>Cash-Out Debt Consolidation</label>
+            </value>
+            <value>
+                <fullName>Cash-Out Home Improvement</fullName>
+                <default>false</default>
+                <label>Cash-Out Home Improvement</label>
+            </value>
+            <value>
+                <fullName>Cash-Out Limited</fullName>
+                <default>false</default>
+                <label>Cash-Out Limited</label>
+            </value>
+            <value>
+                <fullName>Cash-Out Other</fullName>
+                <default>false</default>
+                <label>Cash-Out Other</label>
+            </value>
+            <value>
+                <fullName>Cash-Out with Original Lender</fullName>
+                <default>false</default>
+                <label>Cash-Out with Original Lender</label>
+            </value>
+            <value>
+                <fullName>No Cash-Out Other</fullName>
+                <default>false</default>
+                <label>No Cash-Out Other</label>
+            </value>
+            <value>
+                <fullName>No Cash-Out FHA Streamlined</fullName>
+                <default>false</default>
+                <label>No Cash-Out FHA Streamlined</label>
+            </value>
+            <value>
+                <fullName>No Cash-Out Freddie Owned</fullName>
+                <default>false</default>
+                <label>No Cash-Out Freddie Owned</label>
+            </value>
+            <value>
+                <fullName>No Cash-Out Streamlined</fullName>
+                <default>false</default>
+                <label>No Cash-Out Streamlined</label>
+            </value>
+            <value>
+                <fullName>Np Cash-Out With Original Lender</fullName>
+                <default>false</default>
+                <label>Np Cash-Out With Original Lender</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

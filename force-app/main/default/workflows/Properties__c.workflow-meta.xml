@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <tasks>
+        <fullName>X120_Day_Closed_Alert</fullName>
+        <assignedTo>dusty@solidify.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>120</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Properties__c.Most_Recent_Closing_old__c</offsetFromField>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>Open</status>
+        <subject>120 Day Closed Alert</subject>
+    </tasks>
+    <tasks>
+        <fullName>X180_Day_Closed_Alert</fullName>
+        <assignedTo>dusty@solidify.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>180</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Properties__c.Most_Recent_Closing_old__c</offsetFromField>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>Open</status>
+        <subject>180 Day Closed Alert</subject>
+    </tasks>
+    <tasks>
+        <fullName>X30_Day_Closed_Alert</fullName>
+        <assignedTo>dusty@solidify.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>30</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Properties__c.Most_Recent_Closing_old__c</offsetFromField>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>Open</status>
+        <subject>30 Day Closed Alert</subject>
+    </tasks>
+    <tasks>
+        <fullName>X60_Day_Closed_Alert</fullName>
+        <assignedTo>dusty@solidify.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>60</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Properties__c.Most_Recent_Closing_old__c</offsetFromField>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>Open</status>
+        <subject>60 Day Closed Alert</subject>
+    </tasks>
+    <tasks>
+        <fullName>X90_Day_Closed_Alert</fullName>
+        <assignedTo>dusty@solidify.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>90</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Properties__c.Most_Recent_Closing_old__c</offsetFromField>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>Open</status>
+        <subject>90 Day Closed Alert</subject>
+    </tasks>
+</Workflow>

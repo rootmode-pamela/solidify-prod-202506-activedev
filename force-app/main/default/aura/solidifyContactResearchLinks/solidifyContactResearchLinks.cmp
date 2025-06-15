@@ -1,0 +1,47 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+ 	<aura:attribute name="record" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+
+    <force:recordData aura:id="recordLoader"
+      recordId="{!v.recordId}"
+      fields="Id,FirstName,LastName,Nickname__c,Email,Email_2__c,Employer_Name__c"
+      targetRecord="{!v.record}"
+      targetFields="{!v.simpleRecord}"
+      recordUpdated="{!c.recordUpdate}"
+      />
+	<lightning:card >
+           <div class="slds-grid slds-gutters slds-p-horizontal_medium">
+            <div class="slds-col  slds-size_1-of-3">
+                <div class="slds-section slds-is-open slds-text-heading_small">
+                    <p></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://www.linkedin.com/search/results/index/?keywords=' + v.simpleRecord.LastName + ' ' + v.simpleRecord.LastName + ' OR ' + v.simpleRecord.FirstName + ' ' + v.simpleRecord.Employer_Name__c + '&amp;origin=GLOBAL_SEARCH_HEADER'  }" label="Linked In" target="_blank"/></p>
+                     <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://facebook.com/search/top/?q='+ v.simpleRecord.Email}" label="Facebook Email Search" target="_blank"/></p>
+                     <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://facebook.com/search/top/?q='+ v.simpleRecord.Email_2__c}" label="Facebook Email 2 Search" target="_blank"/></p>
+                   
+                  <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://www.facebook.com/search/top/?q=' + v.simpleRecord.Nickname__c + '%20OR%20' + v.simpleRecord.FirstName + '%20'+
+v.simpleRecord.LastName}" label="Facebook Name Search" target="_blank"/></p>  
+                    
+            	</div>
+
+             </div>
+            
+            <div class="slds-col slds-size_1-of-3">
+                <div class="slds-section slds-is-open slds-text-heading_small">
+                   <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://www.google.com/search?q=' + v.simpleRecord.FirstName + ' ' + v.simpleRecord.LastName }"
+                                                                    label="Google Value"
+                                                                    target="_blank"/></p> 
+                   <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'http://maps.google.com/maps?f=q&amp;hl=en&amp;q=' 
+                                                                          + v.simpleRecord.MailingStreet +'&#43;' +  v.simpleRecord.MailingCity + '&#43;' 
+                                                                          + v.simpleRecord.MailingState}" label="Google Maps" target="_blank"/></p> 
+				    
+               
+            	</div>
+            </div>
+            <div class="slds-col slds-size_1-of-3 slds-text-heading_small"> 
+                <div class="slds-section slds-is-open">
+                
+            </div>
+             </div>
+        </div>
+</lightning:card>
+</aura:component>

@@ -1,0 +1,9 @@
+<design:component label="New Proposal Aura Component">
+    <design:attribute name="recordIdFromButton" label="Record Id" required="true" />
+    <design:attribute name="sObjectFromButton" label="sObject Type (Opportunity, Lead, Contact, Property)" required="true" />
+    <design:attribute name="contactId" label="Contact Id"/>
+    <design:attribute name="leadId" label="Lead Id"/> 
+    <design:attribute name="propertyId" label="Property Id"/>
+    <design:attribute name="recordName" label="Record Name"/>
+	
+</design:component>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loan_Originator__c</fullName>
+    <label>Loan Originator</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Dusty Broderick</fullName>
+                <default>false</default>
+                <label>Dusty Broderick</label>
+            </value>
+            <value>
+                <fullName>Missy Broderick</fullName>
+                <default>false</default>
+                <label>Missy Broderick</label>
+            </value>
+            <value>
+                <fullName>Brandon Kyle</fullName>
+                <default>false</default>
+                <label>Brandon Kyle</label>
+            </value>
+            <value>
+                <fullName>Cole Annati</fullName>
+                <default>false</default>
+                <label>Cole Annati</label>
+            </value>
+            <value>
+                <fullName>Joe Rivera</fullName>
+                <default>false</default>
+                <label>Joe Rivera</label>
+            </value>
+            <value>
+                <fullName>Andy Hess</fullName>
+                <default>false</default>
+                <label>Andy Hess</label>
+            </value>
+            <value>
+                <fullName>Steve McKnight</fullName>
+                <default>false</default>
+                <label>Steve McKnight</label>
+            </value>
+            <value>
+                <fullName>Tiffany Attwood</fullName>
+                <default>false</default>
+                <label>Tiffany Attwood</label>
+            </value>
+            <value>
+                <fullName>Robert Salas</fullName>
+                <default>false</default>
+                <label>Robert Salas</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

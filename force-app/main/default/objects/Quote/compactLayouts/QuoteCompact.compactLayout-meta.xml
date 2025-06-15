@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QuoteCompact</fullName>
+    <fields>Name</fields>
+    <fields>ContactId</fields>
+    <fields>New_Loan_Amount__c</fields>
+    <fields>New_Loan_Interest_Rate__c</fields>
+    <fields>New_Loan_Term__c</fields>
+    <label>QuoteCompact</label>
+</CompactLayout>

@@ -1,0 +1,71 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+	<aura:attribute name="editMode" type="Boolean" default="false" />
+    <aura:attribute name="sourceRecord" type="Object" />
+    <aura:attribute name="sourceRecordFields" type="Object" />
+    <aura:attribute name="error" type="String" />
+
+    <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Opportunity" recordtypeid="012f4000000HmNxAAK">
+        <lightning:messages />
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-2">
+        		<lightning:inputField fieldName="Loan_Processor_User__c" />
+        		<lightning:inputField fieldName="Price_Est_Value__c" />
+                <lightning:inputField fieldName="Loan_Type__c" />
+                <lightning:inputField fieldName="Loan_Type__c" />
+	        	<lightning:inputField fieldName="Loan_Program__c" />
+                <lightning:inputField fieldName="Loan_Amount__c" />
+				<lightning:inputField fieldName="Interest_Rate__c" />
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:inputField fieldName="Down_Payment__c" />
+                <lightning:inputField fieldName="Qualifying_Fico__c" />
+			    <lightning:inputField fieldName="LTV__c" />
+		        <lightning:inputField fieldName="CLTV__c" />
+                <lightning:inputField fieldName="DTI__c" />
+                <lightning:inputField fieldName="Current_Schedule_Balance__c" />
+                <lightning:inputField fieldName="Veteran__c" />
+                <lightning:inputField fieldName="Impounds__c" />
+            </div>
+                 
+        </div>
+        
+        <lightning:accordion activeSectionName="Expenses">
+            <lightning:accordionSection name="Expenses" label="Expenses">
+            <div class="slds-grid slds-gutters">
+               
+   
+            	<div class="slds-col">
+        			<lightning:inputField fieldName="Exp_Rent__c" />
+        			<lightning:inputField fieldName="Exp_1Mtg_Present__c" />
+                	<lightning:inputField fieldName="Exp_HazIns_Present__c" />
+                	<lightning:inputField fieldName="Exp_HOA_Present__c" />
+	        		<lightning:inputField fieldName="Exp_MtgIns_Present__c" />
+                	<lightning:inputField fieldName="Exp_OthFin_Present__c" />
+					<lightning:inputField fieldName="Exp_Other_Present__c" />
+                	<lightning:inputField fieldName="Exp_Taxes_Present__c" />
+                	<lightning:inputField fieldName="Exp_Total_Present__c" />
+            	</div>
+            	<div class="slds-col">
+                    <p>&nbsp;</p>
+                    <p>
+                    <ui:outputText value="N/A"/></p>
+                    <p>&nbsp;</p>
+                	<lightning:inputField fieldName="Exp_1Mtg_Proposed__c" />
+                	<lightning:inputField fieldName="Exp_HazIns_Proposed__c" />
+			    	<lightning:inputField fieldName="Exp_HOA_Proposed__c" />
+		        	<lightning:inputField fieldName="Exp_MtgIns_Proposed__c" />
+                	<lightning:inputField fieldName="Exp_OthFin_Proposed__c" />
+                	<lightning:inputField fieldName="Exp_Other_Proposed__c" />
+                	<lightning:inputField fieldName="Exp_Taxes_Proposed__c" />
+                	<lightning:inputField fieldName="Exp_Total_Proposed__c" />
+            	</div>
+			</div>
+            
+            
+            </lightning:accordionSection>
+        </lightning:accordion>
+        
+        	<lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update" />
+        </lightning:recordEditForm>
+    
+</aura:component>

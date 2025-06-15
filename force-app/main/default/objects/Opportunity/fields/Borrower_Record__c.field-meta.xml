@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Borrower_Record__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Field will only be populated when the loan is added from Salesforce - Temporary field used to create Loan Contact Relationship records.</description>
+    <label>Borrower</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Loans (Borrower)</relationshipLabel>
+    <relationshipName>Loans_Borrower</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

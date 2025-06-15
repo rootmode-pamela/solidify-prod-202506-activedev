@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Credit_for_Rate_Chosen__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>802 in Fee Itemization, Included in Total Orig Fees</inlineHelpText>
+    <label>Total Credit for Rate Chosen</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Early_Payoff_Savings__c</fullName>
+    <formula>(Current_Loan_Monthly_Payment__c * Current_Loan_Term__c) -  (Current_Loan_Monthly_Payment__c * (New_Loan_Term__c - Same_Payment_Term_Reduction__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Early Payoff Savings</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

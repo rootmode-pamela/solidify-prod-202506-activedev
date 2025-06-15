@@ -1,0 +1,8 @@
+<apex:page standardController="Opportunity" >
+    <style>
+        .controls{
+        display: none;
+    }
+    </style>
+    <apex:enhancedList type="Opportunity" height="1000" rowsPerPage="25" customizable="false" id="Active_Clients" />
+</apex:page>

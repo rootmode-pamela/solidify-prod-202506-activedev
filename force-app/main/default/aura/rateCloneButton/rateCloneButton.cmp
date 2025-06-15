@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,lightning:isUrlAddressable">
+    <aura:attribute name="url" type="String"/>
+    <aura:attribute name="pageReference" type="Object"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+    <lightning:navigation aura:id="navService"/>
+
+    <lightning:button label="Clone" variant="brand" onclick="{!c.navToPage}"/>
+</aura:component>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X3_My_Active_Scenarios</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND (4 OR 5) AND 6</booleanFilter>
+    <columns>Household_Name__c</columns>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>Purpose__c</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>Subject_Prop_Street__c</columns>
+    <columns>Subject_Prop_St__c</columns>
+    <columns>Loan_Processor__c</columns>
+    <columns>Lender__c</columns>
+    <columns>Loan_Program__c</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>Interest_Rate_SF__c</columns>
+    <columns>Processor_Note__c</columns>
+    <columns>COE__c</columns>
+    <columns>Next_Deadline__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>equals</operation>
+        <value>New,Qualifying,Proposal,Nurturing,Prospect,Requested,Reviewed,File Started,Docs Requested,Docs Received,Qualified,Pre-approved,Application,Sent to Processing,Submitted,Approved,Clear to Close,Cleared to Close,Docs Out,Funded</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>notEqual</operation>
+        <value>Closed Won,Archive Closed,Closed Elsewhere,Cancelled,Denied</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.Scenario</value>
+    </filters>
+    <filters>
+        <field>Hold_Until__c</field>
+        <operation>lessOrEqual</operation>
+        <value>TODAY</value>
+    </filters>
+    <filters>
+        <field>Hold_Until__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>Encompass_Folder__c</field>
+        <operation>notContain</operation>
+        <value>training</value>
+    </filters>
+    <label>3. My Active Scenarios</label>
+</ListView>

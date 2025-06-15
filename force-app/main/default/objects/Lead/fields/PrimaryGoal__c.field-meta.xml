@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PrimaryGoal__c</fullName>
+    <label>Primary Goal</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Purchase</fullName>
+                <default>false</default>
+                <label>Purchase</label>
+            </value>
+            <value>
+                <fullName>Reduce Rate</fullName>
+                <default>false</default>
+                <label>Reduce Rate</label>
+            </value>
+            <value>
+                <fullName>Reduce Payment</fullName>
+                <default>false</default>
+                <label>Reduce Payment</label>
+            </value>
+            <value>
+                <fullName>Eliminate MI</fullName>
+                <default>false</default>
+                <label>Eliminate MI</label>
+            </value>
+            <value>
+                <fullName>Pay Off Loan Faster</fullName>
+                <default>false</default>
+                <label>Pay Off Loan Faster</label>
+            </value>
+            <value>
+                <fullName>Debt Consolidation</fullName>
+                <default>false</default>
+                <label>Debt Consolidation</label>
+            </value>
+            <value>
+                <fullName>Home Improvement</fullName>
+                <default>false</default>
+                <label>Home Improvement</label>
+            </value>
+            <value>
+                <fullName>Future Investments</fullName>
+                <default>false</default>
+                <label>Future Investments</label>
+            </value>
+            <value>
+                <fullName>Convert ARM to Fixed</fullName>
+                <default>false</default>
+                <label>Convert ARM to Fixed</label>
+            </value>
+            <value>
+                <fullName>Buy Out Partner</fullName>
+                <default>false</default>
+                <label>Buy Out Partner</label>
+            </value>
+            <value>
+                <fullName>Other - See Notes</fullName>
+                <default>false</default>
+                <label>Other - See Notes</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

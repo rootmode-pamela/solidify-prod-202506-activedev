@@ -1,0 +1,72 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="sourceRecord" type="Opportunity"
+               default="{ 'sobjectType': 'Opportunity' }"/>
+    <aura:attribute name="sourceRecordFields" type="Object"/>
+    <force:recordData aura:id="currentRecord"
+                      recordId="{!v.recordId}"
+                      fields="Subject_Property_Name__c"
+                      targetRecord="{!v.sourceRecord}"
+					  targetFields="{!v.sourceRecordFields}"
+                      />
+    <aura:attribute name="addy" type="String" default="{!v.sourceRecordFields.Subject_Prop_Street__c}"/>
+
+  	<lightning:recordEditForm aura:id="loanPropertyForm" recordId="{!v.recordId}" objectApiName="Opportunity">
+        <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Subject_Property_Name__c" onchange="{!c.handleSaveRecord}" /></div>
+            <div class="slds-col slds-size_1-of-2"></div>
+               
+        </div>
+        </lightning:recordEditForm>
+            <lightning:card >
+        <lightning:recordViewForm recordId="{!v.sourceRecordFields.Subject_Property_Name__c}"
+                                          objectApiName="Properties__c">
+             <h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small" title="Details">Property Details</span>
+  						</h3>        
+            <div class="slds-grid slds-gutters">
+                       
+                        <div class="slds-col slds-size_1-of-2">  
+                            <div class="slds-section slds-is-open">                    
+                                <lightning:outputField fieldName="Name" />
+                               <lightning:outputField fieldName="Property_Type__c" />
+                               
+                                <lightning:outputField fieldName="Property_Street__c" />
+                                 <div class="slds-grid slds-gutters">
+                       
+                        			<div class="slds-col slds-size_6-of-12">  
+                                        <lightning:outputField fieldName="Property_City__c" /></div>
+                                     <div class="slds-col slds-size_2-of-12">
+                                         <lightning:outputField fieldName="Property_State__c" /></div>
+                                     <div class="slds-col slds-size_4-of-12">
+                                         <lightning:outputField fieldName="Property_Zip__c" /></div></div>
+                                <lightning:outputField fieldName="Property_County__c" />  
+                            </div>
+                        </div>
+                    <div class="slds-col slds-size_1-of-2">  
+                            <div class="slds-section slds-is-open"> 
+                    <div class="slds-grid slds-gutters">
+                       
+                        			<div class="slds-col slds-size_1-of-2">  
+                                        <lightning:outputField fieldName="Number_of_Units__c" /></div>
+                   
+                       
+                        <div class="slds-col slds-size_1-of-2">   <lightning:outputField fieldName="Year_Built__c" /></div></div>
+                    <lightning:outputField fieldName="Remarks__c" />
+                    <lightning:outputField fieldName="Occupancy__c" />
+                    <lightning:outputField fieldName="Property_Disposition__c" />
+                        <div class="slds-grid slds-gutters">
+                       
+                        			<div class="slds-col slds-size_1-of-2">           
+                                        <lightning:outputField fieldName="Appraisal_Date__c" /></div>
+                   
+                            <div class="slds-col slds-size_1-of-2">  <lightning:outputField fieldName="Appraised_Value__c" /> </div>
+                                </div></div>
+                        </div>
+                    </div>
+                </lightning:recordViewForm>
+
+    </lightning:card>  
+    
+</aura:component>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EPO_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( OR(CONTAINS (TEXT(Loan_Program__c) , &apos;FHA&apos;) , CONTAINS(TEXT(Loan_Program__c), &apos;VA&apos;) ) , 211,  
+
+
+CASE ( Lender__c, 
+&apos;Franklin American&apos;,  121,
+&apos;Franklin&apos;,  121, 
+&apos;FAMC&apos;, 121,
+&apos;Citizens&apos;,  121, 
+&apos;HomePoint&apos;, 151,
+&apos;The Loan Store&apos;, 151,
+&apos;LDW&apos;, 121,
+181)
+
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>EPO Formula</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

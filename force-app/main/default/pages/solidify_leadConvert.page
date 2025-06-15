@@ -1,0 +1,122 @@
+<apex:page standardController="Lead" extensions="solidify_leadConvert" showQuickActionVfHeader="False" doctype="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
+        <body>
+            <apex:slds /><apex:form >
+            
+            <div>
+                <div class="modal-header slds-modal__header" >
+
+
+                    <h2 class="title slds-text-heading--medium" >Convert Lead</h2></div>
+                
+                <div class="modal-body scrollable slds-modal__content slds-p-around--medium" >
+<!--Search with Account returns Opp list and Contact list -->
+                    <apex:outputPanel rendered="{!showAccountMatchPanel}">
+                        <apex:pageBlock >
+                        <apex:pageBlockSection >
+                        
+                    Select the Loan to merge: 
+                            </apex:pageBlockSection>
+                            <apex:pageBlockSection >
+                   			<apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Text searched" for="input"/>
+                                <apex:outputText value="{!userInput}" styleclass="slds-input" label="Loan" id="input" />
+                                </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Account to Merge To" for="account_select"/>
+                            <apex:selectList value="{!selectedAccount}" styleclass="slds-input" id="account_select">
+                                <apex:selectOptions value="{!matchingAccountList}"/>                                     
+                            </apex:selectList>
+                                </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >                           
+                                <apex:outputLabel value="Loan to Merge To" for="loan_select"/>
+                            <apex:selectList value="{!selectedOppId}" id="loan_select" styleclass="slds-input">
+                                <apex:selectOptions value="{!matchingOppsList}"/>                                     
+                            </apex:selectList>
+                                    </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                    <apex:outputLabel value="Contact to Merge To" for="contact_select" />
+                            <apex:selectList value="{!selectedContact}" id="contact_select" styleclass="slds-input" >
+                                <apex:selectOptions value="{!matchingContactsList}"/>                                  
+                            </apex:selectList>  
+                                    </apex:pageBlockSectionItem>
+                            </apex:pageBlockSection>
+                        </apex:pageBlock>
+					</apex:outputPanel>
+<!-- if nothing found by Account, show a user input for Loan name -->                    
+                    <apex:outputPanel rendered="{!noMatchingOpp}">
+                           <apex:pageBlock >
+                           	<apex:pageBlockSection >
+                               
+                               <p>No loans were found.  Leads may only be converted to existing Accounts and Loan applications from Point.</p>
+                        
+                     </apex:pageBlockSection>
+                            <apex:pageBlockSection >
+                        
+                         <apex:inputText value="{!userInput}" required="true" styleclass="slds-input" label="Search by Loan Name (enter exactly as in Point)" />
+                           
+                        
+                        </apex:pageBlockSection>
+                            </apex:pageBlock>
+
+                         
+                     <apex:commandButton styleClass="slds-button slds-button--neutral" value="Search" action="{!doLoanSearch}"/>                    
+                     <apex:commandButton styleClass="slds-button slds-button--neutral" value="Cancel" action="{!Cancel}"/>
+                            
+                    
+                    </apex:outputPanel>
+<!-- Search by Loan Name returns values -->
+                     <apex:outputPanel rendered="{!showOppFoundPanel}">
+                          <apex:pageBlock >
+                           	<apex:pageBlockSection >
+                         
+                    Matching loan found to merge to: 
+                              </apex:pageBlockSection>
+                              
+                    <apex:pageBlockSection >
+					   <apex:PageBlockSectionItem >
+                           <apex:outputLabel value="Loan to Convert To" for="loan_name"/>
+
+                            <apex:outputText value="{!oppName}" styleclass="slds-input" label="Loan" id="loan_name" />
+                            </apex:PageBlockSectionItem>
+                        <apex:PageBlockSectionItem >
+                            <apex:outputLabel value="Account to Convert To" for="account_name"/>
+                            <apex:outputText value="{!accountName}" styleclass="slds-input" label="Account" id="account_name" />
+                            </apex:PageBlockSectionItem>
+                            <apex:PageBlockSectionItem >
+                                <apex:outputLabel value="Contact to Convert To" for="contact_name"/>
+                            <apex:selectList styleclass="slds-input" value="{!selectedContact}">
+                                <apex:selectOptions value="{!matchingContactsList}"/>                                  
+                            </apex:selectList>  
+                                 </apex:PageBlockSectionItem>
+                 <!--       </span>
+                    </div> -->
+                              </apex:pageBlockSection>
+                         </apex:pageBlock>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!NOT(noMatchingOpp)}">
+                    <div class="modal-footer slds-modal__footer">
+                        
+                        <span class=" label bBody truncate" dir="ltr">
+                            <apex:commandButton styleClass="slds-button slds-button--neutral" value="Cancel" action="{!Cancel}"/>
+                            
+                        </span><span class=" label bBody truncate" dir="ltr">
+                        <apex:commandButton styleClass="slds-button slds-button--neutral" value="Convert" action="{!DoConvert}"/>
+                        </span></div>
+                </apex:outputPanel>
+                        
+                    
+                </div>
+               
+                
+            </div>
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

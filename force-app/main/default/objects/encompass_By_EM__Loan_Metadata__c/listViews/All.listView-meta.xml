@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>OBJECT_ID</columns>
+    <columns>encompass_By_EM__Loan_External_Id__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>encompass_By_EM__Loan_External_Id__c</field>
+        <operation>equals</operation>
+        <value>c5c0ceab-e626-4b78-8889-1934b396732b</value>
+    </filters>
+    <label>All</label>
+</ListView>

@@ -1,0 +1,68 @@
+<aura:component implements="flexipage:availableForRecordHome,lightning:availableForFlowScreens,force:hasRecordId" access="global">
+	<aura:attribute name="interestOnly" type="List" default="[
+    	{'label': 'No', 'value': 'no'},
+        {'label': 'Yes', 'value': 'yes'}
+    ]"/>
+    <aura:attribute name="products" type="List" default="[
+    	{'label': 'ARM', 'value': 'no'},
+        {'label': 'Fixed', 'value': 'yes'}
+    ]"/>
+    <aura:attribute name="productFixed" type="string" default="yes" />
+    <aura:attribute name="interestOnlySelection" type="string" default="no"/>
+    <aura:attribute name="interestRate" type="decimal" />
+	<aura:attribute name="loanAmount" type="decimal" />
+    <aura:attribute name="term" type="integer" />
+    <aura:attribute name="armTerm" type="integer" />
+    <aura:attribute name="monthlyPayments" type="decimal" />
+    <aura:attribute name="totalInterest" type="decimal" />
+    <aura:attribute name="armInterest" type="decimal" />
+    <aura:attribute name="interestPerPeriod" type="decimal" />
+    <aura:attribute name="additionalPrincipal" type="decimal"/>
+    <aura:attribute name="newTerm" type="decimal"/> 
+    
+	<lightning:card iconName="action:update" title="Mortgage Calculator">
+        <aura:set attribute="actions">
+                <lightning:button aura:id="calculate" label="Calculate" onclick="{!c.calculateLoan}" class="slds-m-top_medium slds-p-right_small" />
+        </aura:set>
+
+
+        <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="6">
+                <lightning:radioGroup label="Product" name="productSelect" options="{!v.products}" value="{!v.productFixed}" type="button" onchange="{!c.handleProductChange }"/>
+                <lightning:radioGroup label="Interest Only" name="InterestOnlyGroup" options="{!v.interestOnly}" value="{!v.interestOnlySelection}" type="button"/>  
+                <lightning:input type="number" label="Loan Amount" value="{!v.loanAmount}" formatter="currency"/>
+                <lightning:input type="number" label="Interest Rate" value="{!v.interestRate}" step="0.001"/>  
+                <lightning:input type="number" label="Term (years)" value="{!v.term}"/>
+                <aura:if isTrue="{!v.productFixed=='no'}">  
+                    <lightning:input type="number" label="ARM Term (years)" value="{!v.armTerm}"/> 
+                </aura:if>
+            </lightning:layoutItem>
+
+            
+            <lightning:layoutItem padding="around-small" size="6">
+                <aura:if isTrue="{!v.productFixed=='yes'}">        
+                    <lightning:input type="number" label="Additional Principal" min="0"
+                                     messageWhenRangeUnderflow="Additional Principal can't be less than 0" value="{!v.additionalPrincipal}" formatter="currency"/>
+                </aura:if>
+                <br></br><br></br><br></br><br></br>
+                <label class="slds-form-element__label slds-p-around-small">Monthly Payments:</label>
+                <div><p><ui:outputCurrency value="{!v.monthlyPayments}" format="$##,###.00" class="slds-box_small slds-text-heading_medium slds-text-align_right" /></p></div>
+                <aura:if isTrue="{!v.productFixed=='yes'}">  
+                    <label class="slds-form-element__label slds-p-around-small">Effective Term (Years):</label>
+                    <p><ui:outputNumber value="{!v.newTerm}" class="slds-box_small slds-text-heading_medium slds-text-align_right" format=".0" /></p>
+                </aura:if>
+
+                <aura:if isTrue="{!v.productFixed=='yes'}">  
+                    <label class="slds-form-element__label slds-p-around-small">Interest Loan Term:</label>
+                    <div><p> <ui:outputCurrency value="{!v.totalInterest}" format="$##,###" class="slds-box_small slds-text-heading_medium slds-text-align_right" /></p></div>
+                    <aura:set attribute="else">
+                        <label class="slds-form-element__label slds-p-around-small">Interest ARM Term:</label>
+                        <div><p> <ui:outputCurrency value="{!v.armInterest}" format="$##,###" class="slds-box_small slds-text-heading_medium slds-text-align_right" /></p></div>
+                    </aura:set>
+                </aura:if>
+
+            </lightning:layoutItem>
+        </lightning:layout>
+
+    </lightning:card> 
+</aura:component>

@@ -1,0 +1,142 @@
+.container {
+    padding:0;
+    margin:40;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color:#f2f2f2;
+    overflow-y: auto;
+    font-size: 11px;
+    box-shadow:0 4px 4px 0 rgba(0,0,0,.02),0 0 4px 0 rgba(0,0,0,.12)
+ }
+ .MainImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+ }
+ .slds-text-heading_medium{
+    font-weight: bold;
+ }
+ .containerchart {
+    width: 80%;
+    margin: 20px auto;
+  }
+ .nopad{
+    padding: 0px!Important;
+    height: 100%!Important;
+ }
+ .Calc_Header {
+   background-color:#23a2e9;
+ }
+ h1 {
+   color: #fff;
+   font-size: 2.5em; /*30px*/
+   padding: 16px 15px;
+   font-weight: bold;
+   text-align: center;
+ }
+ h2 {
+    font-size: 2em; /*24px*/
+    font-weight: bold;
+    text-align: center;
+    margin: 16px 0px;
+    padding: 0px 15px;
+    color: #080707;
+ }
+ .calc-left {
+   background-color:#f2f2f2;
+   padding: 10px 10px;
+   padding-right: 10px;
+   padding-left: 10px;
+ }
+ .calc-right {
+   background-color:white;
+   padding: 0px 16px 48px;
+ }
+ .calc-rightContainer {
+    background-color:white;
+ }
+ h3{
+    color: #1A1A1A;
+    font-size: 1.5em; /*20px*/
+    font-weight: 700;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+ }
+ h4 {
+    color: #080707;
+    font-size: 1.34em; /*16px*/
+    font-weight: 700;
+ }
+ .labels {
+    margin: 0px 0px 4px;
+ }
+ .row-headers{
+    text-align: center;
+    padding: 3px;
+ }
+ .row-cells{
+    text-align: center;
+    padding: 0px;
+ }
+ .currentFields {
+    margin: 0px 0px 4px 0px;
+    padding: 0px 15px;
+ }
+ .CurrentTab {
+    padding: 12px 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+ }
+ .calc-image-section {
+    width: 472px;
+    height: 150px;
+    margin: auto;
+ }
+ img{
+    align-self: center!Important;
+ }
+ .table {
+    text-align: center;
+ }
+ .row {
+    border-top: 1px solid #dee2e6;
+ }
+ .mainTable {
+    background-color:#f2f2f2;
+ }
+ .component {
+    margin: 0px;
+ }
+ .SpecialRow{
+    background-color: #f2f2f2;
+    border-bottom: 0px!Important;
+    border-top: 0px!Important;
+    border-style: none!Important;
+ }
+ .my-brand-button {
+    --sds-c-button-neutral-color-background: #FDD563;
+    --sds-c-button-radius-border: 25px;
+    --sds-c-button-text-color: #1A1A1A;
+    text-align: center;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    line-height: 1.5;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 1.25em;
+    font-weight: 700;
+    justify-content: center;
+ }
+ .btn {
+    text-align: center;
+    border-top: 1px solid #dee2e6;
+ }
+ .pageBtn {
+    margin: 24px 0px;
+ }

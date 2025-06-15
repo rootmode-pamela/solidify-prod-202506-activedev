@@ -1,0 +1,807 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-14-2022
+  @last modified by  : Ashton Kuehne
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   04-08-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+    <div class="container">
+        <article class="slds-card">
+                <div class="component slds-card__body slds-card__body_inner">
+                <div class="Calc_Header">
+                    <h1>Rate/Fee Comparison</h1>
+                </div>
+            <lightning-record-edit-form record-id={ProposalId} object-api-name={ProposalObject} onsubmit={handleSubmit} onsuccess={handleSuccess}>
+                <div class="mainTable slds-grid">
+                    <div class="nopad slds-col slds-size_4-of-12">
+                        <div class="calc-left">
+                                <lightning-tabset class="slds-tabs_default">
+                                    <lightning-tab class="CurrentTab" label="Transaction">
+                                        <div class="slds-grid slds-wrap slds-gutters">
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Solidify Contact:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="SolidifyContact__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Property:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Property__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Borrower Name:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-output-field field-name="Borrower_Name_Text__c"
+                                                    variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Transaction Type:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Transaction_Type__c" variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Prepared Date:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Prepared_Date__c" variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Lock Period:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Lock_Period_Days__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </lightning-tab>
+                                    <lightning-tab class="CurrentTab" label="Loan">
+                                        <div class="slds-grid slds-wrap slds-gutters">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">New Loan Amount</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="New_Loan_Amount__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Estimated Value</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Estimate_Value__c" variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Estimated FICO Score</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="FICO_Score__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Fixed Term Years:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Fixed_Term_Years__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Loan Type:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Loan_Type__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Mortgage Insurance:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="MI__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">MI %:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="MI_Percent__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Cancel MI At:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="MI_CancelAtPercent__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Include FFMIP In Loan?:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Add_FFMIP_To_Loan__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">VA Funding Fee/FHA UFMIP %:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="FF_MIP_Percent__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">10 Year Treasury Yield:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="X10_Yr_Treasury_Yield__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                        </div>
+                                    </lightning-tab>
+                                    <lightning-tab class="CurrentTab" label="Fees">
+                                        <div class="slds-grid slds-wrap slds-gutters">
+                                            
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Title/Escrow/Recording:
+                                                    <lightning-helptext
+                                                        content="Include all title, escrow, recording fees, including endorsement, loan tie-in, misc">
+                                                    </lightning-helptext>
+                                                </h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Est_Fees_Title_Escrow__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Lender:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Est_Fees_Lender__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Appraisal and Credit:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Est_Fees_Appraisal_Credit__c" variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Add Fees to Loan Balance?:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Add_Fees_to_Loan_Balance__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            
+                                        </div>
+                                    </lightning-tab>
+
+
+
+                                    <lightning-tab class="CurrentTab" label="Prepaids">
+                                        <div class="slds-grid slds-wrap slds-gutters">
+                                            
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Downpayment:
+                                                    <lightning-helptext
+                                                        content="Include all title, escrow, recording fees, including endorsement, loan tie-in, misc">
+                                                    </lightning-helptext>
+                                                </h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Current_Balance_Down_Payment__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="table slds-grid slds-wrap">
+                                            <!--header row-->
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <div class="slds-grid slds-wrap">
+                                                    <div class="slds-col slds-size_1-of-4">
+                                                        <h4 class="row-headers">Type</h4>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4">
+                                                        <h4 class="row-headers">Rate</h4>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4">
+                                                        <h4 class="row-headers">Qty</h4>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4">
+                                                        <h4 class="row-headers">Total</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--interest row -->
+                                            <div class="row slds-col slds-size_1-of-1">
+                                                <div class="slds-grid">
+                                                    <div class="slds-col slds-size_1-of-4">
+                                                        <h3 class="labels">Interest</h3>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4 slds-var-p-horizontal_x-small">
+                                                            <lightning-input-field disabled=true class="" field-name="Escrow_Interest_Daily_Rate__c"
+                                                                    variant="label-hidden">
+                                                            </lightning-input-field>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4 slds-var-p-horizontal_x-small">
+                                                        <lightning-input-field class="" field-name="Escrow_Interest_Days__c"
+                                                                variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4 slds-var-p-horizontal_x-small">
+                                                        <lightning-input-field class="" field-name="Escrow_Interest_Total__c"
+                                                                variant="label-hidden" disabled = "true">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                </div>
+
+                                            <!--taxes row -->
+
+                                                <div class="slds-grid slds-wrap">
+                                                    <div class="slds-col slds-size_1-of-4">
+                                                        <h3 class="labels">Taxes</h3>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4 slds-var-p-horizontal_x-small">
+                                                            <lightning-input-field class="row-cells" field-name="Escrow_Taxes_Monthly_Rate__c"
+                                                                    variant="label-hidden">
+                                                            </lightning-input-field>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4 slds-p-horizontal_x-small">
+                                                        <lightning-input-field class="row-cells" field-name="Escrow_Taxes_Months__c"
+                                                                variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4 slds-p-horizontal_x-small">
+                                                        <lightning-input-field class="row-cells" field-name="Escrow_Taxes_Total__c"
+                                                                variant="label-hidden" disabled = "true">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                </div>
+
+                                            <!--insurance row -->
+
+                                                <div class="slds-grid slds-wrap">
+                                                    <div class="slds-col slds-size_1-of-4">
+                                                        <h3 class="labels">Insurance</h3>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4 slds-p-horizontal_x-small">
+                                                            <lightning-input-field class="row-cells " field-name="Escrow_Ins_Monthly_Rate__c"
+                                                                    variant="label-hidden">
+                                                            </lightning-input-field>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4 slds-p-horizontal_x-small">
+                                                        <lightning-input-field class="row-cells" field-name="Escrow_Ins_Months__c"
+                                                                variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-4 slds-p-horizontal_x-small">
+                                                        <lightning-input-field class="row-cells" field-name="Escrow_Insurance_Total__c"
+                                                                variant="label-hidden" disabled = "true">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-wrap">
+                                                    <div class="slds-col slds-size_1-of-4">
+                                                        <h3 class="labels">Other</h3>
+                                                    </div>
+                                                    <div class="slds-col slds-size_3-of-4 slds-p-horizontal_x-small">
+                                                        <lightning-input-field class="row-cells " field-name="Other__c"
+                                                                               variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-grid slds-wrap slds-gutters">
+                                        <div class="slds-col slds-size_4-of-6">
+                                            <h4 class="labels">Hide Monthly Escrows From Client View:</h4>
+                                        </div>
+                                        <div class="currentFields slds-col slds-size_2-of-6">
+                                            <lightning-input-field field-name="Hide_Escrows_Client_View__c"
+                                                variant="label-hidden">
+                                            </lightning-input-field>
+                                        </div>
+                                        <div class="slds-col slds-size_4-of-6">
+                                            <h4 class="labels">Hide Fund To Close From Client View:</h4>
+                                        </div>
+                                        <div class="currentFields slds-col slds-size_2-of-6">
+                                            <lightning-input-field field-name="Hide_Funds_To_Close_Client_View__c"
+                                                variant="label-hidden">
+                                            </lightning-input-field>
+                                        </div>
+                                        <div class="slds-col slds-size_4-of-6">
+                                            <h4 class="labels">Show Simple Breakeven Calculations:</h4>
+                                        </div>
+                                        <div class="currentFields slds-col slds-size_2-of-6">
+                                            <lightning-input-field field-name="Simple_Breakeven__c" onchange={HandleSimpleBreakeven}
+                                                variant="label-hidden">
+                                            </lightning-input-field>
+                                        </div>
+                                        </div>
+
+                                    </lightning-tab>
+                                    <lightning-tab class="CurrentTab" label="Compensation">
+                                        <div class="slds-grid slds-wrap slds-gutters">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Compensation (LPC/BPC):
+                                                    <lightning-helptext
+                                                        content="If using raw pricing (excludes our LPC). If using after-comp pricing, just leave blank.">
+                                                    </lightning-helptext>
+                                                </h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Origination_Fee__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Global Pricing Adjuster:
+                                                </h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Global_Pricing_Adjuster__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Override Comp?:</h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Override_Comp__c"
+                                                    variant="label-hidden" onchange={HandleOverrideComp}>
+                                                </lightning-input-field>
+                                            </div>
+
+
+                                            <template if:true={OverrideComp}>
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Override Min:
+                                                </h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Override_Min__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <h4 class="labels">Override Max:
+                                                </h4>
+                                            </div>
+                                            <div class="currentFields slds-col slds-size_1-of-2">
+                                                <lightning-input-field field-name="Override_Max__c"
+                                                    variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            </template>
+                                        </div>
+                                    </lightning-tab>
+                                </lightning-tabset>
+                                <div class="currentFields btn slds-col slds-size_1-of-1">
+                                    <lightning-button class="my-brand-button btn" type="submit" label="Save">
+                                    </lightning-button>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="nopad calc-rightContainer slds-col slds-size_8-of-12">
+                        <div class="calc-right">
+                                <!--<div class="calc-image-section">
+                                                <img class="" src="/resource/1619120802000/NewSolidifyLogo">
+                                            </div>
+                                <h2>Comparison Results</h2>-->
+                                <div class="table slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-8">
+                                                <h4 class="row-headers">Rate:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-8">
+                                                <h4 class="row-headers">Price:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-8">
+                                                <h4 class="row-headers">Exclude Rate:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-8">
+                                                <h4 class="row-headers">APR %:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-8">
+                                                <h4 class="row-headers">Fees:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-8">
+                                                <h4 class="row-headers">Total Loan Amount:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-8">
+                                                <h4 class="row-headers">Monthly P&I Payment:</h4>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-8">
+                                                <h4 class="row-headers">Years Until Breakeven:</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Rate_1__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Price_1__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="ExcludeRate1__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="APR1__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="TotalFees1__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Total_Loan_Amount1__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Monthly_PI_Pmt1__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <template if:false={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Years_Until_Breakeven1__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                            <template if:true={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Breakeven_Scenario1_Simple__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Rate_2__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Price_2__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="ExcludeRate2__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="APR2__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="TotalFees2__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Total_Loan_Amount2__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Monthly_PI_Pmt2__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <template if:false={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Years_Until_Breakeven2__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                            <template if:true={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Breakeven_Scenario2_Simple__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Rate_3__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Price_3__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="ExcludeRate3__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="APR3__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="TotalFees3__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Total_Loan_Amount3__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Monthly_PI_Pmt3__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <template if:false={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Years_Until_Breakeven3__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                            <template if:true={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Breakeven_Scenario3_Simple__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Rate_4__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Price_4__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="ExcludeRate4__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="APR4__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="TotalFees4__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Total_Loan_Amount4__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Monthly_PI_Pmt4__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <template if:false={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Years_Until_Breakeven4__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                            <template if:true={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Breakeven_Scenario4_Simple__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Rate_5__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Price_5__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="ExcludeRate5__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="APR5__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="TotalFees5__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Total_Loan_Amount5__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Monthly_PI_Pmt5__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <template if:false={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Years_Until_Breakeven5__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                            <template if:true={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Breakeven_Scenario5_Simple__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="row slds-col slds-size_1-of-1">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Rate_6__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="Price_6__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-input-field class="row-cells" field-name="ExcludeRate6__c"
+                                                        variant="label-hidden">
+                                                </lightning-input-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="APR6__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="TotalFees6__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Total_Loan_Amount6__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <div class="row-cells slds-col slds-size_1-of-8">
+                                                <lightning-output-field class="row-cells" field-name="Monthly_PI_Pmt6__c"
+                                                        variant="label-hidden">
+                                                </lightning-output-field>
+                                            </div>
+                                            <template if:false={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Years_Until_Breakeven6__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                            <template if:true={Simple_Breakeven}>
+                                                <div class="row-cells slds-col slds-size_1-of-8">
+                                                    <lightning-output-field class="row-cells" field-name="Breakeven_Scenario6_Simple__c"
+                                                            variant="label-hidden">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="slds-clearfix">
+                                <div class="pageBtn slds-float_right slds-var-m-bottom_large">
+                                    <lightning-button class="my-brand-button" type="submit" label="Client View"
+                                        onclick={navigateToVFPage}>
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </lightning-record-edit-form>
+                </div>
+        </article>
+    </div>
+</template>

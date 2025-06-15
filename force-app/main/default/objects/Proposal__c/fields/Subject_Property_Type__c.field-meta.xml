@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subject_Property_Type__c</fullName>
+    <label>Prop Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Detached</fullName>
+                <color>#0B6FCE</color>
+                <default>true</default>
+                <label>Detached</label>
+            </value>
+            <value>
+                <fullName>Multi-family</fullName>
+                <default>false</default>
+                <label>Multi-Family</label>
+            </value>
+            <value>
+                <fullName>Condominium</fullName>
+                <color>#78C953</color>
+                <default>false</default>
+                <label>Condo</label>
+            </value>
+            <value>
+                <fullName>Detached Condominium</fullName>
+                <default>false</default>
+                <label>Detached Condominium</label>
+            </value>
+            <value>
+                <fullName>PUD</fullName>
+                <default>false</default>
+                <label>PUD</label>
+            </value>
+            <value>
+                <fullName>Attached</fullName>
+                <default>false</default>
+                <label>Attached</label>
+            </value>
+            <value>
+                <fullName>Manufactured Home</fullName>
+                <color>#F3D904</color>
+                <default>false</default>
+                <label>Manufactured Home</label>
+            </value>
+            <value>
+                <fullName>High Rise Condominium</fullName>
+                <default>false</default>
+                <label>High Rise Condominium</label>
+            </value>
+            <value>
+                <fullName>Modular/Pre-Fab</fullName>
+                <default>false</default>
+                <label>Modular/Pre-Fab</label>
+            </value>
+            <value>
+                <fullName>Cooperative</fullName>
+                <default>false</default>
+                <label>Cooperative</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Qualified__c</fullName>
+    <description>Date Loan was LO Qualified or Pre-Approved to be Sent to Processing</description>
+    <inlineHelpText>Date Loan was LO Qualified or Pre-Approved to be Sent to Processing</inlineHelpText>
+    <label>Qualified</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

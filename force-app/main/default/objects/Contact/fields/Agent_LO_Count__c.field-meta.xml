@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agent_LO_Count__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Number of distinct LO&apos;s utilized across all loans in the 12 months preceding Export Date</inlineHelpText>
+    <label>Agent LO Count</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,11 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+    <aura:handler name="formSubmit" event="c:FormSubmit" action="{!c.onFormSubmit}"/>
+    <lightning:card title="Find Loans" class="slds-m-bottom_10px">
+        <c:ResearchSearchForm/>
+    </lightning:card>
+
+    <lightning:card title="Matching Loans">
+        <c:ResearchLoanResults aura:id="ResearchLoanResults"/>
+    </lightning:card>
+   
+</aura:component>

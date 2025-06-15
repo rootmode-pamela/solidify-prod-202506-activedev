@@ -1,0 +1,21 @@
+<apex:page showHeader="false">
+    
+<apex:includeLightning />
+<apex:form id="frmId">
+    <div id="lightning"/>
+    <script>
+       //This will be used to get user exp i.e.Classic,SF1 ,LEX
+       var myUserContext = "{!$User.UITheme}";
+       var myRecordId = "{!$CurrentPage.parameters.id}";
+       $Lightning.use("c:solidify_proposalAppNew", function() {
+       
+       $Lightning.createComponent("c:rateProposal",{
+         recordId : myRecordId},"lightning",function(cmp) {});
+        });
+     </script>
+       
+    
+</apex:form>
+    
+    
+</apex:page>

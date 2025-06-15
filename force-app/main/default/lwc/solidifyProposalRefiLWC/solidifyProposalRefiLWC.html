@@ -1,0 +1,273 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-14-2022
+  @last modified by  : Ashton Kuehne
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   04-08-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+
+    <div class="container">
+        <div class="inner-container slds-align_absolute-center">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <template if:false={hideTable}>
+                    <div class="Contact-image-section">
+                        <img class="" src="/resource/1619120802000/NewSolidifyLogo">
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 Widget">
+                        <h1>Your Loan, Your Choice</h1>
+                        <h4 class="centerText">Loan Options at your fingertips</h4>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 Widget">
+                        <article class="slds-card">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="mainTable slds-wrap slds-grid slds-gutters">
+                                    <div
+                                        class="NewCompareCards slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="table slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <h3 class="CardName">Current Loan
+                                                </h3>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <div class="slds-grid slds-wrap">
+                                                    <div class="slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Loan Amount:</h4>
+                                                    </div>
+                                                    <div class="row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells" format-style="currency"
+                                                            currency-code="USD" value={Current_Loan_Amount}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Interest Rate:</h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                                format-style="percent"
+                                                                maximum-fraction-digits="3" value={Current_Interest}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Term:</h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            value={Current_Loan_Term}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Monthly Payment:</h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            format-style="currency" currency-code="USD"
+                                                            value={Current_Loan_Monthly_Payment}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="NewCompareCards slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="table slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <h3 class="CardName">Proposed Loan
+                                                </h3>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <div class="slds-grid slds-wrap">
+                                                    <div class="slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Loan Amount:</h4>
+                                                    </div>
+                                                    <div class="row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells" format-style="currency"
+                                                            currency-code="USD" value={New_Loan_Amount}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Interest Rate:</h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                                format-style="percent"
+                                                                maximum-fraction-digits="3" value={New_Loan_Interest}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Term:</h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                            value={New_Loan_Term}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                    <div class="row slds-col slds-size_1-of-2">
+                                                        <h4 class="row-headers">Monthly Payment:</h4>
+                                                    </div>
+                                                    <div class="row row-cells slds-col slds-size_1-of-2">
+                                                        <lightning-formatted-number class="row-cells"
+                                                        format-style="currency" currency-code="USD"
+                                                        value={New_Loan_Monthly_Payment}>
+                                                        </lightning-formatted-number>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <template if:false={paymentsNegative}>
+                    <div class="slds-col slds-size_1-of-1 Widget">
+                        <article class="slds-card greyback">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="mainTable slds-wrap slds-grid slds-gutters">
+                                    <div class="CompareCards slds-col">
+                                        <div class="table slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <h3 class="CardName centerText"> Take the Monthly Savings
+                                                </h3>
+                                                <h4>The new loan will reduce your monthly payments by:<br> 
+                                                    <lightning-formatted-number
+                                                        format-style="currency" class="row-cell"
+                                                        currency-code="USD" value={Monthly_Payment_Savings}>
+                                                    </lightning-formatted-number>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="CompareCards slds-col">
+                                        <div class="table slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <h3 class="CardName centerText"> Make Your Current Payment
+                                                </h3>
+                                                <h4>The new loan will pay off this many months sooner:<br>
+                                                    <lightning-formatted-number
+                                                        format-style="decimal" class="row-cell"
+                                                        maximum-fraction-digits="2" value={Same_Payment_Term_Reduction}>
+                                                    </lightning-formatted-number>
+                                                    <br><br>
+                                                    Which equates to total savings of:<br>
+                                                    <lightning-formatted-number
+                                                        format-style="currency" class="row-cell"
+                                                        currency-code="USD" value={Early_Payoff_Savings}>
+                                                    </lightning-formatted-number>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="CompareCards slds-col">
+                                        <div class="table slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <h3 class="CardName centerText"> Stay on Pace and Save
+                                                </h3>
+                                                <h4>
+                                                    Make this payment on new loan:<br>
+                                                    <lightning-formatted-number
+                                                        format-style="currency" class="row-cell"
+                                                        currency-code="USD" value={New_Loan_Payment_To_Keep_Term}>
+                                                    </lightning-formatted-number>
+                                                    <br><br>
+                                                    Which will enable you to stay on current monthly pace of:<br>
+                                                    <lightning-formatted-number
+                                                        format-style="decimal" class="row-cell"
+                                                        maximum-fraction-digits="2" value={Current_Loan_Payments_Remaining}>
+                                                    </lightning-formatted-number>
+                                                    <br><br>
+                                                    AND save you this much monthly:<br>
+                                                    <lightning-formatted-number
+                                                        format-style="currency" class="row-cell"
+                                                        currency-code="USD" value={Stay_On_Pace_Monthly_Savings}>
+                                                    </lightning-formatted-number>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </template>
+                    <div class="slds-col slds-size_1-of-1 Widget">
+                        <article class="slds-card">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="slds-grid slds-wrap slds-gutters">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="profilediv">
+                                                <img class="Profile-image-section slds-align_absolute-center" src={SolidifyContactFullPhotoUrl}
+                                                    alt="Profile photo">
+                                        </div>
+                                        <div class="contactInfoDiv">
+                                            <br>
+                                            <lightning-formatted-text class="slds-text-heading_small"
+                                                value={SolidifyContactName}>
+                                            </lightning-formatted-text>
+                                            <br>
+                                            <lightning-formatted-email class="slds-text-body_regular"
+                                                value={SolidifyContactEmail}>
+                                            </lightning-formatted-email>
+                                            <br>
+                                            <lightning-formatted-phone class="slds-text-body_regular"
+                                                value={SolidifyContactMobilePhone}>
+                                            </lightning-formatted-phone>
+                                            <br>
+                                            <div class="slds-text-body_regular">NMLS #: &nbsp;
+                                            <lightning-formatted-text class="slds-text-body_regular"
+                                                value={SolidifyContactMLS}>
+                                            </lightning-formatted-text></div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                        <div class="slds-grid slds-wrap slds-gutters">
+                                            <div class="slds-col slds-size_1-of-1">
+                                                <template if:true={addressEmpty}>
+                                                    <h4 class="grey">Address:</h4>
+                                                    <lightning-formatted-text class="slds-text-heading_small"
+                                                    value={Subject_Property_Street}>
+                                                    </lightning-formatted-text>
+                                                    <br>
+                                                </template>
+                                                <h4 class="grey">Name:</h4>
+                                                <lightning-formatted-text class="slds-text-heading_small"
+                                                value={Borrower_Name_Text}>
+                                                </lightning-formatted-text>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2">
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </template>
+                <div class="slds-col slds-size_1-of-1 Widget">
+                    <p class="pad10">
+                        <b>Disclaimer:</b> This is not a Loan Estimate. This is not an extension of credit or a promise
+                        to lend.
+                        Not everyone will qualify for this quote.
+                        This quote is not locked in and can change at any time. Please contact your loan officer for
+                        more
+                        details.
+                        <br>Your actual rate, payment, and costs could be higher. Get an official Loan Estimate before
+                        choosing
+                        the loan.
+                        <br><br> ©2024 Solidify Mortgage Advisors dba of BowHattan Holdings, Inc. All Rights Reserved.
+                        NMLS
+                        1283930, Equal Housing Lender.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>

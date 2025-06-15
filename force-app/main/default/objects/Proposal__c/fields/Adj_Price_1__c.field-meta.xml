@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Adj_Price_1__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Formula: Price 1 + Global Price Adjuster.  Used in Rate Analysis</description>
+    <externalId>false</externalId>
+    <formula>Price_1__c +  Global_Pricing_Adjuster__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Adj Price 1</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

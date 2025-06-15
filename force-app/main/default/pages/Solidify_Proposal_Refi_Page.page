@@ -1,0 +1,40 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 05-14-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   05-14-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<apex:page showHeader="false" docType="html-5.0" sidebar="false" standardStylesheets="true" lightningStylesheets="true">
+<html lang="en" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<head>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   
+   <apex:slds />
+   <apex:includeLightning />
+
+   <script type="text/javascript">
+   var myUserContext = "{!$User.UITheme}";
+   var myRecordId = "{!$CurrentPage.parameters.id}";
+   console.log('@@@ myRecordId: ' + myRecordId);
+      $Lightning.use("c:solidify_Proposal_Refi_App", function() {
+         $Lightning.createComponent("c:solidifyProposalRefiLWC",
+         { recordId : myRecordId },
+         "lightning",
+         function(cmp) {
+            console.log("records loaded");
+         }
+         );
+      });
+   </script>
+</head>
+<body>
+   <div id="lightning"/>
+</body>
+</html>
+</apex:page>

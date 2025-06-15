@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Closed_Loans</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>Lender__c</columns>
+    <columns>Purpose__c</columns>
+    <columns>Loan_Type__c</columns>
+    <columns>Loan_Program__c</columns>
+    <columns>Qualifying_Fico__c</columns>
+    <columns>Loan_Amount__c</columns>
+    <columns>Interest_Rate_SF__c</columns>
+    <columns>Current_Schedule_Balance__c</columns>
+    <columns>Payment_Amount__c</columns>
+    <columns>Scenario_First_Payment__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>equals</operation>
+        <value>Closed Won,Closed</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.Closed,Opportunity.Mortgage</value>
+    </filters>
+    <label>5. My Closed Loans</label>
+</ListView>

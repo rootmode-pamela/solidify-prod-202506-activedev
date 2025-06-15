@@ -1,0 +1,114 @@
+<template>
+    <lightning-messages></lightning-messages>
+    <div class="slds-grid slds-wrap" style="background:var(--lwc-colorBackground,rgb(243, 242, 242))">
+        <div class="slds-col slds-size_1-of-1 slds-p-around_x-small">
+            <div
+                style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+                <div class="slds-grid">
+                    <template if:true={showLoanSetup}>
+                        <div class="slds-col slds-size_1-of-9">
+                            <c-launch-flow flow-name="Loan_Setup" variables={flowVariables} button-title="Setup"
+                                modal-title="Setup"></c-launch-flow>
+                        </div>
+                    </template>
+
+                    <template if:true={showShareSummary}>
+                        <div class="slds-col slds-size_2-of-9">
+                            <c-launch-flow flow-name="New_Loan_Alert" variables={flowVariables}
+                                button-title="Share Summary" modal-title="Send Submit Notes"></c-launch-flow>
+                        </div>
+                    </template>
+
+                    <template if:true={showSubmitNotes}>
+                        <div class="slds-col slds-size_2-of-9">
+                            <lightning-button variant="brand" class="" name="Submit notes" label="Submit Notes"
+                                onclick={openSubmitNotesModal}>
+                            </lightning-button>
+                        </div>
+                    </template>
+
+                    <template if:true={showConvoLogLoanProcessorNotes}>
+                        <div class="slds-col slds-size_2-of-9">
+                            <lightning-button variant="brand" class="" name="Convo Log" label="Convo Log"
+                                onclick={openConvoLogLoanProcessorNotesModal}>
+                            </lightning-button>
+                        </div>
+                    </template>
+
+                    <template if:true={showResearch}>
+                        <div class="slds-col slds-size_1-of-9">
+                            <lightning-button icon-name="utility:search" variant="brand" class="" name="Research!"
+                                label="Research" onclick={openResearchModal} object-api-name={objectApiName}>
+                            </lightning-button>
+                        </div>
+                    </template>
+
+                    <template if:true={showQualifying}>
+                        <div class="slds-col slds-size_1-of-9">
+                            <button class="slds-button slds-button_success qualifying-button "
+                                onclick={openQualifyingModal}>Qualifying</button>
+                        </div>
+                    </template>
+
+                    <template if:true={showMortgageCalculator}>
+                        <div class="slds-col slds-size_1-of-9">
+                            <c-launch-flow flow-name="Solidify_Mortgage_Calculator" button-title="Calculator"
+                                modal-title="Solidify Mortgage Calculator"></c-launch-flow>
+                        </div>
+                    </template>
+
+                    <template if:true={showCreateProposal}>
+                        <div class="slds-col slds-size_2-of-9">
+                            <c-new-proposal-button recordid={recordId}
+                                objectapiname={objectApiName}></c-new-proposal-button>
+                        </div>
+                    </template>
+
+                    <template if:true={showBlendedRate}>
+                        <div class="slds-col slds-size_2-of-9">
+                            <lightning-button variant="brand" class="" name="Blended Rate" label="Blended Rate"
+                                onclick={openBlendedRateModal}>
+                            </lightning-button>
+                        </div>
+                    </template>
+
+                    <template if:true={showWhyWait}>
+                        <div class="slds-col slds-size_2-of-9">
+                            <lightning-button variant="brand" class="" name="Why Wait?" label="Why Wait?"
+                                onclick={openWhyWaitModal}></lightning-button>
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <template if:true={isOpenQualifyingModal}>
+        <c-qualifying-modal record-id={recordId} onclosemodal={closeQualifyingModal}
+            onsuccess={handleSuccessQualifying} type-of-record={recordTypeName}></c-qualifying-modal>
+    </template>
+    <template if:true={isOpenBlendedRateModal}>
+        <c-blended-rate-modal record-id={recordId} onclosemodal={closeBlendedRateModal}></c-blended-rate-modal>
+    </template>
+
+    <template if:true={isOpenWhyWait}>
+        <c-crude-calculator onresult={handleWhyWait} onclosemodal={closeWhyWaitModal} ></c-crude-calculator>
+    </template>
+
+    <template if:true={isOpenSubmitNotes}>
+        <c-submission-notes record-id={recordId} onclosemodal={closeSubmitNotesModal}></c-submission-notes>
+    </template>
+
+    <template if:true={isOpenConvoLogLoanProcessorNotesModal}>
+        <c-convo-log-processor-notes record-id={recordId} onclosemodal={closeConvoLogLoanProcessorNotesModal}></c-convo-log-processor-notes>
+    </template>
+
+    <template if:true={isOpenResearch}>
+        <c-research-modal record-id={recordId} property-record-id={subjectPropertyId} object={objectApiName}
+            onclosemodal={closeResearchModal}></c-research-modal>
+    </template>
+
+</template>

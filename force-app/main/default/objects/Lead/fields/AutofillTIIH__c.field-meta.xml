@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AutofillTIIH__c</fullName>
+    <formula>If(AND(ISBLANK(EstimatedTaxesScenario2__c), ISBLANK(EstimatedInsuranceScenario2__c), ISBLANK(EstimatedMortgageInsuranceScenario2__c), ISBLANK(EstimatedHOAScenario2__c), ISBLANK(EstimatedTaxesScenario3__c), ISBLANK(EstimatedInsuranceScenario3__c), ISBLANK(EstimatedMortgageInsuranceScenario3__c), ISBLANK(EstimatedHOAScenario3__c)),TRUE,FALSE)</formula>
+    <label>Autofill TIIH</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loan_Comparisons</fullName>
+    <columns>Proposal_NameFRM__c</columns>
+    <columns>Borrower__c</columns>
+    <columns>Borrower_Lead__c</columns>
+    <columns>Most_Recent_Loan__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>Property__c</columns>
+    <columns>New_Loan_Amount__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Proposal__c.Comparison_Analysis</value>
+    </filters>
+    <label>Loan Comparisons</label>
+</ListView>

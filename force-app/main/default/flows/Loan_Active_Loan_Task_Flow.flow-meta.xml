@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>CD_Issued_Blank</name>
+        <label>CD Issued != Blank</label>
+        <locationX>182</locationX>
+        <locationY>2471</locationY>
+        <defaultConnector>
+            <targetReference>Purpose_Purchase_Occupancy_Primary_Stage_Closed_Won</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_CD_Issued_Blanks</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CD_Issued__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task_CD_Review_Call_with_Client</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>True, CD Issued != Blanks</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>COE_Blank_Purpose_Purchase</name>
+        <label>COE != Blank, Purpose = Purchase</label>
+        <locationX>182</locationX>
+        <locationY>623</locationY>
+        <defaultConnector>
+            <targetReference>COE_Blank_Purpose_Purchase_Appraisal_Ordered_Blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_COE_Blank_Purpose_Purchase</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.COE__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Purpose__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Purchase</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task_Add_Realtors_to_SF</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>True, COE != Blank, Purpose = Purchase</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>COE_Blank_Purpose_Purchase_Appraisal_Ordered_Blank</name>
+        <label>COE != Blank, Purpose = Purchase, Appraisal Ordered != Blank</label>
+        <locationX>182</locationX>
+        <locationY>1355</locationY>
+        <defaultConnector>
+            <targetReference>COE_Blank_Purpose_Purchase_Appraisal_Received_Blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_COE_Blank_Purpose_Purchase_Appraisal_Ordered_Blank</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.COE__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Purpose__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Purchase</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Appraisal_Ordered__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task_Notify_Buyer_Agent_Appraisal_is_Ordered</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>True, COE != Blank, Purpose = Purchase, Appraisal Ordered != Blank</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>COE_Blank_Purpose_Purchase_Appraisal_Received_Blank</name>
+        <label>COE != Blank, Purpose = Purchase, Appraisal Received != Blank</label>
+        <locationX>182</locationX>
+        <locationY>1763</locationY>
+        <defaultConnector>
+            <targetReference>LE_Issued_Blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_COE_Blank_Purpose_Purchase_Appraisal_Received_Blank</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.COE__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Purpose__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Purchase</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Appraisal_Received__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task_Notify_Client_Appraisal_is_Received</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>True, COE != Blank, Purpose = Purchase, Appraisal Received != Blank</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>LE_Issued_Blank</name>
+        <label>LE Issued != Blank</label>
+        <locationX>182</locationX>
+        <locationY>2171</locationY>
+        <defaultConnector>
+            <targetReference>CD_Issued_Blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_LE_Issued_Blank</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.LE_Issued__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task_LE_Review_Call_with_Client</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>True, LE Issued != Blank</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Purpose_Purchase_Buyers_Agent_Blank</name>
+        <label>Purpose = Purchase, Buyers Agent != Blank</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <defaultConnector>
+            <targetReference>COE_Blank_Purpose_Purchase</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_Purpose_Purchase_Buyers_Agent_Blank</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Purpose__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Purchase</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Buyers_Agent__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task_Buyer_Agent_Introduction</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>True, Purpose = Purchase, Buyers Agent != Blank</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Purpose_Purchase_Occupancy_Primary_Stage_Closed_Won</name>
+        <label>Purpose = Purchase, Occupancy = Primary, Stage = Closed (Won)</label>
+        <locationX>182</locationX>
+        <locationY>2771</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_Purpose_Purchase_Occupancy_Primary_Stage_Closed_Won</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Purpose__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Purchase</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Occupancy__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Primary</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.StageName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed Won</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Household_Mailing_Billing</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>True, Purpose = Purchase, Occupancy = Primary, Stage = Closed (Won)</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>Formula_Assign_Owner_or_LOA</name>
+        <dataType>String</dataType>
+        <expression>IF(
+  OR(
+    {!$Record.OwnerId} = &quot;005f4000000ZZuGAAW&quot;,
+    {!$Record.OwnerId} = &quot;005f4000000b5EmAAI&quot;
+  ),
+  &quot;005Pe00000AHahFIAT&quot;,
+  IF(
+    OR(
+      {!$Record.OwnerId} = &quot;005f4000004e45HAAQ&quot;,
+      {!$Record.OwnerId} = &quot;005Pe00000ALiTJIA1&quot;,
+      {!$Record.OwnerId} = &quot;005Pe000009FTEDIA4&quot;
+    ),
+    &quot;0055G000008sStAQAU&quot;,
+    {!$Record.OwnerId}
+  )
+)</expression>
+    </formulas>
+    <formulas>
+        <name>Formula_Open_Stage</name>
+        <dataType>Boolean</dataType>
+        <expression>CASE(
+    {!$Record.StageName},
+    &quot;New&quot;, 1,
+    &quot;Qualifying&quot;, 1,
+    &quot;Proposal&quot;, 1,
+    &quot;Nurturing&quot;, 1,
+    &quot;Prospect&quot;, 1,
+    &quot;Requested&quot;, 1,
+    &quot;Reviewed&quot;, 1,
+    &quot;File Started&quot;, 1,
+    &quot;Docs Requested&quot;, 1,
+    &quot;Docs Received&quot;, 1,
+    &quot;Qualified&quot;, 1,
+    &quot;Pre-approved&quot;, 1,
+    &quot;Application&quot;, 1,
+    &quot;Sent to Processing&quot;, 1,
+    &quot;Submitted&quot;, 1,
+    &quot;Approved&quot;, 1,
+    &quot;Clear to Close&quot;, 1,
+    &quot;Cleared to Close&quot;, 1,
+    &quot;Docs Out&quot;, 1,
+    &quot;Funded&quot;, 1,
+    0
+) = 1</expression>
+    </formulas>
+    <formulas>
+        <name>Formula_Today_Plus_One_Business_Day</name>
+        <dataType>Date</dataType>
+        <expression>CASE(
+  MOD(TODAY() - DATE(1985,6,24), 7),
+  5, TODAY() + 3, /* Friday → Monday */
+  6, TODAY() + 2, /* Saturday → Monday */
+  TODAY() + 1     /* All other days → next day */
+)</expression>
+    </formulas>
+    <interviewLabel>Loan - Active Loan Task Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Loan - Active Loan Task Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Task_Add_Realtors_to_SF</name>
+        <label>Create Task - Add Realtors to SF</label>
+        <locationX>50</locationX>
+        <locationY>731</locationY>
+        <connector>
+            <targetReference>Create_Task_Review_Contract_and_Update_LOS_CRM</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Add Reatlors to SF and link to loan via Submit Notes form</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Add Realtors to SF</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Buyer_Agent_Introduction</name>
+        <label>Create Task - Buyer Agent Introduction</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>COE_Blank_Purpose_Purchase</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Call buyer agent to discuss availability and outline contacts </stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Buyer Agent Introduction</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_CD_Review_Call_with_Client</name>
+        <label>Create Task - CD Review Call with Client</label>
+        <locationX>50</locationX>
+        <locationY>2579</locationY>
+        <connector>
+            <targetReference>Purpose_Purchase_Occupancy_Primary_Stage_Closed_Won</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Call client to review CD</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>CD Review Call with Client</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Congratulate_Buyer_Agent</name>
+        <label>Create Task - Congratulate Buyer Agent</label>
+        <locationX>50</locationX>
+        <locationY>1055</locationY>
+        <connector>
+            <targetReference>Create_Task_Listing_Agent_Introduction</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Set and clarify expectations, ask about listing agent communication preferences</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Congratulate Buyer Agent</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.Buyers_Agent__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Congratulate_Client</name>
+        <label>Create Task - Congratulate Client</label>
+        <locationX>50</locationX>
+        <locationY>947</locationY>
+        <connector>
+            <targetReference>Create_Task_Congratulate_Buyer_Agent</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Consider a small gift as well</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Congratulate Client</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_LE_Review_Call_with_Client</name>
+        <label>Create Task - LE Review Call with Client</label>
+        <locationX>50</locationX>
+        <locationY>2279</locationY>
+        <connector>
+            <targetReference>CD_Issued_Blank</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Call client to review LE</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>LE Review Call with Client</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Listing_Agent_Introduction</name>
+        <label>Create Task - Listing Agent Introduction</label>
+        <locationX>50</locationX>
+        <locationY>1163</locationY>
+        <connector>
+            <targetReference>COE_Blank_Purpose_Purchase_Appraisal_Ordered_Blank</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Call &amp; email Listing Agent to introduce team and offer availability</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Listing Agent Introduction</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.Sellers_Agent__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Notify_Buyer_Agent_Appraisal_is_Ordered</name>
+        <label>Create Task - Notify Buyer Agent Appraisal is Ordered</label>
+        <locationX>50</locationX>
+        <locationY>1463</locationY>
+        <connector>
+            <targetReference>Create_Task_Notify_Listing_Agent_Appraisal_is_Ordered</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Notify Buyer Agent Appraisal is Ordered</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Notify_Buyer_Agent_Appraisal_is_Received</name>
+        <label>Create Task - Notify Buyer Agent Appraisal is Received</label>
+        <locationX>50</locationX>
+        <locationY>1979</locationY>
+        <connector>
+            <targetReference>LE_Issued_Blank</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Notify Buyer Agent Appraisal is Received</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Notify_Client_Appraisal_is_Received</name>
+        <label>Create Task - Notify Client Appraisal is Received</label>
+        <locationX>50</locationX>
+        <locationY>1871</locationY>
+        <connector>
+            <targetReference>Create_Task_Notify_Buyer_Agent_Appraisal_is_Received</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Notify Client Appraisal is Received</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Notify_Listing_Agent_Appraisal_is_Ordered</name>
+        <label>Create Task - Notify Listing Agent Appraisal is Ordered</label>
+        <locationX>50</locationX>
+        <locationY>1571</locationY>
+        <connector>
+            <targetReference>COE_Blank_Purpose_Purchase_Appraisal_Received_Blank</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Notify Listing Agent Appraisal is Ordered</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Review_Contract_and_Update_LOS_CRM</name>
+        <label>Create Task - Review Contract and Update LOS/CRM</label>
+        <locationX>50</locationX>
+        <locationY>839</locationY>
+        <connector>
+            <targetReference>Create_Task_Congratulate_Client</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>Formula_Today_Plus_One_Business_Day</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Input details into LOS/CRM and review contract</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Formula_Assign_Owner_or_LOA</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Review Contract &amp; Update LOS/CRM</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordUpdates>
+        <name>Update_Contacts_Household</name>
+        <label>Update Contacts (Household)</label>
+        <locationX>50</locationX>
+        <locationY>2987</locationY>
+        <inputAssignments>
+            <field>MailingCity</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_City__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MailingPostalCode</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_Zip__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MailingState</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_State__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MailingStreet</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_Street__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Present_Address_City__c</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_City__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Present_Address_State__c</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_State__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Present_Address_Zip__c</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_Zip__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Present_Address__c</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_Street__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Account.Contacts</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Household_Mailing_Billing</name>
+        <label>Update Household - Mailing (Billing)</label>
+        <locationX>50</locationX>
+        <locationY>2879</locationY>
+        <connector>
+            <targetReference>Update_Contacts_Household</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>BillingCity</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_City__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>BillingPostalCode</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_Zip__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>BillingState</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_State__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>BillingStreet</field>
+            <value>
+                <elementReference>$Record.Subject_Property_Name__r.Property_Street__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Account</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Purpose_Purchase_Buyers_Agent_Blank</targetReference>
+        </connector>
+        <object>Opportunity</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

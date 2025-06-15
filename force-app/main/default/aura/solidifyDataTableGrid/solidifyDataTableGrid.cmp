@@ -1,0 +1,35 @@
+<aura:component controller='solidifyDataTableController'>
+    <!-- This component creates a datatable grid based on a fieldset and criteria 
+		passed in as an attribute.  It uses the Apex solidifyDataTableController 
+		complete the SOQL query and parse results into column names and fields.-->
+
+    <aura:attribute name='mydata' type='Object'/>
+    <aura:attribute name='mycolumns' type='List'/>
+    <aura:attribute name='totalAmount' type='Decimal'/>
+    <aura:attribute name='recordCount' type='Integer'/>
+    
+    <aura:method name='getDataTable'>
+    	<aura:attribute name='objectName' type='string'/>
+    	<aura:attribute name='fieldSetName' type='string'/>
+        <aura:attribute name='amountField' type = 'string'/>
+    	<aura:attribute name='criteriaString' type='string'/>
+    </aura:method>
+    
+    <aura:method name='resetDataTable'></aura:method>
+    
+    
+   	<lightning:datatable data='{! v.mydata }' 
+        columns='{! v.mycolumns }' 
+        keyField='Id'/>  
+    <div class = 'slds-box slds-grid'>
+        <div class = "slds-col slds-text-heading_small">
+            <label>Total Amount:</label>
+    	<lightning:formattedNumber class='c_totals' value="{! v.totalAmount }" style="currency" currencyCode="USD"/>
+        </div>
+            <div class = "slds-col slds-text-heading_small">
+            <label>Record Count:</label>
+            <lightning:formattedNumber class='c_totals' value="{! v.recordCount }"/>
+            </div>
+    </div>
+    
+</aura:component>

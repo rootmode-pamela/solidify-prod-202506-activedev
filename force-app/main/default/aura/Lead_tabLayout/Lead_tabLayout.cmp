@@ -1,0 +1,142 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<lightning:tabset variant="vertical">
+        <div class="shaded">
+    <lightning:tab id="BorrowerInfo" label="Borrower Information">
+        <lightning:layout class="slds-wrap" multipleRows="true">
+            <lightning:layoutItem size="6">
+                <div class="slds-section slds-is-open slds-theme_shade">
+                    <h3 class="slds-section__title">
+                        <div class="slds-section slds-is-open">
+                            <h3 class="slds-section__title">
+                                <lightning:button class="slds-theme_base slds-section__title-action" iconPosition="left" variant="base" label="Borrower Information"></lightning:button>
+                            </h3>
+                            <div class="slds-section__content">
+                                <div class="slds-form slds-form_stacked">
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                       <lightning:inputField aura:id="fname" fieldName = "FirstName"  onchange="{!c.highlightChangedField}" />
+                                        <lightning:inputField aura:id="fname" fieldName = "FirstName"  onchange="{!c.highlightChangedField}" />
+                                    </lightning:layout>
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:select label="Select Label" variant="standard">
+                                            <option value="">Please select</option>
+                                            <option value="Option One">Option One</option>
+                                            <option value="Option Two">Option Two</option>
+                                            <option value="Option Three">Option Three</option>
+                                        </lightning:select>
+                                        <lightning:input class="slds-p-right_none slds-p-left_none" label="Input label" placeholder="Placeholder Text" type="text" variant="standard"></lightning:input>
+                                    </lightning:layout>
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:textarea label="Input label" placeholder="Placeholder Text" variant="standard"></lightning:textarea>
+                                        <lightning:input type="checkbox" label="Checkbox Label"></lightning:input>
+                                    </lightning:layout>
+                                </div>
+                            </div>
+                        </div>
+                    </h3>
+                    <div class="slds-section__content"></div>
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title">
+                        <div class="slds-section slds-is-open">
+                            <h3 class="slds-section__title">
+                                <lightning:button class="slds-theme_base slds-section__title-action" iconPosition="left" variant="base" label="Section Title"></lightning:button>
+                            </h3>
+                            <div class="slds-section__content">
+                                <div class="slds-form slds-form_stacked">
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:input class="slds-p-right_none slds-p-left_none" label="Input label" placeholder="Placeholder Text" type="text" variant="standard"></lightning:input>
+                                        <lightning:combobox label="Search" options="" placeholder="Search Salesforce" dropdownAlignment="left" variant="standard"></lightning:combobox>
+                                    </lightning:layout>
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:select label="Select Label" variant="standard">
+                                            <option value="">Please select</option>
+                                            <option value="Option One">Option One</option>
+                                            <option value="Option Two">Option Two</option>
+                                            <option value="Option Three">Option Three</option>
+                                        </lightning:select>
+                                        <lightning:input class="slds-p-right_none slds-p-left_none" label="Input label" placeholder="Placeholder Text" type="text" variant="standard"></lightning:input>
+                                    </lightning:layout>
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:textarea label="Input label" placeholder="Placeholder Text" variant="standard"></lightning:textarea>
+                                        <lightning:input type="checkbox" label="Checkbox Label"></lightning:input>
+                                    </lightning:layout>
+                                </div>
+                            </div>
+                        </div>
+                    </h3>
+                    <div class="slds-section__content"></div>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="6">
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title">
+                        <div class="slds-section slds-is-open">
+                            <h3 class="slds-section__title">
+                                <lightning:button class="slds-theme_base slds-section__title-action" iconPosition="left" variant="base" label="Section Title"></lightning:button>
+                            </h3>
+                            <div class="slds-section__content">
+                                <div class="slds-form slds-form_stacked">
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:input class="slds-p-right_none slds-p-left_none" label="Input label" placeholder="Placeholder Text" type="text" variant="standard"></lightning:input>
+                                        <lightning:combobox label="Search" options="" placeholder="Search Salesforce" dropdownAlignment="left" variant="standard"></lightning:combobox>
+                                    </lightning:layout>
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:select label="Select Label" variant="standard">
+                                            <option value="">Please select</option>
+                                            <option value="Option One">Option One</option>
+                                            <option value="Option Two">Option Two</option>
+                                            <option value="Option Three">Option Three</option>
+                                        </lightning:select>
+                                        <lightning:input class="slds-p-right_none slds-p-left_none" label="Input label" placeholder="Placeholder Text" type="text" variant="standard"></lightning:input>
+                                    </lightning:layout>
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:textarea label="Input label" placeholder="Placeholder Text" variant="standard"></lightning:textarea>
+                                        <lightning:input type="checkbox" label="Checkbox Label"></lightning:input>
+                                    </lightning:layout>
+                                </div>
+                            </div>
+                        </div>
+                    </h3>
+                    <div class="slds-section__content"></div>
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title">
+                        <div class="slds-section slds-is-open">
+                            <h3 class="slds-section__title">
+                                <lightning:button class="slds-theme_base slds-section__title-action" iconPosition="left" variant="base" label="Section Title"></lightning:button>
+                            </h3>
+                            <div class="slds-section__content">
+                                <div class="slds-form slds-form_stacked">
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:input class="slds-p-right_none slds-p-left_none" label="Input label" placeholder="Placeholder Text" type="text" variant="standard"></lightning:input>
+                                        <lightning:combobox label="Search" options="" placeholder="Search Salesforce" dropdownAlignment="left" variant="standard"></lightning:combobox>
+                                    </lightning:layout>
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:select label="Select Label" variant="standard">
+                                            <option value="">Please select</option>
+                                            <option value="Option One">Option One</option>
+                                            <option value="Option Two">Option Two</option>
+                                            <option value="Option Three">Option Three</option>
+                                        </lightning:select>
+                                        <lightning:input class="slds-p-right_none slds-p-left_none" label="Input label" placeholder="Placeholder Text" type="text" variant="standard"></lightning:input>
+                                    </lightning:layout>
+                                    <lightning:layout class="slds-m-bottom_x-small slds-wrap" multipleRows="true">
+                                        <lightning:textarea label="Input label" placeholder="Placeholder Text" variant="standard"></lightning:textarea>
+                                        <lightning:input type="checkbox" label="Checkbox Label"></lightning:input>
+                                    </lightning:layout>
+                                </div>
+                            </div>
+                        </div>
+                    </h3>
+                    <div class="slds-section__content"></div>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:tab>
+    <lightning:tab id="-MW4ZvFQAIlx3JD6Bq1C" label="Loan Details"></lightning:tab>
+    <lightning:tab id="-MW4Z_h76zcMMieXwUhD" label="Property Information"></lightning:tab>
+    <lightning:tab id="-MW4ZzNxwMl-MfolKyle" label="Source"></lightning:tab>
+    <lightning:tab id="-MW4_FjwwHPTx7m1slvg" label="All"></lightning:tab>
+            </div>
+</lightning:tabset>
+</aura:component>

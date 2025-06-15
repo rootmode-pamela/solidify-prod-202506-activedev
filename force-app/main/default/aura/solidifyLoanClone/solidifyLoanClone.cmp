@@ -1,0 +1,29 @@
+<aura:component implements='force:hasRecordId,force:lightningQuickAction,lightning:availableForFlowScreens' access='global'>
+    <aura:attribute name="recordId" type="String"/>
+   	<aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+
+    
+    <div aura:id="thecontainer" class="thecontainer" id="thecontainer">
+        <div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open slds-modal--large" >
+          <div class="slds-modal__container">
+            <div class="slds-modal__header">
+              <h2 id="header43" class="slds-text-heading--medium">New Loan Details</h2>
+            </div>
+            <div class="slds-modal__content slds-p-top--x-large slds-p-around--medium" aura:id="modalbody" id="modalbody">
+
+		    <lightning:flow aura:id="loanClone" onstatuschange="{!c.handleStatusChange}" />
+             </div><!-- modal -->
+            
+              <div class="slds-modal__footer">
+              	<div class="slds-button-group" role="group">
+                  <lightning:button label="Cancel" variant="neutral" onclick="{!c.doCancel}"/>
+                </div>
+              </div>
+              
+          </div>
+        </div>
+    	<div class="slds-backdrop slds-backdrop--open"></div>
+	</div>
+    
+</aura:component>

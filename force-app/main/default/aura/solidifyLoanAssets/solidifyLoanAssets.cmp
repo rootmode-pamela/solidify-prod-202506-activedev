@@ -1,0 +1,238 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+	<aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="Opportunity" type="Opportunity"
+               default="{ 'sobjectType': 'Opportunity' }"/>
+    <force:recordData aura:id="loanRecord"
+                  recordId="{!v.recordId}"
+                  fields="Id, Account1_Name__c, Account1_Number__c, Account1_Type__c, Account1_Amount__c, Account2_Name__c, 
+                          Account2_Number__c, Account2_Type__c, Account2_Amount__c,Account3_Name__c, Account3_Number__c, 
+                          Account3_Type__c, Account3_Amount__c,Account4_Name__c, Account4_Number__c,Account4_Type__c, 
+                          Account4_Amount__c,Stocks1_Name__c, Stocks1_Shares__c, Stocks1_Amount__c,Stocks2_Name__c, Stocks2_Shares__c, 
+                          Stocks2_Amount__c,RetFund_Vested_Amount__c, Subtotal_Liquid_Assets__c, Total_Assets__c, Cash_Deposit_Desc__c, 
+                          Cash_Deposit_Amount__c"
+                  targetFields="{!v.Opportunity}"
+                      recordUpdated="{!c.recordUpdate}"
+                  />
+    
+<lightning:recordViewForm recordId="{!v.recordId}" objectAPIname="Opportunity">    
+<div class="slds-grid slds-gutters">
+  <div class="slds-col slds-size_1-of-2">  
+    <div class="slds-section slds-is-open">
+  		<h3 class="slds-section__title slds-theme_shade">
+    		<span class="slds-truncate slds-p-horizontal_small" title="Accounts">Accounts</span>
+  		</h3>
+        
+        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+			
+    		<table class="slds-table slds-table_bordered slds-table-striped slds-table_cell-buffer">
+  			<thead>
+    			<tr class="slds-text-title_caps">
+      				<th scope="col">
+                    	<div class="slds-truncate" title="Name">Name</div>
+      				</th>
+                	<th scope="col">
+        				<div class="slds-truncate" title="Type">Type</div>
+      				</th>
+                	<th scope="col">
+        				<div class="slds-truncate" title="Account">Account #</div>
+      				</th>
+                	<th scope="col">
+        				<div class="slds-truncate slds-text-align--right" title="Amount">Amount</div>
+      				</th>                
+            	</tr>
+         	</thead> 
+         	<tbody>
+    			<tr>
+      				<th scope="row" data-label="Name">
+        				<div class="slds-truncate" title="Name Account 1"><lightning:outputField fieldName="Account1_Name__c" variant="label-hidden"/> </div>
+      				</th> 
+      				<td data-label="Type">
+        				<div class="slds-truncate" title="Type Account 1"> <lightning:outputField fieldName="Account1_Type__c" variant="label-hidden"/> </div>
+      				</td>
+      				<td data-label="Account">
+        				<div class="slds-truncate" title="Number Account 1"> <lightning:outputField fieldName="Account1_Number__c" variant="label-hidden"/> </div>
+      				</td>
+        	        <td data-label="Amount">
+        	            <div class="slds-truncate slds-text-align--right" title="Amount Account 2"><lightning:outputField fieldName="Account1_Amount__c" variant="label-hidden"/></div>
+      				</td>
+        	     </tr>
+        		 <tr>
+      				<th scope="row" data-label="Name">
+        				<div class="slds-truncate" title="Name Account 2"><lightning:outputField fieldName="Account2_Name__c" variant="label-hidden"/> </div>
+      				</th> 
+      				<td data-label="Type">
+        				<div class="slds-truncate" title="Type Account 2"> <lightning:outputField fieldName="Account2_Type__c" variant="label-hidden"/> </div>
+      				</td>
+      				<td data-label="Account">
+        				<div class="slds-truncate" title="Number Account 2"> <lightning:outputField fieldName="Account2_Number__c" variant="label-hidden"/> </div>
+      				</td>
+                	<td data-label="Amount">
+               		     <div class="slds-truncate slds-text-align--right" title="Amount Account 2"><lightning:outputField fieldName="Account2_Amount__c" variant="label-hidden"/></div>
+      				</td>
+            	 </tr>
+             	<tr>
+      				<th scope="row" data-label="Name">
+        				<div class="slds-truncate" title="Name Account 3"><lightning:outputField fieldName="Account3_Name__c" variant="label-hidden"/> </div>
+      				</th> 
+      				<td data-label="Type">
+        				<div class="slds-truncate" title="Type Account 3"> <lightning:outputField fieldName="Account3_Type__c" variant="label-hidden"/> </div>
+      				</td>
+      				<td data-label="Account">
+        				<div class="slds-truncate" title="Number Account 3"> <lightning:outputField fieldName="Account3_Number__c" variant="label-hidden"/> </div>
+      				</td>
+            	    <td data-label="Amount">
+            	        <div class="slds-truncate slds-text-align--right" title="Amount Account 3"><lightning:outputField fieldName="Account3_Amount__c" variant="label-hidden"/></div>
+      				</td>
+            	 </tr>
+             	<tr>
+      				<th scope="row" data-label="Name">
+        				<div class="slds-truncate" title="Name Account 3"><lightning:outputField fieldName="Account4_Name__c" variant="label-hidden"/> </div>
+      				</th> 
+      				<td data-label="Type">
+        				<div class="slds-truncate" title="Type Account 3"> <lightning:outputField fieldName="Account4_Type__c" variant="label-hidden"/> </div>
+      				</td>
+      				<td data-label="Account">
+        				<div class="slds-truncate" title="Number Account 3"> <lightning:outputField fieldName="Account4_Number__c" variant="label-hidden"/> </div>
+      				</td>
+            	    <td data-label="Amount">
+            	        <div class="slds-truncate slds-text-align--right" title="Amount Account 3"><lightning:outputField fieldName="Account4_Amount__c" variant="label-hidden"/></div>
+      				</td>
+            	 </tr>
+            	</tbody>
+      
+    		</table>
+    		
+        </div>
+    </div>
+  </div>
+    
+	<div class="slds-col slds-size_1-of-2">   
+      <div class="slds-section slds-is-open">
+  		<h3 class="slds-section__title slds-theme_shade">
+    		<span class="slds-truncate slds-p-horizontal_small" title="Cash">Cash Deposit</span>
+  		</h3>
+        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">            
+			
+    		<table class="slds-table slds-table_bordered slds-table-striped slds-table_cell-buffer">
+  		<thead>
+    		<tr class="slds-text-title_caps">
+      			<th scope="col">
+                    <div class="slds-truncate" title="Name">Description</div>
+      			</th>
+                <th scope="col">
+        			<div class="slds-truncate slds-text-align--right" title="Amount">Amount</div>
+      			</th>              
+            </tr>
+         </thead> 
+         <tbody>
+             <tr>
+             <th scope="row" data-label="Name">
+        			<div class="slds-truncate" title="Cash Deposit Description"><lightning:outputField fieldName="Cash_Deposit_Desc__c" variant="label-hidden"/> </div>
+      			</th> 
+      			<td data-label="Amount">
+        			<div class="slds-truncate slds-text0align--right" title="Cash Deposit Amount"> <lightning:outputField fieldName="Cash_Deposit_Amount__c" variant="label-hidden"/> </div>
+      			</td>            
+             </tr>
+                </tbody>
+                </table>
+           
+          </div>
+        </div>
+    
+        <div class="slds-section slds-is-open">
+  		<h3 class="slds-section__title slds-theme_shade">
+    		<span class="slds-truncate slds-p-horizontal_small" title="Investments">Investments</span>
+  		</h3>
+        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">            
+			
+    		<table class="slds-table slds-table_bordered slds-table-striped slds-table_cell-buffer">
+  		<thead>
+    		<tr class="slds-text-title_caps">
+      			<th scope="col">
+                    <div class="slds-truncate" title="Name">Name</div>
+      			</th>
+                <th scope="col">
+        			<div class="slds-truncate" title="Shares">Shares</div>
+      			</th>
+                <th scope="col">
+        			<div class="slds-truncate slds-text-align--right" title="Amount">Amount</div>
+      			</th>                
+            </tr>
+         </thead> 
+         <tbody>
+    		<tr>
+      			<th scope="row" data-label="Name">
+        			<div class="slds-truncate" title="Name Account 1"><lightning:outputField fieldName="Stocks1_Name__c" variant="label-hidden"/> </div>
+      			</th> 
+      			<td data-label="Shares">
+        			<div class="slds-truncate" title="Shares Account 1"> <lightning:outputField fieldName="Stocks1_Shares__c" variant="label-hidden"/> </div>
+      			</td>
+                <td data-label="Amount">
+                    <div class="slds-truncate slds-text-align--right" title="Amount Shares 1"><lightning:outputField fieldName="Stocks1_Amount__c" variant="label-hidden"/></div>
+      			</td>
+             </tr>
+    		<tr>
+      			<th scope="row" data-label="Name">
+        			<div class="slds-truncate" title="Name Account 1"><lightning:outputField fieldName="Stocks2_Name__c" variant="label-hidden"/> </div>
+      			</th> 
+      			<td data-label="Shares">
+        			<div class="slds-truncate" title="Shares Account 1"> <lightning:outputField fieldName="Stocks2_Shares__c" variant="label-hidden"/> </div>
+      			</td>
+                <td data-label="Amount">
+                    <div class="slds-truncate slds-text-align--right" title="Amount Shares 1"><lightning:outputField fieldName="Stocks2_Amount__c" variant="label-hidden"/></div>
+      			</td>
+             </tr>
+      
+              	
+                  
+      			<tr> 
+                    <th colspan="2" scope="row" >
+        			<div class="slds-truncate" title="RetAccounts">Vested interest in retirement accounts</div>
+      			</th> 
+      
+                <td>
+                    <div class="slds-truncate slds-text-align--right" title="Ret"><lightning:outputField fieldName="RetFund_Vested_Amount__c" variant="label-hidden"/></div>
+      			</td>
+                </tr>
+               </tbody>
+    </table>
+        
+        </div>
+      </div>
+    </div> 
+    </div>
+    
+    <div class="slds-section slds-is-open">
+  		<h3 class="slds-section__title slds-theme_shade">
+    		<span class="slds-truncate slds-p-horizontal_small" title="Other Assets">Total Assets</span>
+  		</h3>
+        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+        
+		
+    <table class="slds-table slds-table_bordered slds-table-striped slds-table_cell-buffer">
+         <tbody>
+             <tr>
+      			<th scope="row" >
+        			<div class="slds-truncate" title="Total Liquid">Subtotal Liquid Assets </div>
+      			</th> 
+
+                <td data-label="Amount">
+                    <div class="slds-truncate slds-text-align--right" title="Amount Shares 1"><lightning:outputField fieldName="Subtotal_Liquid_Assets__c" variant="label-hidden"/></div>
+      			</td>
+             </tr>
+             <tr>
+      			<th scope="row" data-label="Name">
+        			<div class="slds-truncate" title="Total Assets">Total Assets </div>
+      			</th> 
+                <td data-label="Amount">
+                    <div class="slds-truncate slds-text-align--right" title="Amount Shares 2"><lightning:outputField fieldName="Total_Assets__c" variant="label-hidden"/></div>
+      			</td>
+             </tr>
+         </tbody>
+    </table>
+
+    </div>
+    </div>
+    </lightning:recordViewForm>	
+    
+</aura:component>

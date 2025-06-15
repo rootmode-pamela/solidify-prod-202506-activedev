@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Schedule_Balance__c</fullName>
+    <description>This field will calculate the projected remaining balance on a loan based on the loan amount, close date, interest rate, and loan program.</description>
+    <formula>If( OR(IsWon, IsPickVal(StageName, &apos;Closed Elsewhere&apos;)), Loan_Amount__c+((Loan_Amount__c- Payment_Amount__c *12/  Interest_Rate_SF__c  )*EXP(( 
+
+IF(ISBLANK(First_Payment__c), 
+(YEAR(TODAY())-YEAR(CloseDate))*12+MONTH(TODAY())-MONTH(CloseDate), 
+(YEAR(TODAY())-YEAR(First_Payment__c))*12+MONTH(TODAY())-MONTH(First_Payment__c)+1) 
+
+)*LN(1+Interest_Rate_SF__c/12))+Payment_Amount__c*12/Interest_Rate_SF__c )-(( Loan_Amount__c-Payment_Amount__c*12/Interest_Rate_SF__c)*EXP((1-1)*LN(1+Interest_Rate_SF__c/12))+Payment_Amount__c*12/Interest_Rate_SF__c ), null)</formula>
+    <label>Scheduled Balance</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,27 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-10-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <lightning-navigation data-ersatz-aura-id="navService"></lightning-navigation>
+  <div data-ersatz-aura-id="recordModal" role="dialog" tabindex="-1" aria-labelledby="header43"
+    class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container">
+      <div class="slds-modal__header">
+        <h2 class="slds-text-heading--medium">Proposal Type</h2>
+      </div>
+      <div class="slds-modal__content slds-p-around--medium slds-grid slds-wrap ">
+        <lightning-button variant="brand-outline" label="Refi Analysis" onclick={gotorefi}></lightning-button>
+        <lightning-button variant="brand-outline" label="Rate Analysis" onclick={gotoratenew}></lightning-button>
+        <lightning-button variant="brand-outline" label="Scenario Analysis" onclick={gotoscenario}></lightning-button>
+      </div>
+      <div class="slds-modal__footer">
+        <lightning-button variant="neutral" label="Cancel" onclick={canceldialog}></lightning-button>
+      </div>
+    </div>
+  </div>
+  <div data-ersatz-aura-id="overlay" class="slds-backdrop slds-backdrop_open"></div>
+</template>

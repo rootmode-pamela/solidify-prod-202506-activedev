@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Future_Activities_Check__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This checkbox will be used to determine if a task should only be created if no future activities exist.</description>
+    <inlineHelpText>Checked = Task will only be created if no future activities are present</inlineHelpText>
+    <label>Future Activities Check</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

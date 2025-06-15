@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Converted_Status_Leads_Converted</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  NOT(IsConverted),
+  ISPICKVAL( Status, &apos;Active Loan&apos;)
+)</errorConditionFormula>
+    <errorMessage>Please use the Convert button to change Status to Active Loan.</errorMessage>
+</ValidationRule>

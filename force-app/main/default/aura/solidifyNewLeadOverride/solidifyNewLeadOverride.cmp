@@ -1,0 +1,102 @@
+<aura:component implements="lightning:actionOverride,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="CustomNewContactCont">
+    <aura:attribute name="newLead" type = "Lead"/>
+    <aura:attribute name="statusPickValues" type= "Object"/>
+    <aura:attribute name="leadSourcePickValues" type= "Object"/>
+    <aura:attribute name="purposePickValues" type= "Object"/>
+
+    <aura:attribute access="private" type="List" name="selectionReferredBy" default="[]"/>
+
+    <aura:attribute access="private" type="List" name="selectionUser" default="[]"/>
+    <aura:attribute access="private" type="List" name="errors" default="[]"/>
+    <aura:attribute access="private" type="Boolean" name="isMultiEntry" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <div class="slds-card__body_inner">
+    <force:recordData aura:id="newLeadForm"
+                          recordId = "{!v.recordId}"
+                          targetFields = "{!v.newLead}"
+                          fields="FirstName,LastName,CoBorrower_FirstName__c,CoBorrower_LastName__c,Status,LeadSource,Referred_By__c,Purpose__c"
+                          mode="EDIT"
+                          />
+
+        <lightning:messages />
+        <lightning:navigation aura:id="nav"/>
+        <div aura:id="editDialog" role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+           	<div class="slds-modal__header">
+            	<h2 class="slds-text-heading--medium">New Lead</h2>
+            </div>
+                <div class="slds-modal__content slds-p-around--medium slds-grid slds-wrap">
+        			<lightning:input aura:id="fName" name="FirstName" label="First Name" class="slds-size--1-of-2 slds-p-horizontal_x-small" />
+                    <lightning:input aura:id="lName" name="LastName" label="Last Name" class="slds-size--1-of-2 slds-p-horizontal_x-small" />
+					<lightning:input aura:id="coFName" name="Bo_Borrower_FirstName" label="CoBorrower First Name" class="slds-size--1-of-2 slds-p-horizontal_x-small" />
+                    <lightning:input aura:id="coLName" name="Co_Borrower_LastName__c" label="CoBorrower Last Name" class="slds-size--1-of-2 slds-p-horizontal_x-small" />
+                    
+                    <c:solidifyPicklistValues sObjectName="Lead" fieldName="Status" picklistValues="{!v.statusPickValues}" />
+                    
+                    <div class="slds-size--1-of-2 slds-p-horizontal_x-small">
+                        <lightning:select aura:id="leadStatus" name="leadStatus" label="Status">
+                            <aura:iteration items="{!v.statusPickValues}" var="item"> 
+                                <aura:if isTrue="{!v.newLead.Status__c == item }"> 
+                                    <option value="{!item}" selected="selected">{!item}</option> 
+                                    <aura:set attribute="else"> 
+                                        <option value="{!item}">{!item}</option> 
+                                    </aura:set> 
+                                </aura:if> 
+                            </aura:iteration> 
+                        
+                        </lightning:select>
+                    </div>
+                    
+                    <c:solidifyPicklistValues sObjectName="Lead" fieldName="LeadSource" picklistValues="{!v.leadSourcePickValues}" />
+                    <div class="slds-size--1-of-2 slds-p-horizontal_x-small">
+                        <lightning:select aura:id="leadSource" name="leadSource" label="Lead Source">
+                            <option value="" selected="selected"></option> 
+                            <aura:iteration items="{!v.leadSourcePickValues}" var="item"> 
+                                <aura:if isTrue="{!v.newLead.LeadSource == item }"> 
+                                    <option value="{!item}" selected="selected">{!item}</option> 
+                                    <aura:set attribute="else"> 
+                                        <option value="{!item}">{!item}</option> 
+                                    </aura:set> 
+                                </aura:if> 
+                            </aura:iteration> 
+                        </lightning:select>
+                    </div>
+                    
+                    <c:solidifyPicklistValues sObjectName="Lead" fieldName="Purpose__c" picklistValues="{!v.purposePickValues}" />
+                    <div class="slds-size--1-of-2 slds-p-horizontal_x-small">
+                        <lightning:select aura:id="purpose" name="purpose" label="Purpose">
+                            <option value="" selected="selected"></option> 
+                            <aura:iteration items="{!v.purposePickValues}" var="item"> 
+                                <aura:if isTrue="{!v.newLead.Purpose__c == item }"> 
+                                    <option value="{!item}" selected="selected">{!item}</option> 
+                                    <aura:set attribute="else"> 
+                                        <option value="{!item}">{!item}</option> 
+                                    </aura:set> 
+                                </aura:if> 
+                            </aura:iteration> 
+                        </lightning:select>
+                    </div>
+
+                    <div class="slds-size_1-of-2 slds-p-horizontal_x-small">
+                        <p> <ui:outputText class="slds-form-element__label" value="Referred By"/></p>
+                        <c:Lookup selection="{!v.selectionReferredBy}" onSearch="{!c.lookupSearchContact}" onSelection="{!c.clearErrorsOnChangeReferredBy}" errors="{!v.errors}" placeholder="Search Referred By.." isMultiEntry="{!v.isMultiEntry}"/>
+                    </div>
+
+                    <div class="slds-size--1-of-1 slds-p-horizontal_x-small">
+                        <p><ui:outputText class="slds-form-element__label" value="Owner"/></p>
+                        <c:Lookup selection="{!v.selectionUser}" onSearch="{!c.lookupSearchUser}" onSelection="{!c.clearErrorsOnChangeUser}" errors="{!v.errors}" placeholder="Search User.." isMultiEntry="{!v.isMultiEntry}"/>
+                    </div>
+            </div>
+
+           
+                  <div class="slds-modal__footer">      
+  				<lightning:button variant="neutral" label="Cancel" onclick="{!c.handleCancel}"/>
+                <lightning:button variant="brand" label="Submit" onclick="{!c.handleSubmit}" />
+        </div>
+                        </div>
+                    </div> 
+            <div aura:id="overlay" class="slds-backdrop slds-backdrop--open"></div>
+    </div>
+</aura:component>

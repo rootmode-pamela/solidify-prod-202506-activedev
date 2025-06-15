@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X3_Automated</fullName>
+    <columns>FULL_NAME</columns>
+    <columns>LEAD.LEAD_SOURCE</columns>
+    <columns>RCDisposition__c</columns>
+    <columns>LEAD.CREATED_DATE</columns>
+    <columns>PrimaryGoal__c</columns>
+    <columns>Purpose__c</columns>
+    <columns>Subject_Property_State__c</columns>
+    <columns>LEAD.EMAIL</columns>
+    <columns>LEAD.MOBILE_PHONE</columns>
+    <columns>Self_Reported_Credit__c</columns>
+    <columns>PartnerLeadId__c</columns>
+    <columns>Lead_Gen_Id__c</columns>
+    <columns>Ad_Description__c</columns>
+    <columns>LEAD.LAST_ACTIVITY</columns>
+    <columns>pi__score__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>LEAD.STATUS</field>
+        <operation>equals</operation>
+        <value>Automation</value>
+    </filters>
+    <label>3. Automation</label>
+    <sharedTo>
+        <group>Team_Broderick</group>
+    </sharedTo>
+</ListView>

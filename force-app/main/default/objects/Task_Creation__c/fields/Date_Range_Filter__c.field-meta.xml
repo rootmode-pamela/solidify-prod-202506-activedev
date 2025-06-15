@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Date_Range_Filter__c</fullName>
+    <description>This field will hold the date range filter for the field in the Field API Name text box.  0 is Today.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Number of days from today (0 means today, 5 means 5 days from today, -5 means 5 days ago, etc).</inlineHelpText>
+    <label>Date Range Filter</label>
+    <precision>18</precision>
+    <required>true</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

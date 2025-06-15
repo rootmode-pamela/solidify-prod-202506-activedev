@@ -1,0 +1,32 @@
+.THIS h1.header {
+    font-size: 14px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.THIS p.payment {
+    
+}
+
+.THIS .parent .slds-form-element .slds-form-element__control .slds-form-element__static {
+ 
+    font-weight: bold;
+    font-size: 13.5px;
+}
+
+.THIS div.benefitTitle{
+    font-size: 14px;
+     text-decoration: underline;
+     
+}
+
+.THIS h1.sectionTitle{
+    font-size: 14px;
+}
+
+.THIS .parent2 .slds-form-element .slds-form-element__control .slds-form-element__static {
+    font-size: 8px;
+}
+.THIS div.benefitBox{
+    height: 300px;
+}

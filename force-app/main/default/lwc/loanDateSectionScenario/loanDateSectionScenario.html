@@ -1,0 +1,99 @@
+<template>
+    <lightning-messages></lightning-messages>
+    <div class="slds-grid slds-wrap" style="background:var(--lwc-colorBackground,rgb(243, 242, 242))">
+        <div class="slds-col slds-size_1-of-1 slds-p-around_x-small">
+            <div style="background-color:white; border: 1px solid rgba(0,0,0,.16); border-radius: .25rem; box-sizing: border-box; padding: .5rem;">
+
+                <template if:true={isOldVariant}>
+                    <div class="slds-grid slds-wrap slds-p-around_x-small">
+                        <div class="slds-col slds-size_2-of-4">
+                            <lightning-record-form
+                                    record-id={recordId}
+                                    object-api-name={objectApiName}
+                                    fields={fields}
+                                    columns="2"
+                                    mode="view"
+                                    onsubmit={handleSubmit}
+                                    onsuccess={handleSuccess}>
+                            </lightning-record-form>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+                            <c-new-proposal-button recordid={recordId}
+                                                   objectapiname={objectApiName}></c-new-proposal-button>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-button class="slds-m-around_small" variant="brand" name="Value Search"
+                                              label="Value Search" onclick={handleValueSearch}></lightning-button>
+                        </div>
+
+                    </div>
+                </template>
+
+                <template if:false={isOldVariant}>
+                    <div if:true={showForm}>
+                        <lightning-record-form
+                                record-id={recordId}
+                                object-api-name={objectApiName}
+                                fields={fields}
+                                columns="2"
+                                mode="view"
+                                onsubmit={handleSubmit}
+                                onsuccess={handleSuccess}>
+                        </lightning-record-form>
+                    </div>
+                    <template if:true={showFlowButton}>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_1-of-9">
+                                <c-launch-flow flow-name="Loan_Setup" variables={flowVariables} button-title="Setup"
+                                    modal-title="Setup"></c-launch-flow>
+                            </div>
+                            <div class="slds-col slds-size_2-of-9">
+                                <c-launch-flow flow-name="New_Loan_Alert" variables={flowVariables} button-title="Share Summary"
+                                    modal-title="Send Submit Notes"></c-launch-flow>
+                            </div>
+                           
+                            <div class="slds-col slds-size_2-of-9">
+                                <lightning-button variant="brand" class="" name="Blended Rate" label="Blended Rate"
+                                    onclick={openBlendedRateModal}>
+                                </lightning-button>
+                            </div>
+                            <div class="slds-col slds-size_2-of-9">
+                                <lightning-button variant="brand" class="" name="Why Wait?" label="Why Wait?"
+                                    onclick={openCalculator}></lightning-button>
+                            </div>
+                            <div class="slds-col slds-size_1-of-9">
+                                <button class="slds-button slds-button_success qualifying-button "
+                                    onclick={openQualifyingModal}>Qualifying</button>
+                            </div>
+                            <div class="slds-col slds-size_1-of-9">
+                                <c-launch-flow flow-name="Solidify_Mortgage_Calculator" button-title="Calculator"
+                                    modal-title="Solidify Mortgage Calculator"></c-launch-flow>
+                            </div>
+                            <div class="slds-col slds-size_2-of-9">
+                                <c-new-proposal-button recordid={recordId} objectapiname={objectApiName}></c-new-proposal-button>
+                            </div>
+                            <div class="slds-col slds-size_1-of-9">
+                                <lightning-button icon-name="utility:search" variant="brand" class="" name="Research" label="Research"
+                                    onclick={handleResearchButton}>
+                                </lightning-button>
+                            </div>
+                            <lightning-button variant="brand" class="slds-m-left_small slds-hide" name="Submit Note" label="Submit Note"
+                                    onclick={handleSubmitNote}>
+                            </lightning-button>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </div>
+    <template if:true={isOpenQualifyingModal}>
+        <c-qualifying-modal record-id={recordId} onclosemodal={closeQualifyingModal} onsuccess={handleSuccessQualifying}></c-qualifying-modal>
+    </template>
+    <template if:true={isOpenBlendedRateModal}>
+        <c-blended-rate-modal record-id={recordId} onclosemodal={closeBlendedRateModal} ></c-blended-rate-modal>
+    </template>
+
+    <template if:true={isCrudeCalculatorOpen}>
+        <c-crude-calculator onresult={handleCrudeCalculator} onclosemodal={closeCrudeCalculatoeModal}></c-crude-calculator>
+    </template>
+</template>

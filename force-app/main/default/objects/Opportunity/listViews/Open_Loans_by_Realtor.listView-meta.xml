@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Open_Loans_by_Realtor</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+    <columns>Household_Name__c</columns>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>Subject_Prop_Street__c</columns>
+    <columns>Subject_Prop_St__c</columns>
+    <columns>OPPORTUNITY.LEAD_SOURCE</columns>
+    <columns>Referred_By__c</columns>
+    <columns>Buyers_Agent__c</columns>
+    <columns>COE__c</columns>
+    <columns>Loan_Processor__c</columns>
+    <columns>Loan_Program__c</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>Lender__c</columns>
+    <columns>Processor_Note__c</columns>
+    <columns>Next_Deadline__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>notEqual</operation>
+        <value>Closed Won,Archive Closed,Closed Elsewhere,Cancelled,Denied</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.Mortgage</value>
+    </filters>
+    <filters>
+        <field>Loan_Originator__c</field>
+        <operation>contains</operation>
+        <value>Dusty Broderick</value>
+    </filters>
+    <filters>
+        <field>Co_Loan_Originator__c</field>
+        <operation>notEqual</operation>
+        <value>Robert Salas,Alisha Sirois,Tiffany Attwood,Andy Hess,Louis Bing,Stewart Reichardt,John Gildenstern,GG McIntosh,Joe Rivera,G G Gates-McIntosh,Joseph Rivera,Andrew Hess,Cole Annati,Brandon Kyle,Tony Cangas,Jeff Nelson,Heather Cramer</value>
+    </filters>
+    <label>Open Loans by Realtor</label>
+    <sharedTo>
+        <group>Team_Broderick</group>
+    </sharedTo>
+</ListView>

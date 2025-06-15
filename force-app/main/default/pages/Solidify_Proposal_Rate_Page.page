@@ -1,0 +1,30 @@
+<apex:page showHeader="false" docType="html-5.0" sidebar="false" standardStylesheets="true" lightningStylesheets="true">
+<html lang="en" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<head>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   
+   <apex:slds />
+   <apex:includeLightning />
+
+   <script type="text/javascript">
+   var myUserContext = "{!$User.UITheme}";
+   var myRecordId = "{!$CurrentPage.parameters.id}";
+   console.log('@@@ myRecordId: ' + myRecordId);
+      $Lightning.use("c:solidify_Proposal_Rate_App", function() {
+         $Lightning.createComponent("c:solidifyProposalRateLWC",
+         { recordId : myRecordId },
+         "lightning",
+         function(cmp) {
+            console.log("records loaded");
+         }
+         );
+      });
+   </script>
+</head>
+<body>
+   <div id="lightning"/>
+</body>
+</html>
+</apex:page>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Company</fullName>
+    <inlineHelpText>If you don’t have this information, enter a placeholder (ie branch/city/etc), but be sure to update at conversion.  This entry is what the &quot;News&quot; tab uses to provide headlines, or in your case, potential talking points to build rapport.</inlineHelpText>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+</CustomField>

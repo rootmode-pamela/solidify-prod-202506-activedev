@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <label>Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Prospect</fullName>
+                <default>false</default>
+                <label>Prospect</label>
+            </value>
+            <value>
+                <fullName>Client</fullName>
+                <default>true</default>
+                <label>Client</label>
+            </value>
+            <value>
+                <fullName>Realtor</fullName>
+                <default>false</default>
+                <label>Realtor</label>
+            </value>
+            <value>
+                <fullName>Escrow Officer</fullName>
+                <default>false</default>
+                <label>Escrow Officer</label>
+            </value>
+            <value>
+                <fullName>Lender AE</fullName>
+                <default>false</default>
+                <label>Lender AE</label>
+            </value>
+            <value>
+                <fullName>Insurance Agent</fullName>
+                <default>false</default>
+                <label>Insurance Agent</label>
+            </value>
+            <value>
+                <fullName>Lender_Ops</fullName>
+                <default>false</default>
+                <label>Lender - Ops</label>
+            </value>
+            <value>
+                <fullName>Financial Advisor</fullName>
+                <default>false</default>
+                <label>Financial Advisor / Planner</label>
+            </value>
+            <value>
+                <fullName>Referral Partner - Other</fullName>
+                <default>false</default>
+                <label>Referral Partner - Other</label>
+            </value>
+            <value>
+                <fullName>Appraiser</fullName>
+                <default>false</default>
+                <label>Appraiser</label>
+            </value>
+            <value>
+                <fullName>Loan Originator / Broker</fullName>
+                <default>false</default>
+                <label>Loan Originator / Broker</label>
+            </value>
+            <value>
+                <fullName>Vendor</fullName>
+                <default>false</default>
+                <label>Vendor</label>
+            </value>
+            <value>
+                <fullName>Prospective LO</fullName>
+                <default>false</default>
+                <label>Prospective LO</label>
+            </value>
+            <value>
+                <fullName>Prospective TM</fullName>
+                <default>false</default>
+                <label>Prospective TM</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

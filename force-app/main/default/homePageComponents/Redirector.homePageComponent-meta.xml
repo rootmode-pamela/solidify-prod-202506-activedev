@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <body>&amp;lt;script&amp;gt;(document.getElementsByTagName(&amp;#39;h2&amp;#39;)[0]).parentNode.parentNode.style.display = &amp;#39;none&amp;#39;;if(window.location.pathname==&amp;#39;/00Q/o&amp;#39;)location.replace(&amp;#39;/00Q?fcf=00Bf4000002qxT5&amp;#39;);&amp;lt;/script&amp;gt;</body>
+    <pageComponentType>htmlArea</pageComponentType>
+    <width>narrow</width>
+</HomePageComponent>

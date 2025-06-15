@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Priority_Sort__c</fullName>
+    <description>Rating and Grade for sorting by priority</description>
+    <externalId>false</externalId>
+    <formula>CASE (Rating__c, &apos;Hot&apos;, &apos;1&apos;, &apos;Warm&apos;, &apos;2&apos;, &apos;Cold&apos;, &apos;3&apos;, &apos;9&apos;) + &apos; &apos; +   
+
+CASE (Grade__c, &apos;Highly Qualified&apos;, &apos;A&apos;, &apos;Qualified&apos;, &apos;B&apos;, &apos;Needs Work&apos;, &apos;C&apos;, &apos;F&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Priority Sort</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

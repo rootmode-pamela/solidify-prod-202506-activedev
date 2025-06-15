@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Insurance_Reminder</fullName>
+        <description>Insurance Reminder</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Insurance_Task_Reminder</template>
+    </alerts>
+    <alerts>
+        <fullName>Task_Reminder_Alert</fullName>
+        <ccEmails>pamelawhite858@gmail.com</ccEmails>
+        <description>Task Reminder Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Task_Reminder</template>
+    </alerts>
+</Workflow>

@@ -1,0 +1,475 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-15-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   03-18-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+    <div class="calculator-body calculator-structure mt-5">
+        <div class="container mx-auto row p-0 mb-5">
+            <h2 class="container calculator-heading mt-0 mb-3 my-md-0 py-3 text-center d-block">Loan Comparison Calculator
+            </h2>
+            <div class="calculator-input col-11 mx-auto col-md-4 px-2 px-lg-5 py-3">
+                <div class="calculator-input calculator-input-tabs">
+                    <lightning-record-edit-form record-id={leadId} object-api-name={LeadObject} onsubmit={handleSubmit}
+                        onsuccess={handleSuccess}>
+                        <lightning-tabset>
+                            <div class="nav nav-tabs">
+                                <template if:true={isRefinance}>
+                                    <lightning-tab label="Current Loan" class="nav nav-tabs nav-item col-6 Current">
+                                        <div class="tab-content">
+                                            <div class="container tab-pane p-0 active">
+                                                <div class="calculator-input col-12 py-3 px-0">
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Occupancy</label>
+                                                        <lightning-input-field field-name={Occupancy}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Subject Property
+                                                            Type</label>
+                                                        <lightning-input-field field-name={SubjectPropertyType}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Number Of Units</label>
+                                                        <lightning-input-field field-name={NumberOfUnits}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Estimated Value</label>
+                                                        <lightning-input-field field-name={EstimatedValue}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Current Program</label>
+                                                        <lightning-input-field field-name={CurrentProgram}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Current Balance</label>
+                                                        <lightning-input-field field-name={CurrentBalance}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Current Rate</label>
+                                                        <lightning-input-field field-name={CurrentRate}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Current Payment
+                                                            <lightning-helptext
+                                                                content="Input actual payment borrower makes.  May be more than scheduled.">
+                                                            </lightning-helptext>
+                                                        </label>
+                                                        <lightning-input-field field-name={CurrentPayment}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-tab>
+                                </template>
+                                    <lightning-tab label="Scenario 1" class="nav nav-tabs nav-item col-6 Scenario">
+                                        <div class="tab-content">
+                                            <div class="container tab-pane p-0 active">
+                                                <div class="calculator-input col-12 py-3 px-0">
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Purpose</label>
+                                                        <lightning-input-field field-name={PurposeS1}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Loan Program</label>
+                                                        <lightning-input-field field-name={LoanProgramS1}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Term Due</label>
+                                                        <lightning-input-field field-name={TermDueS1}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Loan Amt</label>
+                                                        <lightning-input-field field-name={LoamAmtS1}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Rate</label>
+                                                        <lightning-input-field field-name={RateScenarioS1}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">LTV</label>
+                                                        <lightning-output-field field-name={LTVS1}
+                                                            class="font-size-17 label" variant="label-hidden">
+                                                        </lightning-output-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">CLTV</label>
+                                                        <lightning-output-field field-name={CLTVS1}
+                                                            class="font-size-17 label" variant="label-hidden">
+                                                        </lightning-output-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-tab>
+                                    <lightning-tab label="Scenario 2" class="nav nav-tabs nav-item col-6 Scenario">
+                                        <div class="tab-content">
+                                            <div class="container tab-pane p-0 active">
+                                                <div class="calculator-input col-12 py-3 px-0">
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Purpose</label>
+                                                        <lightning-input-field field-name={PurposeS2}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Loan Program</label>
+                                                        <lightning-input-field field-name={LoanProgramS2}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Term Due</label>
+                                                        <lightning-input-field field-name={TermDueS2}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Loan Amt</label>
+                                                        <lightning-input-field field-name={LoamAmtS2}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Rate</label>
+                                                        <lightning-input-field field-name={RateScenarioS2}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">LTV</label>
+                                                        <lightning-output-field field-name={LTVS2}
+                                                            class="font-size-17 label" variant="label-hidden">
+                                                        </lightning-output-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">CLTV</label>
+                                                        <lightning-output-field field-name={CLTVS2}
+                                                            class="font-size-17 label" variant="label-hidden">
+                                                        </lightning-output-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-tab>
+                                    <lightning-tab label="Scenario 3" class="nav nav-tabs nav-item col-6 Scenario">
+                                        <div class="tab-content">
+                                            <div class="container tab-pane p-0 active">
+                                                <div class="calculator-input col-12 py-3 px-0">
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Purpose</label>
+                                                        <lightning-input-field field-name={PurposeS3}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Loan Program</label>
+                                                        <lightning-input-field field-name={LoanProgramS3}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Term Due</label>
+                                                        <lightning-input-field field-name={TermDueS3}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Loan Amount</label>
+                                                        <lightning-input-field field-name={LoamAmtS3}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">Rate</label>
+                                                        <lightning-input-field field-name={RateScenarioS3}
+                                                            class="Picklist font-size-17 label" variant="label-hidden">
+                                                        </lightning-input-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">LTV</label>
+                                                        <lightning-output-field field-name={LTVS3}
+                                                            class="font-size-17 label" variant="label-hidden">
+                                                        </lightning-output-field>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <label class="label font-size-20 font-bold">CLTV</label>
+                                                        <lightning-output-field field-name={CLTVS3}
+                                                            class="font-size-17 label" variant="label-hidden">
+                                                        </lightning-output-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-tab>
+                            </div>
+                            <div class="col-12 my-3">
+                                <lightning-button class="my-brand proceed-to-next btn font-size-20 font-bold col-12 my-4" 
+                                type="submit" label="Save">
+                                </lightning-button>
+                            </div>
+                        </lightning-tabset>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+            <div class="calculator-result col-11 col-md-8 mx-auto mb-3 my-md-0 p-0">
+                <div class="col-12 calc-image-section">
+                    <img class="d-none d-md-block mt-6 mx-auto" src="/resource/1616612675000/logoHeader">
+                </div>
+                <div class="container calculator-result-comparison px-0 px-md-3 pb-5">
+                    <div class="col-12 text-center font-bold my-3 result-header">Comparison Results</div>
+                    <lightning-record-view-form record-id={leadId} object-api-name={LeadObject}>
+                        <div class="col-12 row calculator-result-comparison-legend m-0 p-0">
+                            <span class="col-3"> </span>
+                            <span class="col-3 font-size-18 font-bold">Scenario 1</span>
+                            <span class="col-3 font-size-18 font-bold">Scenario 2</span>
+                            <span class="col-3 font-size-18 font-bold">Scenario 3</span>
+                        </div>
+                        <template if:false={isRefinance}>
+                        <div class="col-12 row calculator-result-comparison-loan m-0 p-0">
+                            <span class="col-3">Purpose:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={PurposeS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={PurposeS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={PurposeS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <div class="col-12 row calculator-result-comparison-loan m-0 p-0">
+                            <span class="col-3">Loan Program:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={LoanProgramS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={LoanProgramS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={LoanProgramS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <div class="col-12 row calculator-result-comparison-loan m-0 p-0">
+                            <span class="col-3">Term Due:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={TermDueS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={TermDueS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={TermDueS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <div class="col-12 row calculator-result-comparison-loan m-0 p-0">
+                            <span class="col-3">Loan Amount:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={LoamAmtS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={LoamAmtS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={LoamAmtS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <div class="col-12 row calculator-result-comparison-loan m-0 p-0">
+                            <span class="col-3">Rate:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={RateScenarioS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={RateScenarioS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={RateScenarioS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                    </template>
+                        <div class="col-12 row calculator-result-comparison-loan m-0 p-0">
+                            <span class="col-3">Monthly Payment:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={MonthlyPaymentS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={MonthlyPaymentS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={MonthlyPaymentS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <div class="col-12 row calculator-result-comparison-loan m-0 p-0">
+                            <span class="col-3">Total Interest:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={TotalInterestS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={TotalInterestS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={TotalInterestS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <template if:true={isRefinance}>
+                        <div class="col-12 row calculator-result-comparison-special m-0 p-0 SpecialRow">
+                            <span class="col-3">Monthly Payment Savings:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={MonthlySavingsS1} variant="label-hidden" class="slds-text-color_inverse">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={MonthlySavingsS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={MonthlySavingsS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <div class="col-12 row calculator-result-comparison-special m-0 p-0 SpecialRow">
+                            <span class="col-3">Daily Interest Savings:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={InterestSavingsS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={InterestSavingsS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={InterestSavingsS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <div class="col-12 row calculator-result-comparison-loan m-0 p-0">
+                            <span class="col-3">On Pace Payment:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={OnPacePaymentS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={OnPacePaymentS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={OnPacePaymentS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <div class="col-12 row calculator-result-comparison-loan m-0 p-0">
+                            <span class="col-3">On Pace Savings:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={OnPaceSavingsS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={OnPaceSavingsS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={OnPaceSavingsS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <div class="col-12 row calculator-result-comparison-special m-0 p-0 SpecialRow">
+                            <span class="col-3">Maturity Reduction:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={MaturityReductionS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={MaturityReductionS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={MaturityReductionS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                        <div class="col-12 row calculator-result-comparison-special m-0 p-0 SpecialRow">
+                            <span class="col-3">Lifetime Savings:</span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={LifetimeSavingsS1} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={LifetimeSavingsS2} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                            <span class="col-3 animateNumber1">
+                                <lightning-output-field field-name={LifetimeSavingsS3} variant="label-hidden">
+                                </lightning-output-field>
+                            </span>
+                        </div>
+                    </template>
+                        <div>
+                            <div class="d-block d-md-none text-center back-to-calc" id="back-to-calc"> &lt; Back to
+                                compare loan
+                            </div>
+                        </div>
+                    </lightning-record-view-form>
+                </div>
+                <div class="slds-clearfix">
+                    <div class="slds-float_right slds-m-bottom_large">
+                <lightning-button class="my-brand proceed-to-next btn font-size-20 font-bold col-12 my-4" 
+                                type="submit" label="Print or Export PDF" onclick={navigateToVFPage}>
+                                </lightning-button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</template>
+<!--  make fields expand to 100% width, pull purpose field for refi or new home, make text white,-->

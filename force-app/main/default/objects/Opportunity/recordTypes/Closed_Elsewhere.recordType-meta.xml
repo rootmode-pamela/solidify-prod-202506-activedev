@@ -1,0 +1,1867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Elsewhere</fullName>
+    <active>true</active>
+    <businessProcess>Encompass Active</businessProcess>
+    <compactLayoutAssignment>Closed</compactLayoutAssignment>
+    <label>Closed Elsewhere</label>
+    <picklistValues>
+        <picklist>AUS__c</picklist>
+        <values>
+            <fullName>DU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-QM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Specified</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Admin_Fee__c</picklist>
+        <values>
+            <fullName>Buyout %28Fee in Price%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Charge to Borrower</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Appraisal__c</picklist>
+        <values>
+            <fullName>Expecting PIW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PIW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid by Client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reimbursed to Broker</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reimbursed to LO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Streamline %2F IRRRL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transfer</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Attachment_Type__c</picklist>
+        <values>
+            <fullName>Attached</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Detached</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SemiDetached</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Borrower_Paid__c</picklist>
+        <values>
+            <fullName>Borrower Paid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exempt</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lender Paid</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Branch__c</picklist>
+        <values>
+            <fullName>Carlsbad</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Closing_Funds__c</picklist>
+        <values>
+            <fullName>%3C%3D%24500 in Hand %28IRRRL%2FStreamline%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2k Cash in Hand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Add Fees to Balance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cash Out</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Match to Total Payoff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other - See Notes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Principle Balance Only</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>To be determined in escrow</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Zero Due at Close</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Co_Loan_Originator__c</picklist>
+        <values>
+            <fullName>Adam Heaney</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alisha Sirois</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Andrew Hess</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Andy Hess</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Brandon Kyle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cole Annati</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dusty Broderick</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Dusty and Missy Broderick</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elman Dasilva</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>G G Gates-McIntosh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GG McIntosh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Heather Cramer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jeff Nelson</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Joe Rivera</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>John Gildenstern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Joseph Rivera</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Justin Suemnick</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Louis Bing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Missy Broderick</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Robert Salas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stewart Reichardt</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tiffany Attwood</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tony Cangas</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Credit_Source__c</picklist>
+        <values>
+            <fullName>ACI Hard Pull</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ACI Soft Pull</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UWM Hard Pull</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UWM Safecheck</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Escrows__c</picklist>
+        <values>
+            <fullName>All Waived</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Insurance Only</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None Waived</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None Waived - Same Servicer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>See Mortgage Statement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Taxes Only</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fee_Structure__c</picklist>
+        <values>
+            <fullName>Check with LO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Cost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Points</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Points and Fees</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ForecastCategoryName</picklist>
+        <values>
+            <fullName>Best Case</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Omitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pipeline</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Full_VOE__c</picklist>
+        <values>
+            <fullName>Hourly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid Leave</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partnership</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pension</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RSU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rental Income</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Required - Bonus</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Required - Commission</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Required - OT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Self Employed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Social Security</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Structured Withdrawal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Grade__c</picklist>
+        <values>
+            <fullName>Highly Qualified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Needs Work</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qualified</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>HMDA_Action__c</picklist>
+        <values>
+            <fullName>Active Loan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Application approved but not accepted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Application denied</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Application withdrawn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>File Closed for incompleteness</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loan Originated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loan purchased by your institution</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Preapproval request approved but not accepted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Preapproval request denied by institution</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Impounds__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>X</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>IncomeType__c</picklist>
+        <values>
+            <fullName>Hourly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid Leave</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partnership</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pension</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RSU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rental Income</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Required - Bonus</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Required - Commission</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Required - OT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Self Employed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Social Security</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Structured Withdrawal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>LeadSource</picklist>
+        <values>
+            <fullName>BankingBridge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Facebook</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Google Ads</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Internal Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Its Home</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LMB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lower My Bills</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MRC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nextdoor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quicken Broker Finder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Radio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Redfin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referral - Client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referral - Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referral - Realtor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refily</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Repeat Client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Self Generated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Television</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UWM Broker Finder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website - Buy a Home form</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website - Refinance form</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Zillow Lead</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lender__c</picklist>
+        <values>
+            <fullName>Acra</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Advancial Financial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Angel Oak</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Change Wholesale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deephaven</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EPM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FBC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flagstar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freedom Mortgage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fund Loans</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HomeXpress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Homelight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kind Lending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Long Bridge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mega Capital</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MortgageOne</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NQM Funding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Rez</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NexBank</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PBM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PennyMac</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plaza</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Private Lien</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quontic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quorum FCU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REMN</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lien_Position__c</picklist>
+        <values>
+            <fullName>First Mortgage</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Second Mortgage</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loan_Originator__c</picklist>
+        <values>
+            <fullName>Adam Heaney</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alisha Sirois</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Andrew Hess</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Andy Hess</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Brandon Kyle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cole Annati</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dusty Broderick</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Dusty and Missy Broderick</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elman Dasilva</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>G G Gates-McIntosh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GG McIntosh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Heather Cramer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jeff Nelson</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Joe Rivera</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>John Gildenstern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Joseph Rivera</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Justin Suemnick</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Louis Bing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Missy Broderick</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Robert Salas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stewart Reichardt</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tiffany Attwood</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tony Cangas</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loan_Program__c</picklist>
+        <values>
+            <fullName>2nd %2F Heloc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FX 2ND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interest Only - ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interest Only - Fixed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JF15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JF30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-QM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loan_Type__c</picklist>
+        <values>
+            <fullName>CONV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Heloc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>USDA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loss_Reason__c</picklist>
+        <values>
+            <fullName>Assets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed Elsewhere</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Credit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DTI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Down Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LTV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Property</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rates</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Timing</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Non_QM__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Occupancy__c</picklist>
+        <values>
+            <fullName>Investment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Primary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Secondary</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Other_Liens_New__c</picklist>
+        <values>
+            <fullName>New 2nd</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid At Close</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid Before Close</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Subordinate</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Other_Liens__c</picklist>
+        <values>
+            <fullName>New Piggy Heloan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Piggy Heloc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid %26 Subordinate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid At Close</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid Before Close</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Subordinate</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Primary_Goal__c</picklist>
+        <values>
+            <fullName>Buy Out Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Debt Consolidation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Eliminate MI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Future Investments</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Home Improvement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other - See Notes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pay Off Loan Faster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reduce Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reduce Rate</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Purpose__c</picklist>
+        <values>
+            <fullName>Const-Perm</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Construction</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HELOAN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refi-Cashout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refi-No Cashout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refinance</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Rating__c</picklist>
+        <values>
+            <fullName>Cold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hot</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Warm</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Refi_Current_Loan_Program__c</picklist>
+        <values>
+            <fullName>2nd %2F Heloc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CF30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FX 2ND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HB30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interest Only - ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interest Only - Fixed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 10-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 3-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J 7-1 ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JF15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JF30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA 5-1 ARM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Refi_Current_Loan_Type__c</picklist>
+        <values>
+            <fullName>CONV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Heloc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>USDA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Scenario_2nd_Program__c</picklist>
+        <values>
+            <fullName>Heloan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Heloc</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Send_Gift__c</picklist>
+        <values>
+            <fullName>Baked By Melissa Muffins</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cravory Cookies</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Personalized Home Sketch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre-Approval Box</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solidify Tool Set</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solo Stove %28%24249%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Succulent Garden</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tiffany%27s Glasses</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Solar__c</picklist>
+        <values>
+            <fullName>Lease</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid In Full</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unknown</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Existing Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Business</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Vesting__c</picklist>
+        <values>
+            <fullName>Borrower%28s%29 Being Added</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Borrower%28s%29 Being Removed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-Borrower on Title</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Power of Attorney</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>See Prelim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trust</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Veteran__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>encompass_By_EM__Amortization_Type__c</picklist>
+        <values>
+            <fullName>ARM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Rate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GPM - Rate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>encompass_By_EM__Lien_Type__c</picklist>
+        <values>
+            <fullName>First</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Subordinate</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>encompass_By_EM__Loan_Purpose__c</picklist>
+        <values>
+            <fullName>Cash-Out Refi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Construction</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Construction - Perm</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No cash-Out Refi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>encompass_By_EM__Mortgage_Type__c</picklist>
+        <values>
+            <fullName>Conventional</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HELOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>USDA-RHS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>encompass_By_EM__Property_State__c</picklist>
+        <values>
+            <fullName>AK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ID</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ME</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ND</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NJ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WY</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>encompass_By_EM__Refinance_Purpose__c</picklist>
+        <values>
+            <fullName>Cash-Out Debt Consolidation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cash-Out Home Improvement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cash-Out Limited</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cash-Out Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cash-Out with Original Lender</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Cash-Out FHA Streamlined</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Cash-Out Freddie Owned</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Cash-Out Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Cash-Out Streamlined</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Np Cash-Out With Original Lender</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

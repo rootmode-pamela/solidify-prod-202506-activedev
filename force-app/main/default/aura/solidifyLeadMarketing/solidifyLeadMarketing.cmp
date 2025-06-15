@@ -1,0 +1,144 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="Lead" type="Object" />
+    <aura:attribute name="recordError" type="String" />
+    <force:recordData aura:id="leadRecord"
+                  mode="EDIT"
+                  recordId="{!v.recordId}"
+                  targetFields="{!v.Lead}"
+                  targetError="{!v.recordError}"
+                  fields="Id, Name,pi__last_activity__c,pi__first_activity__c,pi__conversion_date__c,pi__conversion_object_name__c,pi__score__c,
+                          pi__grade__c,LeadSource,Referred_By__c,Ad_Description__c,Ad_Consented__c,CreatedDate,LastModifiedDate,CreatedById,LastModifiedById"
+                  recordUpdated="{!c.recordUpdate}"
+                      />
+    
+    
+     
+    <lightning:recordEditForm aura:id="leadMarketingForm" recordId="{!v.recordId}" objectApiName="Lead" >
+        <lightning:messages />
+		<aura:if isTrue="{!not(empty(v.recordError))}">
+        	<div class="recordError">
+            	{!v.recordError}</div>
+    	</aura:if>
+            
+             
+       
+         <div class="slds-grid slds-gutters">
+            <div class="slds-col  slds-size_1-of-2">
+                
+                                  
+                <h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small " title="Address"><b>Mailing Address</b></span>
+  				</h3>
+            
+               <div class="slds-p-left_small">
+                  
+                   <lightning:input label="Address Search" 
+                        name="location"
+                        aura:id="location" 
+                        value="{!v.location}"
+                        onchange="{!c.getAddress}" />
+                   
+                   <aura:if isTrue="{!v.predictions.length > 0}">		 
+ 						<ul class="city_predictions">
+						<aura:iteration items="{!v.predictions}" var="prediction">
+							<li class="slds-listbox__item">
+								<a onclick="{!c.getAddressDetails}" data-placeid="{!prediction.place_id}">{!prediction.description}</a>
+							</li>
+						</aura:iteration>
+						</ul> 	 
+					</aura:if>
+                   
+           
+                   <label for="Street" class="slds-form-element__label slds-p-top_small">Street</label> 
+                      <lightning:inputField aura:id="Street" variant="label-hidden" fieldName="Street"  onchange="{!c.highlightChangedField}"/>
+                   
+                   
+                   <div class="slds-grid slds-gutters_direct-xxx-small slds-p-top_xxx-small">
+                       <div class="slds-col slds-size_5-of-12">
+                           <label for="City" class="slds-form-element__label">City</label>
+                       <lightning:inputfield aura:id="City" fieldName = "City" onchange="{!c.highlightChangedField}" variant="label-hidden"/>
+                       </div>
+                   	<div class="slds-col slds-size_3-of-12">
+                       <label for="State" class="slds-form-element__label">State</label>
+                   <lightning:inputfield aura:id="State" fieldName = "State"  variant="label-hidden" onchange="{!c.highlightChangedField}"/>
+                       </div>
+                	<div class="slds-col slds-size_4-of-12">
+                    <label for="SP_Zip" class="slds-form-element__label">Zip</label>
+                   <lightning:inputfield aura:id="Zip" fieldName = "PostalCode" variant="label-hidden" onchange="{!c.highlightChangedField}"/></div>
+                   </div>
+                   
+               </div>
+
+                <lightning:outputField fieldName="LMB_Mailing_Street__c" />
+        		<lightning:outputField fieldName="LMB_Mailing_City__c" />
+                <lightning:outputField fieldName="LMB_Mailing_St__c" /> 
+                <lightning:outputField fieldName="LMB_Mailing_Zip__c" />
+             
+
+                
+                
+                <div class="slds-section slds-is-open">
+  				<h3 class="slds-section__title slds-theme_shade">
+    				<span class="slds-truncate slds-p-horizontal_small" title="Pardot"><b>Pardot</b></span>
+  				</h3>
+                <div class="slds-p-horizontal_small">
+                  
+                <lightning:outputField fieldName="pi__last_activity__c" />
+        		<lightning:outputField fieldName="pi__first_activity__c" />
+                <lightning:outputField fieldName="pi__conversion_date__c" /> 
+                <lightning:outputField fieldName="pi__conversion_object_name__c" /> 
+                    
+                <lightning:outputField fieldName="pi__score__c" />
+                    
+                    <lightning:outputField fieldName="pi__grade__c" />
+                    
+            
+
+                </div>
+             </div>
+             </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-section slds-is-open">
+  				<h3 class="slds-section__title slds-theme_shade">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Other"><b>Other</b></span>
+  				</h3>
+<div class="slds-p-left_small">
+                <lightning:inputField fieldName="LeadSource" onchange="{!c.handleSaveRecord}" />
+        			<lightning:inputField fieldName="Referred_By__c" onchange="{!c.handleSaveRecord}"/>
+                    <lightning:inputField aura:id="Timeline" fieldName="Timeline__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputfield aura:id="Grade" fieldName="Grade__c" onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="LoanOrginator" fieldName="Loan_Originator__c"  onchange="{!c.highlightChangedField}" variant="label-inline"/>
+                    <lightning:inputField aura:id="Branch" fieldName="Branch__c" onchange="{!c.highlightChangedField}" variant="label-inline"/>
+        			<lightning:inputField fieldName="HasOptedOutOfEmail" onchange="{!c.handleSaveRecord}"/>
+    				<lightning:inputField fieldName="smagicinteract__SMSOptOut__c" onchange="{!c.handleSaveRecord}"/>
+    				<lightning:inputField fieldName="HasTCPAConsent__c" onchange="{!c.handleSaveRecord}"/>
+    				<lightning:inputField fieldName="Lead_Gen_Id__c" onchange="{!c.handleSaveRecord}"/>
+    				<lightning:inputField fieldName="PartnerLeadId__c" onchange="{!c.handleSaveRecord}"/>
+    				<lightning:inputField fieldName="RCDisposition__c" onchange="{!c.handleSaveRecord}"/>
+    				<lightning:inputField fieldName="ExpirationDate__c" onchange="{!c.handleSaveRecord}"/>
+    				<lightning:inputField fieldName="Ad_Description__c" onchange="{!c.handleSaveRecord}"/>
+    				<lightning:inputField fieldName="Ad_Term__c" onchange="{!c.handleSaveRecord}"/>
+    				<lightning:inputField fieldName="Ad_Area__c" onchange="{!c.handleSaveRecord}"/>
+    				<lightning:inputField fieldName="Ad_Content_Descriptor__c" onchange="{!c.handleSaveRecord}"/>
+	                <lightning:inputField fieldName="Ad_Consented__c" onchange="{!c.handleSaveRecord}" />
+    				<lightning:inputfield fieldName="Nurture_Reason__c" onchange="{!c.handleSaveRecord}" variant="label-inline"/>
+    				<lightning:inputField fieldName="Created_Date_for_Automation__c" onchange="{!c.handleSaveRecord}" />
+    				<lightning:inputField fieldName="OwnerId" onchange="{!c.handleSaveRecord}" />
+    				<lightning:inputField fieldName="Loan_Originator_User__c" onchange="{!c.handleSaveRecord}" />
+    <div class="slds-grid">
+        <div class="slds-size_1-of-2 slds-p-right_small">
+    <lightning:outputField fieldName = "CreatedDate"/>
+            <lightning:outputField fieldName = "LastModifiedDate"/></div>
+        <div class="slds-size_1-of-2">
+    <lightning:outputField fieldName = "CreatedById"/>
+            <lightning:outputField fieldName = "LastModifiedById"/></div>
+                    </div>
+            	</div>
+            </div>
+            
+             </div></div>
+    </lightning:recordEditForm>
+       
+  
+
+</aura:component>

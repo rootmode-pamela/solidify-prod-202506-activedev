@@ -1,0 +1,354 @@
+.inner-container {
+    align-self: center;
+    max-width: 900px;
+    padding: 0px 20px;
+}
+@media screen and (min-width: 660px) {
+    .inner-container {
+        padding: 0px 20px;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .inner-container {
+        padding: 0px;
+    }
+}
+.container {
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background-color:#f2f2f2;
+    overflow-y: auto;
+    font-size: 12px;
+    box-shadow:0 4px 4px 0 rgba(0,0,0,.02),0 0 4px 0 rgba(0,0,0,.12)
+}
+/*@media (max-width: 1900) {
+    .container {
+      font-size: 16px;
+    }
+}
+@media (max-width: 2200) {
+    .container {
+      font-size: 20px;
+    }
+}
+@media (max-width: 2500) {
+    .container {
+      font-size: 25px;
+    }
+}*/
+.card-title{
+    padding-top: 10px;
+}
+.MainImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+}
+.Widget{
+    padding: 5px 0px;
+}
+/*.slds-text-heading_medium{
+    font-weight: bold;
+}*/
+.mainWidget{
+    padding-top: 15px;
+}
+.bottomWidget {
+    padding-bottom: 15px;
+}
+.slds-text-heading_medium{
+    font-weight: bold;
+}
+.containerchart {
+    width: 80%;
+    margin: 20px auto;
+  }
+.nopad{
+    padding: 0px!Important;
+    height: 100%!Important;
+}
+.Calc_Header {
+   background-color:#23a2e9;
+}
+h1 {
+    color: #000000;
+    font-size: 3em; /*36px*/
+    padding: 16px 15px;
+    font-weight: bold;
+    text-align: center;
+}
+h2 {
+    font-size: 2.5em; /*30px*/
+    font-weight: bold;
+    text-align: center;
+    margin: 16px 0px;
+    padding: 0px 15px;
+    color: #080707;
+}
+.calc-left {
+   background-color:#f2f2f2;
+   padding: 16px 32px;
+   padding-right: 32px;
+   padding-left: 32px;
+}
+.calc-right {
+   background-color:white;
+   padding: 0px 16px 48px;
+}
+.calc-rightContainer {
+    background-color:white;
+}
+h3{
+    margin: 0px 0px 16px 0px;
+    padding: 0px 15px;
+    color: #080707;
+    font-size: 2em; /*24px*/
+    font-weight: 700;
+    display: inline-block;
+    text-align: center;
+}
+ h4 {
+    color: black;
+    font-size: 1.10em; /*16px*/
+}
+.labels {
+    margin: 0px 0px 8px;
+}
+.row-headers{
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+}
+.row-cells{
+    text-align: center;
+    padding: 10px;
+    font-size:14px;
+}
+.row-cell{
+    text-align: center;
+    padding: 10px;
+    font-size:14px;
+    font-weight: bold;
+}
+.currentFields {
+    margin: 8px 0px;
+    padding: 0px 15px;
+}
+.centerText {
+    text-align: center;
+}
+.leftText {
+    text-align: left;
+}
+.rightText {
+    text-align: right;
+}
+.CurrentTab {
+    padding: 12px 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.calc-image-section {
+    width: 472px;
+    height: 150px;
+    margin: auto;
+}
+.Profile-image-section {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-left: auto;
+    text-align: right;
+}
+.Contact-image-section {
+    width: 236px;
+    height: 75px;
+    margin: auto;
+    text-align: center;
+}
+.EHO-image-section {
+    width: 75px;
+    height: 75px;
+    margin: auto;
+}
+img{
+    align-self: center;
+}
+.table {
+    text-align: center;
+}
+.row {
+    border-top: 1px solid #dee2e6;
+}
+.mainTable {
+    background-color:#f2f2f2;
+}
+.SpecialRow{
+    background-color: #f2f2f2;
+    border-bottom: 0px!Important;
+    border-top: 0px!Important;
+    border-style: none!Important;
+}
+.NewCompareCards {
+    background-color:white;
+    padding: 20px!Important;
+}
+.CompareCards {
+    background-color:white;
+    padding: 15px 10px!Important;
+    margin: 10px 1%;
+    border-radius: 5px;
+    max-width:98%;
+    align-self: center;
+    text-align: center;
+}
+@media screen and (min-width: 660px) {
+    .CompareCards {
+        max-width:48%;
+        height: 250px;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .CompareCards {
+        max-width:31.33%;
+        height: 330px;
+    }
+}
+.grey{
+    color:grey;
+    text-align:left;
+}
+.CardName{
+    text-align: center;
+    padding: 5px 15px;
+    font-size: 24px; /*24px*/
+    font-weight: bold;
+    color: #080707;
+}
+.MainPad {
+    Padding: 5px 15px;
+}
+.BackgroundBlock {
+    border-radius:8px;
+    margin:0px 10px;
+}
+.red {
+    background-color:rgba(255, 0, 0, 0.1);
+}
+.blue {
+    background-color:rgba(0, 0, 255, 0.1);
+}
+.green {
+    background-color:rgba(0, 128, 0, 0.1);
+}
+.purple {
+    background-color:rgba(128, 0, 128, 0.1);
+}
+.orange {
+    background-color:rgba(255, 166, 0, 0.1);
+}
+.white {
+    background-color:rgba(255, 255, 255, 0.1);
+}
+.black {
+    background-color:#212125;
+    color: white;
+}
+.greyback {
+    background-color:rgb(133, 133, 133, 0.1);
+}
+.white-text{
+    color: white;
+}
+.topMargin{
+    margin: 15px 0px 0px 0px;
+}
+.pad10{
+    padding:20px 10px;
+}
+.profilediv{
+    height: 130px;
+    width: 130px;
+    display:inline-block;
+    vertical-align: middle;
+    align-items: center;
+}
+.contactInfoDiv{
+    height: 130px;
+    width: 200px;
+    display:inline-block;
+    vertical-align: middle;
+}
+.floatRight{
+    align-items: right;
+}
+.detailsButton{
+    background-color: #f2f2f2;
+    width: 100%;
+    font-size: 1.34em; /*16px*/
+    height: 45px;
+}
+.greyback{
+    background-color: #f2f2f2;
+    border: none;
+}
+.applyButton{
+    width: 100%;
+    font-size: 1.34em; /*16px*/
+    height: 45px;
+}
+.AbuttonDiv{
+    margin-top: 30px;
+}
+.buttonDiv{
+    margin-top: 18px;
+}
+.RateTitle{
+    font-size: 24px;
+    text-align: center;
+    /*padding: 5px 15px;*/
+    font-weight: bold;
+    color: #080707;
+}
+.detailsTitle {
+    text-align: left;
+}
+.bottomBar {
+    position: fixed!Important;
+    width:100%!Important;
+    margin:0%!Important;
+    background-color: white;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.bottomBarInner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.applyBTN {
+    float: right;
+    padding: 10px;
+}
+.backBTN {
+    float: left;
+    padding: 10px;
+}
+.backArrow {
+    height: 45px;
+    width: 45px;
+}
+.bottombuffer {
+    margin-bottom: 100px;
+}
+.borderCard {
+    border: 1px solid #0176D3;
+}

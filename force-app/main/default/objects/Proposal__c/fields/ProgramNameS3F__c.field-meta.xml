@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProgramNameS3F__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(TEXT(Loan_Program_Scenario_3__c) =&quot;CF30&quot;, &quot;Conventional 30 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;CF25&quot;, &quot;Conventional 25 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;CF20&quot;, &quot;Conventional 20 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;CF15&quot;, &quot;Conventional 15 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;CF10&quot;, &quot;Conventional 10 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;HB30&quot;, &quot;Conventional 30 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;HB25&quot;, &quot;Conventional 25 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;HB20&quot;, &quot;Conventional 20 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;HB15&quot;, &quot;Conventional 15 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;HB10&quot;, &quot;Conventional 10 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;JF30&quot;, &quot;Conventional 30 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;JF15&quot;, &quot;Conventional 15 Year Fixed&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;FHA 30&quot;, &quot;FHA 30 Year Fixed Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;FHA 15&quot;, &quot;FHA 15 Year Fixed Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;VA 30&quot;, &quot;VA 30 Year Fixed Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;VA 15&quot;, &quot;VA 15 Year Fixed Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;C 3-1 ARM&quot;, &quot;Conventional 3 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;C 5-1 ARM&quot;, &quot;Conventional 5 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;C 7-1 ARM&quot;, &quot;Conventional 7 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;C 10-1 ARM&quot;, &quot;Conventional 10 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;H 3-1 ARM&quot;, &quot;Conventional 3 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;H 5-1 ARM&quot;, &quot;Conventional 5 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;H 7-1 ARM&quot;, &quot;Conventional 7 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;H 10-1 ARM&quot;, &quot;Conventional 10 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;J 3-1 ARM&quot;, &quot;Conventional 3 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;J 5-1 ARM&quot;, &quot;Conventional 5 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;J 7-1 ARM&quot;, &quot;Conventional 7 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;J 10-1 ARM&quot;, &quot;Conventional 10 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;FHA 5-1 ARM&quot;, &quot;FHA 5 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;VA 5-1 ARM&quot;, &quot;VA 5 Year Adjustable Rate&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;2nd / HELOC &quot;, &quot;2nd / HELOC&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;Interest Only - ARM&quot;, &quot;Interest Only - ARM&quot;,&quot;&quot;)&amp;
+IF(TEXT(Loan_Program_Scenario_3__c) =&quot;Interest Only - Fixed&quot;, &quot;Interest Only - Fixed&quot;,&quot;&quot;)</formula>
+    <label>Program Name S3F</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

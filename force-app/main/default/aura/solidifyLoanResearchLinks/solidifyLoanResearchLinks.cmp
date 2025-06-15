@@ -1,0 +1,94 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+ 	<aura:attribute name="record" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+
+    <force:recordData aura:id="recordLoader"
+      recordId="{!v.recordId}"
+      fields="Id,Subject_Prop_Street__c,Subject_Prop_City__c,Subject_Prop_St__c,Subject_Prop_Zip__c,Subject_Property_County__c"
+      targetRecord="{!v.record}"
+      targetFields="{!v.simpleRecord}"
+      recordUpdated="{!c.recordUpdate}"
+      />
+
+           <div class="slds-grid slds-gutters slds-p-horizontal_medium">
+            <div class="slds-col  slds-size_1-of-3">
+                <div class="slds-section slds-is-open slds-text-heading_small">
+                    <p></p>				
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://www.zillow.com/homes/1_ah/' + v.simpleRecord.Subject_Prop_Street__c +  (v.simpleRecord.Subject_Prop_City__c != null ? ',' : '' ) 
+                                                                           										  + v.simpleRecord.Subject_Prop_City__c +  ( v.simpleRecord.Subject_Prop_St__c != null ? ',' : '' )
+                                                                           										  + v.simpleRecord.Subject_Prop_St__c +  ( v.simpleRecord.Subject_Prop_Zip__c != null ? ',' : '' ) 
+                                                                            									  + v.simpleRecord.Subject_Prop_Zip__c 
+                                                                           										  + '_rb/?view=public'}" 
+                     												label="Zillow Value" 
+                     												target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'https://www.google.com/search?q=' + v.simpleRecord.Subject_Prop_Street__c + (v.simpleRecord.Subject_Prop_City__c != null ? '+' : '' )
+                                                                           										+ v.simpleRecord.Subject_Prop_City__c + (v.simpleRecord.Subject_Prop_St__c != null ? '+' : '' )
+                                                                           										+ v.simpleRecord.Subject_Prop_St__c + (v.simpleRecord.Subject_Prop_Zip__c != null ? '+' : '' )
+                                                                           										+ v.simpleRecord.Subject_Prop_Zip__c}"
+                                                                    label="Google Value"
+                                                                    target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'http://maps.google.com/maps?f=q&amp;hl=en&amp;q=' + v.simpleRecord.Subject_Prop_Street__c +  (v.simpleRecord.Subject_Prop_City__c != null ? '+' : '' )
+                                                                           														+ v.simpleRecord.Subject_Prop_City__c +  (v.simpleRecord.Subject_Prop_St__c != null ? '+' : '' )
+                                                                           														+ v.simpleRecord.Subject_Prop_St__c + '&amp;om=1'}" 
+                                                                    label="Google Maps" 
+                                                                    target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://onlinegeocoder.fanniemae.com/loanlimitgeocoder/pages/Online.aspx" 
+                                                                    label="Loan Limit Geocoder" 
+                                                                    target="_blank"/></p> 
+                    
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://tools.usps.com/zip-code-lookup.htm?byaddress" 
+                                                                    label="USPS Address" 
+                                                                    target="_blank"/></p> 
+                    
+                    
+                    
+            	</div>
+
+             </div>
+            <div class="slds-col  slds-size_1-of-3">
+                <div class="slds-section slds-is-open slds-text-heading_small">
+                    <p></p>	
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://rates.fntg.com/" 
+                                                                    label="Purchase Fee Finder" 
+                                                                    target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://pricing.fntg.com/" 
+                                                                    label="Refi Fee Finder" 
+                                                                    target="_blank"/></p>                    
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://www.titlepro247.com/index.aspx" 
+                                                                    label="Title Pro 247" 
+                                                                    target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="{!'http://www.google.com/search?ei=hbxXWqbrN9PejwPb3YGQDg&amp;q=' + v.simpleRecord.Subject_Property_County__c + '+county+property+tax+bill+search&amp;oq=' + v.simpleRecord.Subject_Property_County__c + '+county+property+tax+bill+search&amp;gs_l=psy-ab.3..0.3951.6005.0.6573.12.11.1.0.0.0.150.1120.5j6.11.0....0...1c.1.64.psy-ab..1.10.937...0i7i30k1j0i8i7i30k1j0i13k1.0.ALi6IA_tJoA'}"
+                                                                    label="Prop Tax Bill Search" 
+                                                                    target="_blank"/></p>
+
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://miq.mgic.com/miq/" 
+                                                                    label="MGIC" 
+                                                                    target="_blank"/></p>
+                </div>
+             </div>
+               
+            <div class="slds-col slds-size_1-of-3">
+                <div class="slds-section slds-is-open slds-text-heading_small">
+
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://downpaymentresource.com" 
+                                                                    label="Down Payment Asst." 
+                                                                    target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://homeready-eligibility.fanniemae.com/homeready/" 
+                                                                    label="HomeReady (Fannie)" 
+                                                                    target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://www.freddiemac.com/homepossible/eligibility.html" 
+                                                                    label="Home Poss. (Freddie)" 
+                                                                    target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="https://loanlookup.freddiemac.com/" 
+                                                                    label="Freddie Loan Lookup" 
+                                                                    target="_blank"/></p>
+                    <p class="slds-m-bottom_xx-small"><ui:outputURL value="http://www.knowyouroptions.com/loanlookup#" 
+                                                                    label="Fannie Loan Lookup" 
+                                                                    target="_blank"/></p>  				
+                    
+            	</div>
+            </div>
+
+        </div>
+
+</aura:component>
